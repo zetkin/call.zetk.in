@@ -4,6 +4,11 @@ import immutable from 'immutable';
 import * as types from '../actions';
 
 
+export const selectedAssignment = state => {
+    let id = state.getIn(['assignments', 'selectedId']);
+    return state.getIn(['assignments', 'assignmentList', 'items', id]);
+}
+
 const initialState = immutable.fromJS({
     selectedId: null,
     assignmentList: {

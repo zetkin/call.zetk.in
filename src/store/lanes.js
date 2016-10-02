@@ -5,14 +5,16 @@ import * as types from '../actions';
 
 
 export const selectedLane = state => {
-    let key = state.getIn(['lanes', 'allLanes', 'selectedKey']);
-    return state.getIn(['lanes', 'allLanes', key]);
+    let id = state.getIn(['lanes', 'selectedId']);
+    return state.getIn(['lanes', 'allLanes', id]);
 };
 
 
+let laneId = 0;
+
 const initialState = immutable.fromJS({
-    selectedKey: null,
-    allLanes: [],
+    selectedId: null,
+    allLanes: {},
 });
 
 export default createReducer(initialState, {
@@ -22,13 +24,22 @@ export default createReducer(initialState, {
 
     [types.SELECT_ASSIGNMENT]: (state, action) => {
         let lane = {
+            id: (laneId++).toString(),
             callId: null,
             isPending: false,
             step: 'assignment',
         };
 
         return state
-            .set('selectedKey', 0)
-            .set('allLanes', immutable.fromJS([ lane ]));
+            .set('selectedId', lane.id)
+            .set('allLanes', immutable.fromJS({ [lane.id]: lane }));
+    },
+
+    [types.SET_LANE_STEP]: (state, action) => {
+        let step = action.payload.step;
+        let laneId = action.payload.lane.get('id');
+
+        return state
+            .setIn(['allLanes', laneId, 'step'], step);
     },
 });

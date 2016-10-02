@@ -4,13 +4,13 @@ import immutable from 'immutable';
 import { intlReducer } from 'react-intl-redux';
 import promiseMiddleware from 'redux-promise-middleware';
 
-import callAssignments from './callAssignments';
+import assignments from './assignments';
 import user from './user';
 
 
 const appReducer = combineReducers({
     intl: intlReducer,
-    callAssignments,
+    assignments,
     user,
 });
 

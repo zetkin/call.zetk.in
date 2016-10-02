@@ -1,0 +1,18 @@
+.InputPane {
+    background-color: blue;
+
+    &.InputPane-prepareStep {
+        width: 40%;
+        left: 60%;
+    }
+
+    &.InputPane-callStep {
+        width: 70%;
+        left: 30%;
+    }
+
+    &.InputPane-reportStep {
+        width: 30%;
+        left: 30%;
+    }
+}

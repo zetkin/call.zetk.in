@@ -1,0 +1,7 @@
+.PaneBase {
+    position: absolute;
+    top: 0;
+    bottom: 100px;
+
+    transition: width 0.2s, left 0.2s;
+}

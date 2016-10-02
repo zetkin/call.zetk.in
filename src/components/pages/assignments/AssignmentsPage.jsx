@@ -1,15 +1,20 @@
 import React from 'react';
-import { FormattedMessage as Msg } from 'react-intl';
 import { connect } from 'react-redux';
+import { FormattedMessage as Msg } from 'react-intl';
+import { withRouter } from 'react-router';
 
 import AssignmentList from './AssignmentList';
-import { retrieveUserAssignments } from '../../../actions/assignment';
+import {
+    retrieveUserAssignments,
+    selectAssignment,
+} from '../../../actions/assignment';
 
 
 const mapStateToProps = (state) => ({
     assignmentList: state.getIn(['assignments', 'assignmentList']),
 });
 
+@withRouter
 @connect(mapStateToProps)
 export default class AssignmentsPage extends React.Component {
     componentDidMount() {
@@ -47,7 +52,10 @@ export default class AssignmentsPage extends React.Component {
         );
     }
 
-    onSelect(assignmentItem) {
-        console.log('SELECT', assignmentItem);
+    onSelect(assignment) {
+        this.props.dispatch(selectAssignment(assignment));
+
+        let path = '/assignments/' + assignment.get('id') + '/call';
+        this.props.router.push(path);
     }
 }

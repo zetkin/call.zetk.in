@@ -11,3 +11,10 @@ export function retrieveUserAssignments() {
         });
     };
 }
+
+export function selectAssignment(assignment) {
+    return {
+        type: types.SELECT_ASSIGNMENT,
+        payload: { assignment },
+    };
+}

@@ -31,7 +31,7 @@ export default class LaneControlBar extends React.Component {
             content = <h1>Unknown step</h1>;
         }
 
-        let classes = cx('LaneControlBar', 'LaneControlBar-' + step);
+        let classes = cx('LaneControlBar', 'LaneControlBar-' + step + 'Step');
 
         return (
             <div className={ classes }>

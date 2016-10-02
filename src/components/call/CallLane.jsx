@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 
 import LaneControlBar from './LaneControlBar';
 import PropTypes from '../../utils/PropTypes';
@@ -12,9 +13,10 @@ export default class CallLane extends React.Component {
 
     render() {
         let lane = this.props.lane;
+        let step = lane.get('step');
         let paneComponents = [];
 
-        switch (lane.get('step')) {
+        switch (step) {
             case 'assignment':
                 paneComponents = [ 'assignment', 'info' ];
                 break;
@@ -35,12 +37,14 @@ export default class CallLane extends React.Component {
         let panes = paneComponents.map(paneType => {
             let PaneComponent = paneComponentsByType[paneType];
             return (
-                <PaneComponent key={ paneType }/>
+                <PaneComponent step={ step } key={ paneType }/>
             );
         });
 
+        let classes = cx('CallLane', 'CallLane-' + step + 'Step');
+
         return (
-            <div className="CallLane">
+            <div className={ classes }>
                 <div className="CallLane-panes">
                     { panes }
                 </div>

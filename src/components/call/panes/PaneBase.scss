@@ -1,7 +1,27 @@
 .PaneBase {
     position: absolute;
     top: 0;
-    bottom: 100px;
+    bottom: 0;
 
-    transition: width 0.2s, left 0.2s;
+    transition: width 0.5s, left 0.5s;
+
+    &.PaneBase-enter {
+        animation: PaneBase-enterAnimation 0.5s;
+    }
+
+    &.PaneBase-leave {
+        animation: PaneBase-leaveAnimation 0.5s;
+    }
+}
+
+@keyframes PaneBase-enterAnimation {
+    from {
+        left: 100%;
+    }
+}
+
+@keyframes PaneBase-leaveAnimation {
+    to {
+        left: -30%;
+    }
 }

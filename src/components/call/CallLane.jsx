@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 import LaneControlBar from './LaneControlBar';
 import PropTypes from '../../utils/PropTypes';
@@ -45,9 +46,13 @@ export default class CallLane extends React.Component {
 
         return (
             <div className={ classes }>
-                <div className="CallLane-panes">
+                <CSSTransitionGroup
+                    transitionEnterTimeout={ 500 }
+                    transitionLeaveTimeout={ 500 }
+                    transitionName="PaneBase"
+                    component="div" className="CallLane-panes">
                     { panes }
-                </div>
+                </CSSTransitionGroup>
                 <LaneControlBar lane={ this.props.lane }/>
             </div>
         );

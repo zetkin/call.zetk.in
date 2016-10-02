@@ -1,5 +1,6 @@
 .InfoPane {
     background-color: green;
+    z-index: 1;
 
     &.InfoPane-assignmentStep {
         width: 30%;
@@ -8,7 +9,7 @@
 
     &.InfoPane-prepareStep {
         width: 60%;
-        left: 0;
+        left: 0%;
     }
 
     &.InfoPane-callStep {

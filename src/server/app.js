@@ -43,6 +43,9 @@ export default function initApp(messages) {
     app.get('/', auth.callback(authOpts));
     app.get('/logout', auth.logout(authOpts));
 
+    // Require users to be authenticated for most pages
+    app.get('/assignments*', auth.validate(authOpts));
+
     app.get('/l10n', loadLocaleHandler());
 
     app.use(preloader(messages));

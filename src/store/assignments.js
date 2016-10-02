@@ -5,7 +5,7 @@ import * as types from '../actions';
 
 
 export const selectedAssignment = state => {
-    let id = state.getIn(['assignments', 'selectedId']);
+    let id = state.getIn(['assignments', 'selectedId']).toString();
     return state.getIn(['assignments', 'assignmentList', 'items', id]);
 }
 

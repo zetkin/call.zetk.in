@@ -39,6 +39,6 @@ export default createReducer(initialState, {
 
     [types.SELECT_ASSIGNMENT]: (state, action) => {
         return state
-            .set('selectedId', action.payload.assignment.get('id'));
+            .set('selectedId', action.payload.assignmentId);
     },
 });

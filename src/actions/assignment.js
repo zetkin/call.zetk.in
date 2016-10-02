@@ -12,9 +12,9 @@ export function retrieveUserAssignments() {
     };
 }
 
-export function selectAssignment(assignment) {
+export function selectAssignment(assignmentId) {
     return {
         type: types.SELECT_ASSIGNMENT,
-        payload: { assignment },
+        payload: { assignmentId },
     };
 }

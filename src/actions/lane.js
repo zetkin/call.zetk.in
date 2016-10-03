@@ -7,3 +7,10 @@ export function setLaneStep(lane, step) {
         payload: { lane, step },
     };
 }
+
+export function setLaneInfoMode(mode) {
+    return {
+        type: types.SET_LANE_INFO_MODE,
+        payload: { mode },
+    };
+}

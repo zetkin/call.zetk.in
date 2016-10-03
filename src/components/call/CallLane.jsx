@@ -31,6 +31,7 @@ export default class CallLane extends React.Component {
     render() {
         let lane = this.props.lane;
         let step = lane.get('step');
+        let infoMode = lane.get('infoMode');
         let paneComponents = [];
 
         switch (step) {
@@ -59,7 +60,11 @@ export default class CallLane extends React.Component {
             );
         });
 
-        let classes = cx('CallLane', 'CallLane-' + step + 'Step');
+        let classes = cx(
+            'CallLane',
+            'CallLane-' + step + 'Step',
+            'CallLane-' + infoMode + 'InfoMode',
+        );
 
         return (
             <div className={ classes }>

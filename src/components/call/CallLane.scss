@@ -13,4 +13,24 @@
         right: 0;
         overflow: hidden;
     }
+
+    &.CallLane-instructionsInfoMode {
+        .InstructionsPane {
+            z-index: 2;
+        }
+
+        .TargetPane {
+            z-index: 1;
+        }
+    }
+
+    &.CallLane-targetInfoMode {
+        .InstructionsPane {
+            z-index: 1;
+        }
+
+        .TargetPane {
+            z-index: 2;
+        }
+    }
 }

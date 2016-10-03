@@ -4,6 +4,11 @@ import immutable from 'immutable';
 import * as types from '../actions';
 
 
+export const selectedAssignment = state => {
+    let id = state.getIn(['assignments', 'selectedId']).toString();
+    return state.getIn(['assignments', 'assignmentList', 'items', id]);
+}
+
 const initialState = immutable.fromJS({
     selectedId: null,
     assignmentList: {
@@ -39,6 +44,6 @@ export default createReducer(initialState, {
 
     [types.SELECT_ASSIGNMENT]: (state, action) => {
         return state
-            .set('selectedId', action.payload.assignment.get('id'));
+            .set('selectedId', action.payload.assignmentId);
     },
 });

@@ -1,0 +1,9 @@
+.StatsPane {
+    background-color: #0ff;
+    z-index: 0;
+
+    &.StatsPane-doneStep {
+        width: 60%;
+        left: 40%;
+    }
+}

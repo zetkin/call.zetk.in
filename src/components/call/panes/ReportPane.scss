@@ -1,0 +1,13 @@
+.ReportPane {
+    background-color: #ff0;
+
+    &.ReportPane-reportStep {
+        width: 40%;
+        left: 60%;
+    }
+
+    &.ReportPane-doneStep {
+        width: 40%;
+        left: 0;
+    }
+}

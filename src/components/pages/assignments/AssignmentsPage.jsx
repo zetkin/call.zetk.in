@@ -53,7 +53,7 @@ export default class AssignmentsPage extends React.Component {
     }
 
     onSelect(assignment) {
-        this.props.dispatch(selectAssignment(assignment));
+        this.props.dispatch(selectAssignment(assignment.get('id')));
 
         let path = '/assignments/' + assignment.get('id') + '/call';
         this.props.router.push(path);

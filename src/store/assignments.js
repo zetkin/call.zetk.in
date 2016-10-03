@@ -42,6 +42,24 @@ export default createReducer(initialState, {
                 immutable.fromJS(assignments));
     },
 
+    [types.RETRIEVE_ASSIGNMENT_STATS + '_PENDING']: (state, action) => {
+        let caId = action.meta.assignmentId.toString();
+
+        return state
+            .updateIn(['assignmentList', 'items', caId], ca => ca
+                .set('statsIsPending', true));
+    },
+
+    [types.RETRIEVE_ASSIGNMENT_STATS + '_FULFILLED']: (state, action) => {
+        let caId = action.meta.assignmentId.toString();
+        let stats = action.payload.data.data;
+
+        return state
+            .updateIn(['assignmentList', 'items', caId], ca => ca
+                .set('statsIsPending', false)
+                .set('stats', immutable.fromJS(stats)));
+    },
+
     [types.SELECT_ASSIGNMENT]: (state, action) => {
         return state
             .set('selectedId', action.payload.assignmentId);

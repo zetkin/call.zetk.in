@@ -5,6 +5,7 @@ import cx from 'classnames';
 import PropTypes from '../../utils/PropTypes';
 import { selectedAssignment } from '../../store/assignments';
 import { setLaneStep } from '../../actions/lane';
+import { startNewCall } from '../../actions/call';
 
 
 const mapStateToProps = state => ({
@@ -42,15 +43,20 @@ export default class LaneControlBar extends React.Component {
     }
 
     onClickNext() {
-        // TODO: This is a placeholder. Don't use a generic next function.
         let lane = this.props.lane;
-        let steps = [ 'assignment', 'prepare', 'call', 'report', 'done' ];
-        let idx = steps.indexOf(lane.get('step')) + 1;
-
-        if (idx >= steps.length) {
-            idx = 1;
+        if (lane.get('step') === 'assignment') {
+            this.props.dispatch(startNewCall(this.props.assignment));
         }
+        else {
+            // TODO: This is a placeholder. Don't use a generic next function.
+            let steps = [ 'assignment', 'prepare', 'call', 'report', 'done' ];
+            let idx = steps.indexOf(lane.get('step')) + 1;
 
-        this.props.dispatch(setLaneStep(lane, steps[idx]));
+            if (idx >= steps.length) {
+                idx = 1;
+            }
+
+            this.props.dispatch(setLaneStep(lane, steps[idx]));
+        }
     }
 }

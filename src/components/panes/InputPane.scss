@@ -16,4 +16,24 @@
         width: 30%;
         left: 35%;
     }
+
+    &.PaneBase-enter {
+        animation: InputPane-enterAnimation 0.5s;
+    }
+
+    &.InputPane-firstCall.PaneBase-enter {
+        animation: InputPane-firstCall-enterAnimation 0.5s;
+    }
+}
+
+@keyframes InputPane-enterAnimation {
+    from {
+        left: 170%;
+    }
+}
+
+@keyframes InputPane-firstCall-enterAnimation {
+    from {
+        left: 135%;
+    }
 }

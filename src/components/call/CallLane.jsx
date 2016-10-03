@@ -4,7 +4,7 @@ import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 import LaneControlBar from './LaneControlBar';
 import PropTypes from '../../utils/PropTypes';
-import * as panes from './panes';
+import * as panes from '../panes';
 
 
 export default class CallLane extends React.Component {

@@ -24,11 +24,27 @@ export default class PaneBase extends React.Component {
 
         let classes = cx(classNames);
 
+        let header = this.renderHeader();
+        if (header) {
+            header = (
+                <div className="PaneBase-header">
+                    { header }
+                </div>
+            );
+        }
+
         return (
             <section className={ classes }>
-                { this.renderContent() }
+                { header }
+                <div className="PaneBase-content">
+                    { this.renderContent() }
+                </div>
             </section>
         );
+    }
+
+    renderHeader() {
+        return null;
     }
 
     renderContent() {

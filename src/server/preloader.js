@@ -3,6 +3,7 @@ import immutable from 'immutable';
 
 import { configureStore } from '../store';
 import { createLocalizeHandler } from './locale';
+import { setUserData } from '../actions/user';
 import {
     selectAssignment,
     retrieveUserAssignments,

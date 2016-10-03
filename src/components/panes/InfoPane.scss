@@ -1,24 +1,23 @@
 .InfoPane {
-    background-color: green;
     z-index: 1;
 
     &.InfoPane-assignmentStep {
-        width: 30%;
-        left: 70%;
+        width: 35%;
+        left: 65%;
     }
 
     &.InfoPane-prepareStep {
-        width: 60%;
+        width: 70%;
         left: 0%;
     }
 
     &.InfoPane-callStep {
-        width: 30%;
+        width: 35%;
         left: 0;
     }
 
     &.InfoPane-reportStep {
-        width: 30%;
+        width: 35%;
         left: 0;
     }
 }

@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 
 import PropTypes from '../../utils/PropTypes';
+import TargetInfo from './TargetInfo';
 import { selectedAssignment } from '../../store/assignments';
+import { currentCall } from '../../store/calls';
 import { setLaneStep } from '../../actions/lane';
 import { startNewCall } from '../../actions/call';
 
 
 const mapStateToProps = state => ({
+    call: currentCall(state),
     assignment: selectedAssignment(state),
 });
 
@@ -28,6 +31,10 @@ export default class LaneControlBar extends React.Component {
             let assignment = this.props.assignment;
             content = <h1>{ assignment.get('title') }</h1>
         }
+        else if (step === 'prepare') {
+            let call = this.props.call;
+            content = <TargetInfo target={ call.get('target') }/>;
+        }
         else {
             content = <h1>Unknown step</h1>;
         }
@@ -36,7 +43,9 @@ export default class LaneControlBar extends React.Component {
 
         return (
             <div className={ classes }>
-                { content }
+                <div className="LaneControlBar-content">
+                    { content }
+                </div>
                 <button onClick={ this.onClickNext.bind(this) }>Next</button>
             </div>
         );

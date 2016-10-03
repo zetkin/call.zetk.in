@@ -23,7 +23,6 @@ export default class AssignmentPane extends PaneBase {
         let assignment = this.props.assignment;
 
         let statsContent = null;
-        console.log(assignment.toJS());
         if (assignment.get('statsIsPending')) {
             statsContent = <LoadingIndicator />;
         }

@@ -22,4 +22,14 @@
             font-weight: bold;
         }
     }
+
+    &.PaneBase-leave {
+        animation: AssignmentPane-leaveAnimation 0.5s;
+    }
+}
+
+@keyframes AssignmentPane-leaveAnimation {
+    to {
+        left: -65%;
+    }
 }

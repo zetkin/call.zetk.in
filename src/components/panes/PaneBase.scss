@@ -7,13 +7,14 @@
     transition: width 0.5s, left 0.5s;
     padding: 6% 2% 2%;
 
-    &.PaneBase-enter {
-        animation: PaneBase-enterAnimation 0.5s;
-    }
+}
 
-    &.PaneBase-leave {
-        animation: PaneBase-leaveAnimation 0.5s;
-    }
+.PaneBase-enter {
+    animation: PaneBase-enterAnimation 0.5s;
+}
+
+.PaneBase-leave {
+    animation: PaneBase-leaveAnimation 0.5s;
 }
 
 @keyframes PaneBase-enterAnimation {

@@ -12,6 +12,22 @@ export default class CallLane extends React.Component {
         lane: PropTypes.map.isRequired,
     };
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            firstCall: true,
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.lane.get('step') === 'done') {
+            this.setState({
+                firstCall: false,
+            });
+        }
+    }
+
     render() {
         let lane = this.props.lane;
         let step = lane.get('step');
@@ -19,16 +35,16 @@ export default class CallLane extends React.Component {
 
         switch (step) {
             case 'assignment':
-                paneComponents = [ 'assignment', 'info' ];
+                paneComponents = [ 'assignment', 'instructions' ];
                 break;
             case 'prepare':
-                paneComponents = [ 'info', 'input' ];
+                paneComponents = [ 'instructions', 'target', 'input' ];
                 break;
             case 'call':
-                paneComponents = [ 'info', 'input' ];
+                paneComponents = [ 'instructions', 'target', 'input' ];
                 break;
             case 'report':
-                paneComponents = [ 'info', 'input', 'report' ];
+                paneComponents = [ 'instructions', 'target', 'input', 'report' ];
                 break;
             case 'done':
                 paneComponents = [ 'report', 'stats' ];
@@ -38,7 +54,8 @@ export default class CallLane extends React.Component {
         let panes = paneComponents.map(paneType => {
             let PaneComponent = paneComponentsByType[paneType];
             return (
-                <PaneComponent step={ step } key={ paneType }/>
+                <PaneComponent step={ step } key={ paneType }
+                    firstCall={ this.state.firstCall }/>
             );
         });
 
@@ -61,8 +78,9 @@ export default class CallLane extends React.Component {
 
 const paneComponentsByType = {
     assignment: panes.AssignmentPane,
-    info: panes.InfoPane,
+    instructions: panes.InstructionsPane,
     input: panes.InputPane,
     report: panes.ReportPane,
     stats: panes.StatsPane,
+    target: panes.TargetPane,
 };

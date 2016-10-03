@@ -6,4 +6,14 @@
         width: 65%;
         left: 35%;
     }
+
+    &.PaneBase-leave {
+        animation: StatsPane-leaveAnimation 0.5s;
+    }
+}
+
+@keyframes StatsPane-leaveAnimation {
+    to {
+        left: -65%;
+    }
 }

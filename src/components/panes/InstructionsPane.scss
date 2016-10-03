@@ -1,0 +1,24 @@
+.InstructionsPane {
+    z-index: 1;
+    background-color: white;
+
+    &.InstructionsPane-assignmentStep {
+        width: 35%;
+        left: 65%;
+    }
+
+    &.InstructionsPane-prepareStep {
+        width: 35%;
+        left: 0%;
+    }
+
+    &.InstructionsPane-callStep {
+        width: 35%;
+        left: 0;
+    }
+
+    &.InstructionsPane-reportStep {
+        width: 35%;
+        left: 0;
+    }
+}

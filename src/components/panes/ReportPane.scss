@@ -10,4 +10,14 @@
         width: 35%;
         left: 0;
     }
+
+    &.PaneBase-leave {
+        animation: ReportPane-leaveAnimation 0.5s;
+    }
+}
+
+@keyframes ReportPane-leaveAnimation {
+    to {
+        left: -100%;
+    }
 }

@@ -35,6 +35,14 @@ export default createReducer(initialState, {
             .set('allLanes', immutable.fromJS({ [lane.id]: lane }));
     },
 
+    [types.START_NEW_CALL + '_FULFILLED']: (state, action) => {
+        // When a new call is created, proceed to the "prepare" step
+        let laneId = state.get('selectedId');
+
+        return state
+            .setIn(['allLanes', laneId, 'step'], 'prepare');
+    },
+
     [types.SET_LANE_STEP]: (state, action) => {
         let step = action.payload.step;
         let laneId = action.payload.lane.get('id');

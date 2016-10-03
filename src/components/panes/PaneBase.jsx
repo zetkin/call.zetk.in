@@ -6,6 +6,7 @@ import { componentClassNames } from '..';
 
 export default class PaneBase extends React.Component {
     static propTypes = {
+        firstCall: React.PropTypes.bool.isRequired,
         step: React.PropTypes.string.isRequired,
     };
 
@@ -13,8 +14,13 @@ export default class PaneBase extends React.Component {
         let step = this.props.step;
         let classNames = [];
 
-        componentClassNames(this).forEach(className =>
-            classNames.push(className, className + '-' + step + 'Step'));
+        componentClassNames(this).forEach(className => {
+            classNames.push(className);
+            classNames.push(className + '-' + step + 'Step');
+            if (this.props.firstCall) {
+                classNames.push(className + '-firstCall');
+            }
+        });
 
         let classes = cx(classNames);
 

@@ -12,6 +12,22 @@ export default class CallLane extends React.Component {
         lane: PropTypes.map.isRequired,
     };
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            firstCall: true,
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.lane.get('step') === 'done') {
+            this.setState({
+                firstCall: false,
+            });
+        }
+    }
+
     render() {
         let lane = this.props.lane;
         let step = lane.get('step');
@@ -38,7 +54,8 @@ export default class CallLane extends React.Component {
         let panes = paneComponents.map(paneType => {
             let PaneComponent = paneComponentsByType[paneType];
             return (
-                <PaneComponent step={ step } key={ paneType }/>
+                <PaneComponent step={ step } key={ paneType }
+                    firstCall={ this.state.firstCall }/>
             );
         });
 

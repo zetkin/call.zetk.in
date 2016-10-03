@@ -3,7 +3,7 @@ import immutable from 'immutable';
 
 import { configureStore } from '../store';
 import { createLocalizeHandler } from './locale';
-import { setUserData } from '../actions/user';
+import { setUserData, retrieveUserMemberships } from '../actions/user';
 import {
     selectAssignment,
     retrieveUserAssignments,
@@ -20,6 +20,10 @@ export default (messages) => {
     // TODO: Rearrange so that this can be on top
     //       Right now it relies on the intl data from localizeHandler()
     preloader.use(initStore);
+
+    preloader.get('*', waitForActions(req => [
+        retrieveUserMemberships(),
+    ]));
 
     preloader.get('/assignments/:assignmentId/call', waitForActions(req => [
         selectAssignment(req.params.assignmentId),

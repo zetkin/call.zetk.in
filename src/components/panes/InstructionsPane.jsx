@@ -11,13 +11,13 @@ const mapStateToProps = state => ({
 });
 
 @connect(mapStateToProps)
-export default class InfoPane extends PaneBase {
+export default class InstructionsPane extends PaneBase {
     renderContent() {
         let assignment = this.props.assignment;
 
         return [
-            <Msg tagName="h1" key="h1" id="panes.info.h1"/>,
-            <div key="instructions" className="InfoPane-instructions"
+            <Msg tagName="h1" key="h1" id="panes.instructions.h1"/>,
+            <div key="instructions" className="InstructionsPane-instructions"
                 dangerouslySetInnerHTML={{
                     __html: assignment.get('instructions') }}/>,
         ];

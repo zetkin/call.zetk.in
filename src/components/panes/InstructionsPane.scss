@@ -1,22 +1,22 @@
-.InfoPane {
+.InstructionsPane {
     z-index: 1;
 
-    &.InfoPane-assignmentStep {
+    &.InstructionsPane-assignmentStep {
         width: 35%;
         left: 65%;
     }
 
-    &.InfoPane-prepareStep {
+    &.InstructionsPane-prepareStep {
         width: 70%;
         left: 0%;
     }
 
-    &.InfoPane-callStep {
+    &.InstructionsPane-callStep {
         width: 35%;
         left: 0;
     }
 
-    &.InfoPane-reportStep {
+    &.InstructionsPane-reportStep {
         width: 35%;
         left: 0;
     }

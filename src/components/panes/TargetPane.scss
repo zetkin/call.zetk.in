@@ -1,0 +1,40 @@
+.TargetPane {
+    z-index: 2;
+    background-color: red;
+
+    &.TargetPane-prepareStep {
+        width: 35%;
+        left: 35%;
+    }
+
+    &.TargetPane-callStep {
+        width: 35%;
+        left: 0;
+    }
+
+    &.TargetPane-reportStep {
+        width: 35%;
+        left: 0;
+    }
+
+    &.PaneBase-enter {
+        // TODO: Ideally, this should not be on the first enter
+        animation: TargetPane-enterAnimation 0.5s;
+    }
+
+    &.PaneBase-leave {
+        animation: TargetPane-leaveAnimation 0.5s;
+    }
+}
+
+@keyframes TargetPane-enterAnimation {
+    from {
+        left: 135%;
+    }
+}
+
+@keyframes TargetPane-leaveAnimation {
+    to {
+        left: -65%;
+    }
+}

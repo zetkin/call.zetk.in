@@ -22,13 +22,13 @@ export default class CallLane extends React.Component {
                 paneComponents = [ 'assignment', 'instructions' ];
                 break;
             case 'prepare':
-                paneComponents = [ 'instructions', 'input' ];
+                paneComponents = [ 'instructions', 'target', 'input' ];
                 break;
             case 'call':
-                paneComponents = [ 'instructions', 'input' ];
+                paneComponents = [ 'instructions', 'target', 'input' ];
                 break;
             case 'report':
-                paneComponents = [ 'instructions', 'input', 'report' ];
+                paneComponents = [ 'instructions', 'target', 'input', 'report' ];
                 break;
             case 'done':
                 paneComponents = [ 'report', 'stats' ];
@@ -65,4 +65,5 @@ const paneComponentsByType = {
     input: panes.InputPane,
     report: panes.ReportPane,
     stats: panes.StatsPane,
+    target: panes.TargetPane,
 };

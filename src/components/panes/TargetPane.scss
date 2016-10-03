@@ -17,9 +17,14 @@
         left: 0;
     }
 
-    &.PaneBase-enter {
-        // TODO: Ideally, this should not be on the first enter
-        animation: TargetPane-enterAnimation 0.5s;
+    &.TargetPane-firstCall.PaneBase-enter {
+        // Use standard animation for first call
+        animation: PaneBase-enterAnimation 0.5s;
+    }
+
+    .PaneBase-enter {
+        // Use custom animation for all subsequent calls
+        animation: PaneBase-enterAnimation 0.5s;
     }
 
     &.PaneBase-leave {

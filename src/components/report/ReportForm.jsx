@@ -41,6 +41,6 @@ const componentFromStep = step => {
         failure_message: steps.FailureMessageStep,
         caller_log: steps.CallerLogStep,
         organizer_log: steps.OrganizerLogStep,
-        summary: steps.ReportStepBase,
+        summary: steps.SummaryStep,
     }[step];
 };

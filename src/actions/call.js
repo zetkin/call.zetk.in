@@ -23,3 +23,10 @@ export function setCallReportField(field, value) {
         payload: { field, value },
     };
 }
+
+export function setCallerLogMessage(message) {
+    return {
+        type: types.SET_CALLER_LOG_MESSAGE,
+        payload: { message }
+    }
+}

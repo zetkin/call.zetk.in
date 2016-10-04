@@ -59,9 +59,9 @@ export default createReducer(initialState, {
                     success: false,
                     failureReason: null,
                     leftMessage: false,
-                    callerLog: null,
+                    callerLog: '',
                     organizerActionNeeded: false,
-                    organizerLog: null,
+                    organizerLog: '',
                 }));
         }
         else {
@@ -94,5 +94,13 @@ export default createReducer(initialState, {
             .updateIn(['activeCalls', callId, 'report'], report => report
                 .set(field, value)
                 .set('step', nextStep));
+    },
+
+    [types.SET_CALLER_LOG_MESSAGE]: (state, action) => {
+        let msg = action.payload.message;
+        let callId = state.get('currentId');
+
+        return state
+            .setIn(['activeCalls', callId, 'report', 'callerLog'], msg);
     },
 });

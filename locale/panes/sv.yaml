@@ -1,8 +1,12 @@
-instructions:
-    h1: "Instruktioner"
-
 assignment:
     stats:
         target_size: "{number, plural, =1 { person } other { personer }} att ringa"
         calls_made: "ringda samtal"
         calls_reached: "lyckade samtal"
+
+instructions:
+    h1: "Instruktioner"
+    targetButton: "Visa personinfo"
+
+target:
+    instructionsButton: "Visa instruktioner"

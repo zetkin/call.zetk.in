@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import PaneBase from './PaneBase';
 import { selectedAssignment } from '../../store/assignments';
+import { setLaneInfoMode } from '../../actions/lane';
 
 
 const mapStateToProps = state => ({
@@ -21,5 +22,25 @@ export default class InstructionsPane extends PaneBase {
                 dangerouslySetInnerHTML={{
                     __html: assignment.get('instructions') }}/>,
         ];
+    }
+
+    renderHeader() {
+        let step = this.props.step;
+
+        if (step === 'call' || step === 'report') {
+            return (
+                <button className="InstructionsPane-targetButton"
+                    onClick={ this.onClickTarget.bind(this) }>
+                    <Msg id="panes.instructions.targetButton"/>
+                </button>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
+    onClickTarget() {
+        this.props.dispatch(setLaneInfoMode('target'));
     }
 }

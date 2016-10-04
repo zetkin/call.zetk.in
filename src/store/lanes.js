@@ -26,6 +26,7 @@ export default createReducer(initialState, {
         let lane = {
             id: (laneId++).toString(),
             callId: null,
+            infoMode: 'instructions',
             isPending: false,
             step: 'assignment',
         };
@@ -41,6 +42,14 @@ export default createReducer(initialState, {
 
         return state
             .setIn(['allLanes', laneId, 'step'], 'prepare');
+    },
+
+    [types.SET_LANE_INFO_MODE]: (state, action) => {
+        let laneId = state.get('selectedId');
+        let mode = action.payload.mode;
+
+        return state
+            .setIn(['allLanes', laneId, 'infoMode'], mode);
     },
 
     [types.SET_LANE_STEP]: (state, action) => {

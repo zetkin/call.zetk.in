@@ -37,3 +37,9 @@ export function setOrganizerLogMessage(message) {
         payload: { message }
     }
 }
+
+export function finishCallReport() {
+    return {
+        type: types.FINISH_CALL_REPORT,
+    }
+}

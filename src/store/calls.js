@@ -22,7 +22,7 @@ export const REPORT_STEPS = [
     'failure_message',
     'caller_log',
     'organizer_log',
-    'complete',
+    'summary',
 ];
 
 
@@ -93,7 +93,7 @@ export default createReducer(initialState, {
             nextStep = 'organizer_log';
         }
         else if (field === 'organizerActionNeeded') {
-            nextStep = 'complete';
+            nextStep = 'summary';
         }
 
         return state
@@ -116,5 +116,12 @@ export default createReducer(initialState, {
 
         return state
             .setIn(['activeCalls', callId, 'report', 'organizerLog'], msg);
+    },
+
+    [types.FINISH_CALL_REPORT]: (state, action) => {
+        let callId = state.get('currentId');
+
+        return state
+            .setIn(['activeCalls', callId, 'report', 'step'], 'summary');
     },
 });

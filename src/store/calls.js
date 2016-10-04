@@ -89,6 +89,12 @@ export default createReducer(initialState, {
         else if (field === 'leftMessage') {
             nextStep = 'caller_log';
         }
+        else if (field === 'organizerActionNeeded' && value) {
+            nextStep = 'organizer_log';
+        }
+        else if (field === 'organizerActionNeeded') {
+            nextStep = 'complete';
+        }
 
         return state
             .updateIn(['activeCalls', callId, 'report'], report => report

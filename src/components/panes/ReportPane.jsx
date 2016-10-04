@@ -1,10 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import PaneBase from './PaneBase';
+import ReportForm from '../report/ReportForm';
+import { currentCall } from '../../store/calls';
 
 
+const mapStateToProps = state => ({
+    call: currentCall(state),
+});
+
+
+@connect(mapStateToProps)
 export default class ReportPane extends PaneBase {
     renderContent() {
-        return <h1>ReportPane</h1>;
+        let call = this.props.call;
+        let report = call.get('report');
+
+        return (
+            <ReportForm report={ report }/>
+        );
     }
 }

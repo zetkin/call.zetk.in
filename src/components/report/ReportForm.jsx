@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PropTypes from '../../utils/PropTypes';
-import ReportStepBase from './steps/ReportStepBase';
+import * as steps from './steps';
 import { REPORT_STEPS } from '../../store/calls';
 
 
@@ -35,12 +35,12 @@ export default class ReportForm extends React.Component {
 
 const componentFromStep = step => {
     return {
-        success_or_failure: ReportStepBase,
-        success_callback: ReportStepBase,
-        failure_reason: ReportStepBase,
-        failure_message: ReportStepBase,
-        caller_log: ReportStepBase,
-        organizer_log: ReportStepBase,
-        complete: ReportStepBase,
+        success_or_failure: steps.ReportStepBase,
+        success_callback: steps.ReportStepBase,
+        failure_reason: steps.ReportStepBase,
+        failure_message: steps.ReportStepBase,
+        caller_log: steps.ReportStepBase,
+        organizer_log: steps.ReportStepBase,
+        complete: steps.ReportStepBase,
     }[step];
 };

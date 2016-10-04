@@ -15,6 +15,16 @@ const initialState = {
     activeCalls: {},
 };
 
+export const REPORT_STEPS = [
+    'success_or_failure',
+    'success_callback',
+    'failure_reason',
+    'failure_message',
+    'caller_log',
+    'organizer_log',
+    'complete',
+];
+
 
 export default createReducer(initialState, {
     ['@@INIT']: (state, action) => {
@@ -34,5 +44,28 @@ export default createReducer(initialState, {
             .set('currentId', callId)
             .set('currentIsPending', false)
             .setIn(['activeCalls', callId], immutable.fromJS(call))
+    },
+
+    [types.SET_LANE_STEP]: (state, action) => {
+        let step = action.payload.step;
+        let callId = state.get('currentId');
+
+        // Create an empty report for current call when navigating
+        // to the "report" lane step.
+        if (step === 'report') {
+            return state
+                .setIn(['activeCalls', callId, 'report'], immutable.fromJS({
+                    step: REPORT_STEPS[0],
+                    success: false,
+                    failureReason: null,
+                    leftMessage: false,
+                    callerLog: null,
+                    organizerActionNeeded: false,
+                    organizerLog: null,
+                }));
+        }
+        else {
+            return state;
+        }
     },
 });

@@ -68,4 +68,22 @@ export default createReducer(initialState, {
             return state;
         }
     },
+
+    [types.SET_CALL_REPORT_FIELD]: (state, action) => {
+        let { field, value } = action.payload;
+        let callId = state.get('currentId');
+        let nextStep;
+
+        if (field === 'success' && value) {
+            nextStep = 'success_callback';
+        }
+        else if (field === 'success') {
+            nextStep = 'failure_reason';
+        }
+
+        return state
+            .updateIn(['activeCalls', callId, 'report'], report => report
+                .set(field, value)
+                .set('step', nextStep));
+    },
 });

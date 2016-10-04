@@ -9,3 +9,4 @@ export const SET_LANE_STEP = 'SET_LANE_STEP';
 export const SET_LANE_INFO_MODE = 'SET_LANE_INFO_MODE';
 
 export const START_NEW_CALL = 'START_NEW_CALL';
+export const SET_CALL_REPORT_FIELD = 'SET_CALL_REPORT_FIELD';

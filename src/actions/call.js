@@ -16,3 +16,10 @@ export function startNewCall(assignment) {
         });
     };
 }
+
+export function setCallReportField(field, value) {
+    return {
+        type: types.SET_CALL_REPORT_FIELD,
+        payload: { field, value },
+    };
+}

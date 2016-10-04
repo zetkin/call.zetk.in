@@ -109,4 +109,12 @@ export default createReducer(initialState, {
         return state
             .setIn(['activeCalls', callId, 'report', 'callerLog'], msg);
     },
+
+    [types.SET_ORGANIZER_LOG_MESSAGE]: (state, action) => {
+        let msg = action.payload.message;
+        let callId = state.get('currentId');
+
+        return state
+            .setIn(['activeCalls', callId, 'report', 'organizerLog'], msg);
+    },
 });

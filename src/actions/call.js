@@ -30,3 +30,10 @@ export function setCallerLogMessage(message) {
         payload: { message }
     }
 }
+
+export function setOrganizerLogMessage(message) {
+    return {
+        type: types.SET_ORGANIZER_LOG_MESSAGE,
+        payload: { message }
+    }
+}

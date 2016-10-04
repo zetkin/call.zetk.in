@@ -38,7 +38,7 @@ const componentFromStep = step => {
         success_or_failure: steps.SuccessOrFailureStep,
         success_callback: steps.ReportStepBase,
         failure_reason: steps.FailureReasonStep,
-        failure_message: steps.ReportStepBase,
+        failure_message: steps.FailureMessageStep,
         caller_log: steps.ReportStepBase,
         organizer_log: steps.ReportStepBase,
         complete: steps.ReportStepBase,

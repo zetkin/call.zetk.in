@@ -36,7 +36,8 @@ export default class ReportForm extends React.Component {
 const componentFromStep = step => {
     return {
         success_or_failure: steps.SuccessOrFailureStep,
-        success_callback: steps.ReportStepBase,
+        success_could_talk: steps.CouldTalkStep,
+        success_call_back: steps.ReportStepBase,
         failure_reason: steps.FailureReasonStep,
         failure_message: steps.FailureMessageStep,
         caller_log: steps.CallerLogStep,

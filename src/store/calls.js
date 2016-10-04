@@ -17,7 +17,8 @@ const initialState = {
 
 export const REPORT_STEPS = [
     'success_or_failure',
-    'success_callback',
+    'success_could_talk',
+    'success_call_back',
     'failure_reason',
     'failure_message',
     'caller_log',
@@ -57,6 +58,7 @@ export default createReducer(initialState, {
                 .setIn(['activeCalls', callId, 'report'], immutable.fromJS({
                     step: REPORT_STEPS[0],
                     success: false,
+                    targetCouldTalk: false,
                     failureReason: null,
                     leftMessage: false,
                     callerLog: '',
@@ -75,7 +77,13 @@ export default createReducer(initialState, {
         let nextStep;
 
         if (field === 'success' && value) {
-            nextStep = 'success_callback';
+            nextStep = 'success_could_talk';
+        }
+        else if (field === 'targetCouldTalk' && value) {
+            nextStep = 'caller_log';
+        }
+        else if (field === 'targetCouldTalk' && !value) {
+            nextStep = 'success_call_back';
         }
         else if (field === 'success') {
             nextStep = 'failure_reason';

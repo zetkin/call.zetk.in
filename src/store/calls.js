@@ -59,6 +59,7 @@ export default createReducer(initialState, {
                     step: REPORT_STEPS[0],
                     success: false,
                     targetCouldTalk: false,
+                    callBackAfter: null,
                     failureReason: null,
                     leftMessage: false,
                     callerLog: '',
@@ -84,6 +85,9 @@ export default createReducer(initialState, {
         }
         else if (field === 'targetCouldTalk' && !value) {
             nextStep = 'success_call_back';
+        }
+        else if (field === 'callBackAfter') {
+            nextStep = 'caller_log';
         }
         else if (field === 'success') {
             nextStep = 'failure_reason';

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage as Msg } from 'react-intl';
 import { connect } from 'react-redux';
 
 import PaneBase from './PaneBase';
@@ -17,8 +18,9 @@ export default class ReportPane extends PaneBase {
         let call = this.props.call;
         let report = call.get('report');
 
-        return (
-            <ReportForm report={ report }/>
-        );
+        return [
+            <Msg key="h1" tagName="h1" id="panes.report.h1"/>,
+            <ReportForm key="form" report={ report }/>
+        ];
     }
 }

@@ -114,6 +114,14 @@ export default createReducer(initialState, {
                 .set('step', nextStep));
     },
 
+    [types.SET_CALL_REPORT_STEP]: (state, action) => {
+        let step = action.payload.step;
+        let callId = state.get('currentId');
+
+        return state
+            .setIn(['activeCalls', callId, 'report', 'step'], step);
+    },
+
     [types.SET_CALLER_LOG_MESSAGE]: (state, action) => {
         let msg = action.payload.message;
         let callId = state.get('currentId');

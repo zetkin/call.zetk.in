@@ -24,6 +24,13 @@ export function setCallReportField(field, value) {
     };
 }
 
+export function setCallReportStep(step) {
+    return {
+        type: types.SET_CALL_REPORT_STEP,
+        payload: { step },
+    };
+}
+
 export function setCallerLogMessage(message) {
     return {
         type: types.SET_CALLER_LOG_MESSAGE,

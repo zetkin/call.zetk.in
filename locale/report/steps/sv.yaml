@@ -1,0 +1,74 @@
+successOrFailure:
+    question: "Nådde du personen?"
+    options:
+        success: "Ja"
+        failure: "Nej..."
+
+    summary:
+        success: "Du nådde personen."
+        failure: "Du nådde inte personen."
+
+successCouldTalk:
+    question: "Kunde personen prata just nu?"
+    options:
+        couldTalk: "Ja"
+        callBack: "Nej, vi måste ringa tillbaka"
+    summary:
+        couldTalk: "Personen kunde prata med oss."
+        callBack: "Personen hade inte tid att prata just nu."
+
+successCallBack:
+    question: "När ska vi ringa tillbaka?"
+    options:
+        asap: "Så snart som möjligt"
+        fewDays: "Efter ett par dagar"
+        oneWeek: "Efter en vecka"
+        twoWeeks: "Efter ett par veckor"
+    summary:
+        asap: "Vi ringer tillbaka så snart som möjligt"
+        fewDays: "Vi ringer tillbaka tidigast om ett par dagar"
+        oneWeek: "Vi ringer tillbaka tidigast om en vecka"
+        twoWeeks: "Vi ringer tillbaka tidigast om två veckor"
+
+failureReason:
+    question: "Varför inte?"
+    options:
+        noPickup: "Inget svar / telefonsvarare"
+        otherPerson: "Pratade med en annan person"
+        wrongNumber: "Fel nummer"
+        lineBusy: "Upptaget"
+    summary:
+        noPickup: "Personen svarade inte."
+        otherPerson: "Du pratade med en annan person."
+        wrongNumber: "Vi hade fel nummer till personen."
+        lineBusy: "Det var upptaget."
+
+failureMessage:
+    question: "Lämnade du ett meddelande på telefonsvararen?"
+    options:
+        leftMessage: "Ja"
+        noMessage: "Nej"
+    summary:
+        leftMessage: "Du lämnade ett meddelande."
+        noMessage: "Du lämnade inget meddelande."
+
+callerLog:
+    callerQuestion: "Lämna en anteckning till framtida ringare"
+    organizerQuestion: "Behöver en organisatör agera?"
+    options:
+        organizerActionNeeded: "Ja"
+        noActionNeeded: "Nej, det behövs inte"
+    summary:
+        leftLog: "Du lämnade en anteckning till framtida ringare:"
+        emptyLog: "Du lämnade ingen anteckning till ringare."
+
+organizerLog:
+    question: "Förklara för organisatören vad problemet är."
+    options:
+        saveWithoutLog: "Spara utan meddelande"
+        saveWithLog: "Inkludera meddelandet"
+        noActionNeeded: "Organisatör behövs inte"
+    summary:
+        leftLog: "Du lämnade en anteckning för organistörer att uppmärksamma:"
+        emptyLog: "Du har bett en organisatör titta på samtalet."
+        noActionNeeded: "Ingen organisatör behöver titta på meddelandet"

@@ -1,0 +1,17 @@
+.ReportStepBase {
+    .ReportStepBase-editLink {
+        float: right;
+        cursor: pointer;
+
+        &:hover {
+            color: black;
+        }
+    }
+
+    &.ReportStepBase-summaryMode {
+        color: #888;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+}

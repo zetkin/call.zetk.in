@@ -10,3 +10,6 @@ instructions:
 
 target:
     instructionsButton: "Visa instruktioner"
+
+report:
+    h1: "Rapportera in samtal"

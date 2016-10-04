@@ -16,3 +16,37 @@ export function startNewCall(assignment) {
         });
     };
 }
+
+export function setCallReportField(field, value) {
+    return {
+        type: types.SET_CALL_REPORT_FIELD,
+        payload: { field, value },
+    };
+}
+
+export function setCallReportStep(step) {
+    return {
+        type: types.SET_CALL_REPORT_STEP,
+        payload: { step },
+    };
+}
+
+export function setCallerLogMessage(message) {
+    return {
+        type: types.SET_CALLER_LOG_MESSAGE,
+        payload: { message }
+    }
+}
+
+export function setOrganizerLogMessage(message) {
+    return {
+        type: types.SET_ORGANIZER_LOG_MESSAGE,
+        payload: { message }
+    }
+}
+
+export function finishCallReport() {
+    return {
+        type: types.FINISH_CALL_REPORT,
+    }
+}

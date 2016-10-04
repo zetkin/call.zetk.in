@@ -1,10 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import PropTypes from '../../utils/PropTypes';
 import * as steps from './steps';
 import { REPORT_STEPS } from '../../store/calls';
 
 
+@connect()
 export default class ReportForm extends React.Component {
     static propTypes = {
         report: PropTypes.map.isRequired,
@@ -21,6 +23,7 @@ export default class ReportForm extends React.Component {
 
             steps.push(
                 <StepComponent key={ step }
+                    dispatch={ this.props.dispatch }
                     report={ report }/>
             );
         }

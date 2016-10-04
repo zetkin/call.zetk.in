@@ -1,13 +1,11 @@
 import React from 'react';
 import { FormattedMessage as Msg } from 'react-intl';
-import { connect } from 'react-redux';
 
 import Button from '../../misc/Button';
 import ReportStepBase from './ReportStepBase';
 import { setCallReportField } from '../../../actions/call';
 
 
-@connect()
 export default class SuccessOrFailureStep extends ReportStepBase {
     getRenderMode(report) {
         return (report.get('step') === 'success_or_failure')?

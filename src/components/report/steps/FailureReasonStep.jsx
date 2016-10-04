@@ -1,13 +1,11 @@
 import React from 'react';
 import { FormattedMessage as Msg } from 'react-intl';
-import { connect } from 'react-redux';
 
 import Button from '../../misc/Button';
 import ReportStepBase from './ReportStepBase';
 import { setCallReportField } from '../../../actions/call';
 
 
-@connect()
 export default class FailureReasonStep extends ReportStepBase {
     getRenderMode(report) {
         if (report.get('success')) {

@@ -8,6 +8,7 @@ import { componentClassNames } from '../..';
 export default class ReportStepBase extends React.Component {
     static propTypes = {
         report: PropTypes.map.isRequired,
+        dispatch: PropTypes.func.isRequired,
     };
 
     render() {

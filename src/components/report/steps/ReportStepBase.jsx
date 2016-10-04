@@ -21,10 +21,10 @@ export default class ReportStepBase extends React.Component {
             let content = null;
 
             if (renderMode === 'form') {
-                content = this.renderForm();
+                content = this.renderForm(report);
             }
             else if (renderMode === 'summary') {
-                content = this.renderSummary();
+                content = this.renderSummary(report);
             }
 
             let classNames = [];

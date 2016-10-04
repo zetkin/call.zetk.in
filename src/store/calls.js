@@ -80,6 +80,12 @@ export default createReducer(initialState, {
         else if (field === 'success') {
             nextStep = 'failure_reason';
         }
+        else if (field === 'failureReason' && value === "noPickup") {
+            nextStep = 'failure_message';
+        }
+        else if (field === 'failureReason') {
+            nextStep = 'caller_log';
+        }
 
         return state
             .updateIn(['activeCalls', callId, 'report'], report => report

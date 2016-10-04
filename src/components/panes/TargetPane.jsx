@@ -28,7 +28,7 @@ export default class TargetPane extends PaneBase {
             return (
                 <button className="TargetPane-instructionsButton"
                     onClick={ this.onClickInstructions.bind(this) }>
-                    <Msg id="panes.target.instructions"/>
+                    <Msg id="panes.target.instructionsButton"/>
                 </button>
             );
         }

@@ -24,7 +24,7 @@ export default class ReportForm extends React.Component {
             steps.push(
                 <StepComponent key={ step }
                     dispatch={ this.props.dispatch }
-                    report={ report }/>
+                    step={ step } report={ report }/>
             );
         }
 

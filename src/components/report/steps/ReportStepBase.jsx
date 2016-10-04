@@ -1,12 +1,15 @@
 import React from 'react';
+import { FormattedMessage as Msg } from 'react-intl';
 import cx from 'classnames';
 
 import PropTypes from '../../../utils/PropTypes';
 import { componentClassNames } from '../..';
+import { setCallReportStep } from '../../../actions/call';
 
 
 export default class ReportStepBase extends React.Component {
     static propTypes = {
+        step: PropTypes.string.isRequired,
         report: PropTypes.map.isRequired,
         dispatch: PropTypes.func.isRequired,
     };
@@ -20,12 +23,18 @@ export default class ReportStepBase extends React.Component {
         }
         else {
             let content = null;
+            let editLink = null;
 
             if (renderMode === 'form') {
                 content = this.renderForm(report);
             }
             else if (renderMode === 'summary') {
                 content = this.renderSummary(report);
+                editLink = (
+                    <a className="ReportStepBase-editLink"
+                        onClick={ this.onClickEdit.bind(this) }>
+                        <Msg id="report.edit"/></a>
+                );
             }
 
             let classNames = [];
@@ -36,7 +45,10 @@ export default class ReportStepBase extends React.Component {
 
             return (
                 <div className={ cx(classNames) }>
-                    { content }
+                    { editLink }
+                    <div className="ReportStepBase-content">
+                        { content }
+                    </div>
                 </div>
             );
         }
@@ -48,5 +60,9 @@ export default class ReportStepBase extends React.Component {
         // * summary - to render brief summary
         // * none - to not render at all
         return 'none';
+    }
+
+    onClickEdit() {
+        this.props.dispatch(setCallReportStep(this.props.step));
     }
 }

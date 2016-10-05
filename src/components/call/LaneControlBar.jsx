@@ -65,10 +65,12 @@ export default class LaneControlBar extends React.Component {
                     showFullInfo={ true }/>
             );
 
-            proceedSection = (
-                <Button labelMsg="controlBar.submitReportButton"
-                    onClick={ this.onClickSubmitReport.bind(this) }/>
-            );
+            if (call.getIn(['report', 'step']) === 'summary') {
+                proceedSection = (
+                    <Button labelMsg="controlBar.submitReportButton"
+                        onClick={ this.onClickSubmitReport.bind(this) }/>
+                );
+            }
         }
         else if (step === 'done') {
             content = null;

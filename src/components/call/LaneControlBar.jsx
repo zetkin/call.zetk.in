@@ -121,8 +121,6 @@ export default class LaneControlBar extends React.Component {
     }
 
     onClickNextCall() {
-        // TODO: Allocate another call
-        let lane = this.props.lane;
-        this.props.dispatch(setLaneStep(lane, 'prepare'));
+        this.props.dispatch(startNewCall(this.props.assignment));
     }
 }

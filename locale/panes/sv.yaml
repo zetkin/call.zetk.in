@@ -9,3 +9,9 @@ report:
     h1:
         report: "Rapportera in samtal"
         reported: "Samtal rapporterat"
+
+stats:
+    h1: "Bra jobbat!"
+    p: |
+        Din insats är viktig för att bygga din organisation
+        starkare. Här är en sammanfattning av hur det går.

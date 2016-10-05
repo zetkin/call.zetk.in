@@ -144,4 +144,27 @@ export default createReducer(initialState, {
         return state
             .setIn(['activeCalls', callId, 'report', 'step'], 'summary');
     },
+
+    [types.SUBMIT_CALL_REPORT + '_PENDING']: (state, action) => {
+        let callId = action.meta.callId;
+
+        return state
+            .setIn(['activeCalls', callId, 'report', 'isPending'], true);
+    },
+
+    [types.SUBMIT_CALL_REPORT + '_ERROR']: (state, action) => {
+        let callId = action.meta.callId;
+        let error = action.payload.data;
+
+        return state
+            .setIn(['activeCalls', callId, 'report', 'error'],
+                immutable.fromJS(error));
+    },
+
+    [types.SUBMIT_CALL_REPORT + '_FULFILLED']: (state, action) => {
+        let callId = action.meta.callId;
+
+        return state
+            .setIn(['activeCalls', callId, 'report', 'isPending'], false);
+    },
 });

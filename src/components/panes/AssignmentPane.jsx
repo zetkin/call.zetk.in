@@ -2,8 +2,9 @@ import React from 'react';
 import { FormattedMessage as Msg } from 'react-intl';
 import { connect } from 'react-redux';
 
-import LoadingIndicator from '../misc/LoadingIndicator';
+import AssignmentStats from '../misc/AssignmentStats';
 import PaneBase from './PaneBase';
+import LoadingIndicator from '../misc/LoadingIndicator';
 import { selectedAssignment } from '../../store/assignments';
 import { retrieveAssignmentStats } from '../../actions/assignment';
 
@@ -24,23 +25,18 @@ export default class AssignmentPane extends PaneBase {
 
         let statsContent = null;
         if (assignment.get('statsIsPending')) {
-            statsContent = <LoadingIndicator />;
+            statsContent = <LoadingIndicator key="loadingIndicator" />;
         }
         else if (assignment.get('stats')) {
-            let stats = assignment.get('stats');
+            let statsData = assignment.get('stats');
+            let stats = {
+                'stats.target_size': statsData.get('num_target_matches'),
+                'stats.calls_made': statsData.get('num_calls_made'),
+                'stats.calls_reached': statsData.get('num_calls_reached'),
+            };
 
             statsContent = (
-                <ul>
-                    <StatsItem
-                        labelMsg="panes.assignment.stats.target_size"
-                        number={ stats.get('num_target_matches') }/>
-                    <StatsItem
-                        labelMsg="panes.assignment.stats.calls_made"
-                        number={ stats.get('num_calls_made') }/>
-                    <StatsItem
-                        labelMsg="panes.assignment.stats.calls_reached"
-                        number={ stats.get('num_calls_reached') }/>
-                </ul>
+                <AssignmentStats key="stats" stats={ stats }/>
             );
         }
 
@@ -49,24 +45,7 @@ export default class AssignmentPane extends PaneBase {
             <p key="desc">
                 { assignment.get('description') }
             </p>,
-            <div key="stats" className="AssignmentPane-stats">
-                { statsContent }
-            </div>
+            statsContent
         ];
     }
 }
-
-
-const StatsItem = props => {
-    return (
-        <li className="AssignmentPane-statsItem">
-            <span className="AssignmentPane-statsItemNumber">
-                { props.number }
-            </span>
-            <p className="AssignmentPane-statsItemLabel">
-                <Msg id={ props.labelMsg }
-                    values={{ number: props.number }}/>
-            </p>
-        </li>
-    );
-};

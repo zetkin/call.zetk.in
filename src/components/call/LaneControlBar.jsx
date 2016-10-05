@@ -34,7 +34,8 @@ export default class LaneControlBar extends React.Component {
 
             content = <h1>{ assignment.get('title') }</h1>
             proceedSection = (
-                <Button labelMsg="controlBar.startButton"
+                <Button key="startButton"
+                    labelMsg="controlBar.startButton"
                     onClick={ this.onClickStart.bind(this) }/>
             );
         }
@@ -46,7 +47,8 @@ export default class LaneControlBar extends React.Component {
             );
 
             proceedSection = (
-                <Button labelMsg="controlBar.callButton"
+                <Button key="callButton"
+                    labelMsg="controlBar.callButton"
                     labelValues={{ name: target.get('name') }}
                     onClick={ this.onClickCall.bind(this) }/>
             );
@@ -58,7 +60,8 @@ export default class LaneControlBar extends React.Component {
             );
 
             proceedSection = (
-                <Button labelMsg="controlBar.finishCallButton"
+                <Button key="finishCallButton"
+                    labelMsg="controlBar.finishCallButton"
                     onClick={ this.onClickFinishCall.bind(this) }/>
             );
         }
@@ -70,7 +73,8 @@ export default class LaneControlBar extends React.Component {
 
             if (call.getIn(['report', 'step']) === 'summary') {
                 proceedSection = (
-                    <Button labelMsg="controlBar.submitReportButton"
+                    <Button key="submitReportButton"
+                        labelMsg="controlBar.submitReportButton"
                         onClick={ this.onClickSubmitReport.bind(this) }/>
                 );
             }
@@ -78,7 +82,8 @@ export default class LaneControlBar extends React.Component {
         else if (step === 'done') {
             content = null;
             proceedSection = (
-                <Button labelMsg="controlBar.nextCallButton"
+                <Button key="nextCallButton"
+                    labelMsg="controlBar.nextCallButton"
                     onClick={ this.onClickNextCall.bind(this) }/>
             );
         }

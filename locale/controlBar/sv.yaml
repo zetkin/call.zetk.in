@@ -1,0 +1,5 @@
+startButton: "Börja ringa"
+callButton: "Ring { name }"
+finishCallButton: "Avsluta samtal och rapportera"
+submitReportButton: "Skicka rapport"
+nextCallButton: "Fortsätt ringa"

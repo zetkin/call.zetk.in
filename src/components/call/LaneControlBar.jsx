@@ -24,7 +24,7 @@ export default class LaneControlBar extends React.Component {
     };
 
     render() {
-        let content, nextSection;
+        let content, proceedSection;
         let call = this.props.call;
         let lane = this.props.lane;
         let step = lane.get('step');
@@ -33,7 +33,7 @@ export default class LaneControlBar extends React.Component {
             let assignment = this.props.assignment;
 
             content = <h1>{ assignment.get('title') }</h1>
-            nextSection = (
+            proceedSection = (
                 <Button labelMsg="controlBar.startButton"
                     onClick={ this.onClickStart.bind(this) }/>
             );
@@ -43,7 +43,7 @@ export default class LaneControlBar extends React.Component {
                 <TargetInfo target={ call.get('target') }/>
             );
 
-            nextSection = (
+            proceedSection = (
                 <Button labelMsg="controlBar.callButton"
                     onClick={ this.onClickCall.bind(this) }/>
             );
@@ -54,7 +54,7 @@ export default class LaneControlBar extends React.Component {
                     showFullInfo={ true }/>
             );
 
-            nextSection = (
+            proceedSection = (
                 <Button labelMsg="controlBar.finishCallButton"
                     onClick={ this.onClickFinishCall.bind(this) }/>
             );
@@ -65,14 +65,14 @@ export default class LaneControlBar extends React.Component {
                     showFullInfo={ true }/>
             );
 
-            nextSection = (
+            proceedSection = (
                 <Button labelMsg="controlBar.submitReportButton"
                     onClick={ this.onClickSubmitReport.bind(this) }/>
             );
         }
         else if (step === 'done') {
             content = null;
-            nextSection = (
+            proceedSection = (
                 <Button labelMsg="controlBar.nextCallButton"
                     onClick={ this.onClickNextCall.bind(this) }/>
             );
@@ -85,8 +85,8 @@ export default class LaneControlBar extends React.Component {
                 <div className="LaneControlBar-content">
                     { content }
                 </div>
-                <div className="LaneControlBar-nextSection">
-                    { nextSection }
+                <div className="LaneControlBar-proceedSection">
+                    { proceedSection }
                 </div>
             </div>
         );

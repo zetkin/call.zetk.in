@@ -4,4 +4,32 @@
     left: 0;
     right: 0;
     height: 100px;
+
+    .LaneControlBar-content {
+        position: absolute;
+        left: 35%;
+        top: 0;
+        padding: 20px;
+
+        transition: top 0.4s, left 0.4s;
+    }
+
+    .LaneControlBar-proceedSection {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 20px;
+    }
+
+    &.LaneControlBar-callStep {
+        .LaneControlBar-content {
+            left: 0;
+        }
+    }
+
+    &.LaneControlBar-reportStep {
+        .LaneControlBar-content {
+            left: 0;
+        }
+    }
 }

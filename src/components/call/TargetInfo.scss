@@ -1,0 +1,53 @@
+.TargetInfo {
+    &:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .TargetInfo-name {
+        margin: 0;
+        float: left;
+        transition: font-size 0.4s;
+        font-size: 24px;
+    }
+
+    .TargetInfo-number {
+        display: block;
+        float: left;
+    }
+
+    .TargetInfo-lastCall {
+        display: block;
+        float: left;
+    }
+
+    &.TargetInfo-showFull {
+        .TargetInfo-name {
+            font-size: 16px;
+        }
+    }
+
+    .TargetInfo-tagList {
+        clear: left;
+        padding: 0;
+        margin: 0;
+
+        &:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        li {
+            float: left;
+            margin: 5px;
+            padding: 2px 5px;
+            list-style-type: none;
+        }
+
+        .TargetInfo-tag {
+            background-color: red;
+        }
+    }
+}

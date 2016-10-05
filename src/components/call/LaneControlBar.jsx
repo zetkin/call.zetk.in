@@ -8,7 +8,7 @@ import TargetInfo from './TargetInfo';
 import { selectedAssignment } from '../../store/assignments';
 import { currentCall } from '../../store/calls';
 import { setLaneStep } from '../../actions/lane';
-import { startNewCall } from '../../actions/call';
+import { startNewCall, submitCallReport } from '../../actions/call';
 
 
 const mapStateToProps = state => ({
@@ -117,9 +117,7 @@ export default class LaneControlBar extends React.Component {
     }
 
     onClickSubmitReport() {
-        // TODO: Add action to submit report
-        let lane = this.props.lane;
-        this.props.dispatch(setLaneStep(lane, 'done'));
+        this.props.dispatch(submitCallReport());
     }
 
     onClickNextCall() {

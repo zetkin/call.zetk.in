@@ -17,10 +17,16 @@ export default class ReportPane extends PaneBase {
     renderContent() {
         let call = this.props.call;
         let report = call.get('report');
+        let isComplete = this.props.step === 'done';
+
+        let h1Msg = isComplete?
+            'panes.report.h1.reported' :
+            'panes.report.h1.report';
 
         return [
-            <Msg key="h1" tagName="h1" id="panes.report.h1"/>,
-            <ReportForm key="form" report={ report }/>
+            <Msg key="h1" tagName="h1" id={ h1Msg }/>,
+            <ReportForm key="form" report={ report }
+                disableEdit={ isComplete }/>
         ];
     }
 }

@@ -8,18 +8,33 @@
     .TargetInfo-name {
         margin: 0;
         float: left;
-        transition: font-size 0.4s;
+        transition: font-size 0.3s;
         font-size: 24px;
     }
 
     .TargetInfo-number {
         display: block;
         float: left;
+        margin-left: 10px;
+
+        &.TargetInfo-enter {
+            animation: TargetInfo-slideIn-enterAnimation 0.5s ease-out;
+        }
     }
 
     .TargetInfo-lastCall {
         display: block;
         float: left;
+        margin-left: 10px;
+
+        &:before {
+            content: "- ";
+        }
+
+        &.TargetInfo-enter {
+            opacity: 0;
+            animation: TargetInfo-slideIn-enterAnimation 0.5s ease-out 1.0s;
+        }
     }
 
     &.TargetInfo-showFull {
@@ -49,5 +64,28 @@
         .TargetInfo-tag {
             background-color: red;
         }
+
+        &.TargetInfo-enter {
+            animation: TargetInfo-tagList-enterAnimation 1.5s;
+        }
     }
+}
+
+
+@keyframes TargetInfo-slideIn-enterAnimation {
+    from {
+        opacity: 0;
+        transform: translate(50px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes TargetInfo-tagList-enterAnimation {
+    0%      { opacity: 0; transform: translate(0, 50px); }
+    33%     { opacity: 0; transform: translate(0, 50px); }
+    66%     { opacity: 1; transform: none }
 }

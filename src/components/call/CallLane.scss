@@ -59,12 +59,12 @@
 
 @keyframes CallLane-enterAnimation {
     from {
-        top: 100%;
+        transform: translate(0, 100%);
     }
 }
 
 @keyframes CallLane-leaveAnimation {
     to {
-        top: 100%;
+        transform: translate(0, 100%);
     }
 }

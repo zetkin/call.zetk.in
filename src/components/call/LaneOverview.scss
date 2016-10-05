@@ -17,12 +17,12 @@
 
 @keyframes LaneOverview-enterAnimation {
     from {
-        bottom: 100%;
+        transform: translate(0, -100%);
     }
 }
 
 @keyframes LaneOverview-leaveAnimation {
     to {
-        bottom: 100%;
+        transform: translate(0, -100%);
     }
 }

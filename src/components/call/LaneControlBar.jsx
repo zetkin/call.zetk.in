@@ -39,12 +39,15 @@ export default class LaneControlBar extends React.Component {
             );
         }
         else if (step === 'prepare') {
+            let target = call.get('target');
+
             content = (
-                <TargetInfo target={ call.get('target') }/>
+                <TargetInfo target={ target }/>
             );
 
             proceedSection = (
                 <Button labelMsg="controlBar.callButton"
+                    labelValues={{ name: target.get('name') }}
                     onClick={ this.onClickCall.bind(this) }/>
             );
         }

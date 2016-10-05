@@ -12,4 +12,6 @@ target:
     instructionsButton: "Visa instruktioner"
 
 report:
-    h1: "Rapportera in samtal"
+    h1:
+        report: "Rapportera in samtal"
+        reported: "Samtal rapporterat"

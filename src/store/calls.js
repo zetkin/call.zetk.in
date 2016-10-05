@@ -6,13 +6,14 @@ import * as types from '../actions';
 
 export const currentCall = state => {
     let id = state.getIn(['calls', 'currentId']);
-    return state.getIn(['calls', 'activeCalls', id]);
+    return state.getIn(['calls', 'allCalls', id]);
 };
 
 const initialState = {
     currentId: null,
     currentIsPending: false,
-    activeCalls: {},
+    allCalls: {},
+    activeCalls: [],
 };
 
 export const REPORT_STEPS = [
@@ -44,7 +45,8 @@ export default createReducer(initialState, {
         return state
             .set('currentId', callId)
             .set('currentIsPending', false)
-            .setIn(['activeCalls', callId], immutable.fromJS(call))
+            .setIn(['allCalls', callId], immutable.fromJS(call))
+            .update('activeCalls', list => list.push(callId));
     },
 
     [types.SET_LANE_STEP]: (state, action) => {
@@ -55,7 +57,7 @@ export default createReducer(initialState, {
         // to the "report" lane step.
         if (step === 'report') {
             return state
-                .setIn(['activeCalls', callId, 'report'], immutable.fromJS({
+                .setIn(['allCalls', callId, 'report'], immutable.fromJS({
                     step: REPORT_STEPS[0],
                     success: false,
                     targetCouldTalk: false,
@@ -109,7 +111,7 @@ export default createReducer(initialState, {
         }
 
         return state
-            .updateIn(['activeCalls', callId, 'report'], report => report
+            .updateIn(['allCalls', callId, 'report'], report => report
                 .set(field, value)
                 .set('step', nextStep));
     },
@@ -119,7 +121,7 @@ export default createReducer(initialState, {
         let callId = state.get('currentId');
 
         return state
-            .setIn(['activeCalls', callId, 'report', 'step'], step);
+            .setIn(['allCalls', callId, 'report', 'step'], step);
     },
 
     [types.SET_CALLER_LOG_MESSAGE]: (state, action) => {
@@ -127,7 +129,7 @@ export default createReducer(initialState, {
         let callId = state.get('currentId');
 
         return state
-            .setIn(['activeCalls', callId, 'report', 'callerLog'], msg);
+            .setIn(['allCalls', callId, 'report', 'callerLog'], msg);
     },
 
     [types.SET_ORGANIZER_LOG_MESSAGE]: (state, action) => {
@@ -135,36 +137,40 @@ export default createReducer(initialState, {
         let callId = state.get('currentId');
 
         return state
-            .setIn(['activeCalls', callId, 'report', 'organizerLog'], msg);
+            .setIn(['allCalls', callId, 'report', 'organizerLog'], msg);
     },
 
     [types.FINISH_CALL_REPORT]: (state, action) => {
         let callId = state.get('currentId');
 
         return state
-            .setIn(['activeCalls', callId, 'report', 'step'], 'summary');
+            .setIn(['allCalls', callId, 'report', 'step'], 'summary');
     },
 
     [types.SUBMIT_CALL_REPORT + '_PENDING']: (state, action) => {
-        let callId = action.meta.callId;
+        let callId = action.meta.callId.toString();
 
         return state
-            .setIn(['activeCalls', callId, 'report', 'isPending'], true);
+            .setIn(['allCalls', callId, 'report', 'isPending'], true);
     },
 
     [types.SUBMIT_CALL_REPORT + '_ERROR']: (state, action) => {
-        let callId = action.meta.callId;
+        let callId = action.meta.callId.toString();
         let error = action.payload.data;
 
         return state
-            .setIn(['activeCalls', callId, 'report', 'error'],
+            .setIn(['allCalls', callId, 'report', 'error'],
                 immutable.fromJS(error));
     },
 
     [types.SUBMIT_CALL_REPORT + '_FULFILLED']: (state, action) => {
-        let callId = action.meta.callId;
+        let callId = action.meta.callId.toString();
 
         return state
-            .setIn(['activeCalls', callId, 'report', 'isPending'], false);
+            .setIn(['allCalls', callId, 'report', 'isPending'], false)
+            .update('activeCalls', list => {
+                let key = list.findKey(val => val === callId);
+                return list.delete(key);
+            });
     },
 });

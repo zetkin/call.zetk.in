@@ -12,6 +12,7 @@ export default class ReportStepBase extends React.Component {
         step: PropTypes.string.isRequired,
         report: PropTypes.map.isRequired,
         dispatch: PropTypes.func.isRequired,
+        disableEdit: PropTypes.bool,
     };
 
     render() {
@@ -30,11 +31,14 @@ export default class ReportStepBase extends React.Component {
             }
             else if (renderMode === 'summary') {
                 content = this.renderSummary(report);
-                editLink = (
-                    <a className="ReportStepBase-editLink"
-                        onClick={ this.onClickEdit.bind(this) }>
-                        <Msg id="report.edit"/></a>
-                );
+
+                if (!this.props.disableEdit) {
+                    editLink = (
+                        <a className="ReportStepBase-editLink"
+                            onClick={ this.onClickEdit.bind(this) }>
+                            <Msg id="report.edit"/></a>
+                    );
+                }
             }
 
             let classNames = [];

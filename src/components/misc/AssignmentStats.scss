@@ -1,0 +1,20 @@
+.AssignmentStats {
+    .AssignmentStats-item {
+        list-style-type: none;
+        float: left;
+        margin: 10px;
+        min-width: 120px;
+        text-align: center;
+    }
+
+    .AssignmentStats-itemNumber {
+        display: block;
+        font-weight: bold;
+        font-size: 120px;
+    }
+
+    .AssignmentStats-itemLabel {
+        display: block;
+        font-weight: bold;
+    }
+}

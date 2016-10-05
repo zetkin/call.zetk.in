@@ -1,9 +1,3 @@
-assignment:
-    stats:
-        target_size: "{number, plural, =1 { person } other { personer }} att ringa"
-        calls_made: "ringda samtal"
-        calls_reached: "lyckade samtal"
-
 instructions:
     h1: "Instruktioner"
     targetButton: "Visa personinfo"
@@ -12,4 +6,12 @@ target:
     instructionsButton: "Visa instruktioner"
 
 report:
-    h1: "Rapportera in samtal"
+    h1:
+        report: "Rapportera in samtal"
+        reported: "Samtal rapporterat"
+
+stats:
+    h1: "Bra jobbat!"
+    p: |
+        Din insats är viktig för att bygga din organisation
+        starkare. Här är en sammanfattning av hur det går.

@@ -2,27 +2,6 @@
     width: 65%;
     left: 0;
 
-    .AssignmentPane-stats {
-        .AssignmentPane-statsItem {
-            list-style-type: none;
-            float: left;
-            margin: 10px;
-            min-width: 120px;
-            text-align: center;
-        }
-
-        .AssignmentPane-statsItemNumber {
-            display: block;
-            font-weight: bold;
-            font-size: 120px;
-        }
-
-        .AssignmentPane-statsItemLabel {
-            display: block;
-            font-weight: bold;
-        }
-    }
-
     &.PaneBase-leave {
         animation: AssignmentPane-leaveAnimation 0.5s;
     }

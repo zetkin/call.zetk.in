@@ -194,11 +194,13 @@ export default createReducer(initialState, {
     },
 
     [types.SUBMIT_CALL_REPORT + '_FULFILLED']: (state, action) => {
+        let call = action.payload.data.data;
         let callId = action.meta.callId.toString();
 
         return state
             .setIn(['allCalls', callId, 'progress'], 1.0)
             .setIn(['allCalls', callId, 'report', 'isPending'], false)
+            .mergeIn(['allCalls', callId], immutable.fromJS(call))
             .update('activeCalls', list => {
                 let key = list.findKey(val => val === callId);
                 return list.delete(key);

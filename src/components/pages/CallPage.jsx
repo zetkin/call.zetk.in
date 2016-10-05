@@ -1,7 +1,9 @@
 import React from 'react';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 
 import LaneSwitch from '../call/LaneSwitch';
+import LaneOverview from '../call/LaneOverview';
 import CallLane from '../call/CallLane';
 import { selectedLane } from '../../store/lanes';
 
@@ -19,20 +21,24 @@ export default class CallPage extends React.Component {
 
         if (viewState === 'lane') {
             content = (
-                <CallLane lane={ this.props.lane }/>
+                <CallLane key="lane" lane={ this.props.lane }/>
             );
         }
         else if (viewState === 'overview') {
             content = (
-                <div>LOG PLACEHOLDER</div>
+                <LaneOverview key="overview"/>
             );
         }
 
         return (
-            <div className="CallPage">
+            <CSSTransitionGroup
+                transitionEnterTimeout={ 500 }
+                transitionLeaveTimeout={ 500 }
+                transitionName="CallPage"
+                component="div" className="CallPage">
                 <LaneSwitch/>
                 { content }
-            </div>
+            </CSSTransitionGroup>
         );
     }
 }

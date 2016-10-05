@@ -1,0 +1,28 @@
+.LaneOverview {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+
+    &.CallPage-enter {
+        animation: LaneOverview-enterAnimation 0.5s;
+    }
+
+    &.CallPage-leave {
+        animation: LaneOverview-leaveAnimation 0.5s;
+    }
+}
+
+@keyframes LaneOverview-enterAnimation {
+    from {
+        bottom: 100%;
+    }
+}
+
+@keyframes LaneOverview-leaveAnimation {
+    to {
+        bottom: 100%;
+    }
+}

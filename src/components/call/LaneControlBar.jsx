@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 
+import Button from '../misc/Button';
 import PropTypes from '../../utils/PropTypes';
 import TargetInfo from './TargetInfo';
 import { selectedAssignment } from '../../store/assignments';
@@ -23,20 +24,58 @@ export default class LaneControlBar extends React.Component {
     };
 
     render() {
-        let content;
+        let content, nextSection;
+        let call = this.props.call;
         let lane = this.props.lane;
         let step = lane.get('step');
 
         if (step === 'assignment') {
             let assignment = this.props.assignment;
+
             content = <h1>{ assignment.get('title') }</h1>
+            nextSection = (
+                <Button labelMsg="controlBar.startButton"
+                    onClick={ this.onClickStart.bind(this) }/>
+            );
         }
         else if (step === 'prepare') {
-            let call = this.props.call;
-            content = <TargetInfo target={ call.get('target') }/>;
+            content = (
+                <TargetInfo target={ call.get('target') }/>
+            );
+
+            nextSection = (
+                <Button labelMsg="controlBar.callButton"
+                    onClick={ this.onClickCall.bind(this) }/>
+            );
         }
-        else {
-            content = <h1>Unknown step</h1>;
+        else if (step === 'call') {
+            content = (
+                <TargetInfo target={ call.get('target') }
+                    showFullInfo={ true }/>
+            );
+
+            nextSection = (
+                <Button labelMsg="controlBar.finishCallButton"
+                    onClick={ this.onClickFinishCall.bind(this) }/>
+            );
+        }
+        else if (step === 'report') {
+            content = (
+                <TargetInfo target={ call.get('target') }
+                    showFullInfo={ true }/>
+            );
+
+            nextSection = (
+                <Button labelMsg="controlBar.submitReportButton"
+                    onClick={ this.onClickSubmitReport.bind(this) }/>
+            );
+        }
+        else if (step === 'done') {
+            content = null;
+            nextSection = (
+                <Button labelMsg="controlBar.nextCallButton"
+                    onClick={ this.onClickNextCall.bind(this) }/>
+            );
         }
 
         let classes = cx('LaneControlBar', 'LaneControlBar-' + step + 'Step');
@@ -46,26 +85,36 @@ export default class LaneControlBar extends React.Component {
                 <div className="LaneControlBar-content">
                     { content }
                 </div>
-                <button onClick={ this.onClickNext.bind(this) }>Next</button>
+                <div className="LaneControlBar-nextSection">
+                    { nextSection }
+                </div>
             </div>
         );
     }
 
-    onClickNext() {
+    onClickStart() {
+        this.props.dispatch(startNewCall(this.props.assignment));
+    }
+
+    onClickCall() {
         let lane = this.props.lane;
-        if (lane.get('step') === 'assignment') {
-            this.props.dispatch(startNewCall(this.props.assignment));
-        }
-        else {
-            // TODO: This is a placeholder. Don't use a generic next function.
-            let steps = [ 'assignment', 'prepare', 'call', 'report', 'done' ];
-            let idx = steps.indexOf(lane.get('step')) + 1;
+        this.props.dispatch(setLaneStep(lane, 'call'));
+    }
 
-            if (idx >= steps.length) {
-                idx = 1;
-            }
+    onClickFinishCall() {
+        let lane = this.props.lane;
+        this.props.dispatch(setLaneStep(lane, 'report'));
+    }
 
-            this.props.dispatch(setLaneStep(lane, steps[idx]));
-        }
+    onClickSubmitReport() {
+        // TODO: Add action to submit report
+        let lane = this.props.lane;
+        this.props.dispatch(setLaneStep(lane, 'done'));
+    }
+
+    onClickNextCall() {
+        // TODO: Allocate another call
+        let lane = this.props.lane;
+        this.props.dispatch(setLaneStep(lane, 'prepare'));
     }
 }

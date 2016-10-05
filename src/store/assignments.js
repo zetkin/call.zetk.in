@@ -9,6 +9,10 @@ export const selectedAssignment = state => {
     return state.getIn(['assignments', 'assignmentList', 'items', id]);
 }
 
+export const assignmentById = (state, id) =>
+    state.getIn(['assignments', 'assignmentList', 'items', id.toString()]);
+
+
 const initialState = immutable.fromJS({
     selectedId: null,
     assignmentList: {

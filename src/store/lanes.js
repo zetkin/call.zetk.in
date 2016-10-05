@@ -44,6 +44,13 @@ export default createReducer(initialState, {
             .setIn(['allLanes', laneId, 'step'], 'prepare');
     },
 
+    [types.SUBMIT_CALL_REPORT + '_FULFILLED']: (state, action) => {
+        let laneId = state.get('selectedId');
+
+        return state
+            .setIn(['allLanes', laneId, 'step'], 'done');
+    },
+
     [types.SET_LANE_INFO_MODE]: (state, action) => {
         let laneId = state.get('selectedId');
         let mode = action.payload.mode;

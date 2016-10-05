@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 
+import Button from '../misc/Button';
 import PropTypes from '../../utils/PropTypes';
 import TargetInfo from './TargetInfo';
 import { selectedAssignment } from '../../store/assignments';
 import { currentCall } from '../../store/calls';
 import { setLaneStep } from '../../actions/lane';
-import { startNewCall } from '../../actions/call';
+import { startNewCall, submitCallReport } from '../../actions/call';
 
 
 const mapStateToProps = state => ({
@@ -23,20 +24,68 @@ export default class LaneControlBar extends React.Component {
     };
 
     render() {
-        let content;
+        let content, proceedSection;
+        let call = this.props.call;
         let lane = this.props.lane;
         let step = lane.get('step');
 
         if (step === 'assignment') {
             let assignment = this.props.assignment;
+
             content = <h1>{ assignment.get('title') }</h1>
+            proceedSection = (
+                <Button key="startButton"
+                    labelMsg="controlBar.startButton"
+                    onClick={ this.onClickStart.bind(this) }/>
+            );
         }
         else if (step === 'prepare') {
-            let call = this.props.call;
-            content = <TargetInfo target={ call.get('target') }/>;
+            let target = call.get('target');
+
+            content = (
+                <TargetInfo target={ target }/>
+            );
+
+            proceedSection = (
+                <Button key="callButton"
+                    labelMsg="controlBar.callButton"
+                    labelValues={{ name: target.get('name') }}
+                    onClick={ this.onClickCall.bind(this) }/>
+            );
         }
-        else {
-            content = <h1>Unknown step</h1>;
+        else if (step === 'call') {
+            content = (
+                <TargetInfo target={ call.get('target') }
+                    showFullInfo={ true }/>
+            );
+
+            proceedSection = (
+                <Button key="finishCallButton"
+                    labelMsg="controlBar.finishCallButton"
+                    onClick={ this.onClickFinishCall.bind(this) }/>
+            );
+        }
+        else if (step === 'report') {
+            content = (
+                <TargetInfo target={ call.get('target') }
+                    showFullInfo={ true }/>
+            );
+
+            if (call.getIn(['report', 'step']) === 'summary') {
+                proceedSection = (
+                    <Button key="submitReportButton"
+                        labelMsg="controlBar.submitReportButton"
+                        onClick={ this.onClickSubmitReport.bind(this) }/>
+                );
+            }
+        }
+        else if (step === 'done') {
+            content = null;
+            proceedSection = (
+                <Button key="nextCallButton"
+                    labelMsg="controlBar.nextCallButton"
+                    onClick={ this.onClickNextCall.bind(this) }/>
+            );
         }
 
         let classes = cx('LaneControlBar', 'LaneControlBar-' + step + 'Step');
@@ -46,26 +95,32 @@ export default class LaneControlBar extends React.Component {
                 <div className="LaneControlBar-content">
                     { content }
                 </div>
-                <button onClick={ this.onClickNext.bind(this) }>Next</button>
+                <div className="LaneControlBar-proceedSection">
+                    { proceedSection }
+                </div>
             </div>
         );
     }
 
-    onClickNext() {
+    onClickStart() {
+        this.props.dispatch(startNewCall(this.props.assignment));
+    }
+
+    onClickCall() {
         let lane = this.props.lane;
-        if (lane.get('step') === 'assignment') {
-            this.props.dispatch(startNewCall(this.props.assignment));
-        }
-        else {
-            // TODO: This is a placeholder. Don't use a generic next function.
-            let steps = [ 'assignment', 'prepare', 'call', 'report', 'done' ];
-            let idx = steps.indexOf(lane.get('step')) + 1;
+        this.props.dispatch(setLaneStep(lane, 'call'));
+    }
 
-            if (idx >= steps.length) {
-                idx = 1;
-            }
+    onClickFinishCall() {
+        let lane = this.props.lane;
+        this.props.dispatch(setLaneStep(lane, 'report'));
+    }
 
-            this.props.dispatch(setLaneStep(lane, steps[idx]));
-        }
+    onClickSubmitReport() {
+        this.props.dispatch(submitCallReport());
+    }
+
+    onClickNextCall() {
+        this.props.dispatch(startNewCall(this.props.assignment));
     }
 }

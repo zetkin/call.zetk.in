@@ -10,6 +10,7 @@ import calls from './calls';
 import campaigns from './campaigns';
 import lanes from './lanes';
 import user from './user';
+import view from './view';
 
 
 const appReducer = combineReducers({
@@ -20,6 +21,7 @@ const appReducer = combineReducers({
     campaigns,
     lanes,
     user,
+    view,
 });
 
 export const configureStore = (initialState, z) => {

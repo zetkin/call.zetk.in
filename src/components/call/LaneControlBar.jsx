@@ -8,13 +8,14 @@ import CallProgressBar from './CallProgressBar';
 import PropTypes from '../../utils/PropTypes';
 import TargetInfo from './TargetInfo';
 import { selectedAssignment } from '../../store/assignments';
-import { currentCall } from '../../store/calls';
+import { currentCall, currentReport } from '../../store/calls';
 import { setLaneStep } from '../../actions/lane';
 import { startNewCall, submitCallReport } from '../../actions/call';
 
 
 const mapStateToProps = state => ({
     call: currentCall(state),
+    report: currentReport(state),
     assignment: selectedAssignment(state),
 });
 
@@ -80,12 +81,14 @@ export default class LaneControlBar extends React.Component {
             );
         }
         else if (step === 'report') {
+            let report = this.props.report;
+
             content = (
                 <TargetInfo target={ call.get('target') }
                     showFullInfo={ true }/>
             );
 
-            if (call.getIn(['report', 'step']) === 'summary') {
+            if (report.get('step') === 'summary') {
                 proceedSection = (
                     <Button key="submitReportButton"
                         labelMsg="controlBar.submitReportButton"

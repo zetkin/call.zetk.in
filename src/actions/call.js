@@ -1,6 +1,6 @@
 import * as types from '.';
 
-import { currentCall } from '../store/calls';
+import { currentCall, reportForCall } from '../store/calls';
 import { assignmentById } from '../store/assignments';
 
 
@@ -70,7 +70,7 @@ export function submitCallReport() {
         let state = getState();
         let call = currentCall(state);
         let callId = call.get('id');
-        let report = call.get('report');
+        let report = reportForCall(state, callId);
 
         let data = {
             notes: report.get('callerLog'),

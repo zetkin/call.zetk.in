@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 import PaneBase from './PaneBase';
 import ReportForm from '../report/ReportForm';
-import { currentCall } from '../../store/calls';
+import { currentReport } from '../../store/calls';
 
 
 const mapStateToProps = state => ({
-    call: currentCall(state),
+    report: currentReport(state),
 });
 
 
@@ -16,10 +16,9 @@ const mapStateToProps = state => ({
 export default class ReportPane extends PaneBase {
     shouldComponentUpdate(nextProps) {
         let step = this.props.step;
-        let call = this.props.call;
-        let nextCall = nextProps.call;
+        let nextReport = nextProps.report;
 
-        if (step === 'done' && !nextCall.get('report')) {
+        if (step === 'done' && !nextReport) {
             // If we are in the "done" step, about to start a new call, and
             // that call does not yet have a report, don't re-render. It just
             // means that the pane is animating out and will be removed in a
@@ -34,8 +33,8 @@ export default class ReportPane extends PaneBase {
 
     renderContent() {
         let call = this.props.call;
-        let report = call.get('report');
         let target = call.get('target');
+        let report = this.props.report;
         let isComplete = this.props.step === 'done';
 
         let h1Msg = isComplete?

@@ -4,6 +4,17 @@ import { currentCall } from '../store/calls';
 import { assignmentById } from '../store/assignments';
 
 
+export function retrieveUserCalls() {
+    return ({ dispatch, getState, z }) => {
+        dispatch({
+            type: types.RETRIEVE_USER_CALLS,
+            payload: {
+                promise: z.resource('users', 'me', 'calls').get(),
+            }
+        });
+    };
+}
+
 export function startNewCall(assignment) {
     return ({ dispatch, getState, z }) => {
         let orgId = assignment.get('organization_id');

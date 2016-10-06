@@ -13,6 +13,12 @@ const initialState = {
     currentId: null,
     currentIsPending: false,
     allCalls: {},
+    // TODO: Don't duplicate data
+    callList: {
+        error: null,
+        isPending: false,
+        items: null,
+    },
     activeCalls: [],
 };
 
@@ -42,6 +48,31 @@ const REPORT_STEP_PROGRESS = {
 export default createReducer(initialState, {
     ['@@INIT']: (state, action) => {
         return immutable.fromJS(state);
+    },
+
+    [types.RETRIEVE_USER_CALLS + '_PENDING']: (state, action) => {
+        return state
+            .setIn(['callList', 'error'], null)
+            .setIn(['callList', 'isPending'], true);
+    },
+
+    [types.RETRIEVE_USER_CALLS + '_REJECTED']: (state, action) => {
+        return state
+            .setIn(['callList', 'isPending'], false)
+            .setIn(['callList', 'error'], action.payload.data);
+    },
+
+    [types.RETRIEVE_USER_CALLS + '_FULFILLED']: (state, action) => {
+        let calls = {};
+        action.payload.data.data.forEach(call =>
+            calls[call.id.toString()] = call);
+
+        return state
+            .setIn(['callList', 'error'], null)
+            .setIn(['callList', 'isPending'], false)
+            .updateIn(['callList', 'items'], items => items?
+                items.merge(immutable.fromJS(calls)) :
+                immutable.fromJS(calls));
     },
 
     [types.START_NEW_CALL + '_PENDING']: (state, action) => {

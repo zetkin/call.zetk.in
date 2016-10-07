@@ -4,6 +4,10 @@ import immutable from 'immutable';
 import * as types from '../actions';
 
 
+export const activeCalls = state =>
+    state.getIn(['calls', 'activeCalls']).map(callId =>
+        state.getIn(['calls', 'callList', 'items', callId]));
+
 export const currentCall = state => {
     let id = state.getIn(['calls', 'currentId']);
     return state.getIn(['calls', 'callList', 'items', id]);

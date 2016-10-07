@@ -18,7 +18,7 @@ export const reportForCall = (state, id) => {
 };
 
 
-const initialState = {
+const initialState = immutable.fromJS({
     currentId: null,
     currentIsPending: false,
     callList: {
@@ -28,7 +28,7 @@ const initialState = {
     },
     reports: {},
     activeCalls: [],
-};
+});
 
 export const REPORT_STEPS = [
     'success_or_failure',

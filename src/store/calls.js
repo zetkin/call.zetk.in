@@ -104,6 +104,24 @@ export default createReducer(initialState, {
                 immutable.fromJS({ [callId]: call }));
     },
 
+    [types.START_CALL_WITH_TARGET + '_PENDING']: (state, action) => {
+        return state
+            .set('currentIsPending', true);
+    },
+
+    [types.START_CALL_WITH_TARGET + '_FULFILLED']: (state, action) => {
+        let call = action.payload.data.data;
+        let callId = call.id.toString();
+
+        return state
+            .set('currentId', callId)
+            .set('currentIsPending', false)
+            .update('activeCalls', list => list.push(callId))
+            .updateIn(['callList', 'items'], items => items?
+                items.set(callId, immutable.fromJS(call)) :
+                immutable.fromJS({ [callId]: call }));
+    },
+
     [types.SET_LANE_STEP]: (state, action) => {
         let step = action.payload.step;
         let callId = state.get('currentId');

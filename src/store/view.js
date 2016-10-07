@@ -17,4 +17,9 @@ export default createReducer(initialState, {
         return state
             .set('callViewState', action.payload.state);
     },
+
+    [types.START_CALL_WITH_TARGET + '_FULFILLED']: (state, action) => {
+        return state
+            .set('callViewState', 'lane');
+    },
 });

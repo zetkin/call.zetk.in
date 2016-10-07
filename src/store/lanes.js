@@ -44,6 +44,22 @@ export default createReducer(initialState, {
             .setIn(['allLanes', laneId, 'step'], 'prepare');
     },
 
+    [types.START_CALL_WITH_TARGET + '_FULFILLED']: (state, action) => {
+        let call = action.payload.data.data;
+        let callId = call.id.toString();
+        let lane = {
+            id: (laneId++).toString(),
+            callId: callId,
+            infoMode: 'instructions',
+            isPending: false,
+            step: 'prepare',
+        };
+
+        return state
+            .set('selectedId', lane.id)
+            .setIn(['allLanes', lane.id], immutable.fromJS(lane));
+    },
+
     [types.SUBMIT_CALL_REPORT + '_FULFILLED']: (state, action) => {
         let laneId = state.get('selectedId');
 

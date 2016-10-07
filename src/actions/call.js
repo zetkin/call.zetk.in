@@ -31,6 +31,24 @@ export function startNewCall(assignment) {
     };
 }
 
+export function startCallWithTarget(assignmentId, targetId) {
+    return ({ dispatch, getState, z }) => {
+        let state = getState();
+        let assignment = assignmentById(state, assignmentId);
+        let orgId = assignment.get('organization_id');
+        let data = { target_id: targetId };
+
+        dispatch({
+            type: types.START_CALL_WITH_TARGET,
+            meta: { assignmentId, targetId },
+            payload: {
+                promise: z.resource('orgs', orgId,
+                    'call_assignments', assignmentId, 'calls').post(data)
+            }
+        });
+    };
+}
+
 export function setCallReportField(field, value) {
     return {
         type: types.SET_CALL_REPORT_FIELD,

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import LoadingIndicator from '../misc/LoadingIndicator';
-import { retrieveUserCalls } from '../../actions/call';
+import { retrieveUserCalls, startCallWithTarget } from '../../actions/call';
 
 
 const mapStateToProps = state => ({
@@ -48,7 +48,9 @@ export default class LaneOverview extends React.Component {
     }
 
     onStartNewCall(oldCall) {
-        console.log('Re-call', oldCall.get('target').get('name'));
+        let assignmentId = oldCall.get('assignment_id');
+        let targetId = oldCall.getIn(['target', 'id']);
+        this.props.dispatch(startCallWithTarget(assignmentId, targetId));
     }
 }
 

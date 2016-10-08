@@ -53,8 +53,18 @@ export default createReducer(initialState, {
         let call = action.payload.data.data;
         let callId = call.id.toString();
         let laneNumber = state.get('nextLaneNumber');
+
+        // Overwrite existing lane if one exists without a call
+        let laneId = state.get('allLanes')
+            .findKey(lane => lane.get('callId') === null);
+
+        if (!laneId) {
+            // If there was no free lane, create a new lane
+            laneId = (laneNumber++).toString();
+        }
+
         let lane = {
-            id: laneNumber.toString(),
+            id: laneId,
             callId: callId,
             infoMode: 'instructions',
             isPending: false,
@@ -62,9 +72,9 @@ export default createReducer(initialState, {
         };
 
         return state
-            .set('nextLaneNumber', laneNumber + 1)
-            .set('selectedId', lane.id)
-            .setIn(['allLanes', lane.id], immutable.fromJS(lane));
+            .set('nextLaneNumber', laneNumber)
+            .set('selectedId', laneId)
+            .setIn(['allLanes', laneId], immutable.fromJS(lane));
     },
 
     [types.SUBMIT_CALL_REPORT + '_FULFILLED']: (state, action) => {

@@ -84,7 +84,7 @@ export default createReducer(initialState, {
             .setIn(['callList', 'error'], null)
             .setIn(['callList', 'isPending'], false)
             .updateIn(['callList', 'items'], items => items?
-                items.merge(immutable.fromJS(calls)) :
+                items.mergeDeep(immutable.fromJS(calls)) :
                 immutable.fromJS(calls));
     },
 

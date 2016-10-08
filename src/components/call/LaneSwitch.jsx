@@ -29,10 +29,8 @@ export default class LaneSwitch extends React.Component {
                     onClick={ this.onClickOpen.bind(this) }>log</a>,
                 <ul key="callList" className="LaneSwitch-callList">
                 { otherCalls.map(call => (
-                    <li key={ call.get('id') }
-                        onClick={ this.onClickOtherCall.bind(this, call) }>
-                        { call.get('target').get('name') }
-                    </li>
+                    <SwitchItem key={ call.get('id') } call={ call }
+                        onClick={ this.onClickOtherCall.bind(this, call) }/>
                 )) }
                 </ul>
             ];
@@ -62,4 +60,20 @@ export default class LaneSwitch extends React.Component {
     onClickClose() {
         this.props.dispatch(setCallViewState('lane'));
     }
+}
+
+
+const SwitchItem = props => {
+    let call = props.call;
+    let target = call.get('target');
+    let initials = (target.get('first_name') || ' ')[0]
+        + (target.get('last_name') || ' ')[0];
+
+    return (
+        <li className="LaneSwitch-callItem"
+            title={ target.get('name') }
+            onClick={ props.onClick }>
+            { initials }
+        </li>
+    );
 }

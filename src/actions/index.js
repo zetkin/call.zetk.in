@@ -7,6 +7,7 @@ export const SET_USER_DATA = 'SET_USER_DATA';
 
 export const SET_LANE_STEP = 'SET_LANE_STEP';
 export const SET_LANE_INFO_MODE = 'SET_LANE_INFO_MODE';
+export const SWITCH_LANE_TO_CALL = 'SWITCH_LANE_TO_CALL';
 
 export const RETRIEVE_USER_CALLS = 'RETRIEVE_USER_CALLS';
 export const START_NEW_CALL = 'START_NEW_CALL';

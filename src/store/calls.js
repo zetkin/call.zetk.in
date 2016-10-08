@@ -23,6 +23,7 @@ export const reportForCall = (state, id) => {
 
 
 const initialState = immutable.fromJS({
+    // TODO: More or less duplicate of lanes.selectedId
     currentId: null,
     currentIsPending: false,
     callList: {
@@ -287,5 +288,12 @@ export default createReducer(initialState, {
         else {
             return state;
         }
+    },
+
+    [types.SWITCH_LANE_TO_CALL]: (state, action) => {
+        let callId = action.payload.callId.toString();
+
+        return state
+            .set('currentId', callId);
     },
 });

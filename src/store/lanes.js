@@ -10,9 +10,10 @@ export const selectedLane = state => {
 };
 
 
-let laneId = 0;
 
 const initialState = immutable.fromJS({
+    nextLaneNumber: 0,
+    // TODO: More or less duplicate of calls.currentId
     selectedId: null,
     allLanes: {},
 });
@@ -23,8 +24,9 @@ export default createReducer(initialState, {
     },
 
     [types.SELECT_ASSIGNMENT]: (state, action) => {
+        let laneNumber = state.get('nextLaneNumber');
         let lane = {
-            id: (laneId++).toString(),
+            id: laneNumber.toString(),
             callId: null,
             infoMode: 'instructions',
             isPending: false,
@@ -32,23 +34,27 @@ export default createReducer(initialState, {
         };
 
         return state
+            .set('nextLaneNumber', laneNumber + 1)
             .set('selectedId', lane.id)
             .set('allLanes', immutable.fromJS({ [lane.id]: lane }));
     },
 
     [types.START_NEW_CALL + '_FULFILLED']: (state, action) => {
         // When a new call is created, proceed to the "prepare" step
+        let callId = action.payload.data.data.id.toString();
         let laneId = state.get('selectedId');
 
         return state
+            .setIn(['allLanes', laneId, 'callId'], callId)
             .setIn(['allLanes', laneId, 'step'], 'prepare');
     },
 
     [types.START_CALL_WITH_TARGET + '_FULFILLED']: (state, action) => {
         let call = action.payload.data.data;
         let callId = call.id.toString();
+        let laneNumber = state.get('nextLaneNumber');
         let lane = {
-            id: (laneId++).toString(),
+            id: laneNumber.toString(),
             callId: callId,
             infoMode: 'instructions',
             isPending: false,
@@ -56,6 +62,7 @@ export default createReducer(initialState, {
         };
 
         return state
+            .set('nextLaneNumber', laneNumber + 1)
             .set('selectedId', lane.id)
             .setIn(['allLanes', lane.id], immutable.fromJS(lane));
     },
@@ -81,5 +88,16 @@ export default createReducer(initialState, {
 
         return state
             .setIn(['allLanes', laneId, 'step'], step);
+    },
+
+    [types.SWITCH_LANE_TO_CALL]: (state, action) => {
+        let callId = action.payload.callId.toString();
+        let lane = state.get('allLanes')
+            .find(lane => lane.get('callId').toString() === callId);
+
+        let laneId = lane.get('id');
+
+        return state
+            .set('selectedId', laneId);
     },
 });

@@ -5,6 +5,58 @@
     border-radius: 2px;
 }
 
+@mixin button-color($color, $amount:5) {
+    //TODO: switch darken/lighten based on lightness
+    background-color: $color;
+    border-color: darken($color, 10);
+
+    @if (lightness($color) < 70%) {
+        color: $c-text-contrast;
+    }
+    @else {
+        color: inherit;
+    }
+
+    &:hover {
+        @include button-active($color, $amount);
+    }
+    &:focus {
+        border-color: darken($color, $amount * 1.5);
+        background-color: darken($color, $amount * 1.5);
+    }
+    &.selected {
+        border-color: darken($color, $amount * 1.5);
+        background-color: darken($color, $amount * 1.5);
+    }
+}
+
+@mixin button-active($color, $amount) {
+    background-color: darken($color, $amount);
+    border-color: darken($color, $amount*2);
+}
+
+@mixin button($color: $c-brand-main, $amount:5, $icon:false) {
+    display: inline-block;
+    padding: 0 2.5em;
+    border-width: 0;
+    border-radius: 3em;
+    text-decoration: none;
+    font-family: franklin-gothic-urw, sans-serif;
+    font-weight: 300;
+    font-size: 1em;
+    line-height: 3em;
+    cursor: pointer;
+
+    @include button-color($color, $amount);
+    @if $icon {
+        &:before {
+            @include icon($icon);
+            line-height: 0;
+            height: 0;
+        }
+    }
+}
+
 @mixin col ($col, $sum, $gap: 0.5em, $align: top, $first: false, $last: false) {
     width: percentage($col/$sum);
     vertical-align: $align;

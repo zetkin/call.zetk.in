@@ -3,10 +3,11 @@
     top: 0;
     bottom: 0;
     box-sizing: border-box;
+    box-shadow: 0 2px 2px darken(#FFF, 10);
 
     transition: width 0.5s, left 0.5s;
-    padding: 6% 2% 2%;
-
+    padding: 2%;
+    overflow: scroll;
 }
 
 .PaneBase-enter {

@@ -1,6 +1,25 @@
-// Colors
-$c-brand: #fc0;
+/* Colors */
+$c-brand-main: #ee323e;
+$c-brand-main-pink: #ed1c55;
+$c-brand-main-orange: #ef4123;
+
+$c-brand-comp-light: #48baeb;
+$c-brand-comp-dark: #3598c5;
+
+$c-brand-confirm: $c-brand-comp-light;
+$c-brand-delete: #F64A50;   // red
+$c-brand-success: #41EF5A;  // green
+
+$c-text: #303030;
+$c-text-contrast: #FFF;
+
+$c-ui-focus: #FFC400;
+
+$c-ui-bg: rgb(248, 248, 248);
+$c-ui-dark: darken($c-ui-bg, 30);
+$c-ui-darker: darken($c-ui-bg, 50);
 
 // Responsive breakpoints
-$medium-min-width: 720px;
-$wide-min-width: 1024px;
+$small-width: 480px;
+$medium-width: 720px;
+$large-width: 1024px;

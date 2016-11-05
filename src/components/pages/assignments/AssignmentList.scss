@@ -9,7 +9,7 @@
 
     li {
         position: relative;
-        padding: 1em;
+        padding: 1em 0.5em;
         border-bottom: 1px solid darken(#FFF, 5);
 
         &:hover {
@@ -22,15 +22,35 @@
     }
 
     p {
-        width: 60%;
+        width: 100%;
         display: inline-block;
     }
 
     .AssignmentListItem-selectButton {
         @include button();
-        display: inline-block;
-        position: absolute;
-        top: calc(50% - 1.5em);
-        right: 1em;
+        width: 100%;
+    }
+}
+
+@include medium-screen {
+    .AssignmentList {
+        .AssignmentListItem-selectButton {
+            width: auto;
+        }
+    }
+}
+
+@include wide-screen {
+    .AssignmentList {
+        p {
+            width: 60%;
+        }
+
+        .AssignmentListItem-selectButton {
+            display: inline-block;
+            position: absolute;
+            top: calc(50% - 1.5em);
+            right: 1em;
+        }
     }
 }

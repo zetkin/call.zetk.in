@@ -31,3 +31,9 @@
         z-index: -1;
     }
 }
+
+@include medium-screen {
+    .LandingPage {
+        width:50%;
+    }
+}

@@ -20,6 +20,5 @@ $c-ui-dark: darken($c-ui-bg, 30);
 $c-ui-darker: darken($c-ui-bg, 50);
 
 // Responsive breakpoints
-$small-width: 480px;
-$medium-width: 720px;
-$large-width: 1024px;
+$medium-min-width: 720px;
+$wide-min-width: 1024px;

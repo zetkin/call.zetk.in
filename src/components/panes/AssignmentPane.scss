@@ -5,6 +5,10 @@
     &.PaneBase-leave {
         animation: AssignmentPane-leaveAnimation 0.5s;
     }
+
+    .PaneBase-content {
+        text-align: center;
+    }
 }
 
 @keyframes AssignmentPane-leaveAnimation {

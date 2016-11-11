@@ -8,6 +8,19 @@
     transition: width 0.5s, left 0.5s;
     padding: 2%;
     overflow: scroll;
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+        margin-bottom: 0;
+    }
 }
 
 .PaneBase-enter {

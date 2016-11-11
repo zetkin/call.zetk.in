@@ -62,7 +62,13 @@
         }
 
         .TargetInfo-tag {
-            background-color: red;
+            font-size: 0.8em;
+            @include inline-button();
+        }
+
+        .TargetInfo-moreTags {
+            font-size: 0.8em;
+            @include inline-button(darken(white, 10));
         }
 
         &.TargetInfo-enter {

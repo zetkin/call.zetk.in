@@ -47,6 +47,10 @@
     line-height: 3em;
     cursor: pointer;
 
+    &:focus {
+        outline: none;
+    }
+
     @include button-color($color, $amount);
     @if $icon {
         &:before {

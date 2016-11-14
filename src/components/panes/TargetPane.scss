@@ -2,6 +2,8 @@
     z-index: 2;
     background-color: white;
 
+    @include PaneWithTabs('TargetPane');
+
     &.TargetPane-prepareStep {
         width: 35%;
         left: 35%;
@@ -10,6 +12,12 @@
     &.TargetPane-callStep {
         width: 35%;
         left: 0;
+
+        .PaneBase-header {
+            .TargetPane-instructionsButton {
+                right: 0;
+            }
+        }
     }
 
     &.TargetPane-reportStep {

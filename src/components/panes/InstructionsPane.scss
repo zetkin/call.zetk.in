@@ -2,6 +2,8 @@
     z-index: 1;
     background-color: white;
 
+    @include PaneWithTabs('InstructionsPane');
+
     &.InstructionsPane-assignmentStep {
         width: 35%;
         left: 65%;
@@ -15,6 +17,12 @@
     &.InstructionsPane-callStep {
         width: 35%;
         left: 0;
+
+        .PaneBase-header {
+            .InstructionsPane-targetButton {
+                left: 0;
+            }
+        }
     }
 
     &.InstructionsPane-reportStep {

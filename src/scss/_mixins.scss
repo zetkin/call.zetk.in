@@ -77,6 +77,46 @@
     }
 }
 
+@mixin PaneWithTabs($class) {
+    overflow: visible!important;
+    padding-top: 0!important;
+    padding-right: 0!important;
+
+    &.#{$class}-callStep {
+        background: none;
+
+        .PaneBase-header {
+            position: absolute;
+            width: 100%;
+            height: 4em;
+            top: 0;
+            left: 0;
+
+            button {
+                position: absolute;
+                width: 50%;
+                height: 100%;
+                border: none;
+                background: white;
+                font-family: inherit;
+                font-size: 1em;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+
+        .PaneBase-content {
+            background: white;
+            height: 100%;
+            margin-top: 4em;
+            overflow: scroll;
+            padding-right: 3%;
+        }
+    }
+}
+
 @mixin col ($col, $sum, $gap: 0.5em, $align: top, $first: false, $last: false) {
     width: percentage($col/$sum);
     vertical-align: $align;

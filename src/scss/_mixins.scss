@@ -78,11 +78,11 @@
 }
 
 @mixin PaneWithTabs($class) {
-    overflow: visible!important;
-    padding-top: 0!important;
-    padding-right: 0!important;
 
     &.#{$class}-callStep, &.#{$class}-reportStep {
+        overflow: visible!important;
+        padding-top: 0!important;
+        padding-right: 0!important;
         background: none;
 
         .PaneBase-header {

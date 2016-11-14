@@ -82,7 +82,7 @@
     padding-top: 0!important;
     padding-right: 0!important;
 
-    &.#{$class}-callStep {
+    &.#{$class}-callStep, &.#{$class}-reportStep {
         background: none;
 
         .PaneBase-header {

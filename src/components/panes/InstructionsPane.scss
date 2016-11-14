@@ -17,16 +17,16 @@
     &.InstructionsPane-callStep {
         width: 35%;
         left: 0;
-
-        .PaneBase-header {
-            .InstructionsPane-targetButton {
-                left: 0;
-            }
-        }
     }
 
     &.InstructionsPane-reportStep {
         width: 35%;
         left: 0;
+    }
+
+    .PaneBase-header {
+        .InstructionsPane-targetButton {
+            left: 0;
+        }
     }
 }

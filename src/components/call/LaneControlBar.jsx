@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
+import { FormattedMessage as Msg } from 'react-intl';
 
 import Button from '../misc/Button';
 import PropTypes from '../../utils/PropTypes';
@@ -24,7 +25,7 @@ export default class LaneControlBar extends React.Component {
     };
 
     render() {
-        let content, proceedSection;
+        let returnSection, content, proceedSection;
         let call = this.props.call;
         let lane = this.props.lane;
         let step = lane.get('step');
@@ -32,7 +33,13 @@ export default class LaneControlBar extends React.Component {
         if (step === 'assignment') {
             let assignment = this.props.assignment;
 
-            content = <h1>{ assignment.get('title') }</h1>
+            returnSection = (
+                <Button key="endButton"
+                    labelMsg="controlBar.endButton"/>
+            );
+
+            content = null;
+
             proceedSection = (
                 <Button key="startButton"
                     labelMsg="controlBar.startButton"
@@ -42,8 +49,14 @@ export default class LaneControlBar extends React.Component {
         else if (step === 'prepare') {
             let target = call.get('target');
 
+            returnSection = (
+                <Button key="endButton"
+                    labelMsg="controlBar.endButton"/>
+            );
+
             content = (
-                <TargetInfo target={ target }/>
+                <Msg tagName="p" className="" id="controlBar.instructions.prepare"/>
+                // TODO: Fix transition when not using TargetInfo anymore.
             );
 
             proceedSection = (
@@ -80,7 +93,13 @@ export default class LaneControlBar extends React.Component {
             }
         }
         else if (step === 'done') {
+            returnSection = (
+                <Button key="endButton"
+                    labelMsg="controlBar.endButton"/>
+            );
+
             content = null;
+
             proceedSection = (
                 <Button key="nextCallButton"
                     labelMsg="controlBar.nextCallButton"
@@ -93,9 +112,7 @@ export default class LaneControlBar extends React.Component {
         return (
             <div className={ classes }>
                 <div className="LaneControlBar-returnSection">
-                    <Button key=""
-                        labelMsg="controlBar.nextCallButton"
-                    onClick={ this.onClickNextCall.bind(this) }/>
+                    { returnSection }
                 </div>
                 <div className="LaneControlBar-content">
                     { content }

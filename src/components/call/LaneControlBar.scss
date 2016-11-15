@@ -1,17 +1,26 @@
 .LaneControlBar {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
     height: 100px;
     padding: 1em;
-    box-shadow: 0 2px 2px darken(#FFF, 10);
+    box-shadow: 0 -2px 2px darken(#FFF, 10);
     overflow: hidden;
     z-index: 99;
 
+    .LaneControlBar-returnSection {
+        @include col(3,12)
+        text-align: left;
+
+        button {
+            @include button(darken(white, 10));
+        }
+    }
+
     .LaneControlBar-content {
         @include col(6,12);
-        @include col-offset(3,12);
+        // @include col-offset(3,12);
 
         text-align: center;
         transition: top 0.4s, left 0.4s;

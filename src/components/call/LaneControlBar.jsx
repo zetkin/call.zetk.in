@@ -92,6 +92,11 @@ export default class LaneControlBar extends React.Component {
 
         return (
             <div className={ classes }>
+                <div className="LaneControlBar-returnSection">
+                    <Button key=""
+                        labelMsg="controlBar.nextCallButton"
+                    onClick={ this.onClickNextCall.bind(this) }/>
+                </div>
                 <div className="LaneControlBar-content">
                     { content }
                 </div>

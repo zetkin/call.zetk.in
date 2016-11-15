@@ -1,4 +1,6 @@
 .TargetInfo {
+    text-align: left;
+
     &:after {
         content: "";
         display: block;
@@ -7,15 +9,15 @@
 
     .TargetInfo-name {
         margin: 0;
-        float: left;
+        display: inline-block;
+        vertical-align: middle;
         transition: font-size 0.3s;
-        font-size: 24px;
     }
 
     .TargetInfo-number {
-        display: block;
-        float: left;
-        margin-left: 10px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 0.5em;
 
         &.TargetInfo-enter {
             animation: TargetInfo-slideIn-enterAnimation 0.5s ease-out;
@@ -23,9 +25,9 @@
     }
 
     .TargetInfo-lastCall {
-        display: block;
-        float: left;
-        margin-left: 10px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 0.5em;
 
         &:before {
             content: "- ";
@@ -38,15 +40,42 @@
     }
 
     &.TargetInfo-showFull {
+        line-height: 1.5em;
+
+        .TargetInfo-avatar {
+            display: inline-block;
+            margin-right: 0.5em;
+            height: 2em;
+            width: 2em;
+            border-radius: 50%;
+            background: linear-gradient(to right, $c-brand-main-orange, $c-brand-main-pink);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+            vertical-align: middle;
+            float: left;
+        }
+
         .TargetInfo-name {
-            font-size: 16px;
+            font-size: 1.3em;
+            line-height: 1.5em;
+        }
+
+        .TargetInfo-number {
+            font-size: 1.3em;
+            line-height: 1.5em;
+        }
+
+        .TargetInfo-lastCall {
+            font-size: 0.8em;
         }
     }
 
     .TargetInfo-tagList {
         clear: left;
         padding: 0;
-        margin: 0;
+        margin: 0.2em 0 0 0;
+        line-height: normal;
 
         &:after {
             content: "";
@@ -59,15 +88,14 @@
             margin: 5px;
             padding: 2px 5px;
             list-style-type: none;
+            font-size: 0.7em;
         }
 
         .TargetInfo-tag {
-            font-size: 0.8em;
             @include inline-button();
         }
 
         .TargetInfo-moreTags {
-            font-size: 0.8em;
             @include inline-button(darken(white, 10));
         }
 

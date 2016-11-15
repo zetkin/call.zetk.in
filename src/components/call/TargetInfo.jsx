@@ -15,6 +15,10 @@ export default class TargetInfo extends React.Component {
         let target = this.props.target;
         let callInfo, tagList;
 
+        const avatarDomain = '//api.' + process.env.ZETKIN_DOMAIN;
+        const avatarSrc = avatarDomain + '/v1/users/' + target.get('id') + '/avatar';
+        const avatarStyle = {backgroundImage: 'url("' + avatarSrc + '")'}
+
         if (this.props.showFullInfo) {
             callInfo = [
                 <span key="number" className="TargetInfo-number">
@@ -48,7 +52,7 @@ export default class TargetInfo extends React.Component {
                 transitionLeaveTimeout={ 1500 }
                 transitionName="TargetInfo"
                 component="div" className={ classes }>
-
+                <div className="TargetInfo-avatar" style={avatarStyle}></div>
                 <h1 className="TargetInfo-name">{ target.get('name') }</h1>
                 { callInfo }
                 { tagList }

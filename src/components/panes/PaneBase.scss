@@ -6,11 +6,12 @@
     box-shadow: 0 2px 2px darken(#FFF, 10);
 
     transition: width 0.5s, left 0.5s;
-    padding: 2%;
+    padding: 0 1em;
     overflow: scroll;
 
     h1 {
-        font-size: 1.8em;
+        font-size: 1.7em;
+        margin-top: 0.5em;
     }
 
     h2 {

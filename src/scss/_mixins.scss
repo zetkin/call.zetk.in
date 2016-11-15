@@ -81,6 +81,17 @@
     }
 }
 
+@mixin icon($fa-character) {
+    @include fa-icon;
+    text-align: center;
+    height: 1.6em;
+    width: 1.6em;
+    line-height: 1.6;
+    margin-right: .2em;
+    content: $fa-character;
+}
+
+
 @mixin PaneWithTabs($class) {
 
     &.#{$class}-callStep, &.#{$class}-reportStep {

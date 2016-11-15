@@ -16,8 +16,24 @@ export default class TargetPane extends PaneBase {
     renderContent() {
         let target = this.props.call.get('target');
 
+        const avatarDomain = '//api.' + process.env.ZETKIN_DOMAIN;
+        const avatarSrc = avatarDomain + '/v1/users/' + target.get('id') + '/avatar';
+        const avatarStyle = {backgroundImage: 'url("' + avatarSrc + '")'}
+
+        let info = [
+            <li key="phone" className="TargetPane-infoPhone">
+                { target.get('phone') }</li>,
+            <li key="email" className="TargetPane-infoEmail">
+                { target.get('phone') }</li>,
+        ]
+
         return [
-            <h1 key="name">{ target.get('name') }</h1>
+            <img key="image" className="TargetPane-avatar"
+                src={ avatarSrc } />,
+            <h1 key="name" className="TargetPane-name">
+                { target.get('name') }</h1>,
+            <ul key="info" className="TargetPane-info">
+                { info }</ul>
         ];
     }
 

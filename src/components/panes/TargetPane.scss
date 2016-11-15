@@ -28,11 +28,15 @@
     }
 
     .TargetPane-infoPhone {
-
+        &:before {
+            @include icon($fa-var-phone);
+        }
     }
 
     .TargetPane-infoEmail {
-
+        &:before {
+            @include icon($fa-var-envelope);
+        }
     }
 
     &.TargetPane-prepareStep {

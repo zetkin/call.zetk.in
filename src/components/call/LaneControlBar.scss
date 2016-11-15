@@ -20,13 +20,15 @@
 
     .LaneControlBar-content {
         @include col(6,12);
-        // @include col-offset(3,12);
-
         text-align: center;
         transition: top 0.4s, left 0.4s;
 
         h1 {
             margin: 0;
+        }
+
+        p {
+            color: darken(white, 30);
         }
     }
 
@@ -39,15 +41,20 @@
         }
     }
 
-    &.LaneControlBar-callStep {
+    &.LaneControlBar-callStep, &.LaneControlBar-reportStep {
+        height: 110px;
+
+        .LaneControlBar-returnSection {
+            display: none;
+        }
         .LaneControlBar-content {
-            left: 0;
+            @include col(9,12);
         }
     }
 
     &.LaneControlBar-reportStep {
         .LaneControlBar-content {
-            left: 0;
+
         }
     }
 }

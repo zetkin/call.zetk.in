@@ -64,6 +64,10 @@
         .TargetInfo-number {
             font-size: 1.3em;
             line-height: 1.5em;
+
+            &:before {
+                @include icon($fa-var-phone);
+            }
         }
 
         .TargetInfo-lastCall {

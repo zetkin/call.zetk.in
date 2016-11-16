@@ -22,6 +22,15 @@ export default class InputPane extends PaneBase {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.step === 'report') {
+            // Go back to summary mode when reporting
+            this.setState({
+                viewMode: 'summary',
+            });
+        }
+    }
+
     renderContent() {
         let target = this.props.call.get('target');
         let content = null;

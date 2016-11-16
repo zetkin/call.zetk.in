@@ -85,15 +85,17 @@ export default class InputPane extends PaneBase {
             let selectValue = this.state.viewMode + ':' + this.state.selectedId;
 
             content = [
-                <FormattedLink key="summaryLink" msgId="panes.input.summaryLink"
-                    onClick={ this.onSummaryLinkClick.bind(this) }/>,
-                <select key="inputSelect"
-                    value={ selectValue }
-                    onChange={ this.onSelectChange.bind(this) }>
-                    <option value="campaign:1">First campaign</option>
-                    <option value="campaign:2">Second campaign</option>
-                    <option value="survey:1">Member survey</option>
-                </select>,
+                <div key="nav" className="InputPane-nav">
+                    <FormattedLink className="InputPane-summaryLink"
+                        msgId="panes.input.summaryLink"
+                        onClick={ this.onSummaryLinkClick.bind(this) }/>
+                    <select value={ selectValue }
+                        onChange={ this.onSelectChange.bind(this) }>
+                        <option value="campaign:1">First campaign</option>
+                        <option value="campaign:2">Second campaign</option>
+                        <option value="survey:1">Member survey</option>
+                    </select>
+                </div>
             ];
 
             if (this.state.viewMode == 'campaign') {

@@ -1,10 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 import cx from 'classnames';
 
 import PropTypes from '../../utils/PropTypes';
+import { selectedAssignment } from '../../store/assignments';
+import Avatar from '../misc/Avatar';
 
+const mapStateToProps = state => ({
+    assignment: selectedAssignment(state),
+});
 
+@connect(mapStateToProps)
 export default class TargetInfo extends React.Component {
     static propTypes = {
         target: PropTypes.map.isRequired,
@@ -44,11 +51,16 @@ export default class TargetInfo extends React.Component {
 
         return (
             <CSSTransitionGroup
+                transitionAppear={ true }
+                transitionAppearTimeout={ 1500 }
                 transitionEnterTimeout={ 1500 }
                 transitionLeaveTimeout={ 1500 }
                 transitionName="TargetInfo"
                 component="div" className={ classes }>
-
+                <Avatar key="avatar"
+                    personId={ target.get('id') }
+                    orgId={ this.props.assignment.get('organization_id') }
+                    mask={ true }/>
                 <h1 className="TargetInfo-name">{ target.get('name') }</h1>
                 { callInfo }
                 { tagList }

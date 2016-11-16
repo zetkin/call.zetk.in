@@ -1,20 +1,26 @@
 .AssignmentStats {
+    padding: 0;
+    margin-top: 2em;
+
     .AssignmentStats-item {
         list-style-type: none;
         float: left;
-        margin: 10px;
-        min-width: 120px;
+        margin: 1%;
+        padding: 1em;
         text-align: center;
+        width: 31%;
+        @include card;
     }
 
     .AssignmentStats-itemNumber {
         display: block;
         font-weight: bold;
-        font-size: 120px;
+        font-size: 3em;
     }
 
     .AssignmentStats-itemLabel {
         display: block;
         font-weight: bold;
+        margin: 0;
     }
 }

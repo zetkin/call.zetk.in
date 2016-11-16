@@ -19,6 +19,13 @@
             z-index: 2;
         }
 
+        .PaneBase-header {
+            .InstructionsPane-targetButton {
+                background: darken(white, 10);
+                @include button-color(darken(white, 10), 5);
+            }
+        }
+
         .TargetPane {
             z-index: 1;
         }
@@ -29,8 +36,21 @@
             z-index: 1;
         }
 
+        .PaneBase-header {
+            .TargetPane-instructionsButton {
+                background: darken(white, 10);
+                @include button-color(darken(white, 10), 5);
+            }
+        }
+
         .TargetPane {
             z-index: 2;
+        }
+    }
+
+    &.CallLane-callStep, &.CallLane-reportStep {
+        .CallLane-panes {
+            bottom: 110px;
         }
     }
 }

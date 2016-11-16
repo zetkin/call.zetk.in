@@ -10,6 +10,10 @@ export default class App extends React.Component {
         return (
             <html>
                 <head>
+                    <meta name="viewport"
+                        content="width=device-width, initial-scale=1"/>
+                    <script src="https://use.typekit.net/tqq3ylv.js"></script>
+                    <script>{"try{Typekit.load({ async: true })}catch(e){}"}</script>
                     <title>Zetkin</title>
                     <script src="/static/main.js"></script>
                     <link rel="stylesheet" href="/static/css/style.css"/>

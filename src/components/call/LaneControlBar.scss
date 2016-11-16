@@ -4,33 +4,60 @@
     left: 0;
     right: 0;
     height: 100px;
+    padding: 1em;
+    box-shadow: 0 -2px 2px darken(#FFF, 10);
     overflow: hidden;
+    z-index: 99;
+
+    .LaneControlBar-returnSection {
+        @include col(3,12)
+        text-align: left;
+
+        button {
+            @include button(darken(white, 10));
+        }
+    }
 
     .LaneControlBar-content {
-        position: absolute;
-        left: 35%;
-        top: 0;
-        padding: 20px;
-
+        @include col(6,12);
+        text-align: center;
         transition: top 0.4s, left 0.4s;
+
+        h1 {
+            margin: 0;
+        }
+
+        p {
+            color: darken(white, 30);
+        }
     }
 
     .LaneControlBar-proceedSection {
-        position: absolute;
-        right: 0;
-        top: 0;
-        padding: 20px;
+        @include col(3,12)
+        text-align: right;
+
+        button {
+            @include button();
+        }
     }
 
-    &.LaneControlBar-callStep {
+    &.LaneControlBar-callStep, &.LaneControlBar-reportStep {
+        height: 110px;
+
+        .LaneControlBar-returnSection {
+            display: none;
+        }
         .LaneControlBar-content {
-            left: 0;
+            @include col(9,12);
+        }
+        .LaneControlBar-proceedSection {
+            padding-top: 0.5em;
         }
     }
 
     &.LaneControlBar-reportStep {
         .LaneControlBar-content {
-            left: 0;
+
         }
     }
 }

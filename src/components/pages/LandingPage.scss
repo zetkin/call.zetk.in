@@ -1,0 +1,39 @@
+.LandingPage {
+    width:90%;
+    margin: 10% auto;
+    padding: 2em;
+    @include card;
+
+    text-align: center;
+
+    a {
+        @include button();
+    }
+
+    &:before {
+        content: " ";
+        display: block;
+        background: url("/static/img/logo-red.png");
+        background-size: contain;
+        width: 5em;
+        height: 5em;
+        margin: 0 auto;
+    }
+
+    &:after {
+        content: " ";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: #EEE;
+        z-index: -1;
+    }
+}
+
+@include medium-screen {
+    .LandingPage {
+        width:50%;
+    }
+}

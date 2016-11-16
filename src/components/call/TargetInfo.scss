@@ -1,52 +1,66 @@
 .TargetInfo {
+    text-align: left;
+    line-height: 1.5em;
+
     &:after {
         content: "";
         display: block;
         clear: both;
     }
 
+    & > * {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 0.5em;
+    }
+
+    .TargetInfo-name, .TargetInfo-number {
+        font-size: 1.3em;
+        line-height: 1.5em;
+    }
+
     .TargetInfo-name {
         margin: 0;
-        float: left;
         transition: font-size 0.3s;
-        font-size: 24px;
     }
 
     .TargetInfo-number {
-        display: block;
-        float: left;
-        margin-left: 10px;
+        &:before {
+            @include icon($fa-var-phone);
+        }
 
-        &.TargetInfo-enter {
-            animation: TargetInfo-slideIn-enterAnimation 0.5s ease-out;
+        &.TargetInfo-appear {
+            animation: TargetInfo-number-appearAnimation 1.5s;
         }
     }
 
     .TargetInfo-lastCall {
-        display: block;
-        float: left;
-        margin-left: 10px;
+        font-size: 0.8em;
 
         &:before {
             content: "- ";
         }
 
-        &.TargetInfo-enter {
-            opacity: 0;
-            animation: TargetInfo-slideIn-enterAnimation 0.5s ease-out 1.0s;
+        &.TargetInfo-appear {
+            animation: TargetInfo-lastCall-appearAnimation 1.5s;
         }
     }
 
     &.TargetInfo-showFull {
-        .TargetInfo-name {
-            font-size: 16px;
+        .Avatar {
+            margin-right: 0.5em;
+            height: 2em;
+            width: 2em;
+            float: left;
         }
     }
 
     .TargetInfo-tagList {
+        display: block;
         clear: left;
         padding: 0;
-        margin: 0;
+        margin: 0.2em 0 0 0;
+        line-height: normal;
 
         &:after {
             content: "";
@@ -59,33 +73,38 @@
             margin: 5px;
             padding: 2px 5px;
             list-style-type: none;
+            font-size: 0.7em;
         }
 
         .TargetInfo-tag {
-            background-color: red;
+            @include inline-button();
         }
 
-        &.TargetInfo-enter {
+        .TargetInfo-moreTags {
+            @include inline-button(darken(white, 10));
+        }
+
+        &.TargetInfo-appear {
             animation: TargetInfo-tagList-enterAnimation 1.5s;
         }
     }
 }
 
 
-@keyframes TargetInfo-slideIn-enterAnimation {
-    from {
-        opacity: 0;
-        transform: translate(50px, 0);
-    }
+@keyframes TargetInfo-number-appearAnimation {
+    0%      { opacity: 0; transform: translate(50px, 0); }
+    25%     { opacity: 0; transform: translate(50px, 0); }
+    50%     { opacity: 1; transform: none; }
+}
 
-    to {
-        opacity: 1;
-        transform: translate(0, 0);
-    }
+@keyframes TargetInfo-lastCall-appearAnimation {
+    0%      { opacity: 0; transform: translate(50px, 0); }
+    50%     { opacity: 0; transform: translate(50px, 0); }
+    75%     { opacity: 1; transform: none; }
 }
 
 @keyframes TargetInfo-tagList-enterAnimation {
     0%      { opacity: 0; transform: translate(0, 50px); }
-    33%     { opacity: 0; transform: translate(0, 50px); }
-    66%     { opacity: 1; transform: none }
+    75%     { opacity: 0; transform: translate(0, 50px); }
+    100%    { opacity: 1; transform: none }
 }

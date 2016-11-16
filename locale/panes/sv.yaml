@@ -5,6 +5,18 @@ instructions:
 target:
     instructionsButton: "Visa instruktioner"
 
+input:
+    h1: "Agera som { target }"
+    summaryLink: "Tillbaka till sammanfattningen"
+    summary:
+        campaigns:
+            h2: "Kampanjer"
+            respondButton: "Anmäl till { campaign }"
+
+        surveys:
+            h2: "Enkäter"
+            respondButton: "Svara på { survey }"
+
 report:
     h1:
         report: "Rapportera in samtal"

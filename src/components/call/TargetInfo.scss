@@ -1,5 +1,6 @@
 .TargetInfo {
     text-align: left;
+    line-height: 1.5em;
 
     &:after {
         content: "";
@@ -7,17 +8,26 @@
         clear: both;
     }
 
-    .TargetInfo-name {
-        margin: 0;
+    & > * {
         display: inline-block;
         vertical-align: middle;
+        margin-left: 0.5em;
+    }
+
+    .TargetInfo-name, .TargetInfo-number {
+        font-size: 1.3em;
+        line-height: 1.5em;
+    }
+
+    .TargetInfo-name {
+        margin: 0;
         transition: font-size 0.3s;
     }
 
     .TargetInfo-number {
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 0.5em;
+        &:before {
+            @include icon($fa-var-phone);
+        }
 
         &.TargetInfo-appear {
             animation: TargetInfo-number-appearAnimation 1.5s;
@@ -25,9 +35,7 @@
     }
 
     .TargetInfo-lastCall {
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 0.5em;
+        font-size: 0.8em;
 
         &:before {
             content: "- ";
@@ -39,36 +47,16 @@
     }
 
     &.TargetInfo-showFull {
-        line-height: 1.5em;
-
         .Avatar {
             margin-right: 0.5em;
             height: 2em;
             width: 2em;
-            vertical-align: middle;
             float: left;
-        }
-
-        .TargetInfo-name {
-            font-size: 1.3em;
-            line-height: 1.5em;
-        }
-
-        .TargetInfo-number {
-            font-size: 1.3em;
-            line-height: 1.5em;
-
-            &:before {
-                @include icon($fa-var-phone);
-            }
-        }
-
-        .TargetInfo-lastCall {
-            font-size: 0.8em;
         }
     }
 
     .TargetInfo-tagList {
+        display: block;
         clear: left;
         padding: 0;
         margin: 0.2em 0 0 0;

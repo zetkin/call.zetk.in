@@ -5,7 +5,7 @@
 
     @include PaneWithTabs('TargetPane');
 
-    .TargetPane-avatar {
+    .Avatar {
         @include col(4,12);
         float: left;
     }

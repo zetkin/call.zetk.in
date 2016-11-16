@@ -1,10 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 import cx from 'classnames';
 
 import PropTypes from '../../utils/PropTypes';
+import { selectedAssignment } from '../../store/assignments';
+import Avatar from '../misc/Avatar';
 
+const mapStateToProps = state => ({
+    assignment: selectedAssignment(state),
+});
 
+@connect(mapStateToProps)
 export default class TargetInfo extends React.Component {
     static propTypes = {
         target: PropTypes.map.isRequired,
@@ -14,13 +21,6 @@ export default class TargetInfo extends React.Component {
     render() {
         let target = this.props.target;
         let callInfo, tagList;
-
-        const avatarDomain = '//api.' + process.env.ZETKIN_DOMAIN;
-        const avatarSrc = avatarDomain + '/v1/orgs/'
-            + 1 + '/people/' + target.get('id')
-            + '/avatar';
-            // TODO: Replace hard coded org id with actual.
-        const avatarStyle = {backgroundImage: 'url("' + avatarSrc + '")'}
 
         if (this.props.showFullInfo) {
             callInfo = [
@@ -57,7 +57,10 @@ export default class TargetInfo extends React.Component {
                 transitionLeaveTimeout={ 1500 }
                 transitionName="TargetInfo"
                 component="div" className={ classes }>
-                <div className="TargetInfo-avatar" style={avatarStyle}></div>
+                <Avatar key="avatar"
+                    personId={ target.get('id') }
+                    orgId={ this.props.assignment.get('organization_id') }
+                    mask={ true }/>
                 <h1 className="TargetInfo-name">{ target.get('name') }</h1>
                 { callInfo }
                 { tagList }

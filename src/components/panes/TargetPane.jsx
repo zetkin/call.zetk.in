@@ -5,23 +5,19 @@ import { FormattedMessage as Msg } from 'react-intl';
 import PaneBase from './PaneBase';
 import { currentCall } from '../../store/calls';
 import { setLaneInfoMode } from '../../actions/lane';
+import { selectedAssignment } from '../../store/assignments';
+import Avatar from '../misc/Avatar';
 
 
 const mapStateToProps = state => ({
     call: currentCall(state),
+    assignment: selectedAssignment(state),
 });
 
 @connect(mapStateToProps)
 export default class TargetPane extends PaneBase {
     renderContent() {
         let target = this.props.call.get('target');
-
-        const avatarDomain = '//api.' + process.env.ZETKIN_DOMAIN;
-        const avatarSrc = avatarDomain + '/v1/orgs/'
-            + 1 + '/people/' + target.get('id')
-            + '/avatar';
-            // TODO: Replace hard coded org id with actual.
-        const avatarStyle = {backgroundImage: 'url("' + avatarSrc + '")'}
 
         let info = [
             <li key="phone" className="TargetPane-infoPhone">
@@ -31,8 +27,9 @@ export default class TargetPane extends PaneBase {
         ]
 
         return [
-            <img key="image" className="TargetPane-avatar"
-                src={ avatarSrc } />,
+            <Avatar key="avatar"
+                personId={ target.get('id') }
+                orgId={ this.props.assignment.get('organization_id') }/>,
             <h1 key="name" className="TargetPane-name">
                 { target.get('name') }</h1>,
             <ul key="info" className="TargetPane-info">

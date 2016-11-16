@@ -41,16 +41,10 @@
     &.TargetInfo-showFull {
         line-height: 1.5em;
 
-        .TargetInfo-avatar {
-            display: inline-block;
+        .Avatar {
             margin-right: 0.5em;
             height: 2em;
             width: 2em;
-            border-radius: 50%;
-            background: linear-gradient(to right, $c-brand-main-orange, $c-brand-main-pink);
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 100%;
             vertical-align: middle;
             float: left;
         }

@@ -19,8 +19,8 @@
         vertical-align: middle;
         margin-left: 0.5em;
 
-        &.TargetInfo-enter {
-            animation: TargetInfo-slideIn-enterAnimation 0.5s ease-out;
+        &.TargetInfo-appear {
+            animation: TargetInfo-number-appearAnimation 1.5s;
         }
     }
 
@@ -33,9 +33,8 @@
             content: "- ";
         }
 
-        &.TargetInfo-enter {
-            opacity: 0;
-            animation: TargetInfo-slideIn-enterAnimation 0.5s ease-out 1.0s;
+        &.TargetInfo-appear {
+            animation: TargetInfo-lastCall-appearAnimation 1.5s;
         }
     }
 
@@ -103,27 +102,27 @@
             @include inline-button(darken(white, 10));
         }
 
-        &.TargetInfo-enter {
+        &.TargetInfo-appear {
             animation: TargetInfo-tagList-enterAnimation 1.5s;
         }
     }
 }
 
 
-@keyframes TargetInfo-slideIn-enterAnimation {
-    from {
-        opacity: 0;
-        transform: translate(50px, 0);
-    }
+@keyframes TargetInfo-number-appearAnimation {
+    0%      { opacity: 0; transform: translate(50px, 0); }
+    25%     { opacity: 0; transform: translate(50px, 0); }
+    50%     { opacity: 1; transform: none; }
+}
 
-    to {
-        opacity: 1;
-        transform: translate(0, 0);
-    }
+@keyframes TargetInfo-lastCall-appearAnimation {
+    0%      { opacity: 0; transform: translate(50px, 0); }
+    50%     { opacity: 0; transform: translate(50px, 0); }
+    75%     { opacity: 1; transform: none; }
 }
 
 @keyframes TargetInfo-tagList-enterAnimation {
     0%      { opacity: 0; transform: translate(0, 50px); }
-    33%     { opacity: 0; transform: translate(0, 50px); }
-    66%     { opacity: 1; transform: none }
+    75%     { opacity: 0; transform: translate(0, 50px); }
+    100%    { opacity: 1; transform: none }
 }

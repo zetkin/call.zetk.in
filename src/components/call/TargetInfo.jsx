@@ -51,6 +51,8 @@ export default class TargetInfo extends React.Component {
 
         return (
             <CSSTransitionGroup
+                transitionAppear={ true }
+                transitionAppearTimeout={ 1500 }
                 transitionEnterTimeout={ 1500 }
                 transitionLeaveTimeout={ 1500 }
                 transitionName="TargetInfo"

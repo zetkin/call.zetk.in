@@ -4,6 +4,12 @@
     &.InputPane-prepareStep {
         width: 30%;
         left: 70%;
+
+        .InputPane-summaryList {
+            .Button {
+                display: none;
+            }
+        }
     }
 
     &.InputPane-callStep {
@@ -14,6 +20,12 @@
     &.InputPane-reportStep {
         width: 30%;
         left: 35%;
+
+        .InputPane-summaryList {
+            .Button {
+                display: none;
+            }
+        }
     }
 
     &.PaneBase-enter {

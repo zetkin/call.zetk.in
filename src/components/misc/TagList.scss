@@ -1,0 +1,21 @@
+.TagList {
+   padding: 0;
+
+    &:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    li {
+        float: left;
+        margin: 0.5em;
+        list-style-type: none;
+        font-size: 0.7em;
+    }
+
+    .TagList-tag {
+        @include inline-button();
+        margin-bottom: 0.5em;
+    }
+}

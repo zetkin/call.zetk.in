@@ -16,7 +16,10 @@ export default class TargetInfo extends React.Component {
         let callInfo, tagList;
 
         const avatarDomain = '//api.' + process.env.ZETKIN_DOMAIN;
-        const avatarSrc = avatarDomain + '/v1/users/' + target.get('id') + '/avatar';
+        const avatarSrc = avatarDomain + '/v1/orgs/'
+            + 1 + '/people/' + target.get('id')
+            + '/avatar';
+            // TODO: Replace hard coded org id with actual.
         const avatarStyle = {backgroundImage: 'url("' + avatarSrc + '")'}
 
         if (this.props.showFullInfo) {

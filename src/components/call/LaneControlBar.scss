@@ -50,6 +50,9 @@
         .LaneControlBar-content {
             @include col(9,12);
         }
+        .LaneControlBar-proceedSection {
+            padding-top: 0.5em;
+        }
     }
 
     &.LaneControlBar-reportStep {

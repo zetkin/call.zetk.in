@@ -1,0 +1,12 @@
+.Avatar {
+      display: inline-block;
+      &.Avatar-mask {
+            height: 100%;
+            width: 100%;
+            background: darken(white, 10);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100%;
+            border-radius: 50%;
+      }
+}

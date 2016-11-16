@@ -57,28 +57,6 @@
         }
     }
 
-    .TargetPane-tagList {
-       padding: 0;
-
-        &:after {
-            content: "";
-            display: block;
-            clear: both;
-        }
-
-        li {
-            float: left;
-            margin: 0.5em;
-            list-style-type: none;
-            font-size: 0.7em;
-        }
-
-        .TargetPane-tag {
-            @include inline-button();
-            margin-bottom: 0.5em;
-        }
-    }
-
     .TargetPane-callLogHeader {
         &:before {
             @include icon($fa-var-clock-o);

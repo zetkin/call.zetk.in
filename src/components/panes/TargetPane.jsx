@@ -7,6 +7,8 @@ import { currentCall } from '../../store/calls';
 import { setLaneInfoMode } from '../../actions/lane';
 import { selectedAssignment } from '../../store/assignments';
 import Avatar from '../misc/Avatar';
+import TagList from '../misc/TagList';
+import CallLog from '../call/CallLog';
 
 
 const mapStateToProps = state => ({
@@ -23,17 +25,25 @@ export default class TargetPane extends PaneBase {
             <li key="phone" className="TargetPane-infoPhone">
                 { target.get('phone') }</li>,
             <li key="email" className="TargetPane-infoEmail">
-                { target.get('phone') }</li>,
+                onetwo.fourfivesixseven@vansterpartiet.se</li>,
         ]
 
         return [
             <Avatar key="avatar"
                 personId={ target.get('id') }
-                orgId={ this.props.assignment.get('organization_id') }/>,
+                orgId={ this.props.assignment.get('organization_id') }
+                mask={ true } />,
             <h1 key="name" className="TargetPane-name">
                 { target.get('name') }</h1>,
-            <ul key="info" className="TargetPane-info">
-                { info }</ul>
+            <ul key="contactInformation" className="TargetPane-info">
+                { info }</ul>,
+            <img key="map" className="TargetPane-map"
+                src="https://maps.googleapis.com/maps/api/staticmap?center=21437+Malm%C3%B6&zoom=15&size=450x150&maptype=roadmap"/>,
+            <h4 key="tagHeader" className="TargetPane-tagHeader">Taggar</h4>,
+            <TagList key="tagList" />,
+            <h4 key="callLogHeader" className="TargetPane-callLogHeader">
+                Tidigare samtal</h4>,
+            <CallLog key="callLog" />
         ];
     }
 

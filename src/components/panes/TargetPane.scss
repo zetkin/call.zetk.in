@@ -30,9 +30,9 @@
         }
     }
 
-    .TargetPane-infoPhone {
+    .TargetPane-infoJoin {
         &:before {
-            @include icon($fa-var-phone);
+            @include icon($fa-var-sign-in);
         }
     }
 

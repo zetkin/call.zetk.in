@@ -44,21 +44,21 @@ export default class InputPane extends PaneBase {
 
                         <ul className="InputPane-summaryList">
                             <li>
-                                <h3>First campaign</h3>
+                                <h3>En välfärd att lita på</h3>
                                 <p>
-                                    No future bookings.
+                                    Inga kommande anmälningar.
                                 </p>
                                 <Button labelMsg="panes.input.summary.campaigns.respondButton"
-                                    labelValues={{ campaign: 'First campaign' }}
+                                    labelValues={{ campaign: 'En välfärd att lita på' }}
                                     onClick={ this.onRespondClick.bind(this, 'campaign', 1) }/>
                             </li>
                             <li>
-                                <h3>Second campaign</h3>
+                                <h3>Rosengård är inte till salu</h3>
                                 <p>
-                                    Booked on two future actions.
+                                    Anmäld på två kommande aktiviteter.
                                 </p>
                                 <Button labelMsg="panes.input.summary.campaigns.respondButton"
-                                    labelValues={{ campaign: 'Second campaign' }}
+                                    labelValues={{ campaign: 'Rosengård är inte till salu' }}
                                     onClick={ this.onRespondClick.bind(this, 'campaign', 2) }/>
                             </li>
                         </ul>
@@ -68,12 +68,12 @@ export default class InputPane extends PaneBase {
 
                         <ul className="InputPane-summaryList">
                             <li>
-                                <h3>Member survey</h3>
+                                <h3>Medlemsenkäten</h3>
                                 <p>
-                                    34% filled out.
+                                    34% ifylld.
                                 </p>
                                 <Button labelMsg="panes.input.summary.surveys.respondButton"
-                                    labelValues={{ survey: 'Member survey' }}
+                                    labelValues={{ survey: 'Medlemsenkäten' }}
                                     onClick={ this.onRespondClick.bind(this, 'survey', 1) }/>
                             </li>
                         </ul>
@@ -105,9 +105,9 @@ export default class InputPane extends PaneBase {
             }
             else if (this.state.viewMode == 'survey') {
                 content.push(
-                    <h2 key="h2">Member survey</h2>,
+                    <h2 key="h2">Medlemsenkäten</h2>,
                     <p key="intro">
-                        This is the member survey.
+                        Fyll i Medlemsenkäten 2016.
                     </p>,
                     <img key="dummy" src="/static/img/dummies/dummy-survey.png"/>,
                 );
@@ -133,9 +133,9 @@ export default class InputPane extends PaneBase {
                         values={{ target: target.get('name') }}/>
                     <select value={ selectValue }
                         onChange={ this.onSelectChange.bind(this) }>
-                        <option value="campaign:1">First campaign</option>
-                        <option value="campaign:2">Second campaign</option>
-                        <option value="survey:1">Member survey</option>
+                        <option value="campaign:1">En välfärd att lita på</option>
+                        <option value="campaign:2">Rosengård är inte till salu</option>
+                        <option value="survey:1">Medlemsenkäten</option>
                     </select>
                 </div>
             );

@@ -136,6 +136,18 @@
                 &:focus {
                     outline: none;
                 }
+
+                &.InstructionsPane-targetButton {
+                    &:before {
+                        @include icon($fa-var-user);
+                    }
+                }
+
+                &.TargetPane-instructionsButton {
+                    &:before {
+                        @include icon($fa-var-file-text);
+                    }
+                }
             }
         }
 

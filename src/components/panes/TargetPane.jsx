@@ -38,7 +38,7 @@ export default class TargetPane extends PaneBase {
             <ul key="contactInformation" className="TargetPane-info">
                 { info }</ul>,
             <img key="map" className="TargetPane-map"
-                src="https://maps.googleapis.com/maps/api/staticmap?center=21437+Malm%C3%B6&zoom=15&size=450x150&maptype=roadmap"/>,
+                src="https://maps.googleapis.com/maps/api/staticmap?center=21437+Malm%C3%B6&zoom=15&size=650x200&maptype=roadmap&key=AIzaSyAHVagqI3RTd0psf57oA6gzKqVyjp8FS8w"/>,
             <h4 key="tagHeader" className="TargetPane-tagHeader">Taggar</h4>,
             <TagList key="tagList" />,
             <h4 key="callLogHeader" className="TargetPane-callLogHeader">

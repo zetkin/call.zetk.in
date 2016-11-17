@@ -15,10 +15,19 @@
 
 
     &:before {
-        @include icon($fa-var-check-circle);
-        color: $c-brand-comp-light;
         position: absolute;
         left: 0.5em;
+    }
+
+    &.success:before {
+        @include icon($fa-var-check-circle);
+        color: $c-brand-comp-light;
+        line-height: 3em;
+    }
+
+    &.failed:before {
+        @include icon($fa-var-times-circle);
+        color: $c-brand-main;
         line-height: 3em;
     }
 }

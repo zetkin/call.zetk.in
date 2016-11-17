@@ -22,10 +22,10 @@ export default class TargetPane extends PaneBase {
         let target = this.props.call.get('target');
 
         let info = [
-            <li key="phone" className="TargetPane-infoJoin">
-                Ingång 2012-03-15</li>,
             <li key="email" className="TargetPane-infoEmail">
                 namnet.namnsen@vansterpartiet.se</li>,
+            <li key="phone" className="TargetPane-infoJoin">
+                Ingång 2012-03-15</li>,
         ]
 
         return [

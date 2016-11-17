@@ -91,10 +91,27 @@
     content: $fa-character;
 }
 
+@mixin list() {
+    li {
+        position: relative;
+        padding: 1em 1em 1em 3em;
+        border-bottom: 1px solid #eee;
+
+        &:hover {
+            background: darken(white,1);
+        }
+
+        &:before {
+            position: absolute;
+            left: 0.5em;
+        }
+    }
+}
 
 @mixin PaneWithTabs($class) {
 
-    &.#{$class}-callStep, &.#{$class}-reportStep {
+    &.#{$class}-callStep, &.#{$class}-reportStep,
+    &.InputPane-prepareStep { //TODO: This is only temp solution.
         overflow: visible!important;
         padding-top: 0!important;
         padding-right: 0!important;

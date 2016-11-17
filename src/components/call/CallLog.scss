@@ -6,7 +6,6 @@
 
 .CallLog-item {
     position: relative;
-    // height: 3em;
     padding: 1em 1em 1em 3em;
     border-bottom: 1px solid #eee;
 
@@ -20,7 +19,6 @@
         color: $c-brand-comp-light;
         position: absolute;
         left: 0.5em;
-        // margin-left: -3em;
         line-height: 3em;
     }
 }
@@ -28,15 +26,10 @@
 
 .CallLog-timeStamp {
     font-size: 0.8em;
-    // position: absolute;
-    // left: 3em;
-    // top: 0;
     color: lighten($c-text, 30);
 }
 
 .CallLog-summary {
-    // position: absolute;
-    // bottom: 0;
     margin-top: 0.5em;
     font-size: 0.9em;
 }

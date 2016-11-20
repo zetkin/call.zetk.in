@@ -1,0 +1,36 @@
+action:
+    booked: "Bokad"
+    yesLabel: "Ja"
+    multiLocationLabel: |
+        {count, plural,
+            =2 {På två platser}
+            =3 {På tre platser}
+            =4 {På fyra platser}
+            =5 {På fem platser}
+            other {På # platser}
+        }
+
+calendar:
+    weekDays:
+        monday: "M"
+        tuesday: "T"
+        wednesday: "O"
+        thursday: "T"
+        friday: "F"
+        saturday: "L"
+        sunday: "S"
+
+filter:
+    h: "Filtrera aktioner"
+
+    activities:
+        h: "Aktiviteter ({ count })"
+
+    campaigns:
+        h: "Kampanjer ({ count })"
+
+    locations:
+        h: "Platser ({ count })"
+
+
+submitLabel: "Spara mina anmälningar"

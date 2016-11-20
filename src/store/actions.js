@@ -22,6 +22,17 @@ export default createReducer(initialState, {
         return immutable.fromJS(state);
     },
 
+    [types.START_NEW_CALL + '_FULFILLED']: (state, action) => {
+        // Reset when new call starts
+        return state
+            .setIn(['actionList', 'error'], null)
+            .setIn(['actionList', 'isPending'], false)
+            .setIn(['actionList', 'items'], immutable.Map())
+            .setIn(['responseList', 'error'], null)
+            .setIn(['responseList', 'isPending'], false)
+            .setIn(['responseList', 'items'], immutable.Map());
+    },
+
     [types.RETRIEVE_ACTIONS + '_PENDING']: (state, action) => {
         return state
             .setIn(['actionList', 'error'], null)

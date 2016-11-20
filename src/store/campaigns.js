@@ -17,6 +17,14 @@ export default createReducer(initialState, {
         return immutable.fromJS(state);
     },
 
+    [types.START_NEW_CALL + '_FULFILLED']: (state, action) => {
+        // Reset when new call starts
+        return state
+            .setIn(['campaignList', 'error'], null)
+            .setIn(['campaignList', 'isPending'], false)
+            .setIn(['campaignList', 'items'], immutable.Map());
+    },
+
     [types.RETRIEVE_CAMPAIGNS + '_PENDING']: (state, action) => {
         return state
             .setIn(['campaignList', 'error'], null)

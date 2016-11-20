@@ -1,9 +1,66 @@
 .InputPane {
     z-index: 2;
 
+    @include PaneWithTabs('InputPane');
+
+    .PaneBase-header {
+        p {
+            text-align: center;
+            color: darken(white, 30);
+        }
+    }
+
+    .PaneBase-content {
+        font-size: 0.9em;
+    }
+
+    h2 {
+        margin-bottom: 0.5em;
+    }
+
+    .InputPane-campaignInfo {
+        max-width: 700px;
+        margin: 0 auto 2em;
+    }
+
+    .InputPane-summaryList {
+        list-style: none;
+        margin: 0 0 2em 0;
+        padding: 0;
+
+        @include list();
+
+        h3, p {
+            margin: 0;
+        }
+    }
+
+    .InputPane-campaigns {
+        .InputPane-summaryList li {
+            &:before {
+                @include icon($fa-var-flag);
+            }
+        }
+    }
+
+    .InputPane-surveys {
+        .InputPane-summaryList li {
+            &:before {
+                @include icon($fa-var-list);
+            }
+        }
+    }
+
     &.InputPane-prepareStep {
         width: 65%;
         left: 70%;
+        box-shadow: none;
+
+        .PaneBase-header {
+            p {
+                width: 46%;
+            }
+        }
 
         .InputPane-summaryList {
             .Button {
@@ -15,10 +72,6 @@
     &.InputPane-callStep {
         width: 65%;
         left: 35%;
-
-        .InputPane-summaryList {
-            max-width: 40%;
-        }
     }
 
     &.InputPane-reportStep {
@@ -33,10 +86,29 @@
     }
 
     .InputPane-nav {
-        float: right;
-
         .InputPane-summaryLink {
-            display: block;
+            @include col(4,12);
+            display: inline-block;
+            line-height: 4em;
+            cursor: pointer;
+
+            &:before {
+                @include icon($fa-var-arrow-left);
+            }
+
+            &:hover {
+                color: darken($c-brand-main, 20);
+            }
+        }
+
+        p {
+            @include col(4,12);
+        }
+
+        select {
+            @include col(2,12);
+            float: right;
+            margin: 2em;
         }
     }
 
@@ -45,10 +117,10 @@
             position: relative;
 
             .Button {
+                @include button(darken(white, 5));
                 position: absolute;
-                top: 0;
-                right: -40%;
-                width: 40%;
+                top: 1em;
+                right: 0;
             }
         }
     }

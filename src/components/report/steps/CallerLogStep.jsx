@@ -38,7 +38,7 @@ export default class CallerLogStep extends ReportStepBase {
             return [
                 <Msg key="summary" tagName="p"
                     id="report.steps.callerLog.summary.leftLog"/>,
-                <p key="log">{ log }</p>
+                <p key="log" className="logMessage">{ log }</p>
             ];
         }
         else {

@@ -7,6 +7,8 @@ import { currentCall } from '../../store/calls';
 import { setLaneInfoMode } from '../../actions/lane';
 import { selectedAssignment } from '../../store/assignments';
 import Avatar from '../misc/Avatar';
+import TagList from '../misc/TagList';
+import CallLog from '../call/CallLog';
 
 
 const mapStateToProps = state => ({
@@ -20,20 +22,28 @@ export default class TargetPane extends PaneBase {
         let target = this.props.call.get('target');
 
         let info = [
-            <li key="phone" className="TargetPane-infoPhone">
-                { target.get('phone') }</li>,
             <li key="email" className="TargetPane-infoEmail">
-                { target.get('phone') }</li>,
+                namnet.namnsen@vansterpartiet.se</li>,
+            <li key="phone" className="TargetPane-infoJoin">
+                Ingång 2012-03-15</li>,
         ]
 
         return [
             <Avatar key="avatar"
                 personId={ target.get('id') }
-                orgId={ this.props.assignment.get('organization_id') }/>,
+                orgId={ this.props.assignment.get('organization_id') }
+                mask={ true } />,
             <h1 key="name" className="TargetPane-name">
                 { target.get('name') }</h1>,
-            <ul key="info" className="TargetPane-info">
-                { info }</ul>
+            <ul key="contactInformation" className="TargetPane-info">
+                { info }</ul>,
+            <img key="map" className="TargetPane-map"
+                src="https://maps.googleapis.com/maps/api/staticmap?center=21437+Malm%C3%B6&zoom=15&size=650x200&maptype=roadmap&key=AIzaSyAHVagqI3RTd0psf57oA6gzKqVyjp8FS8w"/>,
+            <h4 key="tagHeader" className="TargetPane-tagHeader">Taggar</h4>,
+            <TagList key="tagList" />,
+            <h4 key="callLogHeader" className="TargetPane-callLogHeader">
+                Tidigare samtal</h4>,
+            <CallLog key="callLog" />
         ];
     }
 

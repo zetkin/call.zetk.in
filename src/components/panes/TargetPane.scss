@@ -6,8 +6,10 @@
     @include PaneWithTabs('TargetPane');
 
     .Avatar {
-        @include col(4,12);
         float: left;
+        padding-left: 0;
+        height: 8em;
+        width: 8em;
     }
 
     .TargetPane-name {
@@ -24,12 +26,13 @@
 
         li {
             margin-bottom: 0.5em;
+            font-size: 0.8em;
         }
     }
 
-    .TargetPane-infoPhone {
+    .TargetPane-infoJoin {
         &:before {
-            @include icon($fa-var-phone);
+            @include icon($fa-var-sign-in);
         }
     }
 
@@ -38,6 +41,28 @@
             @include icon($fa-var-envelope);
         }
     }
+
+    .TargetPane-map {
+        max-width: 100%;
+        margin-top: 1em;
+    }
+
+    h4 {
+        margin-bottom: 0.5em;
+    }
+
+    .TargetPane-tagHeader {
+        &:before {
+            @include icon($fa-var-tag);
+        }
+    }
+
+    .TargetPane-callLogHeader {
+        &:before {
+            @include icon($fa-var-clock-o);
+        }
+    }
+
 
     &.TargetPane-prepareStep {
         width: 35%;

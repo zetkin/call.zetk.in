@@ -44,7 +44,7 @@ export default class OrganizerLogStep extends ReportStepBase {
             return [
                 <Msg key="summary" tagName="p"
                     id="report.steps.organizerLog.summary.leftLog"/>,
-                <p key="log">{ log }</p>
+                <p key="log" className="logMessage">{ log }</p>
             ];
         }
         else if (oan) {

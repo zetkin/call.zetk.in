@@ -125,6 +125,10 @@
         }
     }
 
+    .CampaignForm {
+        background-color: white;
+    }
+
     &.PaneBase-enter {
         animation: InputPane-enterAnimation 0.5s;
     }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormattedMessage as Msg } from 'react-intl';
 
-import Button from '../../misc/Button';
-import LoadingIndicator from '../../misc/LoadingIndicator';
+import Button from '../../../common/misc/Button';
+import LoadingIndicator from '../../../common/misc/LoadingIndicator';
 import PropTypes from '../../../utils/PropTypes';
 
 

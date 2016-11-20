@@ -109,7 +109,7 @@ gulp.task('minify', function() {
 });
 
 gulp.task('default', [ 'clean' ], function(cb) {
-    return runSequence('bundleJs', 'buildSass', 'minifyImages', 'copyFonts', cb);
+    return runSequence('bundleJs', 'buildSass', 'minifyImages', 'copyFonts', 'copyMessages', cb);
 });
 
 

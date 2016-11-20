@@ -2,11 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage as Msg } from 'react-intl';
 
-import Button from '../misc/Button';
-import FormattedLink from '../misc/FormattedLink';
+import Button from '../../common/misc/Button';
+import CampaignForm from '../../common/campaignForm/CampaignForm';
+import FormattedLink from '../../common/misc/FormattedLink';
 import PaneBase from './PaneBase';
 import { currentCall } from '../../store/calls';
 
+// TODO: REMOVE-------------------------------
+import immutable from 'immutable';
+const dummyList = immutable.fromJS({
+    isPending: false,
+    error: null,
+    items: {},
+});
+// -------------------------------------------
 
 const mapStateToProps = state => ({
     call: currentCall(state),
@@ -100,7 +109,11 @@ export default class InputPane extends PaneBase {
                             S/Mp-styre.
                         </p>
                     </div>,
-                    <img key="dummy" src="/static/img/dummies/dummy-campaign.png"/>,
+                    <CampaignForm key="campaignForm"
+                        actionList={ dummyList }
+                        responseList={ dummyList }
+                        userActionList={ dummyList }
+                        onResponse={ this.onCampaignResponse.bind(this) }/>
                 );
             }
             else if (this.state.viewMode == 'survey') {
@@ -156,6 +169,10 @@ export default class InputPane extends PaneBase {
                 );
             }
         }
+    }
+
+    onCampaignResponse() {
+        // TODO: Implement sign-up
     }
 
     onRespondClick(type, id) {

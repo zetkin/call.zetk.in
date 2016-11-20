@@ -20,6 +20,7 @@
   },
   "homepage": "https://call.zetk.in",
   "dependencies": {
+    "animated-scrollto": "^1.1.0",
     "array.prototype.find": "^2.0.0",
     "classnames": "^2.2.5",
     "cookie-cutter": "^0.2.0",

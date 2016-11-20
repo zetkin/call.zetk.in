@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import AssignmentStats from '../misc/AssignmentStats';
 import PaneBase from './PaneBase';
-import LoadingIndicator from '../misc/LoadingIndicator';
+import LoadingIndicator from '../../common/misc/LoadingIndicator';
 import { selectedAssignment } from '../../store/assignments';
 import { retrieveAssignmentStats } from '../../actions/assignment';
 

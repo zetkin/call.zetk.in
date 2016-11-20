@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage as Msg } from 'react-intl';
 
-import Button from '../misc/Button';
+import Button from '../../common/misc/Button';
 
 
 export default class LandingPage extends React.Component {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import { FormattedMessage as Msg } from 'react-intl';
 
-import Button from '../misc/Button';
+import Button from '../../common/misc/Button';
 import PropTypes from '../../utils/PropTypes';
 import TargetInfo from './TargetInfo';
 import { selectedAssignment } from '../../store/assignments';

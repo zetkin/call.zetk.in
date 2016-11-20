@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage as Msg } from 'react-intl';
 
-import Button from '../misc/Button';
-import FormattedLink from '../misc/FormattedLink';
+import Button from '../../common/misc/Button';
+import FormattedLink from '../../common/misc/FormattedLink';
 import PaneBase from './PaneBase';
 import { currentCall } from '../../store/calls';
 

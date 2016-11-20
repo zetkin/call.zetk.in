@@ -5,8 +5,12 @@ import { FormattedMessage as Msg } from 'react-intl';
 import Button from '../../common/misc/Button';
 import CampaignForm from '../../common/campaignForm/CampaignForm';
 import FormattedLink from '../../common/misc/FormattedLink';
+import LoadingIndicator from '../../common/misc/LoadingIndicator';
 import PaneBase from './PaneBase';
+import { campaignById } from '../../store/campaigns';
 import { currentCall } from '../../store/calls';
+import { retrieveActions } from '../../actions/action';
+import { retrieveCampaigns } from '../../actions/campaign';
 
 // TODO: REMOVE-------------------------------
 import immutable from 'immutable';
@@ -18,6 +22,8 @@ const dummyList = immutable.fromJS({
 // -------------------------------------------
 
 const mapStateToProps = state => ({
+    actions: state.get('actions'),
+    campaigns: state.get('campaigns'),
     call: currentCall(state),
 });
 
@@ -40,52 +46,46 @@ export default class InputPane extends PaneBase {
         }
     }
 
+    componentDidMount() {
+        this.props.dispatch(retrieveActions());
+        this.props.dispatch(retrieveCampaigns());
+    }
+
     renderContent() {
         let target = this.props.call.get('target');
         let content = null;
 
-        // TODO: Don't hard-code content
         if (this.state.viewMode == 'summary') {
+            let campaignStore = this.props.campaigns;
+            let campaignContent = null;
+
+            if (campaignStore.getIn(['campaignList', 'isPending'])) {
+                campaignContent = <LoadingIndicator/>;
+            }
+            else {
+                let listItems = campaignStore.getIn(['campaignList', 'items']);
+
+                if (listItems) {
+                    campaignContent = (
+                        <ul className="InputPane-summaryList">
+                        { listItems.toList().map(campaign => (
+                            <CampaignListItem key={ campaign.get('id') }
+                                campaign={ campaign }
+                                onSelect={ this.onCampaignSelect.bind(this) }/>
+                        )) }
+                        </ul>
+                    );
+                }
+                else {
+                    campaignContent = null;
+                }
+            }
+
             content = (
                 <div key="content" className="InputPane-summary">
                     <section className="InputPane-campaigns">
                         <Msg tagName="h2" id="panes.input.summary.campaigns.h2"/>
-
-                        <ul className="InputPane-summaryList">
-                            <li>
-                                <h3>En välfärd att lita på</h3>
-                                <p>
-                                    Inga kommande anmälningar.
-                                </p>
-                                <Button labelMsg="panes.input.summary.campaigns.respondButton"
-                                    labelValues={{ campaign: 'En välfärd att lita på' }}
-                                    onClick={ this.onRespondClick.bind(this, 'campaign', 1) }/>
-                            </li>
-                            <li>
-                                <h3>Rosengård är inte till salu</h3>
-                                <p>
-                                    Anmäld på två kommande aktiviteter.
-                                </p>
-                                <Button labelMsg="panes.input.summary.campaigns.respondButton"
-                                    labelValues={{ campaign: 'Rosengård är inte till salu' }}
-                                    onClick={ this.onRespondClick.bind(this, 'campaign', 2) }/>
-                            </li>
-                        </ul>
-                    </section>
-                    <section className="InputPane-surveys">
-                        <Msg tagName="h2" id="panes.input.summary.surveys.h2"/>
-
-                        <ul className="InputPane-summaryList">
-                            <li>
-                                <h3>Medlemsenkäten</h3>
-                                <p>
-                                    34% ifylld.
-                                </p>
-                                <Button labelMsg="panes.input.summary.surveys.respondButton"
-                                    labelValues={{ survey: 'Medlemsenkäten' }}
-                                    onClick={ this.onRespondClick.bind(this, 'survey', 1) }/>
-                            </li>
-                        </ul>
+                        { campaignContent }
                     </section>
                 </div>
             );
@@ -96,33 +96,27 @@ export default class InputPane extends PaneBase {
             content = [];
 
             if (this.state.viewMode == 'campaign') {
+                let campaign = this.props.campaigns
+                    .getIn(['campaignList', 'items', this.state.selectedId.toString()]);
+
+                // Filter list to only contain actions from the selected campaign
+                let actionList = this.props.actions.get('actionList')
+                    .updateIn(['items'], items => items
+                        .filter(item =>
+                            item.getIn(['campaign', 'id']) == campaign.get('id')));
+
                 content.push(
                     <div key="campaignInfo" className="InputPane-campaignInfo">
-                        <h2 key="h2">En välfärd att lita på</h2>
+                        <h2 key="h2">{ campaign.get('title') }</h2>
                         <p key="intro">
-                            Över hela Skåne går Vänsterpartiet ut i en kampanjar 
-                            för en jämlik sjukvård med ökade resurser och en 
-                            kollektivtrafik som alla har råd med. I regionen 
-                            slåss vi för ökade resurser och en höjd skatt för 
-                            att lösa de stora problem som skapats under år av 
-                            misskötsel av ett borgerligt styre och nu 
-                            S/Mp-styre.
+                            { campaign.get('info_text') }
                         </p>
                     </div>,
                     <CampaignForm key="campaignForm"
-                        actionList={ dummyList }
+                        actionList={ actionList }
                         responseList={ dummyList }
                         userActionList={ dummyList }
                         onResponse={ this.onCampaignResponse.bind(this) }/>
-                );
-            }
-            else if (this.state.viewMode == 'survey') {
-                content.push(
-                    <h2 key="h2">Medlemsenkäten</h2>,
-                    <p key="intro">
-                        Fyll i Medlemsenkäten 2016.
-                    </p>,
-                    <img key="dummy" src="/static/img/dummies/dummy-survey.png"/>,
                 );
             }
         }
@@ -136,6 +130,18 @@ export default class InputPane extends PaneBase {
         let selectValue = this.state.viewMode + ':' + this.state.selectedId;
 
         if (this.state.viewMode != 'summary') {
+            let campaignStore = this.props.campaigns;
+            let campaignItems = campaignStore.getIn(['campaignList', 'items']);
+            let campaignOptions = campaignItems.toList().map(campaign => {
+                let value = 'campaign:' + campaign.get('id');
+
+                return (
+                    <option key={ value } value={ value }>
+                        { campaign.get('title') }
+                    </option>
+                );
+            });
+
             return (
                 <div key="nav" className="InputPane-nav">
                     <FormattedLink className="InputPane-summaryLink"
@@ -146,9 +152,7 @@ export default class InputPane extends PaneBase {
                         values={{ target: target.get('name') }}/>
                     <select value={ selectValue }
                         onChange={ this.onSelectChange.bind(this) }>
-                        <option value="campaign:1">En välfärd att lita på</option>
-                        <option value="campaign:2">Rosengård är inte till salu</option>
-                        <option value="survey:1">Medlemsenkäten</option>
+                        { campaignOptions }
                     </select>
                 </div>
             );
@@ -169,6 +173,13 @@ export default class InputPane extends PaneBase {
                 );
             }
         }
+    }
+
+    onCampaignSelect(id) {
+        this.setState({
+            viewMode: 'campaign',
+            selectedId: id,
+        });
     }
 
     onCampaignResponse() {
@@ -199,3 +210,20 @@ export default class InputPane extends PaneBase {
         });
     }
 }
+
+const CampaignListItem = props => {
+    let id = props.campaign.get('id');
+    let title = props.campaign.get('title');
+
+    return (
+        <li>
+            <h3>{ title }</h3>
+            <p>
+                TODO: Show status here
+            </p>
+            <Button labelMsg="panes.input.summary.campaigns.respondButton"
+                labelValues={{ campaign: title }}
+                onClick={ () => props.onSelect(id) }/>
+        </li>
+    );
+};

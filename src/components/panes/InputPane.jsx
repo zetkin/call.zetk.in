@@ -9,7 +9,7 @@ import LoadingIndicator from '../../common/misc/LoadingIndicator';
 import PaneBase from './PaneBase';
 import { campaignById } from '../../store/campaigns';
 import { currentCall } from '../../store/calls';
-import { retrieveActions } from '../../actions/action';
+import { retrieveActions, updateActionResponse } from '../../actions/action';
 import { retrieveCampaigns } from '../../actions/campaign';
 
 // TODO: REMOVE-------------------------------
@@ -114,7 +114,7 @@ export default class InputPane extends PaneBase {
                     </div>,
                     <CampaignForm key="campaignForm"
                         actionList={ actionList }
-                        responseList={ dummyList }
+                        responseList={ this.props.actions.get('responseList') }
                         userActionList={ dummyList }
                         onResponse={ this.onCampaignResponse.bind(this) }/>
                 );
@@ -182,8 +182,8 @@ export default class InputPane extends PaneBase {
         });
     }
 
-    onCampaignResponse() {
-        // TODO: Implement sign-up
+    onCampaignResponse(action, checked) {
+        this.props.dispatch(updateActionResponse(action, checked));
     }
 
     onRespondClick(type, id) {

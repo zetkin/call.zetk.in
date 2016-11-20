@@ -27,10 +27,9 @@ export function updateActionResponse(action, responseBool) {
         let actionId = action.get('id');
 
         // Find user personId from list of memberships
-        let membershipList = getState().getIn(['orgs', 'membershipList']);
-        let membership = membershipList.get('items').find(val => (
-            val.getIn(['organization', 'id']) == orgId));
-        let personId = membership.getIn(['profile', 'id']);
+        // Find target personId from current call
+        let call = currentCall(getState());
+        let personId = call.getIn(['target', 'id']);
 
         let resource = z.resource('orgs', orgId, 'actions', actionId,
                 'responses', personId);

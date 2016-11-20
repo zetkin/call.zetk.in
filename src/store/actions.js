@@ -13,7 +13,7 @@ const initialState = immutable.fromJS({
     responseList: {
         isPending: false,
         error: null,
-        items: null,
+        items: {},
     },
 });
 

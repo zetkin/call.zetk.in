@@ -60,11 +60,18 @@ export default class InputPane extends PaneBase {
                 if (listItems) {
                     campaignContent = (
                         <ul className="InputPane-summaryList">
-                        { listItems.toList().map(campaign => (
-                            <CampaignListItem key={ campaign.get('id') }
-                                campaign={ campaign }
-                                onSelect={ this.onCampaignSelect.bind(this) }/>
-                        )) }
+                        { listItems.toList().map(campaign => {
+                            let actions = target.get('future_actions').filter(a =>
+                                a.getIn(['campaign', 'id']) == campaign.get('id'));
+
+                            return (
+                                <CampaignListItem key={ campaign.get('id') }
+                                    userActions={ actions }
+                                    target={ target }
+                                    campaign={ campaign }
+                                    onSelect={ this.onCampaignSelect.bind(this) }/>
+                            );
+                        }) }
                         </ul>
                     );
                 }
@@ -208,13 +215,14 @@ export default class InputPane extends PaneBase {
 const CampaignListItem = props => {
     let id = props.campaign.get('id');
     let title = props.campaign.get('title');
+    let target = props.target.get('first_name');
+    let numBookings = props.userActions.size;
 
     return (
         <li>
             <h3>{ title }</h3>
-            <p>
-                TODO: Show status here
-            </p>
+            <Msg tagName="p" id="panes.input.summary.campaigns.status"
+                values={{ numBookings, target }}/>
             <Button labelMsg="panes.input.summary.campaigns.respondButton"
                 labelValues={{ campaign: title }}
                 onClick={ () => props.onSelect(id) }/>

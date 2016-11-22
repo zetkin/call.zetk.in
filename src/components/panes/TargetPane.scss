@@ -5,6 +5,14 @@
 
     @include PaneWithTabs('TargetPane');
 
+    .TargetPane-basics {
+        &:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+
     .Avatar {
         float: left;
         padding-left: 0;
@@ -52,6 +60,8 @@
     }
 
     .TargetPane-tagHeader {
+        margin-top: 1em;
+
         &:before {
             @include icon($fa-var-tag);
         }

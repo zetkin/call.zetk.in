@@ -6,6 +6,7 @@ import cx from 'classnames';
 import PropTypes from '../../utils/PropTypes';
 import { selectedAssignment } from '../../store/assignments';
 import Avatar from '../misc/Avatar';
+import TagList from '../misc/TagList';
 
 const mapStateToProps = state => ({
     assignment: selectedAssignment(state),
@@ -33,15 +34,7 @@ export default class TargetInfo extends React.Component {
             ];
 
             tagList = (
-                <ul className="TargetInfo-tagList">
-                    <li className="TargetInfo-tag">These</li>
-                    <li className="TargetInfo-tag">are</li>
-                    <li className="TargetInfo-tag">some</li>
-                    <li className="TargetInfo-tag">mighty</li>
-                    <li className="TargetInfo-tag">fake</li>
-                    <li className="TargetInfo-tag">tags</li>
-                    <li className="TargetInfo-moreTags">+2 tags</li>
-                </ul>
+                <TagList tags={ target.get('tags') }/>
             );
         }
 

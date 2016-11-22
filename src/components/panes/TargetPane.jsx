@@ -56,7 +56,8 @@ export default class TargetPane extends PaneBase {
             </div>,
             map,
             <h4 key="tagHeader" className="TargetPane-tagHeader">Taggar</h4>,
-            <TagList key="tagList" />,
+            <TagList key="tagList"
+                tags={ target.get('tags') }/>,
             <h4 key="callLogHeader" className="TargetPane-callLogHeader">
                 Tidigare samtal</h4>,
             <CallLog key="callLog"

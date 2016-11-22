@@ -23,6 +23,12 @@ export default createReducer(initialState, {
     },
 
     [types.START_NEW_CALL + '_FULFILLED']: (state, action) => {
+        // Get responses from target info
+        let responses = {};
+        action.payload.data.data.target.action_responses.forEach(response => {
+            responses[response.action_id] = response;
+        });
+
         // Reset when new call starts
         return state
             .setIn(['actionList', 'error'], null)
@@ -30,7 +36,7 @@ export default createReducer(initialState, {
             .setIn(['actionList', 'items'], immutable.Map())
             .setIn(['responseList', 'error'], null)
             .setIn(['responseList', 'isPending'], false)
-            .setIn(['responseList', 'items'], immutable.Map());
+            .setIn(['responseList', 'items'], immutable.fromJS(responses));
     },
 
     [types.RETRIEVE_ACTIONS + '_PENDING']: (state, action) => {

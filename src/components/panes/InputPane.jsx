@@ -170,7 +170,7 @@ export default class InputPane extends PaneBase {
             }
             else {
                 return (
-                    <p>Sammanfattning</p>
+                    <Msg tagName="p" id="panes.input.summaryLabel"/>
                 );
             }
         }

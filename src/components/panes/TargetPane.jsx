@@ -55,11 +55,14 @@ export default class TargetPane extends PaneBase {
                     { info }</ul>
             </div>,
             map,
-            <h4 key="tagHeader" className="TargetPane-tagHeader">Taggar</h4>,
+            <h4 key="tagHeader" className="TargetPane-tagHeader">
+                <Msg id="panes.target.tagHeader"/></h4>,
             <TagList key="tagList"
                 tags={ target.get('tags') }/>,
             <h4 key="callLogHeader" className="TargetPane-callLogHeader">
-                Tidigare samtal</h4>,
+                <Msg id="panes.target.callLogHeader"
+                    values={{ target: target.get('first_name') }}/>
+            </h4>,
             <CallLog key="callLog"
                 calls={ target.get('call_log') }/>
         ];

@@ -12,14 +12,6 @@ import { currentCall } from '../../store/calls';
 import { retrieveActions, updateActionResponse } from '../../actions/action';
 import { retrieveCampaigns } from '../../actions/campaign';
 
-// TODO: REMOVE-------------------------------
-import immutable from 'immutable';
-const dummyList = immutable.fromJS({
-    isPending: false,
-    error: null,
-    items: {},
-});
-// -------------------------------------------
 
 const mapStateToProps = state => ({
     actions: state.get('actions'),
@@ -96,6 +88,8 @@ export default class InputPane extends PaneBase {
             content = [];
 
             if (this.state.viewMode == 'campaign') {
+                let responseList = this.props.actions.get('responseList');
+                let userActionList = this.props.actions.get('userActionList');
                 let campaign = this.props.campaigns
                     .getIn(['campaignList', 'items', this.state.selectedId.toString()]);
 
@@ -114,8 +108,8 @@ export default class InputPane extends PaneBase {
                     </div>,
                     <CampaignForm key="campaignForm"
                         actionList={ actionList }
-                        responseList={ this.props.actions.get('responseList') }
-                        userActionList={ dummyList }
+                        responseList={ responseList }
+                        userActionList={ userActionList }
                         onResponse={ this.onCampaignResponse.bind(this) }/>
                 );
             }

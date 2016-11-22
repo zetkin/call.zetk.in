@@ -10,6 +10,11 @@ const initialState = immutable.fromJS({
         error: null,
         items: null,
     },
+    userActionList: {
+        isPending: false,
+        error: null,
+        items: null,
+    },
     responseList: {
         isPending: false,
         error: null,
@@ -29,6 +34,12 @@ export default createReducer(initialState, {
             responses[response.action_id] = response;
         });
 
+        // Get actions from target info
+        let actions = {};
+        action.payload.data.data.target.future_actions.forEach(obj => {
+            actions[obj.id] = obj;
+        });
+
         // Reset when new call starts
         return state
             .setIn(['actionList', 'error'], null)
@@ -36,7 +47,10 @@ export default createReducer(initialState, {
             .setIn(['actionList', 'items'], immutable.Map())
             .setIn(['responseList', 'error'], null)
             .setIn(['responseList', 'isPending'], false)
-            .setIn(['responseList', 'items'], immutable.fromJS(responses));
+            .setIn(['responseList', 'items'], immutable.fromJS(responses))
+            .setIn(['userActionList', 'error'], null)
+            .setIn(['userActionList', 'isPending'], false)
+            .setIn(['userActionList', 'items'], immutable.fromJS(actions));
     },
 
     [types.RETRIEVE_ACTIONS + '_PENDING']: (state, action) => {

@@ -59,7 +59,8 @@ export default class TargetPane extends PaneBase {
             <TagList key="tagList" />,
             <h4 key="callLogHeader" className="TargetPane-callLogHeader">
                 Tidigare samtal</h4>,
-            <CallLog key="callLog" />
+            <CallLog key="callLog"
+                calls={ target.get('call_log') }/>
         ];
     }
 

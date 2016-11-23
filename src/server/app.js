@@ -10,6 +10,7 @@ import App from '../components/App';
 import routes from '../components/routes';
 import IntlReduxProvider from '../components/IntlReduxProvider';
 import { loadLocaleHandler } from './locale';
+import { selectedAssignment } from '../store/assignments';
 import preloader from './preloader';
 
 
@@ -49,6 +50,17 @@ export default function initApp(messages) {
     app.get('/l10n', loadLocaleHandler());
 
     app.use(preloader(messages));
+
+    // Check that assignment could be retrieved
+    app.get('/assignments/*', (req, res, next) => {
+        let assignment = selectedAssignment(req.store.getState());
+        if (assignment) {
+            next();
+        }
+        else {
+            res.redirect('/assignments');
+        }
+    });
 
     app.use(function(req, res, next) {
         renderReactPage(App, req, res);

@@ -146,7 +146,7 @@ export default createReducer(initialState, {
         let step = action.payload.step;
         let callId = state.get('currentId');
 
-        let reportProgress = REPORT_STEP_PROGRESS[nextStep];
+        let reportProgress = REPORT_STEP_PROGRESS[step];
         let progress = 0.8 + reportProgress * 0.15;
 
         return state

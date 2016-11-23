@@ -4,6 +4,7 @@ import cx from 'classnames';
 import { FormattedMessage as Msg } from 'react-intl';
 
 import Button from '../../common/misc/Button';
+import CallProgressBar from './CallProgressBar';
 import PropTypes from '../../utils/PropTypes';
 import TargetInfo from './TargetInfo';
 import { selectedAssignment } from '../../store/assignments';
@@ -111,6 +112,7 @@ export default class LaneControlBar extends React.Component {
 
         return (
             <div className={ classes }>
+                <CallProgressBar key={ call? call.get('id') : '' } call={ call }/>
                 <div className="LaneControlBar-returnSection">
                     { returnSection }
                 </div>

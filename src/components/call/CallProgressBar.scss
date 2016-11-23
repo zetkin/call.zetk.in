@@ -1,0 +1,21 @@
+.CallProgressBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    .CallProgressBar-bar {
+        width: 0;
+        transition: width 0.3s;
+        background-color: $c-brand-comp-light;
+        height: 3px;
+
+        animation: CallProgressBar-reset 0.5s;
+    }
+}
+
+@keyframes CallProgressBar-reset {
+    from {
+        width: 0;
+    }
+}

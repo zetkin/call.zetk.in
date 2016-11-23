@@ -44,6 +44,16 @@ export default function initApp(messages) {
     app.get('/', auth.callback(authOpts));
     app.get('/logout', auth.logout(authOpts));
 
+    // Redirect to assignments page if logged in
+    app.get('/', auth.validate(authOpts, true), (req, res, next) => {
+        if (req.isZetkinAuthenticated) {
+            res.redirect('/assignments');
+        }
+        else {
+            next();
+        }
+    });
+
     // Require users to be authenticated for most pages
     app.get('/assignments*', auth.validate(authOpts));
 

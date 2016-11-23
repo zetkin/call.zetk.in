@@ -35,7 +35,7 @@ export default class CouldTalkStep extends ReportStepBase {
 
     renderSummary(report) {
         let target = this.props.target.get('first_name');
-        let msgId = report.get('success')?
+        let msgId = report.get('targetCouldTalk')?
             'report.steps.successCouldTalk.summary.couldTalk' :
             'report.steps.successCouldTalk.summary.callBack';
 

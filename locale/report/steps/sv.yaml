@@ -1,21 +1,21 @@
 successOrFailure:
-    question: "Nådde du personen?"
+    question: "Fick du prata med någon?"
     options:
         success: "Ja"
         failure: "Nej..."
 
     summary:
-        success: "Du nådde personen."
-        failure: "Du nådde inte personen."
+        success: "Du nådde fram."
+        failure: "Du nådde inte fram."
 
 successCouldTalk:
-    question: "Kunde personen prata just nu?"
+    question: "Kunde {target} prata just nu?"
     options:
         couldTalk: "Ja"
         callBack: "Nej, vi måste ringa tillbaka"
     summary:
-        couldTalk: "Personen kunde prata med oss."
-        callBack: "Personen hade inte tid att prata just nu."
+        couldTalk: "{target} kunde prata med oss."
+        callBack: "{target} hade inte tid att prata just nu."
 
 successCallBack:
     question: "När ska vi ringa tillbaka?"

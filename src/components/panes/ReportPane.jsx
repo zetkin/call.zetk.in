@@ -35,6 +35,7 @@ export default class ReportPane extends PaneBase {
     renderContent() {
         let call = this.props.call;
         let report = call.get('report');
+        let target = call.get('target');
         let isComplete = this.props.step === 'done';
 
         let h1Msg = isComplete?
@@ -43,7 +44,8 @@ export default class ReportPane extends PaneBase {
 
         return [
             <Msg key="h1" tagName="h1" id={ h1Msg }/>,
-            <ReportForm key="form" report={ report }
+            <ReportForm key="form"
+                report={ report } target={ target }
                 disableEdit={ isComplete }/>
         ];
     }

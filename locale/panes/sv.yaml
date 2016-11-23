@@ -3,15 +3,24 @@ instructions:
     targetButton: "Visa personinfo"
 
 target:
+    tagHeader: "Etiketter"
+    callLogHeader: "Tidigare påringningar till {target}"
     instructionsButton: "Visa instruktioner"
 
 input:
     h1: "Agera som { target }"
+    summaryLabel: "Sammanfattning"
     summaryLink: "Sammanfattning"
     summary:
         campaigns:
             h2: "Kampanjer"
             respondButton: "Anmäl till { campaign }"
+            status: |
+                {numBookings, plural,
+                    =0 {{target} har inga bokningar}
+                    =1 {{target} har en bokning}
+                    other {{target} har # bokningar}
+                }
 
         surveys:
             h2: "Enkäter"

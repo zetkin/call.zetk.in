@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage as Msg } from 'react-intl';
+import querystring from 'querystring';
 
 import PaneBase from './PaneBase';
 import { currentCall } from '../../store/calls';
@@ -23,27 +24,47 @@ export default class TargetPane extends PaneBase {
 
         let info = [
             <li key="email" className="TargetPane-infoEmail">
-                namnet.namnsen@vansterpartiet.se</li>,
-            <li key="phone" className="TargetPane-infoJoin">
-                Ingång 2012-03-15</li>,
-        ]
+                { target.get('email') }</li>
+        ];
+
+        let map = null;
+        if (target.get('zip_code') && target.get('city')) {
+            let qs = querystring.stringify({
+                center: target.get('zip_code') + '+' + target.get('city'),
+                maptype: 'roadmap',
+                size: '650x200',
+                zoom: 15,
+                key: 'AIzaSyAHVagqI3RTd0psf57oA6gzKqVyjp8FS8w',
+            });
+
+            let src = 'https://maps.googleapis.com/maps/api/staticmap?' + qs;
+
+            map = (
+                <img key="map" className="TargetPane-map" src={ src }/>
+            );
+        }
 
         return [
-            <Avatar key="avatar"
-                personId={ target.get('id') }
-                orgId={ this.props.assignment.get('organization_id') }
-                mask={ true } />,
-            <h1 key="name" className="TargetPane-name">
-                { target.get('name') }</h1>,
-            <ul key="contactInformation" className="TargetPane-info">
-                { info }</ul>,
-            <img key="map" className="TargetPane-map"
-                src="https://maps.googleapis.com/maps/api/staticmap?center=21437+Malm%C3%B6&zoom=15&size=650x200&maptype=roadmap&key=AIzaSyAHVagqI3RTd0psf57oA6gzKqVyjp8FS8w"/>,
-            <h4 key="tagHeader" className="TargetPane-tagHeader">Taggar</h4>,
-            <TagList key="tagList" />,
+            <div key="basics" className="TargetPane-basics">
+                <Avatar personId={ target.get('id') }
+                    orgId={ this.props.assignment.get('organization_id') }
+                    mask={ true } />
+                <h1 className="TargetPane-name">
+                    { target.get('name') }</h1>
+                <ul className="TargetPane-info">
+                    { info }</ul>
+            </div>,
+            map,
+            <h4 key="tagHeader" className="TargetPane-tagHeader">
+                <Msg id="panes.target.tagHeader"/></h4>,
+            <TagList key="tagList"
+                tags={ target.get('tags') }/>,
             <h4 key="callLogHeader" className="TargetPane-callLogHeader">
-                Tidigare samtal</h4>,
-            <CallLog key="callLog" />
+                <Msg id="panes.target.callLogHeader"
+                    values={{ target: target.get('first_name') }}/>
+            </h4>,
+            <CallLog key="callLog"
+                calls={ target.get('call_log') }/>
         ];
     }
 

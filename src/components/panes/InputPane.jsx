@@ -12,14 +12,6 @@ import { currentCall } from '../../store/calls';
 import { retrieveActions, updateActionResponse } from '../../actions/action';
 import { retrieveCampaigns } from '../../actions/campaign';
 
-// TODO: REMOVE-------------------------------
-import immutable from 'immutable';
-const dummyList = immutable.fromJS({
-    isPending: false,
-    error: null,
-    items: {},
-});
-// -------------------------------------------
 
 const mapStateToProps = state => ({
     actions: state.get('actions'),
@@ -68,11 +60,18 @@ export default class InputPane extends PaneBase {
                 if (listItems) {
                     campaignContent = (
                         <ul className="InputPane-summaryList">
-                        { listItems.toList().map(campaign => (
-                            <CampaignListItem key={ campaign.get('id') }
-                                campaign={ campaign }
-                                onSelect={ this.onCampaignSelect.bind(this) }/>
-                        )) }
+                        { listItems.toList().map(campaign => {
+                            let actions = target.get('future_actions').filter(a =>
+                                a.getIn(['campaign', 'id']) == campaign.get('id'));
+
+                            return (
+                                <CampaignListItem key={ campaign.get('id') }
+                                    userActions={ actions }
+                                    target={ target }
+                                    campaign={ campaign }
+                                    onSelect={ this.onCampaignSelect.bind(this) }/>
+                            );
+                        }) }
                         </ul>
                     );
                 }
@@ -96,6 +95,8 @@ export default class InputPane extends PaneBase {
             content = [];
 
             if (this.state.viewMode == 'campaign') {
+                let responseList = this.props.actions.get('responseList');
+                let userActionList = this.props.actions.get('userActionList');
                 let campaign = this.props.campaigns
                     .getIn(['campaignList', 'items', this.state.selectedId.toString()]);
 
@@ -114,8 +115,8 @@ export default class InputPane extends PaneBase {
                     </div>,
                     <CampaignForm key="campaignForm"
                         actionList={ actionList }
-                        responseList={ this.props.actions.get('responseList') }
-                        userActionList={ dummyList }
+                        responseList={ responseList }
+                        userActionList={ userActionList }
                         onResponse={ this.onCampaignResponse.bind(this) }/>
                 );
             }
@@ -169,7 +170,7 @@ export default class InputPane extends PaneBase {
             }
             else {
                 return (
-                    <p>Sammanfattning</p>
+                    <Msg tagName="p" id="panes.input.summaryLabel"/>
                 );
             }
         }
@@ -214,13 +215,14 @@ export default class InputPane extends PaneBase {
 const CampaignListItem = props => {
     let id = props.campaign.get('id');
     let title = props.campaign.get('title');
+    let target = props.target.get('first_name');
+    let numBookings = props.userActions.size;
 
     return (
         <li>
             <h3>{ title }</h3>
-            <p>
-                TODO: Show status here
-            </p>
+            <Msg tagName="p" id="panes.input.summary.campaigns.status"
+                values={{ numBookings, target }}/>
             <Button labelMsg="panes.input.summary.campaigns.respondButton"
                 labelValues={{ campaign: title }}
                 onClick={ () => props.onSelect(id) }/>

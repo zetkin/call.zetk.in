@@ -204,4 +204,24 @@ export default createReducer(initialState, {
                 return list.delete(key);
             });
     },
+
+    [types.UPDATE_ACTION_RESPONSE + '_FULFILLED']: (state, action) => {
+        // Update progress for positive action responses
+        if (action.meta.responseBool) {
+            let callId = state.get('currentId');
+            let initial = state.getIn(['allCalls', callId, 'progress']);
+
+            // Progress is increased towards 80%, but the pace decreases
+            // with each iteration, so that it never reaches until the
+            // user proceeds to the next step.
+            let diff = 0.8 - initial;
+            let progress = initial + 0.05 * diff;
+
+            return state
+                .setIn(['allCalls', callId, 'progress'], progress);
+        }
+        else {
+            return state;
+        }
+    },
 });

@@ -19,9 +19,11 @@ export default class CouldTalkStep extends ReportStepBase {
     }
 
     renderForm(report) {
+        let target = this.props.target.get('first_name');
         return [
             <Msg key="question" tagName="p"
-                id="report.steps.successCouldTalk.question"/>,
+                id="report.steps.successCouldTalk.question"
+                values={{ target }}/>,
             <Button key="yesButton"
                 labelMsg="report.steps.successCouldTalk.options.couldTalk"
                 onClick={ this.onClickOption.bind(this, true) }/>,
@@ -32,11 +34,13 @@ export default class CouldTalkStep extends ReportStepBase {
     }
 
     renderSummary(report) {
-        let msgId = report.get('success')?
+        let target = this.props.target.get('first_name');
+        let msgId = report.get('targetCouldTalk')?
             'report.steps.successCouldTalk.summary.couldTalk' :
             'report.steps.successCouldTalk.summary.callBack';
+
         return (
-            <Msg tagName="p" id={ msgId }/>
+            <Msg tagName="p" id={ msgId } values={{ target }}/>
         );
     }
 

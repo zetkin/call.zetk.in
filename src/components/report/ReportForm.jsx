@@ -9,6 +9,7 @@ import { REPORT_STEPS } from '../../store/calls';
 @connect()
 export default class ReportForm extends React.Component {
     static propTypes = {
+        target: PropTypes.map.isRequired,
         report: PropTypes.map.isRequired,
         disableEdit: PropTypes.bool,
     };
@@ -24,6 +25,7 @@ export default class ReportForm extends React.Component {
 
             steps.push(
                 <StepComponent key={ step }
+                    target={ this.props.target }
                     dispatch={ this.props.dispatch }
                     step={ step } report={ report }
                     disableEdit={ this.props.disableEdit }/>

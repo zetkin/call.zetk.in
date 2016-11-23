@@ -25,9 +25,6 @@ export default class FailureReasonStep extends ReportStepBase {
             <Button key="noResponseButton"
                 labelMsg="report.steps.failureReason.options.noPickup"
                 onClick={ this.onClickOption.bind(this, 'noPickup') }/>,
-            <Button key="otherPersonButton"
-                labelMsg="report.steps.failureReason.options.otherPerson"
-                onClick={ this.onClickOption.bind(this, 'otherPerson') }/>,
             <Button key="wrongNumberButton"
                 labelMsg="report.steps.failureReason.options.wrongNumber"
                 onClick={ this.onClickOption.bind(this, 'wrongNumber') }/>,

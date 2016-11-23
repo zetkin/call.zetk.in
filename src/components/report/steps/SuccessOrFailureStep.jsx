@@ -26,11 +26,12 @@ export default class SuccessOrFailureStep extends ReportStepBase {
     }
 
     renderSummary(report) {
+        let target = this.props.target.get('first_name');
         let msgId = report.get('success')?
             'report.steps.successOrFailure.summary.success' :
             'report.steps.successOrFailure.summary.failure';
         return (
-            <Msg tagName="p" id={ msgId }/>
+            <Msg tagName="p" id={ msgId } values={{ target }}/>
         );
     }
 

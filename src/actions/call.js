@@ -68,7 +68,6 @@ export function submitCallReport() {
 
         // TODO: Respect "leftMessage" once API supports it
         // TODO: Send along organizerLog once API supports it
-        // TODO: Use separate state for "otherPerson" once API supports it
         if (report.get('success')) {
             if (report.get('targetCouldTalk')) {
                 // Successful call!
@@ -103,7 +102,6 @@ export function submitCallReport() {
         else {
             switch (report.get('failureReason')) {
                 case 'noPickup':    data.state = 11;    break;
-                case 'otherPerson': data.state = 11;    break;
                 case 'lineBusy':    data.state = 12;    break;
                 case 'wrongNumber': data.state = 21;    break;
             }

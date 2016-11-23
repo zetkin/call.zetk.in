@@ -34,7 +34,6 @@ failureReason:
     question: "Varför inte?"
     options:
         noPickup: "Inget svar / telefonsvarare"
-        otherPerson: "Pratade med en annan person"
         wrongNumber: "Fel nummer"
         lineBusy: "Upptaget"
     summary:

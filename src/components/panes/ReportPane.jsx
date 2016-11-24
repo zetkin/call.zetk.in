@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 
 import PaneBase from './PaneBase';
 import ReportForm from '../report/ReportForm';
-import { currentReport, currentCall } from '../../store/calls';
+import { reportForCall } from '../../store/calls';
 
 
-const mapStateToProps = state => ({
-    call: currentCall(state),
-    report: currentReport(state),
+const mapStateToProps = (state, props) => ({
+    report: reportForCall(state, props.call.get('id')),
 });
 
 

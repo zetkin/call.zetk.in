@@ -10,6 +10,7 @@ import { selectedLane } from '../../store/lanes';
 
 const mapStateToProps = state => ({
     viewState: state.getIn(['view', 'callViewState']),
+    calls: state.get('calls'),
     lane: selectedLane(state),
 });
 
@@ -25,6 +26,9 @@ export default class CallPage extends React.Component {
             );
         }
 
+        let lane = this.props.lane;
+        let call = this.props.calls.getIn(['callList', 'items', lane.get('callId')]);
+
         return (
             <CSSTransitionGroup
                 transitionEnterTimeout={ 500 }
@@ -33,7 +37,8 @@ export default class CallPage extends React.Component {
                 component="div" className="CallPage">
                 <LaneSwitch/>
                 <div className="CallPage-lanes">
-                    <CallLane lane={ this.props.lane }/>
+                    <CallLane key={ lane.get('id') }
+                        lane={ lane } call={ call }/>
                 </div>
                 { overlay }
             </CSSTransitionGroup>

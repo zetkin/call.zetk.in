@@ -157,7 +157,7 @@ export default createReducer(initialState, {
         }
 
         return state
-            .setIn(['allCalls', callId, 'progress'], progress);
+            .setIn(['callList', 'items', callId, 'progress'], progress);
     },
 
     [types.SET_CALL_REPORT_FIELD]: (state, action) => {
@@ -200,7 +200,7 @@ export default createReducer(initialState, {
         let progress = 0.8 + reportProgress * 0.15;
 
         return state
-            .setIn(['allCalls', callId, 'progress'], progress)
+            .setIn(['callList', 'items', callId, 'progress'], progress)
             .updateIn(['reports', callId], report => report
                 .set(field, value)
                 .set('step', nextStep));
@@ -214,7 +214,7 @@ export default createReducer(initialState, {
         let progress = 0.8 + reportProgress * 0.15;
 
         return state
-            .setIn(['allCalls', callId, 'progress'], progress)
+            .setIn(['callList', 'items', callId, 'progress'], progress)
             .setIn(['reports', callId, 'step'], step);
     },
 
@@ -261,9 +261,10 @@ export default createReducer(initialState, {
         let callId = action.meta.callId.toString();
 
         return state
-            .setIn(['allCalls', callId, 'progress'], 1.0)
+            .setIn(['callList', 'items', callId, 'progress'], 1.0)
             .setIn(['reports', callId, 'isPending'], false)
-            .mergeIn(['callList', 'items', callId], immutable.fromJS(call))
+            .updateIn(['callList', 'items', callId], call => call
+                .mergeDeep(call))
             .update('activeCalls', list => {
                 let key = list.findKey(val => val === callId);
                 return list.delete(key);
@@ -274,7 +275,7 @@ export default createReducer(initialState, {
         // Update progress for positive action responses
         if (action.meta.responseBool) {
             let callId = state.get('currentId');
-            let initial = state.getIn(['allCalls', callId, 'progress']);
+            let initial = state.getIn(['callList', 'items', callId, 'progress']);
 
             // Progress is increased towards 80%, but the pace decreases
             // with each iteration, so that it never reaches until the
@@ -283,7 +284,7 @@ export default createReducer(initialState, {
             let progress = initial + 0.05 * diff;
 
             return state
-                .setIn(['allCalls', callId, 'progress'], progress);
+                .setIn(['callList', 'items', callId, 'progress'], progress);
         }
         else {
             return state;

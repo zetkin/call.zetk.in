@@ -4,25 +4,30 @@
     bottom: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+    background-color: rgba(0,0,0,0.8);
+    transform: none;
+    opacity: 1;
 
     &.CallPage-enter {
         animation: LaneOverview-enterAnimation 0.5s;
     }
 
     &.CallPage-leave {
-        animation: LaneOverview-leaveAnimation 0.5s;
+        animation: LaneOverview-leaveAnimation 0.6s;
     }
 }
 
 @keyframes LaneOverview-enterAnimation {
     from {
-        transform: translate(0, -100%);
+        transform: scale(1.1, 1.1);
+        opacity: 0;
     }
 }
 
 @keyframes LaneOverview-leaveAnimation {
     to {
-        transform: translate(0, -100%);
+        transform: scale(1.1, 1.1);
+        opacity: 0;
     }
 }

@@ -16,16 +16,11 @@ const mapStateToProps = state => ({
 @connect(mapStateToProps)
 export default class CallPage extends React.Component {
     render() {
-        let content;
+        let overlay;
         let viewState = this.props.viewState;
 
-        if (viewState === 'lane') {
-            content = (
-                <CallLane key="lane" lane={ this.props.lane }/>
-            );
-        }
-        else if (viewState === 'overview') {
-            content = (
+        if (viewState === 'overview') {
+            overlay = (
                 <LaneOverview key="overview"/>
             );
         }
@@ -37,7 +32,10 @@ export default class CallPage extends React.Component {
                 transitionName="CallPage"
                 component="div" className="CallPage">
                 <LaneSwitch/>
-                { content }
+                <div className="CallPage-lanes">
+                    <CallLane lane={ this.props.lane }/>
+                </div>
+                { overlay }
             </CSSTransitionGroup>
         );
     }

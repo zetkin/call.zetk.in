@@ -10,6 +10,7 @@ import * as panes from '../panes';
 export default class CallLane extends React.Component {
     static propTypes = {
         lane: PropTypes.map.isRequired,
+        call: PropTypes.map,
     };
 
     constructor(props) {
@@ -56,6 +57,7 @@ export default class CallLane extends React.Component {
             let PaneComponent = paneComponentsByType[paneType];
             return (
                 <PaneComponent step={ step } key={ paneType }
+                    call={ this.props.call }
                     firstCall={ this.state.firstCall }/>
             );
         });

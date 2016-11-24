@@ -14,3 +14,12 @@ export function setLaneInfoMode(mode) {
         payload: { mode },
     };
 }
+
+export function switchLaneToCall(call) {
+    let callId = call.get('id');
+
+    return {
+        type: types.SWITCH_LANE_TO_CALL,
+        payload: { callId },
+    };
+}

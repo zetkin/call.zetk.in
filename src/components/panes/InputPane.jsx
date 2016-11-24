@@ -8,7 +8,6 @@ import FormattedLink from '../../common/misc/FormattedLink';
 import LoadingIndicator from '../../common/misc/LoadingIndicator';
 import PaneBase from './PaneBase';
 import { campaignById } from '../../store/campaigns';
-import { currentCall } from '../../store/calls';
 import { retrieveActions, updateActionResponse } from '../../actions/action';
 import { retrieveCampaigns } from '../../actions/campaign';
 
@@ -16,7 +15,6 @@ import { retrieveCampaigns } from '../../actions/campaign';
 const mapStateToProps = state => ({
     actions: state.get('actions'),
     campaigns: state.get('campaigns'),
-    call: currentCall(state),
 });
 
 @connect(mapStateToProps)

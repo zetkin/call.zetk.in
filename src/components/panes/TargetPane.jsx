@@ -4,7 +4,6 @@ import { FormattedMessage as Msg } from 'react-intl';
 import querystring from 'querystring';
 
 import PaneBase from './PaneBase';
-import { currentCall } from '../../store/calls';
 import { setLaneInfoMode } from '../../actions/lane';
 import { selectedAssignment } from '../../store/assignments';
 import Avatar from '../misc/Avatar';
@@ -13,7 +12,6 @@ import CallLog from '../call/CallLog';
 
 
 const mapStateToProps = state => ({
-    call: currentCall(state),
     assignment: selectedAssignment(state),
 });
 

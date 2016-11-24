@@ -1,8 +1,19 @@
 import * as types from '.';
 
-import { currentCall } from '../store/calls';
+import { currentCall, reportForCall } from '../store/calls';
 import { assignmentById } from '../store/assignments';
 
+
+export function retrieveUserCalls() {
+    return ({ dispatch, getState, z }) => {
+        dispatch({
+            type: types.RETRIEVE_USER_CALLS,
+            payload: {
+                promise: z.resource('users', 'me', 'calls').get(),
+            }
+        });
+    };
+}
 
 export function startNewCall(assignment) {
     return ({ dispatch, getState, z }) => {
@@ -15,6 +26,24 @@ export function startNewCall(assignment) {
             payload: {
                 promise: z.resource('orgs', orgId,
                     'call_assignments', assignmentId, 'queue', 'head').post()
+            }
+        });
+    };
+}
+
+export function startCallWithTarget(assignmentId, targetId) {
+    return ({ dispatch, getState, z }) => {
+        let state = getState();
+        let assignment = assignmentById(state, assignmentId);
+        let orgId = assignment.get('organization_id');
+        let data = { target_id: targetId };
+
+        dispatch({
+            type: types.START_CALL_WITH_TARGET,
+            meta: { assignmentId, targetId },
+            payload: {
+                promise: z.resource('orgs', orgId,
+                    'call_assignments', assignmentId, 'calls').post(data)
             }
         });
     };
@@ -59,7 +88,7 @@ export function submitCallReport() {
         let state = getState();
         let call = currentCall(state);
         let callId = call.get('id');
-        let report = call.get('report');
+        let report = reportForCall(state, callId);
 
         let data = {
             notes: report.get('callerLog'),

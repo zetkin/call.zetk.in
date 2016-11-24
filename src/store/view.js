@@ -22,4 +22,9 @@ export default createReducer(initialState, {
         return state
             .set('callViewState', 'lane');
     },
+
+    [types.SWITCH_LANE_TO_CALL]: (state, action) => {
+        return state
+            .set('callViewState', 'lane');
+    },
 });

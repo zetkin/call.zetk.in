@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import LoadingIndicator from '../misc/LoadingIndicator';
+import { switchLaneToCall } from '../../actions/lane';
 import { retrieveUserCalls, startCallWithTarget } from '../../actions/call';
 
 
 const mapStateToProps = state => ({
+    lanes: state.get('lanes'),
     callList: state.getIn(['calls', 'callList']),
 });
 
@@ -17,17 +19,17 @@ export default class LaneOverview extends React.Component {
 
     render() {
         let callList = this.props.callList;
-        let content = null;
+        let logContent = null;
 
         if (callList.get('isPending')) {
-            content = <LoadingIndicator/>;
+            logContent = <LoadingIndicator/>;
         }
         else if (callList.get('error')) {
-            content = <h1>ERROR</h1>;
+            logContent = <h1>ERROR</h1>;
         }
         else if (callList.get('items')) {
-            content = (
-                <ul className="LaneOverview-log">
+            logContent = (
+                <ul className="LaneOverview-logList">
                 { callList.get('items').toList().map(call => (
                     <CallLogItem key={ call.get('id') }
                         onSelect={ this.onStartNewCall.bind(this, call) }
@@ -37,14 +39,39 @@ export default class LaneOverview extends React.Component {
             );
         }
         else {
-            content = null;
+            logContent = null;
         }
 
         return (
             <div className="LaneOverview">
-                { content }
+                <div className="LaneOverview-log">
+                    { logContent }
+                </div>
+                <div className="LaneOverview-lanes">
+                    <ul className="LaneOverview-laneList">
+                    { this.props.lanes.get('allLanes').toList().map(lane => {
+                        let callId = lane.get('callId');
+                        let call = callList.getIn(['items', callId]);
+
+                        if (!call) {
+                            return null;
+                        }
+
+                        return (
+                            <LaneItem key={ lane.get('id') }
+                                onSelect={ this.onLaneSelect.bind(this, call) }
+                                call={ call }
+                                />
+                        );
+                    })}
+                    </ul>
+                </div>
             </div>
         );
+    }
+
+    onLaneSelect(call) {
+        this.props.dispatch(switchLaneToCall(call));
     }
 
     onStartNewCall(oldCall) {
@@ -54,6 +81,18 @@ export default class LaneOverview extends React.Component {
     }
 }
 
+
+const LaneItem = props => {
+    let call = props.call;
+
+    return (
+        <li className="LaneOverview-laneItem">
+            <a onClick={ props.onSelect }>
+                { props.call.getIn(['target', 'name']) }
+            </a>
+        </li>
+    );
+};
 
 const CallLogItem = props => {
     let call = props.call;

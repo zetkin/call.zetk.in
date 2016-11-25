@@ -22,8 +22,11 @@ export default class LaneSwitch extends React.Component {
         let content;
 
         if (!overlay) {
-            let otherCalls = this.props.activeCalls.filter(call =>
-                call !== this.props.currentCall);
+            let currentCall = this.props.currentCall;
+            let currentId = currentCall? currentCall.get('id') : undefined;
+            let otherCalls = this.props.activeCalls
+                .filter(call => call.get('id') != currentId)
+                .sortBy(call => call.get('id'));
 
             content = [
                 <a key="openButton" className="LaneSwitch-openLogButton"

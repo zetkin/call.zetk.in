@@ -35,7 +35,7 @@ export function updateActionResponse(action, responseBool) {
 
         dispatch({
             type: types.UPDATE_ACTION_RESPONSE,
-            meta: { actionId, responseBool },
+            meta: { personId, actionId, responseBool },
             payload: {
                 // PUT or DELETE depending on whether response is yes or no
                 promise: (responseBool? resource.put() : resource.del()),

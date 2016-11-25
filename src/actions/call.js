@@ -52,7 +52,7 @@ export function startCallWithTarget(assignmentId, targetId) {
 
         dispatch({
             type: types.START_CALL_WITH_TARGET,
-            meta: { assignmentId, targetId },
+            meta: { orgId, assignmentId, targetId },
             payload: {
                 promise: z.resource('orgs', orgId,
                     'call_assignments', assignmentId, 'calls').post(data)

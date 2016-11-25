@@ -113,7 +113,9 @@ export default createReducer(initialState, {
     },
 
     [types.START_NEW_CALL + '_FULFILLED']: (state, action) => {
-        let call = action.payload.data.data;
+        let call = Object.assign(action.payload.data.data, {
+            organization_id: action.meta.orgId,
+        });
         let callId = call.id.toString();
 
         // Progress at prepare step is 0.1
@@ -134,7 +136,9 @@ export default createReducer(initialState, {
     },
 
     [types.START_CALL_WITH_TARGET + '_FULFILLED']: (state, action) => {
-        let call = action.payload.data.data;
+        let call = Object.assign(action.payload.data.data, {
+            organization_id: action.meta.orgId,
+        });
         let callId = call.id.toString();
 
         return state

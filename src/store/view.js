@@ -5,7 +5,7 @@ import * as types from '../actions';
 
 
 const initialState = immutable.fromJS({
-    callViewState: 'lane',
+    overlay: null,
 });
 
 export default createReducer(initialState, {
@@ -13,18 +13,28 @@ export default createReducer(initialState, {
         return immutable.fromJS(state);
     },
 
-    [types.SET_CALL_VIEW_STATE]: (state, action) => {
+    [types.SHOW_OVERLAY]: (state, action) => {
+        let overlay = immutable.fromJS({
+            type: action.payload.type,
+            config: action.payload.config,
+        });
+
         return state
-            .set('callViewState', action.payload.state);
+            .set('overlay', overlay);
+    },
+
+    [types.CLOSE_OVERLAY]: (state, action) => {
+        return state
+            .set('overlay', null);
     },
 
     [types.START_CALL_WITH_TARGET + '_FULFILLED']: (state, action) => {
         return state
-            .set('callViewState', 'lane');
+            .set('overlay', null);
     },
 
     [types.SWITCH_LANE_TO_CALL]: (state, action) => {
         return state
-            .set('callViewState', 'lane');
+            .set('overlay', null);
     },
 });

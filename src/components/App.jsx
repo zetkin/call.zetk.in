@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import React from 'react';
 
+import OverlayStack from './overlays/OverlayStack';
+
 
 @connect(state => ({ fullState: state }))
 export default class App extends React.Component {
@@ -24,6 +26,7 @@ export default class App extends React.Component {
                     <div className="App-content">
                         { this.props.children }
                     </div>
+                    <OverlayStack/>
                     <script type="text/json"
                         id="App-initialState"
                         dangerouslySetInnerHTML={{ __html: stateJson }}/>

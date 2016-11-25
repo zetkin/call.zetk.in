@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import PropTypes from '../../utils/PropTypes';
-import { setCallViewState } from '../../actions/view';
+import { showOverlay } from '../../actions/view';
 import { switchLaneToCall } from '../../actions/lane';
 import { activeCalls, currentCall } from '../../store/calls';
 
@@ -10,17 +10,17 @@ import { activeCalls, currentCall } from '../../store/calls';
 const mapStateToProps = state => ({
     activeCalls: activeCalls(state),
     currentCall: currentCall(state),
-    viewState: state.getIn(['view', 'callViewState']),
+    overlay: state.getIn(['view', 'overlay']),
 });
 
 
 @connect(mapStateToProps)
 export default class LaneSwitch extends React.Component {
     render() {
-        let viewState = this.props.viewState;
+        let overlay = this.props.overlay;
         let content;
 
-        if (viewState === 'lane') {
+        if (!overlay) {
             let otherCalls = this.props.activeCalls.filter(call =>
                 call !== this.props.currentCall);
 
@@ -36,10 +36,9 @@ export default class LaneSwitch extends React.Component {
             ];
         }
         else {
-            content = (
-                <a className="LaneSwitch-closeLogButton"
-                    onClick={ this.onClickClose.bind(this) }>back</a>
-            );
+            // TODO: This component shouldn't have to care about overlay state
+            //       Find some way of hiding this when overlay is open
+            content = null;
         }
 
         return (
@@ -54,11 +53,7 @@ export default class LaneSwitch extends React.Component {
     }
 
     onClickOpen() {
-        this.props.dispatch(setCallViewState('overview'));
-    }
-
-    onClickClose() {
-        this.props.dispatch(setCallViewState('lane'));
+        this.props.dispatch(showOverlay('laneOverview'));
     }
 }
 

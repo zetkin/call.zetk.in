@@ -22,17 +22,17 @@ export const reportForCall = (state, id) => {
 };
 
 
-const initialState = immutable.fromJS({
+const initialState = immutable.Map({
     // TODO: More or less duplicate of lanes.selectedId
     currentId: null,
     currentIsPending: false,
-    callList: {
+    callList: immutable.Map({
         error: null,
         isPending: false,
         items: null,
-    },
-    reports: {},
-    activeCalls: [],
+    }),
+    reports: immutable.Map({}),
+    activeCalls: immutable.Set(),
 });
 
 export const REPORT_STEPS = [
@@ -90,12 +90,18 @@ export default createReducer(initialState, {
 
     [types.RETRIEVE_ALLOCATED_CALLS + '_FULFILLED']: (state, action) => {
         let calls = {};
-        action.payload.data.data.forEach(call =>
-            calls[call.id.toString()] = call);
+        let callIds = [];
+        action.payload.data.data.forEach(call => {
+            let id = call.id.toString();
+            callIds.push(id);
+            calls[id] = call
+        });
 
         return state
             .setIn(['callList', 'error'], null)
             .setIn(['callList', 'isPending'], false)
+            .updateIn(['activeCalls'], list =>
+                list.union(immutable.fromJS(callIds)))
             .updateIn(['callList', 'items'], items => items?
                 items.mergeDeep(immutable.fromJS(calls)) :
                 immutable.fromJS(calls));

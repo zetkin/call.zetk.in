@@ -43,8 +43,6 @@ export default createReducer(initialState, {
         let lanes = {};
         let laneNumber = state.get('nextLaneNumber');
 
-        console.trace(laneNumber);
-
         action.payload.data.data.forEach(call => {
             let id = (laneNumber++).toString();
             lanes[id] = {

@@ -26,7 +26,6 @@ export function updateActionResponse(action, responseBool) {
         let orgId = action.get('org_id');
         let actionId = action.get('id');
 
-        // Find user personId from list of memberships
         // Find target personId from current call
         let call = currentCall(getState());
         let personId = call.getIn(['target', 'id']);

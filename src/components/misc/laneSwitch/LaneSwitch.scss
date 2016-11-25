@@ -1,0 +1,21 @@
+.LaneSwitch {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    z-index: 200;
+
+    .LaneSwitch-openLogButton {
+        float: left;
+        width: 40px;
+        height: 40px;
+        background-color: red;
+        border-radius: 50%;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .LaneSwitch-callList {
+        margin: 0;
+        padding: 0;
+        float: left;
+    }
+}

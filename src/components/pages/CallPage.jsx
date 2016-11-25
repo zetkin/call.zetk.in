@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import LaneSwitch from '../call/LaneSwitch';
+import LaneSwitch from '../misc/laneSwitch/LaneSwitch';
 import CallLane from '../call/CallLane';
 import { selectedLane } from '../../store/lanes';
 

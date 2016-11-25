@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Avatar from '../misc/Avatar';
-import PropTypes from '../../utils/PropTypes';
-import { showOverlay } from '../../actions/view';
-import { switchLaneToCall } from '../../actions/lane';
-import { activeCalls, currentCall } from '../../store/calls';
+import LaneSwitchItem from './LaneSwitchItem';
+import PropTypes from '../../../utils/PropTypes';
+import { showOverlay } from '../../../actions/view';
+import { switchLaneToCall } from '../../../actions/lane';
+import { activeCalls, currentCall } from '../../../store/calls';
 
 
 const mapStateToProps = state => ({
@@ -30,7 +30,7 @@ export default class LaneSwitch extends React.Component {
                     onClick={ this.onClickOpen.bind(this) }>log</a>,
                 <ul key="callList" className="LaneSwitch-callList">
                 { otherCalls.map(call => (
-                    <SwitchItem key={ call.get('id') } call={ call }
+                    <LaneSwitchItem key={ call.get('id') } call={ call }
                         onClick={ this.onClickOtherCall.bind(this, call) }/>
                 )) }
                 </ul>
@@ -56,21 +56,4 @@ export default class LaneSwitch extends React.Component {
     onClickOpen() {
         this.props.dispatch(showOverlay('laneOverview'));
     }
-}
-
-
-const SwitchItem = props => {
-    let call = props.call;
-    let target = call.get('target');
-
-    return (
-        <li className="LaneSwitch-callItem"
-            title={ target.get('name') }
-            onClick={ props.onClick }>
-            <Avatar personId={ target.get('id') }
-                orgId={ call.get('organization_id') }
-                mask={ true }
-                />
-        </li>
-    );
 }

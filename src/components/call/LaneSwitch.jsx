@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Avatar from '../misc/Avatar';
 import PropTypes from '../../utils/PropTypes';
 import { showOverlay } from '../../actions/view';
 import { switchLaneToCall } from '../../actions/lane';
@@ -61,14 +62,15 @@ export default class LaneSwitch extends React.Component {
 const SwitchItem = props => {
     let call = props.call;
     let target = call.get('target');
-    let initials = (target.get('first_name') || ' ')[0]
-        + (target.get('last_name') || ' ')[0];
 
     return (
         <li className="LaneSwitch-callItem"
             title={ target.get('name') }
             onClick={ props.onClick }>
-            { initials }
+            <Avatar personId={ target.get('id') }
+                orgId={ call.get('organization_id') }
+                mask={ true }
+                />
         </li>
     );
 }

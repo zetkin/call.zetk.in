@@ -77,12 +77,13 @@ function waitForActions(execActions) {
                     }
                 });
             }
+            else {
+                req.store.dispatch(thunkOrAction);
+            }
 
             if (thunkOrAction.payload && thunkOrAction.payload.promise) {
                 promises.push(thunkOrAction.payload.promise);
             }
-
-            req.store.dispatch(thunkOrAction);
         }
 
         Promise.all(promises)

@@ -88,6 +88,19 @@ export default createReducer(initialState, {
                 immutable.fromJS(calls));
     },
 
+    [types.RETRIEVE_ALLOCATED_CALLS + '_FULFILLED']: (state, action) => {
+        let calls = {};
+        action.payload.data.data.forEach(call =>
+            calls[call.id.toString()] = call);
+
+        return state
+            .setIn(['callList', 'error'], null)
+            .setIn(['callList', 'isPending'], false)
+            .updateIn(['callList', 'items'], items => items?
+                items.mergeDeep(immutable.fromJS(calls)) :
+                immutable.fromJS(calls));
+    },
+
     [types.START_NEW_CALL + '_PENDING']: (state, action) => {
         return state
             .set('currentIsPending', true);

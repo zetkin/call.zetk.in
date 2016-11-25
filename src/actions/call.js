@@ -15,6 +15,18 @@ export function retrieveUserCalls() {
     };
 }
 
+export function retrieveAllocatedCalls() {
+    return ({ dispatch, getState, z }) => {
+        dispatch({
+            type: types.RETRIEVE_ALLOCATED_CALLS,
+            payload: {
+                promise: z.resource('users', 'me', 'outgoing_calls')
+                    .get(null, null, [[ 'state', '==', 0 ]]),
+            }
+        });
+    }
+}
+
 export function startNewCall(assignment) {
     return ({ dispatch, getState, z }) => {
         let orgId = assignment.get('organization_id');

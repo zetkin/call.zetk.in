@@ -1,0 +1,6 @@
+resume:
+    h: "Du har oavslutade samtal"
+    p: |
+        Vid ett tidigare ringtillfälle har du fått samtal tilldelade dig
+        som du ännu inte rapporterat in. Du kan se samtalen som bollar
+        längst upp i ringgränssnittet.

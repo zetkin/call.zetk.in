@@ -150,6 +150,14 @@ export default createReducer(initialState, {
                 immutable.fromJS({ [callId]: call }));
     },
 
+    [types.DEALLOCATE_CALL + '_FULFILLED']: (state, action) => {
+        let callId = action.meta.callId.toString();
+        let activeIndex = state.get('activeCalls').indexOf(callId);
+        return state
+            .deleteIn(['callList', 'items', callId])
+            .deleteIn(['activeCalls', activeIndex]);
+    },
+
     [types.SET_LANE_STEP]: (state, action) => {
         let step = action.payload.step;
         let callId = state.get('currentId');

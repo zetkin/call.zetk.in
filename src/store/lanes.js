@@ -97,6 +97,15 @@ export default createReducer(initialState, {
             .setIn(['allLanes', laneId], immutable.fromJS(lane));
     },
 
+    [types.DEALLOCATE_CALL + '_FULFILLED']: (state, action) => {
+        let callId = action.meta.callId.toString();
+        let laneId = state.get('allLanes')
+            .findKey(lane => lane.get('callId') == callId);
+
+        return state
+            .deleteIn(['allLanes', laneId]);
+    },
+
     [types.SUBMIT_CALL_REPORT + '_FULFILLED']: (state, action) => {
         let laneId = state.get('selectedId');
 

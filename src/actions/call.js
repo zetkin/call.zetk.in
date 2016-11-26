@@ -61,6 +61,21 @@ export function startCallWithTarget(assignmentId, targetId) {
     };
 }
 
+export function deallocateCall(call) {
+    return ({ dispatch, z }) => {
+        let callId = call.get('id');
+        let orgId = call.get('organization_id');
+
+        dispatch({
+            type: types.DEALLOCATE_CALL,
+            meta: { callId },
+            payload: {
+                promise: z.resource('orgs', orgId, 'calls', callId).del()
+            },
+        });
+    };
+}
+
 export function setCallReportField(field, value) {
     return {
         type: types.SET_CALL_REPORT_FIELD,

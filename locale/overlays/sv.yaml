@@ -2,5 +2,7 @@ resume:
     h: "Du har oavslutade samtal"
     p: |
         Vid ett tidigare ringtillfälle har du fått samtal tilldelade dig
-        som du ännu inte rapporterat in. Du kan se samtalen som bollar
-        längst upp i ringgränssnittet.
+        som du ännu inte rapporterat in.
+    ops:
+        resume: "Återuppta samtal med {target}"
+        discard: "Överge samtalet med {target}"

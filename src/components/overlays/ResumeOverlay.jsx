@@ -4,6 +4,8 @@ import { FormattedMessage as Msg } from 'react-intl';
 
 import { activeCalls } from '../../store/calls';
 import CallOpList from '../misc/callOpList/CallOpList';
+import { closeOverlay } from '../../actions/view';
+import { deallocateCall } from '../../actions/call';
 import { switchLaneToCall } from '../../actions/lane';
 
 
@@ -13,9 +15,16 @@ const mapStateToProps = state => ({
 
 @connect(mapStateToProps)
 export default class ResumeOverlay extends React.Component {
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.activeCalls.size == 0) {
+            // User has deleted all active calls
+            this.props.dispatch(closeOverlay());
+        }
+    }
+
     render() {
         let callOpMsgPrefix = 'overlays.resume.ops';
-        let callOps = [ 'resume' ];
+        let callOps = [ 'resume', 'discard' ];
 
         return (
             <div className="ResumeOverlay">
@@ -33,6 +42,9 @@ export default class ResumeOverlay extends React.Component {
     onCallOperation(call, op) {
         if (op == 'resume') {
             this.props.dispatch(switchLaneToCall(call));
+        }
+        else if (op == 'discard') {
+            this.props.dispatch(deallocateCall(call));
         }
     }
 }

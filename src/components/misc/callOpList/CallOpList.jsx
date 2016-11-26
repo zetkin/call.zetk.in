@@ -1,4 +1,5 @@
 import React from 'react';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Button from '../../../common/misc/Button';
 import CallOpListItem from './CallOpListItem';
@@ -16,7 +17,12 @@ export default class CallOpList extends React.Component {
     render() {
         return (
             <div className="CallOpList">
-                <ul className="CallOpList-list">
+                <CSSTransitionGroup
+                    transitionEnterTimeout={ 300 }
+                    transitionLeaveTimeout={ 300 }
+                    transitionName="CallOpList-item"
+                    component="ul" className="CallOpList-list">
+
                 { this.props.calls.map(call => (
                     <li key={ call.get('id') }>
                         <CallOpListItem call={ call }>
@@ -38,7 +44,7 @@ export default class CallOpList extends React.Component {
                         </CallOpListItem>
                     </li>
                 )) }
-                </ul>
+                </CSSTransitionGroup>
             </div>
         );
     }

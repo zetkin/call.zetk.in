@@ -17,8 +17,9 @@ const mapStateToProps = state => ({
 export default class ResumeOverlay extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.activeCalls.size == 0) {
-            // User has deleted all active calls
-            this.props.dispatch(closeOverlay());
+            // User has deleted all active calls. Allow animations
+            // to play out and then close overlay.
+            setTimeout(() => this.props.dispatch(closeOverlay()), 300);
         }
     }
 

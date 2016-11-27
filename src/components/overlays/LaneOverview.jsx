@@ -95,6 +95,8 @@ export default class LaneOverview extends React.Component {
                 <div className="LaneOverview-log">
                     <Msg tagName="h1"
                         id="overlays.laneOverview.log.h"/>
+                    <Msg tagName="p"
+                        id="overlays.laneOverview.log.p"/>
                     <input type="text"
                         placeholder={ filterPlaceholder }
                         value={ this.state.filterString }
@@ -105,6 +107,8 @@ export default class LaneOverview extends React.Component {
                 <div className="LaneOverview-lanes">
                     <Msg tagName="h1"
                         id="overlays.laneOverview.lanes.h"/>
+                    <Msg tagName="p"
+                        id="overlays.laneOverview.lanes.p"/>
                     <CallOpList calls={ activeCalls }
                         opMessagePrefix="overlays.laneOverview.lanes.ops"
                         ops={ LANE_OPS }

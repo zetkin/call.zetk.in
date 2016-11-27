@@ -53,8 +53,13 @@ export default class LaneOverview extends React.Component {
                 }
             };
 
+            // Exclude calls that are merely allocated. They will be in the
+            // adjacent lanes list anyway.
+            let calls = callList.get('items').toList()
+                .filter(c => c.get('state') !== 0);
+
             logContent = (
-                <CallOpList calls={ callList.get('items').toList() }
+                <CallOpList calls={ calls }
                     opMessagePrefix="overlays.laneOverview.log.ops"
                     ops={ opsForCall }
                     onCallOperation={ this.onCallOperation.bind(this) }

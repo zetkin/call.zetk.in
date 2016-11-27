@@ -26,9 +26,9 @@ export default class LaneOverview extends React.Component {
 
     render() {
         let callList = this.props.callList;
+        let activeCalls = this.props.activeCalls;
         let logContent = null;
 
-        const LOG_OPS = ['repeat'];
         const LANE_OPS = ['switch', 'discard'];
 
         if (callList.get('isPending')) {
@@ -38,10 +38,25 @@ export default class LaneOverview extends React.Component {
             logContent = <h1>ERROR</h1>;
         }
         else if (callList.get('items')) {
+            let opsForCall = call => {
+                let targetId = call.getIn(['target', 'id']);
+                let activeCall = activeCalls
+                    .find(c => c.getIn(['target','id']) === targetId);
+
+                if (activeCall) {
+                    return {
+                        'switch': this.onSwitchFromOld.bind(this),
+                    };
+                }
+                else {
+                    return ['repeat'];
+                }
+            };
+
             logContent = (
                 <CallOpList calls={ callList.get('items').toList() }
-                    opMessagePrefix="overlays.laneOverview.ops"
-                    ops={ LOG_OPS }
+                    opMessagePrefix="overlays.laneOverview.log.ops"
+                    ops={ opsForCall }
                     onCallOperation={ this.onCallOperation.bind(this) }
                     />
             );
@@ -60,14 +75,22 @@ export default class LaneOverview extends React.Component {
                 <div className="LaneOverview-lanes">
                     <Msg tagName="h1"
                         id="overlays.laneOverview.lanes.h"/>
-                    <CallOpList calls={ this.props.activeCalls }
-                        opMessagePrefix="overlays.laneOverview.ops"
+                    <CallOpList calls={ activeCalls }
+                        opMessagePrefix="overlays.laneOverview.lanes.ops"
                         ops={ LANE_OPS }
                         onCallOperation={ this.onCallOperation.bind(this) }
                         />
                 </div>
             </div>
         );
+    }
+
+    onSwitchFromOld(oldCall) {
+        let targetId = oldCall.getIn(['target', 'id']);
+        let activeCall = this.props.activeCalls
+            .find(c => c.getIn(['target','id']) === targetId);
+
+        this.props.dispatch(switchLaneToCall(activeCall));
     }
 
     onCallOperation(call, op) {

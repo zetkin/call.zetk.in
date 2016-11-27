@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage as Msg } from 'react-intl';
+import { FormattedMessage as Msg, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 
 import { activeCalls } from '../../store/calls';
@@ -18,8 +18,17 @@ const mapStateToProps = state => ({
     callList: state.getIn(['calls', 'callList']),
 });
 
+@injectIntl
 @connect(mapStateToProps)
 export default class LaneOverview extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            filterString: '',
+        };
+    }
+
     componentDidMount() {
         this.props.dispatch(retrieveUserCalls());
     }
@@ -58,6 +67,14 @@ export default class LaneOverview extends React.Component {
             let calls = callList.get('items').toList()
                 .filter(c => c.get('state') !== 0);
 
+            let filterString = this.state.filterString.toLowerCase();
+            if (filterString.length > 2) {
+                calls = calls.filter(c =>
+                    c.getIn(['target', 'name'])
+                        .toLowerCase()
+                        .indexOf(filterString) >= 0);
+            }
+
             logContent = (
                 <CallOpList calls={ calls }
                     opMessagePrefix="overlays.laneOverview.log.ops"
@@ -70,11 +87,19 @@ export default class LaneOverview extends React.Component {
             logContent = null;
         }
 
+        let filterPlaceholder = this.props.intl.formatMessage(
+            { id: 'overlays.laneOverview.log.filterPlaceholder' });
+
         return (
             <div className="LaneOverview">
                 <div className="LaneOverview-log">
                     <Msg tagName="h1"
                         id="overlays.laneOverview.log.h"/>
+                    <input type="text"
+                        placeholder={ filterPlaceholder }
+                        value={ this.state.filterString }
+                        onChange={ this.onFilterChange.bind(this) }
+                        />
                     { logContent }
                 </div>
                 <div className="LaneOverview-lanes">
@@ -88,6 +113,12 @@ export default class LaneOverview extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    onFilterChange(ev) {
+        this.setState({
+            filterString: ev.target.value,
+        });
     }
 
     onSwitchFromOld(oldCall) {

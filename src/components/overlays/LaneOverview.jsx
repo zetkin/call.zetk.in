@@ -1,13 +1,20 @@
 import React from 'react';
+import { FormattedMessage as Msg } from 'react-intl';
 import { connect } from 'react-redux';
 
+import { activeCalls } from '../../store/calls';
+import CallOpList from '../misc/callOpList/CallOpList';
 import LoadingIndicator from '../../common/misc/LoadingIndicator';
 import { switchLaneToCall } from '../../actions/lane';
-import { retrieveUserCalls, startCallWithTarget } from '../../actions/call';
+import {
+    deallocateCall,
+    retrieveUserCalls,
+    startCallWithTarget
+} from '../../actions/call';
 
 
 const mapStateToProps = state => ({
-    lanes: state.get('lanes'),
+    activeCalls: activeCalls(state),
     callList: state.getIn(['calls', 'callList']),
 });
 
@@ -21,6 +28,9 @@ export default class LaneOverview extends React.Component {
         let callList = this.props.callList;
         let logContent = null;
 
+        const LOG_OPS = ['repeat'];
+        const LANE_OPS = ['switch', 'discard'];
+
         if (callList.get('isPending')) {
             logContent = <LoadingIndicator/>;
         }
@@ -29,13 +39,11 @@ export default class LaneOverview extends React.Component {
         }
         else if (callList.get('items')) {
             logContent = (
-                <ul className="LaneOverview-logList">
-                { callList.get('items').toList().map(call => (
-                    <CallLogItem key={ call.get('id') }
-                        onSelect={ this.onStartNewCall.bind(this, call) }
-                        call={ call }/>
-                )) }
-                </ul>
+                <CallOpList calls={ callList.get('items').toList() }
+                    opMessagePrefix="overlays.laneOverview.ops"
+                    ops={ LOG_OPS }
+                    onCallOperation={ this.onCallOperation.bind(this) }
+                    />
             );
         }
         else {
@@ -45,63 +53,34 @@ export default class LaneOverview extends React.Component {
         return (
             <div className="LaneOverview">
                 <div className="LaneOverview-log">
+                    <Msg tagName="h1"
+                        id="overlays.laneOverview.log.h"/>
                     { logContent }
                 </div>
                 <div className="LaneOverview-lanes">
-                    <ul className="LaneOverview-laneList">
-                    { this.props.lanes.get('allLanes').toList().map(lane => {
-                        let callId = lane.get('callId');
-                        let call = callList.getIn(['items', callId]);
-
-                        if (!call) {
-                            return null;
-                        }
-
-                        return (
-                            <LaneItem key={ lane.get('id') }
-                                onSelect={ this.onLaneSelect.bind(this, call) }
-                                call={ call }
-                                />
-                        );
-                    })}
-                    </ul>
+                    <Msg tagName="h1"
+                        id="overlays.laneOverview.lanes.h"/>
+                    <CallOpList calls={ this.props.activeCalls }
+                        opMessagePrefix="overlays.laneOverview.ops"
+                        ops={ LANE_OPS }
+                        onCallOperation={ this.onCallOperation.bind(this) }
+                        />
                 </div>
             </div>
         );
     }
 
-    onLaneSelect(call) {
-        this.props.dispatch(switchLaneToCall(call));
-    }
-
-    onStartNewCall(oldCall) {
-        let assignmentId = oldCall.get('assignment_id');
-        let targetId = oldCall.getIn(['target', 'id']);
-        this.props.dispatch(startCallWithTarget(assignmentId, targetId));
+    onCallOperation(call, op) {
+        if (op == 'repeat') {
+            let assignmentId = call.get('assignment_id');
+            let targetId = call.getIn(['target', 'id']);
+            this.props.dispatch(startCallWithTarget(assignmentId, targetId));
+        }
+        else if (op == 'switch') {
+            this.props.dispatch(switchLaneToCall(call));
+        }
+        else if (op == 'discard') {
+            this.props.dispatch(deallocateCall(call));
+        }
     }
 }
-
-
-const LaneItem = props => {
-    let call = props.call;
-
-    return (
-        <li className="LaneOverview-laneItem">
-            <a onClick={ props.onSelect }>
-                { props.call.getIn(['target', 'name']) }
-            </a>
-        </li>
-    );
-};
-
-const CallLogItem = props => {
-    let call = props.call;
-
-    return (
-        <li className="LaneOverview-logItem">
-            <a onClick={ props.onSelect }>
-                { call.getIn(['target', 'name']) }
-            </a>
-        </li>
-    );
-};

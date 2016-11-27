@@ -93,8 +93,12 @@ export default class InputPane extends PaneBase {
             content = [];
 
             if (this.state.viewMode == 'campaign') {
-                let responseList = this.props.actions.get('responseList');
-                let userActionList = this.props.actions.get('userActionList');
+                let actionStore = this.props.actions;
+                let targetId = target.get('id').toString();
+                let targetActions = actionStore.getIn(['byTarget', targetId]);
+                let responseList = targetActions.get('responseList');
+                let userActionList = targetActions.get('userActionList');
+
                 let campaign = this.props.campaigns
                     .getIn(['campaignList', 'items', this.state.selectedId.toString()]);
 

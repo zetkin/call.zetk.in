@@ -1,9 +1,19 @@
 import { connect } from 'react-redux';
 import React from 'react';
 
+import OverlayStack from './overlays/OverlayStack';
+import { showOverlay } from '../actions/view';
+
 
 @connect(state => ({ fullState: state }))
 export default class App extends React.Component {
+    componentDidMount() {
+        let activeCalls = this.props.fullState.getIn(['calls', 'activeCalls']);
+        if (activeCalls.size > 0) {
+            this.props.dispatch(showOverlay('resume'));
+        }
+    }
+
     render() {
         let stateJson = JSON.stringify(this.props.fullState);
 
@@ -24,6 +34,7 @@ export default class App extends React.Component {
                     <div className="App-content">
                         { this.props.children }
                     </div>
+                    <OverlayStack/>
                     <script type="text/json"
                         id="App-initialState"
                         dangerouslySetInnerHTML={{ __html: stateJson }}/>

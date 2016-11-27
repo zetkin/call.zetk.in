@@ -1,0 +1,23 @@
+.CallOpList {
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        list-style-type: none;
+        margin: 1em 0;
+        padding: 0;
+
+        &.CallOpList-item-leave {
+            opacity: 1;
+            animation: CallOpList-item-leaveAnimation 0.31s;
+        }
+    }
+}
+
+@keyframes CallOpList-item-leaveAnimation {
+    to {
+        opacity: 0;
+    }
+}

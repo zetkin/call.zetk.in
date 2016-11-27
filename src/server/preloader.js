@@ -4,6 +4,7 @@ import immutable from 'immutable';
 import { configureStore } from '../store';
 import { createLocalizeHandler } from './locale';
 import { setUserData, retrieveUserMemberships } from '../actions/user';
+import { retrieveAllocatedCalls } from '../actions/call';
 import {
     selectAssignment,
     retrieveUserAssignments,
@@ -22,6 +23,7 @@ export default (messages) => {
     preloader.use(initStore);
 
     preloader.get('*', waitForActions(req => [
+        retrieveAllocatedCalls(),
         retrieveUserMemberships(),
     ]));
 
@@ -75,12 +77,13 @@ function waitForActions(execActions) {
                     }
                 });
             }
+            else {
+                req.store.dispatch(thunkOrAction);
+            }
 
             if (thunkOrAction.payload && thunkOrAction.payload.promise) {
                 promises.push(thunkOrAction.payload.promise);
             }
-
-            req.store.dispatch(thunkOrAction);
         }
 
         Promise.all(promises)

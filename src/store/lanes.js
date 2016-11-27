@@ -36,7 +36,27 @@ export default createReducer(initialState, {
         return state
             .set('nextLaneNumber', laneNumber + 1)
             .set('selectedId', lane.id)
-            .set('allLanes', immutable.fromJS({ [lane.id]: lane }));
+            .setIn(['allLanes', lane.id], immutable.fromJS(lane));
+    },
+
+    [types.RETRIEVE_ALLOCATED_CALLS + '_FULFILLED']: (state, action) => {
+        let lanes = {};
+        let laneNumber = state.get('nextLaneNumber');
+
+        action.payload.data.data.forEach(call => {
+            let id = (laneNumber++).toString();
+            lanes[id] = {
+                id: id,
+                callId: call.id.toString(),
+                infoMode: 'instructions',
+                step: 'prepare',
+                isPending: false,
+            };
+        });
+
+        return state
+            .set('nextLaneNumber', laneNumber)
+            .mergeIn(['allLanes'], immutable.fromJS(lanes));
     },
 
     [types.START_NEW_CALL + '_FULFILLED']: (state, action) => {
@@ -75,6 +95,15 @@ export default createReducer(initialState, {
             .set('nextLaneNumber', laneNumber)
             .set('selectedId', laneId)
             .setIn(['allLanes', laneId], immutable.fromJS(lane));
+    },
+
+    [types.DEALLOCATE_CALL + '_FULFILLED']: (state, action) => {
+        let callId = action.meta.callId.toString();
+        let laneId = state.get('allLanes')
+            .findKey(lane => lane.get('callId') == callId);
+
+        return state
+            .deleteIn(['allLanes', laneId]);
     },
 
     [types.SUBMIT_CALL_REPORT + '_FULFILLED']: (state, action) => {

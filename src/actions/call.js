@@ -15,6 +15,18 @@ export function retrieveUserCalls() {
     };
 }
 
+export function retrieveAllocatedCalls() {
+    return ({ dispatch, getState, z }) => {
+        dispatch({
+            type: types.RETRIEVE_ALLOCATED_CALLS,
+            payload: {
+                promise: z.resource('users', 'me', 'outgoing_calls')
+                    .get(null, null, [[ 'state', '==', 0 ]]),
+            }
+        });
+    }
+}
+
 export function startNewCall(assignment) {
     return ({ dispatch, getState, z }) => {
         let orgId = assignment.get('organization_id');
@@ -40,11 +52,26 @@ export function startCallWithTarget(assignmentId, targetId) {
 
         dispatch({
             type: types.START_CALL_WITH_TARGET,
-            meta: { assignmentId, targetId },
+            meta: { orgId, assignmentId, targetId },
             payload: {
                 promise: z.resource('orgs', orgId,
                     'call_assignments', assignmentId, 'calls').post(data)
             }
+        });
+    };
+}
+
+export function deallocateCall(call) {
+    return ({ dispatch, z }) => {
+        let callId = call.get('id');
+        let orgId = call.get('organization_id');
+
+        dispatch({
+            type: types.DEALLOCATE_CALL,
+            meta: { callId },
+            payload: {
+                promise: z.resource('orgs', orgId, 'calls', callId).del()
+            },
         });
     };
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import LoadingIndicator from '../misc/LoadingIndicator';
+import LoadingIndicator from '../../common/misc/LoadingIndicator';
 import { switchLaneToCall } from '../../actions/lane';
 import { retrieveUserCalls, startCallWithTarget } from '../../actions/call';
 

@@ -10,16 +10,7 @@ const initialState = immutable.fromJS({
         error: null,
         items: null,
     },
-    userActionList: {
-        isPending: false,
-        error: null,
-        items: null,
-    },
-    responseList: {
-        isPending: false,
-        error: null,
-        items: {},
-    },
+    byTarget: {},
 });
 
 export default createReducer(initialState, {
@@ -28,6 +19,8 @@ export default createReducer(initialState, {
     },
 
     [types.START_NEW_CALL + '_FULFILLED']: (state, action) => {
+        let targetId = action.payload.data.data.target.id.toString();
+
         // Get responses from target info
         let responses = {};
         action.payload.data.data.target.action_responses.forEach(response => {
@@ -42,15 +35,14 @@ export default createReducer(initialState, {
 
         // Reset when new call starts
         return state
-            .setIn(['actionList', 'error'], null)
-            .setIn(['actionList', 'isPending'], false)
-            .setIn(['actionList', 'items'], immutable.Map())
-            .setIn(['responseList', 'error'], null)
-            .setIn(['responseList', 'isPending'], false)
-            .setIn(['responseList', 'items'], immutable.fromJS(responses))
-            .setIn(['userActionList', 'error'], null)
-            .setIn(['userActionList', 'isPending'], false)
-            .setIn(['userActionList', 'items'], immutable.fromJS(actions));
+            .setIn(['byTarget', targetId, 'responseList', 'error'], null)
+            .setIn(['byTarget', targetId, 'responseList', 'isPending'], false)
+            .setIn(['byTarget', targetId, 'responseList', 'items'],
+                immutable.fromJS(responses))
+            .setIn(['byTarget', targetId, 'userActionList', 'error'], null)
+            .setIn(['byTarget', targetId, 'userActionList', 'isPending'], false)
+            .setIn(['byTarget', targetId, 'userActionList', 'items'],
+                immutable.fromJS(actions));
     },
 
     [types.RETRIEVE_ACTIONS + '_PENDING']: (state, action) => {
@@ -75,7 +67,31 @@ export default createReducer(initialState, {
                 immutable.fromJS(actions));
     },
 
+    [types.RETRIEVE_ALLOCATED_CALLS + '_FULFILLED']: (state, action) => {
+        action.payload.data.data.forEach(call => {
+            let targetId = call.target.id.toString();
+
+            let responses = call.target.action_responses.reduce((m, r) =>
+                Object.assign(m, { [r.action_id.toString()]: r }), {});
+            let actions = call.target.future_actions.reduce((m, a) =>
+                Object.assign(m, { [a.id.toString()]: a }), {});
+
+            state = state
+                .setIn(['byTarget', targetId, 'responseList', 'error'], null)
+                .setIn(['byTarget', targetId, 'responseList', 'isPending'], false)
+                .setIn(['byTarget', targetId, 'responseList', 'items'],
+                    immutable.fromJS(responses))
+                .setIn(['byTarget', targetId, 'userActionList', 'error'], null)
+                .setIn(['byTarget', targetId, 'userActionList', 'isPending'], false)
+                .setIn(['byTarget', targetId, 'userActionList', 'items'],
+                    immutable.fromJS(actions));
+        });
+
+        return state;
+    },
+
     [types.UPDATE_ACTION_RESPONSE + '_FULFILLED']: (state, action) => {
+        let targetId = action.meta.personId.toString();
         let actionId = action.meta.actionId.toString();
         if (action.meta.responseBool) {
             let response = immutable.fromJS({
@@ -84,13 +100,14 @@ export default createReducer(initialState, {
             });
 
             return state
-                .updateIn(['responseList', 'items'], items => items?
-                    items.set(actionId, response) :
-                    immutable.toJS({ [actionId]: response }));
+                .updateIn(['byTarget', targetId, 'responseList', 'items'],
+                    items => items?
+                        items.set(actionId, response) :
+                        immutable.fromJS({ [actionId]: response }));
         }
         else {
             return state
-                .deleteIn(['responseList', 'items', actionId]);
+                .deleteIn(['byTarget', targetId, 'responseList', 'items', actionId]);
         }
     },
 });

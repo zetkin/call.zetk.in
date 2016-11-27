@@ -1,9 +1,15 @@
 import * as types from '.';
 
 
-export function setCallViewState(state) {
+export function showOverlay(type, config) {
     return {
-        type: types.SET_CALL_VIEW_STATE,
-        payload: { state }
+        type: types.SHOW_OVERLAY,
+        payload: { type, config },
+    };
+}
+
+export function closeOverlay() {
+    return {
+        type: types.CLOSE_OVERLAY,
     };
 }

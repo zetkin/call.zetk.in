@@ -22,17 +22,17 @@ export const reportForCall = (state, id) => {
 };
 
 
-const initialState = immutable.fromJS({
+const initialState = immutable.Map({
     // TODO: More or less duplicate of lanes.selectedId
     currentId: null,
     currentIsPending: false,
-    callList: {
+    callList: immutable.Map({
         error: null,
         isPending: false,
         items: null,
-    },
-    reports: {},
-    activeCalls: [],
+    }),
+    reports: immutable.Map({}),
+    activeCalls: immutable.Set(),
 });
 
 export const REPORT_STEPS = [
@@ -88,13 +88,34 @@ export default createReducer(initialState, {
                 immutable.fromJS(calls));
     },
 
+    [types.RETRIEVE_ALLOCATED_CALLS + '_FULFILLED']: (state, action) => {
+        let calls = {};
+        let callIds = [];
+        action.payload.data.data.forEach(call => {
+            let id = call.id.toString();
+            callIds.push(id);
+            calls[id] = call
+        });
+
+        return state
+            .setIn(['callList', 'error'], null)
+            .setIn(['callList', 'isPending'], false)
+            .updateIn(['activeCalls'], list =>
+                list.union(immutable.fromJS(callIds)))
+            .updateIn(['callList', 'items'], items => items?
+                items.mergeDeep(immutable.fromJS(calls)) :
+                immutable.fromJS(calls));
+    },
+
     [types.START_NEW_CALL + '_PENDING']: (state, action) => {
         return state
             .set('currentIsPending', true);
     },
 
     [types.START_NEW_CALL + '_FULFILLED']: (state, action) => {
-        let call = action.payload.data.data;
+        let call = Object.assign(action.payload.data.data, {
+            organization_id: action.meta.orgId,
+        });
         let callId = call.id.toString();
 
         // Progress at prepare step is 0.1
@@ -115,7 +136,9 @@ export default createReducer(initialState, {
     },
 
     [types.START_CALL_WITH_TARGET + '_FULFILLED']: (state, action) => {
-        let call = action.payload.data.data;
+        let call = Object.assign(action.payload.data.data, {
+            organization_id: action.meta.orgId,
+        });
         let callId = call.id.toString();
 
         return state
@@ -125,6 +148,14 @@ export default createReducer(initialState, {
             .updateIn(['callList', 'items'], items => items?
                 items.set(callId, immutable.fromJS(call)) :
                 immutable.fromJS({ [callId]: call }));
+    },
+
+    [types.DEALLOCATE_CALL + '_FULFILLED']: (state, action) => {
+        let callId = action.meta.callId.toString();
+        let activeIndex = state.get('activeCalls').indexOf(callId);
+        return state
+            .deleteIn(['callList', 'items', callId])
+            .deleteIn(['activeCalls', activeIndex]);
     },
 
     [types.SET_LANE_STEP]: (state, action) => {

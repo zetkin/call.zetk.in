@@ -48,7 +48,7 @@ export default class LaneControlBar extends React.Component {
                     onClick={ this.onClickStart.bind(this) }/>
             );
         }
-        else if (step === 'prepare') {
+        else if (step === 'prepare' && call) {
             let target = call.get('target');
 
             returnSection = (

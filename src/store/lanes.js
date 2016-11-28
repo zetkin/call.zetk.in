@@ -126,15 +126,30 @@ export default createReducer(initialState, {
         if (selectedId === laneId) {
             selectedId = null;
             state.get('allLanes').forEach(lane => {
-                if (lane.get('id') !== selectedId) {
+                if (lane.get('id') !== laneId) {
                     selectedId = lane.get('id');
                 }
             });
         }
 
-        return state
-            .set('selectedId', selectedId)
-            .deleteIn(['allLanes', laneId]);
+        if (!selectedId) {
+            // This lane is the last one, so we should not remove it,
+            // but instead just reset it. Changing it's idea makes sure
+            // it's not rendered as the same lane but replaced.
+            let laneNumber = state.get('nextLaneNumber');
+            return state
+                .set('nextLaneNumber', laneNumber + 1)
+                .updateIn(['allLanes', laneId], lane => lane
+                    .set('id', laneNumber.toString())
+                    .set('step', 'assignment')
+                    .set('callId', null)
+                    .set('progress', 0.0));
+        }
+        else {
+            return state
+                .set('selectedId', selectedId)
+                .deleteIn(['allLanes', laneId]);
+        }
     },
 
     [types.SUBMIT_CALL_REPORT + '_FULFILLED']: (state, action) => {

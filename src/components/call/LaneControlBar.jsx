@@ -48,7 +48,7 @@ export default class LaneControlBar extends React.Component {
                     onClick={ this.onClickStart.bind(this) }/>
             );
         }
-        else if (step === 'prepare') {
+        else if (step === 'prepare' && call) {
             let target = call.get('target');
 
             returnSection = (
@@ -115,7 +115,7 @@ export default class LaneControlBar extends React.Component {
 
         return (
             <div className={ classes }>
-                <CallProgressBar key={ call? call.get('id') : '' } call={ call }/>
+                <CallProgressBar key={ call? call.get('id') : '' } lane={ lane }/>
                 <div className="LaneControlBar-returnSection">
                     { returnSection }
                 </div>

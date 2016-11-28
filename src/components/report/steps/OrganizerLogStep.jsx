@@ -62,14 +62,16 @@ export default class OrganizerLogStep extends ReportStepBase {
     }
 
     onChangeMessage(ev) {
-        this.props.dispatch(setOrganizerLogMessage(ev.target.value));
+        this.props.dispatch(setOrganizerLogMessage(
+            this.props.call, ev.target.value));
     }
 
     onClickAdd() {
-        this.props.dispatch(finishCallReport());
+        this.props.dispatch(finishCallReport(this.props.call));
     }
 
     onClickRemove() {
-        this.props.dispatch(setCallReportField('organizerActionNeeded', false));
+        this.props.dispatch(setCallReportField(
+            this.props.call, 'organizerActionNeeded', false));
     }
 }

@@ -3,8 +3,8 @@ import React from 'react';
 export default function CallProgressBar(props) {
     let style;
 
-    if (props.call) {
-        let progress = props.call.get('progress');
+    if (props.lane) {
+        let progress = props.lane.get('progress');
         let pc = Math.ceil(progress * 100) + '%';
         style = { width: pc };
     }

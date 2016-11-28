@@ -9,13 +9,15 @@ import { REPORT_STEPS } from '../../store/calls';
 @connect()
 export default class ReportForm extends React.Component {
     static propTypes = {
-        target: PropTypes.map.isRequired,
+        call: PropTypes.map.isRequired,
         report: PropTypes.map.isRequired,
         disableEdit: PropTypes.bool,
     };
 
     render() {
         let report = this.props.report;
+        let call = this.props.call;
+        let target = call.get('target');
         let steps = [];
 
         let curStepIndex = REPORT_STEPS.indexOf(report.get('step')) || 0;
@@ -25,8 +27,8 @@ export default class ReportForm extends React.Component {
 
             steps.push(
                 <StepComponent key={ step }
-                    target={ this.props.target }
                     dispatch={ this.props.dispatch }
+                    call={ call } target={ target }
                     step={ step } report={ report }
                     disableEdit={ this.props.disableEdit }/>
             );

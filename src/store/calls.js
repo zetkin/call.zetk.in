@@ -2,6 +2,7 @@ import { createReducer } from 'redux-create-reducer';
 import immutable from 'immutable';
 
 import * as types from '../actions';
+import { selectedLane } from './lanes';
 
 
 export const activeCalls = state =>
@@ -9,22 +10,24 @@ export const activeCalls = state =>
         state.getIn(['calls', 'callList', 'items', callId]));
 
 export const currentCall = state => {
-    let id = state.getIn(['calls', 'currentId']);
+    let lane = selectedLane(state);
+    let id = lane.get('callId');
     return state.getIn(['calls', 'callList', 'items', id]);
 };
 
-export const currentReport = state =>
-    reportForCall(state, state.getIn(['calls', 'currentId']));
+export const currentReport = state => {
+    let call = currentCall(state);
+    if (!call) return null;
+    return reportForCallById(state, call.get('id'));
+}
 
-export const reportForCall = (state, id) => {
+export const reportForCallById = (state, id) => {
     if (!id) return null;
     return state.getIn(['calls', 'reports', id.toString()]);
 };
 
 
 const initialState = immutable.Map({
-    // TODO: More or less duplicate of lanes.selectedId
-    currentId: null,
     currentIsPending: false,
     callList: immutable.Map({
         error: null,
@@ -45,17 +48,6 @@ export const REPORT_STEPS = [
     'organizer_log',
     'summary',
 ];
-
-const REPORT_STEP_PROGRESS = {
-    'success_or_failure': 0.0,
-    'success_could_talk': 0.2,
-    'success_call_back': 0.4,
-    'failure_reason': 0.2,
-    'failure_message': 0.4,
-    'caller_log': 0.6,
-    'organizer_log': 0.8,
-    'summary': 1.0,
-};
 
 
 export default createReducer(initialState, {
@@ -118,11 +110,7 @@ export default createReducer(initialState, {
         });
         let callId = call.id.toString();
 
-        // Progress at prepare step is 0.1
-        call.progress = 0.1;
-
         return state
-            .set('currentId', callId)
             .set('currentIsPending', false)
             .update('activeCalls', list => list.push(callId))
             .updateIn(['callList', 'items'], items => items?
@@ -142,7 +130,6 @@ export default createReducer(initialState, {
         let callId = call.id.toString();
 
         return state
-            .set('currentId', callId)
             .set('currentIsPending', false)
             .update('activeCalls', list => list.push(callId))
             .updateIn(['callList', 'items'], items => items?
@@ -160,12 +147,12 @@ export default createReducer(initialState, {
 
     [types.SET_LANE_STEP]: (state, action) => {
         let step = action.payload.step;
-        let callId = state.get('currentId');
+        let callId = action.payload.lane.get('callId');
 
         // Create an empty report for current call when navigating
         // to the "report" lane step.
         if (step === 'report') {
-            state = state
+            return state
                 .setIn(['reports', callId], immutable.fromJS({
                     step: REPORT_STEPS[0],
                     success: false,
@@ -178,22 +165,14 @@ export default createReducer(initialState, {
                     organizerLog: '',
                 }));
         }
-
-        let progress = 0;
-
-        switch (step) {
-            case 'call':    progress = 0.3; break;
-            case 'report':  progress = 0.8; break;
-            case 'done':    progress = 1.0; break;
+        else {
+            return state;
         }
-
-        return state
-            .setIn(['callList', 'items', callId, 'progress'], progress);
     },
 
     [types.SET_CALL_REPORT_FIELD]: (state, action) => {
-        let { field, value } = action.payload;
-        let callId = state.get('currentId');
+        let { call, field, value } = action.payload;
+        let callId = call.get('id').toString();
         let nextStep;
 
         if (field === 'success' && value) {
@@ -227,11 +206,7 @@ export default createReducer(initialState, {
             nextStep = 'summary';
         }
 
-        let reportProgress = REPORT_STEP_PROGRESS[nextStep];
-        let progress = 0.8 + reportProgress * 0.15;
-
         return state
-            .setIn(['callList', 'items', callId, 'progress'], progress)
             .updateIn(['reports', callId], report => report
                 .set(field, value)
                 .set('step', nextStep));
@@ -239,19 +214,15 @@ export default createReducer(initialState, {
 
     [types.SET_CALL_REPORT_STEP]: (state, action) => {
         let step = action.payload.step;
-        let callId = state.get('currentId');
-
-        let reportProgress = REPORT_STEP_PROGRESS[step];
-        let progress = 0.8 + reportProgress * 0.15;
+        let callId = action.payload.call.get('id').toString();
 
         return state
-            .setIn(['callList', 'items', callId, 'progress'], progress)
             .setIn(['reports', callId, 'step'], step);
     },
 
     [types.SET_CALLER_LOG_MESSAGE]: (state, action) => {
         let msg = action.payload.message;
-        let callId = state.get('currentId');
+        let callId = action.payload.call.get('id').toString();
 
         return state
             .setIn(['reports', callId, 'callerLog'], msg);
@@ -259,14 +230,14 @@ export default createReducer(initialState, {
 
     [types.SET_ORGANIZER_LOG_MESSAGE]: (state, action) => {
         let msg = action.payload.message;
-        let callId = state.get('currentId');
+        let callId = action.payload.call.get('id').toString();
 
         return state
             .setIn(['reports', callId, 'organizerLog'], msg);
     },
 
     [types.FINISH_CALL_REPORT]: (state, action) => {
-        let callId = state.get('currentId');
+        let callId = action.payload.call.get('id').toString();
 
         return state
             .setIn(['reports', callId, 'step'], 'summary');
@@ -292,7 +263,6 @@ export default createReducer(initialState, {
         let callId = action.meta.callId.toString();
 
         return state
-            .setIn(['callList', 'items', callId, 'progress'], 1.0)
             .setIn(['reports', callId, 'isPending'], false)
             .updateIn(['callList', 'items', callId], call => call
                 .mergeDeep(call))
@@ -300,32 +270,5 @@ export default createReducer(initialState, {
                 let key = list.findKey(val => val === callId);
                 return list.delete(key);
             });
-    },
-
-    [types.UPDATE_ACTION_RESPONSE + '_FULFILLED']: (state, action) => {
-        // Update progress for positive action responses
-        if (action.meta.responseBool) {
-            let callId = state.get('currentId');
-            let initial = state.getIn(['callList', 'items', callId, 'progress']);
-
-            // Progress is increased towards 80%, but the pace decreases
-            // with each iteration, so that it never reaches until the
-            // user proceeds to the next step.
-            let diff = 0.8 - initial;
-            let progress = initial + 0.05 * diff;
-
-            return state
-                .setIn(['callList', 'items', callId, 'progress'], progress);
-        }
-        else {
-            return state;
-        }
-    },
-
-    [types.SWITCH_LANE_TO_CALL]: (state, action) => {
-        let callId = action.payload.callId.toString();
-
-        return state
-            .set('currentId', callId);
     },
 });

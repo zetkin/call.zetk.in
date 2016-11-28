@@ -47,6 +47,7 @@ export default class CallBackStep extends ReportStepBase {
     }
 
     onClickOption(option) {
-        this.props.dispatch(setCallReportField('callBackAfter', option));
+        this.props.dispatch(setCallReportField(
+            this.props.call, 'callBackAfter', option));
     }
 }

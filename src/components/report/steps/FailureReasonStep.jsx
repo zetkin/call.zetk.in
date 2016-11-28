@@ -44,6 +44,7 @@ export default class FailureReasonStep extends ReportStepBase {
     }
 
     onClickOption(option) {
-        this.props.dispatch(setCallReportField('failureReason', option));
+        this.props.dispatch(setCallReportField(
+            this.props.call, 'failureReason', option));
     }
 }

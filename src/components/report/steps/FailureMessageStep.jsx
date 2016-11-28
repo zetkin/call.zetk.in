@@ -47,6 +47,7 @@ export default class FailureMessageStep extends ReportStepBase {
     }
 
     onClickOption(leftMessage) {
-        this.props.dispatch(setCallReportField('leftMessage', leftMessage));
+        this.props.dispatch(setCallReportField(
+            this.props.call, 'leftMessage', leftMessage));
     }
 }

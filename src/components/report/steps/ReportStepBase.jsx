@@ -9,6 +9,7 @@ import { setCallReportStep } from '../../../actions/call';
 
 export default class ReportStepBase extends React.Component {
     static propTypes = {
+        call: PropTypes.map.isRequired,
         step: PropTypes.string.isRequired,
         target: PropTypes.map.isRequired,
         report: PropTypes.map.isRequired,
@@ -68,6 +69,7 @@ export default class ReportStepBase extends React.Component {
     }
 
     onClickEdit() {
-        this.props.dispatch(setCallReportStep(this.props.step));
+        this.props.dispatch(setCallReportStep(
+            this.props.call, this.props.step));
     }
 }

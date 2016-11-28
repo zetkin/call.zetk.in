@@ -2,6 +2,7 @@ import { createReducer } from 'redux-create-reducer';
 import immutable from 'immutable';
 
 import * as types from '../actions';
+import { selectedLane } from './lanes';
 
 
 export const activeCalls = state =>
@@ -9,22 +10,24 @@ export const activeCalls = state =>
         state.getIn(['calls', 'callList', 'items', callId]));
 
 export const currentCall = state => {
-    let id = state.getIn(['calls', 'currentId']);
+    let lane = selectedLane(state);
+    let id = lane.get('callId');
     return state.getIn(['calls', 'callList', 'items', id]);
 };
 
-export const currentReport = state =>
-    reportForCall(state, state.getIn(['calls', 'currentId']));
+export const currentReport = state => {
+    let call = currentCall(state);
+    if (!call) return null;
+    return reportForCallById(state, call.get('id'));
+}
 
-export const reportForCall = (state, id) => {
+export const reportForCallById = (state, id) => {
     if (!id) return null;
     return state.getIn(['calls', 'reports', id.toString()]);
 };
 
 
 const initialState = immutable.Map({
-    // TODO: More or less duplicate of lanes.selectedId
-    currentId: null,
     currentIsPending: false,
     callList: immutable.Map({
         error: null,
@@ -122,7 +125,6 @@ export default createReducer(initialState, {
         call.progress = 0.1;
 
         return state
-            .set('currentId', callId)
             .set('currentIsPending', false)
             .update('activeCalls', list => list.push(callId))
             .updateIn(['callList', 'items'], items => items?
@@ -142,7 +144,6 @@ export default createReducer(initialState, {
         let callId = call.id.toString();
 
         return state
-            .set('currentId', callId)
             .set('currentIsPending', false)
             .update('activeCalls', list => list.push(callId))
             .updateIn(['callList', 'items'], items => items?
@@ -160,7 +161,7 @@ export default createReducer(initialState, {
 
     [types.SET_LANE_STEP]: (state, action) => {
         let step = action.payload.step;
-        let callId = state.get('currentId');
+        let callId = action.payload.lane.get('callId');
 
         // Create an empty report for current call when navigating
         // to the "report" lane step.
@@ -192,8 +193,8 @@ export default createReducer(initialState, {
     },
 
     [types.SET_CALL_REPORT_FIELD]: (state, action) => {
-        let { field, value } = action.payload;
-        let callId = state.get('currentId');
+        let { call, field, value } = action.payload;
+        let callId = call.get('id').toString();
         let nextStep;
 
         if (field === 'success' && value) {
@@ -239,7 +240,7 @@ export default createReducer(initialState, {
 
     [types.SET_CALL_REPORT_STEP]: (state, action) => {
         let step = action.payload.step;
-        let callId = state.get('currentId');
+        let callId = action.payload.call.get('id').toString();
 
         let reportProgress = REPORT_STEP_PROGRESS[step];
         let progress = 0.8 + reportProgress * 0.15;
@@ -251,7 +252,7 @@ export default createReducer(initialState, {
 
     [types.SET_CALLER_LOG_MESSAGE]: (state, action) => {
         let msg = action.payload.message;
-        let callId = state.get('currentId');
+        let callId = action.payload.call.get('id').toString();
 
         return state
             .setIn(['reports', callId, 'callerLog'], msg);
@@ -259,14 +260,14 @@ export default createReducer(initialState, {
 
     [types.SET_ORGANIZER_LOG_MESSAGE]: (state, action) => {
         let msg = action.payload.message;
-        let callId = state.get('currentId');
+        let callId = action.payload.call.get('id').toString();
 
         return state
             .setIn(['reports', callId, 'organizerLog'], msg);
     },
 
     [types.FINISH_CALL_REPORT]: (state, action) => {
-        let callId = state.get('currentId');
+        let callId = action.payload.call.get('id').toString();
 
         return state
             .setIn(['reports', callId, 'step'], 'summary');
@@ -320,12 +321,5 @@ export default createReducer(initialState, {
         else {
             return state;
         }
-    },
-
-    [types.SWITCH_LANE_TO_CALL]: (state, action) => {
-        let callId = action.payload.callId.toString();
-
-        return state
-            .set('currentId', callId);
     },
 });

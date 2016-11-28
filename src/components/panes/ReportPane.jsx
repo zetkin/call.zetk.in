@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 import PaneBase from './PaneBase';
 import ReportForm from '../report/ReportForm';
-import { reportForCall } from '../../store/calls';
+import { reportForCallById } from '../../store/calls';
 
 
 const mapStateToProps = (state, props) => ({
-    report: reportForCall(state, props.call.get('id')),
+    report: reportForCallById(state, props.call.get('id')),
 });
 
 
@@ -33,7 +33,6 @@ export default class ReportPane extends PaneBase {
 
     renderContent() {
         let call = this.props.call;
-        let target = call.get('target');
         let report = this.props.report;
         let isComplete = this.props.step === 'done';
 
@@ -44,7 +43,7 @@ export default class ReportPane extends PaneBase {
         return [
             <Msg key="h1" tagName="h1" id={ h1Msg }/>,
             <ReportForm key="form"
-                report={ report } target={ target }
+                report={ report } call={ call }
                 disableEdit={ isComplete }/>
         ];
     }

@@ -1,6 +1,6 @@
 import * as types from '.';
 
-import { currentCall, reportForCall } from '../store/calls';
+import { currentCall, reportForCallById } from '../store/calls';
 import { assignmentById } from '../store/assignments';
 
 
@@ -76,37 +76,38 @@ export function deallocateCall(call) {
     };
 }
 
-export function setCallReportField(field, value) {
+export function setCallReportField(call, field, value) {
     return {
         type: types.SET_CALL_REPORT_FIELD,
-        payload: { field, value },
+        payload: { call, field, value },
     };
 }
 
-export function setCallReportStep(step) {
+export function setCallReportStep(call, step) {
     return {
         type: types.SET_CALL_REPORT_STEP,
-        payload: { step },
+        payload: { call, step },
     };
 }
 
-export function setCallerLogMessage(message) {
+export function setCallerLogMessage(call, message) {
     return {
         type: types.SET_CALLER_LOG_MESSAGE,
-        payload: { message }
+        payload: { call, message }
     }
 }
 
-export function setOrganizerLogMessage(message) {
+export function setOrganizerLogMessage(call, message) {
     return {
         type: types.SET_ORGANIZER_LOG_MESSAGE,
-        payload: { message }
+        payload: { call, message }
     }
 }
 
-export function finishCallReport() {
+export function finishCallReport(call) {
     return {
         type: types.FINISH_CALL_REPORT,
+        payload: { call },
     }
 }
 
@@ -115,7 +116,7 @@ export function submitCallReport() {
         let state = getState();
         let call = currentCall(state);
         let callId = call.get('id');
-        let report = reportForCall(state, callId);
+        let report = reportForCallById(state, callId);
 
         let data = {
             notes: report.get('callerLog'),

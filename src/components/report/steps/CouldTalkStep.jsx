@@ -45,6 +45,7 @@ export default class CouldTalkStep extends ReportStepBase {
     }
 
     onClickOption(success) {
-        this.props.dispatch(setCallReportField('targetCouldTalk', success));
+        this.props.dispatch(setCallReportField(
+            this.props.call, 'targetCouldTalk', success));
     }
 }

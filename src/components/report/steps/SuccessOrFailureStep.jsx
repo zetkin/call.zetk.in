@@ -36,6 +36,7 @@ export default class SuccessOrFailureStep extends ReportStepBase {
     }
 
     onClickOption(success) {
-        this.props.dispatch(setCallReportField('success', success));
+        this.props.dispatch(setCallReportField(
+            this.props.call, 'success', success));
     }
 }

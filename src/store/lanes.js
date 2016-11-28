@@ -121,7 +121,19 @@ export default createReducer(initialState, {
         let laneId = state.get('allLanes')
             .findKey(lane => lane.get('callId') == callId);
 
+        let selectedId = state.get('selectedId');
+
+        if (selectedId === laneId) {
+            selectedId = null;
+            state.get('allLanes').forEach(lane => {
+                if (lane.get('id') !== selectedId) {
+                    selectedId = lane.get('id');
+                }
+            });
+        }
+
         return state
+            .set('selectedId', selectedId)
             .deleteIn(['allLanes', laneId]);
     },
 

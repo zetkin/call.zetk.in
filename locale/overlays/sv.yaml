@@ -1,3 +1,21 @@
+laneOverview:
+    log:
+        h: "Dina tidigare samtal"
+        p: |
+            Du kan starta nya samtal med personer du ringt tidigare.
+        filterPlaceholder: "Skriv namn för att filtrera"
+        ops:
+            switch: "Växla till pågående samtal med {target}"
+            repeat: "Logga nytt samtal med {target}"
+
+    lanes:
+        h: "Pågående samtal"
+        p: |
+            Här är samtal du redan har igång. Du bör slutföra samtalen
+            eller överge dem så att andra kan ringa samma personer.
+        ops:
+            switch: "Växla över till detta samtal"
+            discard: "Överge samtalet"
 resume:
     h: "Du har oavslutade samtal"
     p: |

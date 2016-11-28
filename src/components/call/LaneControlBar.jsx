@@ -115,7 +115,7 @@ export default class LaneControlBar extends React.Component {
 
         return (
             <div className={ classes }>
-                <CallProgressBar key={ call? call.get('id') : '' } call={ call }/>
+                <CallProgressBar key={ call? call.get('id') : '' } lane={ lane }/>
                 <div className="LaneControlBar-returnSection">
                     { returnSection }
                 </div>

@@ -100,6 +100,7 @@ export default class LaneOverview extends React.Component {
                     <input type="text"
                         placeholder={ filterPlaceholder }
                         value={ this.state.filterString }
+                        onKeyUp={ this.onFilterKeyUp.bind(this) }
                         onChange={ this.onFilterChange.bind(this) }
                         />
                     { logContent }
@@ -123,6 +124,16 @@ export default class LaneOverview extends React.Component {
         this.setState({
             filterString: ev.target.value,
         });
+    }
+
+    onFilterKeyUp(ev) {
+        if (ev.keyCode == 27) {
+            ev.stopPropagation();
+            ev.target.blur();
+            this.setState({
+                filterString: ''
+            });
+        }
     }
 
     onSwitchFromOld(oldCall) {

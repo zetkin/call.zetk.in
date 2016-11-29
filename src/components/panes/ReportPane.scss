@@ -1,4 +1,6 @@
 .ReportPane {
+    transition: left 0.5s;
+
     &.ReportPane-reportStep {
         width: 35%;
         left: 65%;
@@ -7,6 +9,11 @@
     &.ReportPane-doneStep {
         width: 35%;
         left: 0;
+    }
+
+    &.ReportPane-callStep {
+        width: 35%;
+        left: 100%;
     }
 
     &.PaneBase-leave {

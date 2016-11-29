@@ -171,10 +171,11 @@ export default createReducer(initialState, {
     [types.SET_LANE_STEP]: (state, action) => {
         let step = action.payload.step;
         let callId = action.payload.lane.get('callId');
+        let report = state.getIn(['reports', callId]);
 
         // Create an empty report for current call when navigating
-        // to the "report" lane step.
-        if (step === 'report') {
+        // to the "call" lane step, if there is none already.
+        if (step === 'call' && !report) {
             return state
                 .setIn(['reports', callId], immutable.fromJS({
                     step: REPORT_STEPS[0],

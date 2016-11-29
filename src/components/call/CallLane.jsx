@@ -43,7 +43,7 @@ export default class CallLane extends React.Component {
                 paneComponents = [ 'instructions', 'target', 'input' ];
                 break;
             case 'call':
-                paneComponents = [ 'instructions', 'target', 'input' ];
+                paneComponents = [ 'instructions', 'target', 'input', 'report' ];
                 break;
             case 'report':
                 paneComponents = [ 'instructions', 'target', 'input', 'report' ];
@@ -57,6 +57,7 @@ export default class CallLane extends React.Component {
             let PaneComponent = paneComponentsByType[paneType];
             return (
                 <PaneComponent step={ step } key={ paneType }
+                    lane={ lane }
                     call={ this.props.call }
                     firstCall={ this.state.firstCall }/>
             );

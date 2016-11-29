@@ -27,9 +27,11 @@ input:
             respondButton: "Svara på { survey }"
 
 report:
-    h1:
+    h:
         report: "Rapportera in samtal"
         reported: "Samtal rapporterat"
+    backLink: "Gå tillbaka"
+
 
 stats:
     h1: "Bra jobbat!"

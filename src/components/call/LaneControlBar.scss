@@ -13,7 +13,7 @@
         @include col(3,12)
         text-align: left;
 
-        button {
+        .Button {
             @include button(darken(white, 10));
         }
     }
@@ -36,7 +36,7 @@
         @include col(3,12)
         text-align: right;
 
-        button {
+        .Button {
             @include button();
         }
     }

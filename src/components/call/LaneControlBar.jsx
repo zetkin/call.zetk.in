@@ -10,7 +10,12 @@ import TargetInfo from './TargetInfo';
 import { selectedAssignment } from '../../store/assignments';
 import { currentCall, currentReport } from '../../store/calls';
 import { setLaneStep } from '../../actions/lane';
-import { startNewCall, submitCallReport } from '../../actions/call';
+import { showOverlay } from '../../actions/view';
+import {
+    endCallSession,
+    startNewCall,
+    submitCallReport
+} from '../../actions/call';
 
 
 const mapStateToProps = state => ({
@@ -36,8 +41,10 @@ export default class LaneControlBar extends React.Component {
             let assignment = this.props.assignment;
 
             returnSection = (
-                <Button key="endButton"
-                    labelMsg="controlBar.endButton"/>
+                <Button key="assignmentsButton"
+                    labelMsg="controlBar.assignmentsButton"
+                    href="/assignments"
+                    />
             );
 
             content = null;
@@ -53,6 +60,8 @@ export default class LaneControlBar extends React.Component {
 
             returnSection = (
                 <Button key="endButton"
+                    href="/end"
+                    onClick={ this.onClickEnd.bind(this) }
                     labelMsg="controlBar.endButton"/>
             );
 
@@ -61,24 +70,39 @@ export default class LaneControlBar extends React.Component {
                 // TODO: Fix transition when not using TargetInfo anymore.
             );
 
-            proceedSection = (
+            proceedSection = [
+                <Button key="skipButton"
+                    className="LaneControlBar-skipButton"
+                    labelMsg="controlBar.skipButton"
+                    labelValues={{ target: target.get('first_name') }}
+                    onClick={ this.onClickSkip.bind(this) }
+                    />,
                 <Button key="callButton"
                     labelMsg="controlBar.callButton"
-                    labelValues={{ name: target.get('name') }}
-                    onClick={ this.onClickCall.bind(this) }/>
-            );
+                    labelValues={{ target: target.get('first_name') }}
+                    onClick={ this.onClickCall.bind(this) }
+                    />
+            ];
         }
         else if (step === 'call') {
+            let target = call.get('target');
+
             content = (
                 <TargetInfo target={ call.get('target') }
                     showFullInfo={ true }/>
             );
 
-            proceedSection = (
+            proceedSection = [
+                <Button key="skipButton"
+                    className="LaneControlBar-skipButton"
+                    labelMsg="controlBar.skipButton"
+                    labelValues={{ target: target.get('first_name') }}
+                    onClick={ this.onClickSkip.bind(this) }
+                    />,
                 <Button key="finishCallButton"
                     labelMsg="controlBar.finishCallButton"
                     onClick={ this.onClickFinishCall.bind(this) }/>
-            );
+            ];
         }
         else if (step === 'report') {
             let report = this.props.report;
@@ -99,6 +123,7 @@ export default class LaneControlBar extends React.Component {
         else if (step === 'done') {
             returnSection = (
                 <Button key="endButton"
+                    href="/end"
                     labelMsg="controlBar.endButton"/>
             );
 
@@ -131,6 +156,15 @@ export default class LaneControlBar extends React.Component {
 
     onClickStart() {
         this.props.dispatch(startNewCall(this.props.assignment));
+    }
+
+    onClickEnd() {
+        this.props.dispatch(endCallSession());
+    }
+
+    onClickSkip() {
+        let call = this.props.call;
+        this.props.dispatch(showOverlay('skip', { call }));
     }
 
     onClickCall() {

@@ -2,8 +2,10 @@ import React from 'react';
 import { FormattedMessage as Msg } from 'react-intl';
 import { connect } from 'react-redux';
 
+import FormattedLink from '../../common/misc/FormattedLink';
 import PaneBase from './PaneBase';
 import ReportForm from '../report/ReportForm';
+import { setLaneStep } from '../../actions/lane';
 import { reportForCallById } from '../../store/calls';
 
 
@@ -36,15 +38,33 @@ export default class ReportPane extends PaneBase {
         let report = this.props.report;
         let isComplete = this.props.step === 'done';
 
-        let h1Msg = isComplete?
-            'panes.report.h1.reported' :
-            'panes.report.h1.report';
-
-        return [
-            <Msg key="h1" tagName="h1" id={ h1Msg }/>,
+        return (
             <ReportForm key="form"
                 report={ report } call={ call }
                 disableEdit={ isComplete }/>
-        ];
+        );
+    }
+
+    renderHeader() {
+        let isComplete = this.props.step === 'done';
+
+        let hMsg = isComplete?
+            'panes.report.h.reported' :
+            'panes.report.h.report';
+
+        return (
+            <div key="nav" className="ReportPane-nav">
+                <FormattedLink className="ReportPane-backLink"
+                    msgId="panes.report.backLink"
+                    onClick={ this.onBackLinkClick.bind(this) }
+                    />
+                <Msg key="h" tagName="p" id={ hMsg }/>
+            </div>
+        );
+    }
+
+    onBackLinkClick() {
+        let lane = this.props.lane;
+        this.props.dispatch(setLaneStep(lane, 'call'));
     }
 }

@@ -33,6 +33,11 @@ export default createReducer(initialState, {
             .set('overlay', null);
     },
 
+    [types.SKIP_CALL + '_FULFILLED']: (state, action) => {
+        return state
+            .set('overlay', null);
+    },
+
     [types.SWITCH_LANE_TO_CALL]: (state, action) => {
         return state
             .set('overlay', null);

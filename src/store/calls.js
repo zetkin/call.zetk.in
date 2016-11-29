@@ -145,13 +145,37 @@ export default createReducer(initialState, {
             .deleteIn(['activeCalls', activeIndex]);
     },
 
+    [types.SKIP_CALL + '_FULFILLED']: (state, action) => {
+        let call = Object.assign(action.payload.data.data, {
+            organization_id: action.meta.orgId,
+        });
+
+        let callId = call.id.toString();
+        let prevCallId = action.meta.prevCallId.toString();
+        let activeIndex = state.get('activeCalls').indexOf(prevCallId);
+
+        return state
+            .deleteIn(['callList', 'items', prevCallId])
+            .deleteIn(['activeCalls', activeIndex])
+            .update('activeCalls', list => list.push(callId))
+            .updateIn(['callList', 'items'], items => items?
+                items.set(callId, immutable.fromJS(call)) :
+                immutable.fromJS({ [callId]: call }));
+    },
+
+    [types.END_CALL_SESSION + '_FULFILLED']: (state, action) => {
+        return state
+            .set('activeCalls', immutable.List());
+    },
+
     [types.SET_LANE_STEP]: (state, action) => {
         let step = action.payload.step;
         let callId = action.payload.lane.get('callId');
+        let report = state.getIn(['reports', callId]);
 
         // Create an empty report for current call when navigating
-        // to the "report" lane step.
-        if (step === 'report') {
+        // to the "call" lane step, if there is none already.
+        if (step === 'call' && !report) {
             return state
                 .setIn(['reports', callId], immutable.fromJS({
                     step: REPORT_STEPS[0],

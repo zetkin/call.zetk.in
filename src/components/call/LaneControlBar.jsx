@@ -36,8 +36,10 @@ export default class LaneControlBar extends React.Component {
             let assignment = this.props.assignment;
 
             returnSection = (
-                <Button key="endButton"
-                    labelMsg="controlBar.endButton"/>
+                <Button key="assignmentsButton"
+                    labelMsg="controlBar.assignmentsButton"
+                    href="/assignments"
+                    />
             );
 
             content = null;

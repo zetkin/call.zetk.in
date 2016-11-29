@@ -13,3 +13,4 @@ instructions:
 targetInfo:
     lastSuccessful: "Senast nådd {date}"
     lastFailure: "Senast sökt {date}"
+    lastNever: "Aldrig ringd förut"

@@ -27,23 +27,31 @@ export default class TargetInfo extends React.Component {
         if (this.props.showFullInfo) {
             let lastCall = target.get('call_log').first();
             let lastCallLabel = null;
-            let lastCallDate = (
-                <FormattedRelative
-                    updateInterval={ 0 }
-                    value={ new Date(lastCall.get('allocation_time')) }
-                    />
-            );
 
-            if (lastCall.get('state') === 1) {
-                lastCallLabel = (
-                    <Msg id="controlBar.targetInfo.lastSuccessful"
-                        values={{ date: lastCallDate }}/>
+            if (lastCall) {
+                let lastCallDate = (
+                    <FormattedRelative
+                        updateInterval={ 0 }
+                        value={ new Date(lastCall.get('allocation_time')) }
+                        />
                 );
+
+                if (lastCall.get('state') === 1) {
+                    lastCallLabel = (
+                        <Msg id="controlBar.targetInfo.lastSuccessful"
+                            values={{ date: lastCallDate }}/>
+                    );
+                }
+                else {
+                    lastCallLabel = (
+                        <Msg id="controlBar.targetInfo.lastFailure"
+                            values={{ date: lastCallDate }}/>
+                    );
+                }
             }
             else {
                 lastCallLabel = (
-                    <Msg id="controlBar.targetInfo.lastFailure"
-                        values={{ date: lastCallDate }}/>
+                    <Msg id="controlBar.targetInfo.lastNever"/>
                 );
             }
 

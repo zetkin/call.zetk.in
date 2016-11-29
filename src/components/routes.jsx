@@ -4,6 +4,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './App';
 import AssignmentsPage from './pages/assignments/AssignmentsPage';
 import CallPage from './pages/CallPage';
+import EndPage from './pages/EndPage';
 import LandingPage from './pages/LandingPage';
 
 
@@ -14,5 +15,7 @@ export default (
             component={ AssignmentsPage }/>
         <Route path="/assignments/:assignmentId/call"
             component={ CallPage }/>
+        <Route path="/end"
+            component={ EndPage }/>
     </Route>
 );

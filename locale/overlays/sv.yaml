@@ -24,3 +24,11 @@ resume:
     ops:
         resume: "Återuppta samtal med {target}"
         discard: "Överge samtalet med {target}"
+
+skip:
+    h: "Hoppa över samtal"
+    p: |
+        Vill du hoppa över {target} och ringa någon annan istället?
+
+    skipButton: "Ja, hoppa över {target}"
+    resumeButton: "Nej, återuppta samtalet"

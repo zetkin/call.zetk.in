@@ -79,8 +79,9 @@ export default class LaneControlBar extends React.Component {
                     />,
                 <Button key="callButton"
                     labelMsg="controlBar.callButton"
-                    labelValues={{ name: target.get('name') }}
-                    onClick={ this.onClickCall.bind(this) }/>
+                    labelValues={{ target: target.get('first_name') }}
+                    onClick={ this.onClickCall.bind(this) }
+                    />
             ];
         }
         else if (step === 'call') {

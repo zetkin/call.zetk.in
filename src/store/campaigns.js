@@ -46,4 +46,18 @@ export default createReducer(initialState, {
                 items.merge(immutable.fromJS(campaigns)) :
                 immutable.fromJS(campaigns));
     },
+
+    [types.RETRIEVE_ACTIONS + '_FULFILLED']: (state, action) => {
+        let campaigns = {};
+        action.payload.data.data.forEach(obj => {
+            let campaign = obj.campaign;
+            campaign.id = campaign.id.toString();
+            campaigns[campaign.id] = campaign;
+        });
+
+        return state
+            .updateIn(['campaignList', 'items'], items => items?
+                items.merge(immutable.fromJS(campaigns)) :
+                immutable.fromJS(campaigns));
+    },
 });

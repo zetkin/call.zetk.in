@@ -259,6 +259,15 @@ export default createReducer(initialState, {
             .setIn(['allLanes', laneId, 'progress'], progress);
     },
 
+    [types.FINISH_CALL_REPORT]: (state, action) => {
+        let callId = action.payload.call.get('id').toString();
+        let lane = laneByCallId(state, callId);
+        let laneId = lane.get('id');
+
+        return state
+            .setIn(['allLanes', laneId, 'progress'], 0.95);
+    },
+
     [types.SWITCH_LANE_TO_CALL]: (state, action) => {
         let callId = action.payload.callId.toString();
         let lane = laneByCallId(state, callId);

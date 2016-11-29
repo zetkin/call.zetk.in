@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 import cx from 'classnames';
+import { FormattedMessage as Msg, FormattedRelative } from 'react-intl';
 
 import PropTypes from '../../utils/PropTypes';
 import { selectedAssignment } from '../../store/assignments';
@@ -24,13 +25,35 @@ export default class TargetInfo extends React.Component {
         let callInfo, tagList;
 
         if (this.props.showFullInfo) {
+            let lastCall = target.get('call_log').first();
+            let lastCallLabel = null;
+            let lastCallDate = (
+                <FormattedRelative
+                    updateInterval={ 0 }
+                    value={ new Date(lastCall.get('allocation_time')) }
+                    />
+            );
+
+            if (lastCall.get('state') === 1) {
+                lastCallLabel = (
+                    <Msg id="controlBar.targetInfo.lastSuccessful"
+                        values={{ date: lastCallDate }}/>
+                );
+            }
+            else {
+                lastCallLabel = (
+                    <Msg id="controlBar.targetInfo.lastFailure"
+                        values={{ date: lastCallDate }}/>
+                );
+            }
+
             callInfo = [
                 <span key="number" className="TargetInfo-number">
                     { target.get('phone') }
                 </span>,
-                <span key="lastCall" className="TargetInfo-lastCall">
-                    Called successfully 2 months ago
-                </span>
+                <div key="lastCall" className="TargetInfo-lastCall">
+                    { lastCallLabel }
+                </div>
             ];
 
             tagList = (

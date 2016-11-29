@@ -9,3 +9,7 @@ nextCallButton: "Fortsätt ringa"
 
 instructions:
     prepare: "Förbered dig iför samtalet."
+
+targetInfo:
+    lastSuccessful: "Senast nådd {date}"
+    lastFailure: "Senast sökt {date}"

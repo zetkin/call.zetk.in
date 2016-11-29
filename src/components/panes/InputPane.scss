@@ -63,6 +63,11 @@
         }
 
         .InputPane-summaryList {
+            li:hover {
+                // Override hover from list() mixin
+                background-color: white;
+            }
+
             .Button {
                 display: none;
             }

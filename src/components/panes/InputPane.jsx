@@ -38,7 +38,6 @@ export default class InputPane extends PaneBase {
 
     componentDidMount() {
         this.props.dispatch(retrieveActions());
-        this.props.dispatch(retrieveCampaigns());
     }
 
     renderContent() {

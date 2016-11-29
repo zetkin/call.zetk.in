@@ -13,36 +13,44 @@ const initialState = immutable.fromJS({
     byTarget: {},
 });
 
+const stateForNewTarget = (state, target) => {
+    let targetId = target.id.toString();
+
+    // Get responses from target info
+    let responses = {};
+    target.action_responses.forEach(response => {
+        responses[response.action_id] = response;
+    });
+
+    // Get actions from target info
+    let actions = {};
+    target.future_actions.forEach(obj => {
+        actions[obj.id] = obj;
+    });
+
+    // Reset when new call starts
+    return state
+        .setIn(['byTarget', targetId, 'responseList', 'error'], null)
+        .setIn(['byTarget', targetId, 'responseList', 'isPending'], false)
+        .setIn(['byTarget', targetId, 'responseList', 'items'],
+            immutable.fromJS(responses))
+        .setIn(['byTarget', targetId, 'userActionList', 'error'], null)
+        .setIn(['byTarget', targetId, 'userActionList', 'isPending'], false)
+        .setIn(['byTarget', targetId, 'userActionList', 'items'],
+            immutable.fromJS(actions));
+};
+
 export default createReducer(initialState, {
     '@@INIT': (state, action) => {
         return immutable.fromJS(state);
     },
 
     [types.START_NEW_CALL + '_FULFILLED']: (state, action) => {
-        let targetId = action.payload.data.data.target.id.toString();
+        return stateForNewTarget(state, action.payload.data.data.target);
+    },
 
-        // Get responses from target info
-        let responses = {};
-        action.payload.data.data.target.action_responses.forEach(response => {
-            responses[response.action_id] = response;
-        });
-
-        // Get actions from target info
-        let actions = {};
-        action.payload.data.data.target.future_actions.forEach(obj => {
-            actions[obj.id] = obj;
-        });
-
-        // Reset when new call starts
-        return state
-            .setIn(['byTarget', targetId, 'responseList', 'error'], null)
-            .setIn(['byTarget', targetId, 'responseList', 'isPending'], false)
-            .setIn(['byTarget', targetId, 'responseList', 'items'],
-                immutable.fromJS(responses))
-            .setIn(['byTarget', targetId, 'userActionList', 'error'], null)
-            .setIn(['byTarget', targetId, 'userActionList', 'isPending'], false)
-            .setIn(['byTarget', targetId, 'userActionList', 'items'],
-                immutable.fromJS(actions));
+    [types.SKIP_CALL + '_FULFILLED']: (state, action) => {
+        return stateForNewTarget(state, action.payload.data.data.target);
     },
 
     [types.RETRIEVE_ACTIONS + '_PENDING']: (state, action) => {

@@ -28,8 +28,9 @@ export default class InputPane extends PaneBase {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.step === 'report') {
-            // Go back to summary mode when reporting
+        if (nextProps.step === 'report' || nextProps.step === 'prepare') {
+            // Go back to summary mode when reporting and when navigating
+            // back to prepare step (e.g. after a skip).
             this.setState({
                 viewMode: 'summary',
             });

@@ -87,6 +87,17 @@ export default createReducer(initialState, {
             .setIn(['allLanes', laneId, 'step'], 'prepare');
     },
 
+    [types.SKIP_CALL + '_FULFILLED']: (state, action) => {
+        // When a new call is created, proceed to the "prepare" step
+        let callId = action.payload.data.data.id.toString();
+        let laneId = state.get('selectedId');
+
+        return state
+            .setIn(['allLanes', laneId, 'progress'], 0.1)
+            .setIn(['allLanes', laneId, 'callId'], callId)
+            .setIn(['allLanes', laneId, 'step'], 'prepare');
+    },
+
     [types.START_CALL_WITH_TARGET + '_FULFILLED']: (state, action) => {
         let call = action.payload.data.data;
         let callId = call.id.toString();

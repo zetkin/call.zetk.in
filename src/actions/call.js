@@ -76,6 +76,28 @@ export function deallocateCall(call) {
     };
 }
 
+export function skipCall(call) {
+    return ({ dispatch, z }) => {
+        let prevCallId = call.get('id');
+        let assignmentId = call.get('assignment_id');
+        let orgId = call.get('organization_id');
+
+        dispatch({
+            type: types.SKIP_CALL,
+            meta: { orgId, prevCallId },
+            payload: {
+                promise: z.resource('orgs', orgId, 'calls', prevCallId).del()
+                    .then(res => {
+                        // Request new call from queue
+                        return z.resource('orgs', orgId,
+                            'call_assignments', assignmentId,
+                            'queue', 'head').post()
+                    }),
+            }
+        });
+    };
+}
+
 export function setCallReportField(call, field, value) {
     return {
         type: types.SET_CALL_REPORT_FIELD,

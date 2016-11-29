@@ -176,3 +176,29 @@ export function submitCallReport() {
         });
     };
 }
+
+export function endCallSession() {
+    return ({ dispatch, getState, z }) => {
+        let call = currentCall(getState());
+
+        if (call) {
+            let callId = call.get('id');
+            let orgId = call.get('organization_id');
+
+            // Delete call before continuing
+            dispatch({
+                type: types.END_CALL_SESSION,
+                meta: { callId },
+                payload: {
+                    promise: z.resource('orgs', orgId, 'calls', callId).del(),
+                }
+            });
+        }
+        else {
+            // No call to delete.
+            dispatch({
+                type: types.END_CALL_SESSION,
+            });
+        }
+    };
+}

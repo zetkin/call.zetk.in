@@ -145,6 +145,11 @@ export default createReducer(initialState, {
             .deleteIn(['activeCalls', activeIndex]);
     },
 
+    [types.END_CALL_SESSION + '_FULFILLED']: (state, action) => {
+        return state
+            .set('activeCalls', immutable.List());
+    },
+
     [types.SET_LANE_STEP]: (state, action) => {
         let step = action.payload.step;
         let callId = action.payload.lane.get('callId');

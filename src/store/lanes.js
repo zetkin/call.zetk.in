@@ -152,6 +152,12 @@ export default createReducer(initialState, {
         }
     },
 
+    [types.END_CALL_SESSION + '_FULFILLED']: (state, action) => {
+        return state
+            .set('selectedId', null)
+            .set('allLanes', immutable.Map());
+    },
+
     [types.SUBMIT_CALL_REPORT + '_FULFILLED']: (state, action) => {
         let laneId = state.get('selectedId');
 

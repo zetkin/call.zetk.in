@@ -10,6 +10,7 @@ import TargetInfo from './TargetInfo';
 import { selectedAssignment } from '../../store/assignments';
 import { currentCall, currentReport } from '../../store/calls';
 import { setLaneStep } from '../../actions/lane';
+import { showOverlay } from '../../actions/view';
 import {
     endCallSession,
     startNewCall,
@@ -69,24 +70,38 @@ export default class LaneControlBar extends React.Component {
                 // TODO: Fix transition when not using TargetInfo anymore.
             );
 
-            proceedSection = (
+            proceedSection = [
+                <Button key="skipButton"
+                    className="LaneControlBar-skipButton"
+                    labelMsg="controlBar.skipButton"
+                    labelValues={{ target: target.get('first_name') }}
+                    onClick={ this.onClickSkip.bind(this) }
+                    />,
                 <Button key="callButton"
                     labelMsg="controlBar.callButton"
                     labelValues={{ name: target.get('name') }}
                     onClick={ this.onClickCall.bind(this) }/>
-            );
+            ];
         }
         else if (step === 'call') {
+            let target = call.get('target');
+
             content = (
                 <TargetInfo target={ call.get('target') }
                     showFullInfo={ true }/>
             );
 
-            proceedSection = (
+            proceedSection = [
+                <Button key="skipButton"
+                    className="LaneControlBar-skipButton"
+                    labelMsg="controlBar.skipButton"
+                    labelValues={{ target: target.get('first_name') }}
+                    onClick={ this.onClickSkip.bind(this) }
+                    />,
                 <Button key="finishCallButton"
                     labelMsg="controlBar.finishCallButton"
                     onClick={ this.onClickFinishCall.bind(this) }/>
-            );
+            ];
         }
         else if (step === 'report') {
             let report = this.props.report;
@@ -145,6 +160,11 @@ export default class LaneControlBar extends React.Component {
 
     onClickEnd() {
         this.props.dispatch(endCallSession());
+    }
+
+    onClickSkip() {
+        let call = this.props.call;
+        this.props.dispatch(showOverlay('skip', { call }));
     }
 
     onClickCall() {

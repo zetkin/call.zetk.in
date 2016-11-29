@@ -10,7 +10,11 @@ import TargetInfo from './TargetInfo';
 import { selectedAssignment } from '../../store/assignments';
 import { currentCall, currentReport } from '../../store/calls';
 import { setLaneStep } from '../../actions/lane';
-import { startNewCall, submitCallReport } from '../../actions/call';
+import {
+    endCallSession,
+    startNewCall,
+    submitCallReport
+} from '../../actions/call';
 
 
 const mapStateToProps = state => ({
@@ -55,6 +59,8 @@ export default class LaneControlBar extends React.Component {
 
             returnSection = (
                 <Button key="endButton"
+                    href="/end"
+                    onClick={ this.onClickEnd.bind(this) }
                     labelMsg="controlBar.endButton"/>
             );
 
@@ -101,6 +107,8 @@ export default class LaneControlBar extends React.Component {
         else if (step === 'done') {
             returnSection = (
                 <Button key="endButton"
+                    href="/end"
+                    onClick={ this.onClickEnd.bind(this) }
                     labelMsg="controlBar.endButton"/>
             );
 
@@ -133,6 +141,10 @@ export default class LaneControlBar extends React.Component {
 
     onClickStart() {
         this.props.dispatch(startNewCall(this.props.assignment));
+    }
+
+    onClickEnd() {
+        this.props.dispatch(endCallSession());
     }
 
     onClickCall() {

@@ -123,7 +123,6 @@ export default class LaneControlBar extends React.Component {
             returnSection = (
                 <Button key="endButton"
                     href="/end"
-                    onClick={ this.onClickEnd.bind(this) }
                     labelMsg="controlBar.endButton"/>
             );
 

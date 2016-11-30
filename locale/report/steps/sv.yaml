@@ -1,12 +1,12 @@
 successOrFailure:
-    question: "Fick du prata med någon?"
+    question: "Nådde du {target}?"
     options:
         success: "Ja"
         failure: "Nej..."
 
     summary:
-        success: "Du nådde fram."
-        failure: "Du nådde inte fram."
+        success: "Du nådde {target}."
+        failure: "Du nådde inte {target}."
 
 successCouldTalk:
     question: "Kunde {target} prata just nu?"
@@ -34,12 +34,13 @@ failureReason:
     question: "Varför inte?"
     options:
         noPickup: "Inget svar / telefonsvarare"
+        notAvailable: "Inte tillgänglig just nu"
         wrongNumber: "Fel nummer"
         lineBusy: "Upptaget"
     summary:
-        noPickup: "Personen svarade inte."
-        otherPerson: "Du pratade med en annan person."
-        wrongNumber: "Vi hade fel nummer till personen."
+        noPickup: "{target} svarade inte."
+        notAvailable: "{target} var inte tillgänglig just nu."
+        wrongNumber: "Vi hade fel nummer till {target}."
         lineBusy: "Det var upptaget."
 
 failureMessage:

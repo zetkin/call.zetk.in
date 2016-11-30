@@ -8,9 +8,17 @@
         float: left;
         width: 40px;
         height: 40px;
-        background-color: red;
+        padding: 10px;
+        background-color: $c-brand-main;
         border-radius: 50%;
         box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        color: white;
+        font: normal normal normal 20px/1 FontAwesome;
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($c-brand-main, 10%);
+        }
     }
 
     .LaneSwitch-callList {

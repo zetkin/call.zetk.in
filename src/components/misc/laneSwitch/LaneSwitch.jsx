@@ -65,7 +65,8 @@ export default class LaneSwitch extends React.Component {
             content = [
                 toolTip,
                 <a key="openButton" className="LaneSwitch-openLogButton"
-                    onClick={ this.onClickOpen.bind(this) }>log</a>,
+                    onClick={ this.onClickOpen.bind(this) }>
+                    <i className="fa-phone"/></a>,
                 <ul key="callList" className="LaneSwitch-callList">
                 { otherCalls.map(call => (
                     <LaneSwitchItem key={ call.get('id') } call={ call }

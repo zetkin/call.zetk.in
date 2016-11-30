@@ -39,10 +39,11 @@ export default class FailureReasonStep extends ReportStepBase {
 
     renderSummary(report) {
         let reason = report.get('failureReason');
+        let target = this.props.target.get('first_name');
         let msgId = 'report.steps.failureReason.summary.' + reason;
 
         return (
-            <Msg tagName="p" id={ msgId }/>
+            <Msg tagName="p" id={ msgId } values={{ target }}/>
         );
     }
 

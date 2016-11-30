@@ -108,6 +108,9 @@ export default class InputPane extends PaneBase {
                         .filter(item =>
                             item.getIn(['campaign', 'id']) == campaign.get('id')));
 
+                let scrollContainer = document
+                    .querySelector('.InputPane .PaneBase-content');
+
                 content.push(
                     <div key="campaignInfo" className="InputPane-campaignInfo">
                         <h2 key="h2">{ campaign.get('title') }</h2>
@@ -119,6 +122,7 @@ export default class InputPane extends PaneBase {
                         actionList={ actionList }
                         responseList={ responseList }
                         userActionList={ userActionList }
+                        scrollContainer={ scrollContainer}
                         onResponse={ this.onCampaignResponse.bind(this) }/>
                 );
             }

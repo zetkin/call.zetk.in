@@ -17,7 +17,7 @@ successCouldTalk:
         couldTalk: "{target} kunde prata med oss."
         callBack: "{target} hade inte tid att prata just nu."
 
-successCallBack:
+callBack:
     question: "När ska vi ringa tillbaka?"
     options:
         asap: "Så snart som möjligt"

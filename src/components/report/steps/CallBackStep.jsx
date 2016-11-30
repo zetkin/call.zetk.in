@@ -28,25 +28,25 @@ export default class CallBackStep extends ReportStepBase {
     renderForm(report) {
         return [
             <Msg key="question" tagName="p"
-                id="report.steps.successCallBack.question"/>,
+                id="report.steps.callBack.question"/>,
             <Button key="noResponseButton"
-                labelMsg="report.steps.successCallBack.options.asap"
+                labelMsg="report.steps.callBack.options.asap"
                 onClick={ this.onClickOption.bind(this, 'asap') }/>,
             <Button key="otherPersonButton"
-                labelMsg="report.steps.successCallBack.options.fewDays"
+                labelMsg="report.steps.callBack.options.fewDays"
                 onClick={ this.onClickOption.bind(this, 'fewDays') }/>,
             <Button key="wrongNumberButton"
-                labelMsg="report.steps.successCallBack.options.oneWeek"
+                labelMsg="report.steps.callBack.options.oneWeek"
                 onClick={ this.onClickOption.bind(this, 'oneWeek') }/>,
             <Button key="lineBusyButton"
-                labelMsg="report.steps.successCallBack.options.twoWeeks"
+                labelMsg="report.steps.callBack.options.twoWeeks"
                 onClick={ this.onClickOption.bind(this, 'twoWeeks') }/>,
         ];
     }
 
     renderSummary(report) {
         let cba = report.get('callBackAfter');
-        let msgId = 'report.steps.successCallBack.summary.' + cba;
+        let msgId = 'report.steps.callBack.summary.' + cba;
 
         return (
             <Msg tagName="p" id={ msgId }/>

@@ -24,9 +24,9 @@ const initialState = immutable.fromJS({
 const REPORT_STEP_PROGRESS = {
     'success_or_failure': 0.0,
     'success_could_talk': 0.2,
-    'success_call_back': 0.4,
     'failure_reason': 0.2,
     'failure_message': 0.4,
+    'call_back': 0.4,
     'caller_log': 0.6,
     'organizer_log': 0.8,
     'summary': 1.0,
@@ -215,7 +215,7 @@ export default createReducer(initialState, {
             nextStep = 'caller_log';
         }
         else if (field === 'targetCouldTalk' && !value) {
-            nextStep = 'success_call_back';
+            nextStep = 'call_back';
         }
         else if (field === 'callBackAfter') {
             nextStep = 'caller_log';
@@ -225,6 +225,9 @@ export default createReducer(initialState, {
         }
         else if (field === 'failureReason' && value === "noPickup") {
             nextStep = 'failure_message';
+        }
+        else if (field === 'failureReason' && value === 'notAvailable') {
+            nextStep = 'call_back';
         }
         else if (field === 'failureReason') {
             nextStep = 'caller_log';

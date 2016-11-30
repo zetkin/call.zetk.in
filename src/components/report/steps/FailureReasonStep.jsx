@@ -31,15 +31,19 @@ export default class FailureReasonStep extends ReportStepBase {
             <Button key="lineBusyButton"
                 labelMsg="report.steps.failureReason.options.lineBusy"
                 onClick={ this.onClickOption.bind(this, 'lineBusy') }/>,
+            <Button key="notAvailableButton"
+                labelMsg="report.steps.failureReason.options.notAvailable"
+                onClick={ this.onClickOption.bind(this, 'notAvailable') }/>,
         ];
     }
 
     renderSummary(report) {
         let reason = report.get('failureReason');
+        let target = this.props.target.get('first_name');
         let msgId = 'report.steps.failureReason.summary.' + reason;
 
         return (
-            <Msg tagName="p" id={ msgId }/>
+            <Msg tagName="p" id={ msgId } values={{ target }}/>
         );
     }
 

@@ -13,9 +13,11 @@ export default class SuccessOrFailureStep extends ReportStepBase {
     }
 
     renderForm(report) {
+        let target = this.props.target.get('first_name');
         return [
             <Msg key="question" tagName="p"
-                id="report.steps.successOrFailure.question"/>,
+                id="report.steps.successOrFailure.question"
+                values={{ target }}/>,
             <Button key="yesButton"
                 labelMsg="report.steps.successOrFailure.options.success"
                 onClick={ this.onClickOption.bind(this, true) }/>,

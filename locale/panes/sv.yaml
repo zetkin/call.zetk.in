@@ -6,6 +6,14 @@ target:
     tagHeader: "Etiketter"
     callLogHeader: "Tidigare påringningar till {target}"
     instructionsButton: "Visa instruktioner"
+    activityHeader: "Tidigare aktivitet"
+    activityLastAction: "{activity} ({location}) {date}"
+    activityLabel: |
+        {count, plural,
+            =0 {{target} har aldrig deltagit i några aktioner.}
+            =1 {{target} har delagit i en aktion, {lastAction}.}
+            other {{target} har deltagit i {count} aktioner. Den senaste var {lastAction}.}
+        }
 
 input:
     h1: "Agera som { target }"

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage as Msg } from 'react-intl';
+import { FormattedMessage as Msg, FormattedRelative } from 'react-intl';
 import querystring from 'querystring';
 
 import PaneBase from './PaneBase';
@@ -42,6 +42,30 @@ export default class TargetPane extends PaneBase {
             );
         }
 
+        let activityValues = {
+            target: target.get('first_name'),
+            count: target.getIn(['past_actions', 'num_actions']),
+        };
+
+        let lastAction = target.getIn(['past_actions', 'last_action']);
+        if (lastAction) {
+            let lastActionValues = {
+                activity: lastAction.getIn(['activity', 'title']),
+                location: lastAction.getIn(['location', 'title']),
+                date: (
+                    <FormattedRelative
+                        value={ new Date(lastAction.get('start_time')) }
+                        updateInterval={ 0 }
+                        />
+                )
+            };
+
+            activityValues.lastAction = (
+                <Msg tagName="em" id="panes.target.activityLastAction"
+                    values={ lastActionValues }/>
+            );
+        }
+
         return [
             <div key="basics" className="TargetPane-basics">
                 <Avatar personId={ target.get('id') }
@@ -57,6 +81,11 @@ export default class TargetPane extends PaneBase {
                 <Msg id="panes.target.tagHeader"/></h4>,
             <TagList key="tagList"
                 tags={ target.get('tags') }/>,
+            <h4 key="activityHeader" className="TargetPane-activityHeader">
+                <Msg id="panes.target.activityHeader"/>
+            </h4>,
+            <Msg key="activityLabel" id="panes.target.activityLabel"
+                values={ activityValues }/>,
             <h4 key="callLogHeader" className="TargetPane-callLogHeader">
                 <Msg id="panes.target.callLogHeader"
                     values={{ target: target.get('first_name') }}/>

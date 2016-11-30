@@ -98,6 +98,10 @@ export default class LaneSwitch extends React.Component {
     }
 
     onClickOpen() {
+        this.setState({
+            showInitialToolTip: false,
+        });
+
         this.props.dispatch(showOverlay('laneOverview'));
     }
 }

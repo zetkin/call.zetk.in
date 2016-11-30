@@ -1,4 +1,10 @@
 misc:
+    callLog:
+        emptyLabel: "Aldrig ringd"
+
+    tagList:
+        emptyLabel: "Inga etiketter"
+
     laneSwitch:
         toolTip:
             h: "Gör om samtal"

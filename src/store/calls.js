@@ -41,9 +41,9 @@ const initialState = immutable.Map({
 export const REPORT_STEPS = [
     'success_or_failure',
     'success_could_talk',
-    'success_call_back',
     'failure_reason',
     'failure_message',
+    'call_back',
     'caller_log',
     'organizer_log',
     'summary',
@@ -206,7 +206,7 @@ export default createReducer(initialState, {
             nextStep = 'caller_log';
         }
         else if (field === 'targetCouldTalk' && !value) {
-            nextStep = 'success_call_back';
+            nextStep = 'call_back';
         }
         else if (field === 'callBackAfter') {
             nextStep = 'caller_log';
@@ -216,6 +216,9 @@ export default createReducer(initialState, {
         }
         else if (field === 'failureReason' && value === "noPickup") {
             nextStep = 'failure_message';
+        }
+        else if (field === 'failureReason' && value === "notAvailable") {
+            nextStep = 'call_back';
         }
         else if (field === 'failureReason') {
             nextStep = 'caller_log';

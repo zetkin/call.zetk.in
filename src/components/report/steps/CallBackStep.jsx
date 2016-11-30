@@ -8,12 +8,19 @@ import { setCallReportField } from '../../../actions/call';
 
 export default class CallBackStep extends ReportStepBase {
     getRenderMode(report) {
-        if (!report.get('success') || report.get('targetCouldTalk')) {
-            // Don't render this step for failed calls
+        if (report.get('success') && report.get('targetCouldTalk')) {
+            // Don't render this step for successfull calls where
+            // the target had time to talk right now.
+            return 'none';
+        }
+        else if (!report.get('success')
+            && report.get('failureReason') !== 'notAvailable') {
+            // Don't render this step for failed calls unless the
+            // reason was that caller is not available
             return 'none';
         }
         else {
-            return (report.get('step') === 'success_call_back')?
+            return (report.get('step') === 'call_back')?
                 'form' : 'summary';
         }
     }

@@ -31,6 +31,9 @@ export default class FailureReasonStep extends ReportStepBase {
             <Button key="lineBusyButton"
                 labelMsg="report.steps.failureReason.options.lineBusy"
                 onClick={ this.onClickOption.bind(this, 'lineBusy') }/>,
+            <Button key="notAvailableButton"
+                labelMsg="report.steps.failureReason.options.notAvailable"
+                onClick={ this.onClickOption.bind(this, 'notAvailable') }/>,
         ];
     }
 

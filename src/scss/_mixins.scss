@@ -53,6 +53,7 @@
 
     @include button-color($color, $amount);
     @if $icon {
+        padding-left: 1.5em;
         &:before {
             @include icon($icon);
             line-height: 0;

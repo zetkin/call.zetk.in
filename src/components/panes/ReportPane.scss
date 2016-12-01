@@ -1,6 +1,35 @@
 .ReportPane {
     transition: left 0.5s;
 
+    @include PaneWithTabs('ReportPane');
+
+    .PaneBase-header {
+        p {
+            color: darken(white, 30);
+        }
+    }
+
+    .ReportPane-nav {
+        .ReportPane-backLink {
+            @include col(4,12);
+            display: inline-block;
+            line-height: 4em;
+            cursor: pointer;
+
+            &:before {
+                @include icon($fa-var-arrow-left);
+            }
+
+            &:hover {
+                color: darken($c-brand-main, 20);
+            }
+        }
+
+        p {
+            @include col(8,12);
+        }
+    }
+
     &.ReportPane-reportStep {
         width: 35%;
         left: 65%;

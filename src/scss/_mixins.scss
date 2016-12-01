@@ -99,7 +99,9 @@
         &:before {
             @include icon($icon);
             line-height: $size;
-            height: 0;
+            height: $size;
+            width: $size;
+            margin-right:0;
         }
     }
     &:focus {

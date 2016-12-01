@@ -8,7 +8,8 @@
 @mixin button-color($color, $amount:5) {
     //TODO: switch darken/lighten based on lightness
     background-color: $color;
-    border-color: darken($color, 10);
+    // border-color: darken($color, 10);
+    border-color: $color;
 
     @if (lightness($color) < 70%) {
         color: $c-text-contrast;
@@ -35,11 +36,12 @@
     border-color: darken($color, $amount*2);
 }
 
-@mixin button($color: $c-brand-main, $amount:5, $icon:false) {
+@mixin button($color: $c-brand-main, $amount:5, $icon:false, $border: 0) {
     display: inline-block;
     padding: 0 2.5em;
-    border-width: 0;
+    border-width: $border;
     border-radius: 3em;
+    border-style: solid;
     text-decoration: none;
     font-family: franklin-gothic-urw, sans-serif;
     font-weight: 300;

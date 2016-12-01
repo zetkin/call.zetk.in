@@ -49,6 +49,10 @@ export default createReducer(initialState, {
         return stateForNewTarget(state, action.payload.data.data.target);
     },
 
+    [types.START_CALL_WITH_TARGET + '_FULFILLED']: (state, action) => {
+        return stateForNewTarget(state, action.payload.data.data.target);
+    },
+
     [types.SKIP_CALL + '_FULFILLED']: (state, action) => {
         return stateForNewTarget(state, action.payload.data.data.target);
     },

@@ -7,8 +7,10 @@ $c-brand-comp-light: #48baeb;
 $c-brand-comp-dark: #3598c5;
 
 $c-brand-confirm: $c-brand-comp-light;
-$c-brand-delete: #F64A50;   // red
-$c-brand-success: #41EF5A;  // green
+
+$c-ui-status-negative: #F64A50;    // red
+$c-ui-status-neutral: #ffc502;     // yellow
+$c-ui-status-positive: #41EF5A;    // green
 
 $c-text: #303030;
 $c-text-contrast: #FFF;

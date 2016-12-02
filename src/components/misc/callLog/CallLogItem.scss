@@ -1,16 +1,67 @@
 .CallLogItem {
     position: relative;
-    padding: 1em 1em 1em 3em;
+    padding: 1em 1em 1em 1em;
     border-bottom: 1px solid #eee;
 
     &:hover {
         background: darken(white,1);
     }
 
+    .CallLogItem-status {
+        width: 10em;
+        position: relative;
+        padding: 0.5em 0 0.5em 1.5em;
 
-    &:before {
-        position: absolute;
-        left: 0.5em;
+        span {
+            position: relative;
+            display: inline-block;
+            width: 48%;
+            height: 2px;
+            margin: 0 2% 0 0;
+            background-color: $c-ui-dark;
+        }
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: red;
+            width: 1em;
+            height: 1em;
+        }
+    }
+
+    &.status1 {
+        // 1=Success
+        .CallLogItem-status:before {
+            background-color: $c-ui-status-positive;
+        }
+
+        .CallLogItem-statusBar0, .CallLogItem-statusBar1 {
+            background-color: $c-ui-status-positive;
+            height: 4px;
+        }
+    }
+
+    &.status11, &.status12, &.status21 {
+        // 11=No response, 12=Line busy, 21=Wrong number
+        .CallLogItem-status:before {
+            background-color: $c-ui-status-negative;
+        }
+    }
+
+    &.status14, &.status15 {
+        // 14=Unavailable to talk, 15=Left message
+        .CallLogItem-status:before {
+            background-color: $c-ui-status-neutral;
+        }
+
+        .CallLogItem-statusBar0 {
+            background-color: $c-ui-status-neutral;
+            height: 4px;
+        }
     }
 }
 

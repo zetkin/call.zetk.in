@@ -132,6 +132,13 @@
 
     .CampaignForm {
         background-color: white;
+
+        .CampaignForm-form {
+            @include large-screen {
+                @include col(7,12);
+                margin-left: 0;
+            }
+        }
     }
 
     &.PaneBase-enter {

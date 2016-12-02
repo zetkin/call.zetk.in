@@ -52,8 +52,8 @@
         }
     }
 
-    &.status14, &.status15 {
-        // 14=Unavailable to talk, 15=Left message
+    &.status13, &.status14, &.status15 {
+        // 13=Picked up but no time, 14=Unavailable to talk, 15=Left message
         .CallLogItem-status:before {
             background-color: $c-ui-status-neutral;
         }

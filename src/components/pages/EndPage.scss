@@ -1,5 +1,5 @@
 .EndPage {
-    width:50%;
+    width:90%;
     margin: 10em auto;
     padding: 1em;
     @include card;
@@ -19,5 +19,9 @@
         height: 100%;
         background: #EEE;
         z-index: -1;
+    }
+
+    @include large-screen {
+        width: 50%;
     }
 }

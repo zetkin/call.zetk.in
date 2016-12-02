@@ -11,7 +11,8 @@ export const selectedLane = state => {
 
 export const laneByCallId = (state, id) =>
     state.get('allLanes')
-        .find(lane => lane.get('callId').toString() === id);
+        .find(lane => lane.get('callId') &&
+            lane.get('callId').toString() === id);
 
 
 const initialState = immutable.fromJS({

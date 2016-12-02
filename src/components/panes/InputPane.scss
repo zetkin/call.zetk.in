@@ -133,10 +133,28 @@
     .CampaignForm {
         background-color: white;
 
+        .CampaignForm-calendar {
+            @include large-screen {
+                @include col(5,12);
+                margin-top: 0;
+                padding-left: 0;
+                float: right;
+                position: relative;
+            }
+        }
+
+        .CampaignForm-filter {
+            @include large-screen {
+                margin-left: 15%;
+                @include col(5,12);
+            }
+        }
+
         .CampaignForm-form {
             @include large-screen {
                 @include col(7,12);
                 margin-left: 0;
+                float:left;
             }
         }
     }

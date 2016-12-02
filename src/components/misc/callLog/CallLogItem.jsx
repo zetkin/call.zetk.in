@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedDate } from 'react-intl';
+import { FormattedDate, FormattedMessage as Msg } from 'react-intl';
 import cx from 'classnames';
 
 
@@ -9,6 +9,12 @@ export default function CallLogItem(props) {
 
     let classes = cx('CallLogItem', 'status' + state);
     let allocTime = new Date(call.get('allocation_time'));
+
+    let summaryMsg = 'misc.callLog.summary.status' + state;
+    let summaryValues = {
+        caller: call.getIn(['caller', 'name']),
+        target: call.getIn(['target', 'name']),
+    };
 
     return (
         <div className={ classes }>
@@ -27,6 +33,11 @@ export default function CallLogItem(props) {
                     />
             </div>
             <div className="CallLogItem-summary">
+                <Msg id={ summaryMsg }
+                    values={ summaryValues }
+                    />
+            </div>
+            <div className="CallLogItem-notes">
                 { call.get('notes') }</div>
             <div className="CallLogItem-caller">
                 { call.getIn(['caller', 'name']) }</div>

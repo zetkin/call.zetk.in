@@ -67,19 +67,23 @@
 
 
 .CallLogItem-timeStamp {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+
     font-size: 0.8em;
     color: lighten($c-text, 30);
 }
 
 .CallLogItem-summary {
-    margin-top: 0.5em;
-    font-size: 0.9em;
+    font-size: 0.7em;
+    color: lighten($c-text, 30);
 }
 
 .CallLogItem-caller {
     font-size: 0.7em;
     position: absolute;
     right: 1em;
-    top: 1.5em;
+    top: 3em;
     color: lighten($c-text, 30);
 }

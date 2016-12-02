@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import { FormattedMessage as Msg } from 'react-intl';
 
-import PropTypes from '../../utils/PropTypes';
+import PropTypes from '../../../utils/PropTypes';
 
 
 export default class CallLog extends React.Component {

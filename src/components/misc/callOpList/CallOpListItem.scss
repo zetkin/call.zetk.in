@@ -23,15 +23,6 @@
     }
 
     .Button {
-        @include button($color: white, $border: 1px);
-        margin: 0 0.5em 0 0;
-        font-size: 0.8em;
-        background-color: transparent;
-        transition: background-color 0.2s;
-
-        &:hover {
-            color: $c-text;
-            border-color: transparent;
-        }
+        @include overlay-button();
     }
 }

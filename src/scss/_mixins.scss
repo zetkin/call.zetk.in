@@ -112,6 +112,19 @@
     }
 }
 
+@mixin overlay-button($color: white, $border:1px ) {
+    @include button($color: $color, $border: $border);
+    margin: 0 0.5em 0 0;
+    font-size: 0.8em;
+    background-color: transparent;
+    transition: background-color 0.2s;
+
+    &:hover {
+        color: $c-text;
+        border-color: transparent;
+    }
+}
+
 @mixin icon($fa-character) {
     @include fa-icon;
     text-align: center;

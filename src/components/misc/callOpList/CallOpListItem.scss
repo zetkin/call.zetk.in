@@ -15,6 +15,7 @@
         color: rgba(255, 255, 255, 0.4);
         padding-left: 1em;
         font-size: 80%;
+        float: right;
     }
 
     .CallOpListItem-ops {
@@ -22,19 +23,6 @@
     }
 
     .Button {
-        margin: 0 0.5em 0 0;
-        padding: 0.5em 1em;
-        font-size: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.7);
-        background-color: transparent;
-        border-radius: 5em;
-        cursor: pointer;
-
-        transition: background-color 0.2s;
-
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.7);
-            color: #222;
-        }
+        @include overlay-button();
     }
 }

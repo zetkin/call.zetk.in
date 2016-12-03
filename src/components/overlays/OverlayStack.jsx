@@ -21,7 +21,7 @@ export default class OverlayStack extends React.Component {
                 <button key="closeButton"
                     className="OverlayStack-closeButton"
                     onClick={ this.onCloseButtonClick.bind(this) }>
-                    CLOSE</button>,
+                    </button>,
                 <div key="overlay" className="OverlayStack-overlay">
                     <OverlayComponent config={ overlayData.get('config') }/>
                 </div>,

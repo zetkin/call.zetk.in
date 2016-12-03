@@ -4,4 +4,17 @@
         width: 45%;
         margin: 0 2.5%;
     }
+
+    input[type="text"] {
+        width: 100%;
+        border: 0;
+        border-bottom: 1px solid white;
+        padding: 0.5em;
+        margin-bottom: 1em;
+        font-size: 1em;
+        &:focus {
+            outline: none;
+            border-bottom-color: $c-brand-comp-light;
+        }
+    }
 }

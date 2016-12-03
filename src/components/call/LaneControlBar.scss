@@ -38,6 +38,15 @@
 
         .Button {
             @include button();
+            &:first-child {
+                margin-right: 0.5em;
+            }
+        }
+
+        .LaneControlBar-skipButton {
+            @include button(darken(white, 5), $icon: $fa-var-step-forward);
+            background: 0;
+            font-size: 0.8em;
         }
     }
 
@@ -46,10 +55,10 @@
             display: none;
         }
         .LaneControlBar-content {
-            @include col(9,12);
+            @include col(7,12);
         }
         .LaneControlBar-proceedSection {
-            padding-top: 0.5em;
+            @include col(5,12)
         }
     }
 

@@ -8,7 +8,8 @@
 @mixin button-color($color, $amount:5) {
     //TODO: switch darken/lighten based on lightness
     background-color: $color;
-    border-color: darken($color, 10);
+    // border-color: darken($color, 10);
+    border-color: $color;
 
     @if (lightness($color) < 70%) {
         color: $c-text-contrast;
@@ -35,11 +36,12 @@
     border-color: darken($color, $amount*2);
 }
 
-@mixin button($color: $c-brand-main, $amount:5, $icon:false) {
+@mixin button($color: $c-brand-main, $amount:5, $icon:false, $border: 0) {
     display: inline-block;
     padding: 0 2.5em;
-    border-width: 0;
+    border-width: $border;
     border-radius: 3em;
+    border-style: solid;
     text-decoration: none;
     font-family: franklin-gothic-urw, sans-serif;
     font-weight: 300;
@@ -53,6 +55,7 @@
 
     @include button-color($color, $amount);
     @if $icon {
+        padding-left: 1.5em;
         &:before {
             @include icon($icon);
             line-height: 0;
@@ -81,7 +84,7 @@
     }
 }
 
-@mixin circle-button($color: lighten($c-ui-bg, 1), $amount:3, $icon:false, $size:3em) {
+@mixin circle-button($color: lighten($c-ui-bg, 1), $amount:3, $icon:false, $size:2.5em) {
     width: $size;
     height: $size;
     padding: 0;
@@ -90,12 +93,15 @@
     border-radius: 50%;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
     transition: box-shadow 0.3s;
+    text-align: center;
     @include button-color($color, $amount);
     @if $icon {
         &:before {
             @include icon($icon);
-            line-height: 0.5em;
-            height: 0;
+            line-height: $size;
+            height: $size;
+            width: $size;
+            margin-right:0;
         }
     }
     &:focus {
@@ -103,6 +109,19 @@
     }
     &:active {
         box-shadow: 0 0px 1px rgba(0, 0, 0, 0.15);
+    }
+}
+
+@mixin overlay-button($color: white, $border:1px ) {
+    @include button($color: $color, $border: $border);
+    margin: 0 0.5em 0 0;
+    font-size: 0.8em;
+    background-color: transparent;
+    transition: background-color 0.2s;
+
+    &:hover {
+        color: $c-text;
+        border-color: transparent;
     }
 }
 

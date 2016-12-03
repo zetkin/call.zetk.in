@@ -40,6 +40,8 @@
         top: 10px;
         left: 10px;
         z-index: 101;
+        font-size: 0.8em;
+        @include circle-button($icon: $fa-var-times);
 
         &.OverlayStack-enter {
             animation: OverlayStack-closeButton-enterAnimation 0.5s;

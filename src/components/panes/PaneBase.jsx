@@ -1,14 +1,26 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import cx from 'classnames';
 
+import PropTypes from '../../utils/PropTypes';
 import { componentClassNames } from '..';
 
 
 export default class PaneBase extends React.Component {
     static propTypes = {
-        firstCall: React.PropTypes.bool.isRequired,
-        step: React.PropTypes.string.isRequired,
+        firstCall: PropTypes.bool.isRequired,
+        step: PropTypes.string.isRequired,
+        call: PropTypes.map,
     };
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.call && this.props.call
+            && prevProps.call.get('id') != this.props.call.get('id')) {
+            // The call was switched, so scroll should be reset
+            let node = ReactDOM.findDOMNode(this);
+            node.scrollTop = 0;
+        }
+    }
 
     render() {
         let step = this.props.step;

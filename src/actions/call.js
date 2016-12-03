@@ -145,25 +145,20 @@ export function submitCallReport() {
             organizer_action_needed: report.get('organizerActionNeeded'),
         };
 
-        // TODO: Respect "leftMessage" once API supports it
         // TODO: Send along organizerLog once API supports it
-        // TODO: Better way to handle failed calls + CBA
         if (report.get('success')) {
             if (report.get('targetCouldTalk')) {
                 // Successful call!
                 data.state = 1;
             }
-            else if (report.get('callBackAfter') === 'asap') {
-                // Failed: call back later
-                data.state = 13;
-            }
             else {
-                // Success, but with call_back_after set
-                data.state = 1;
+                // Failed, call_back_after set
+                data.state = 13;
 
                 let date = new Date();
                 date.setUTC(true);
 
+                // Fast forward CBA date if not "ASAP"
                 switch (report.get('callBackAfter')) {
                     case 'fewDays':
                         date.advance('2 days');
@@ -180,7 +175,7 @@ export function submitCallReport() {
             }
         }
         else if (report.get('failureReason') == 'notAvailable') {
-            data.state = 13;
+            data.state = 14;
 
             let date = new Date();
             date.setUTC(true);
@@ -199,6 +194,9 @@ export function submitCallReport() {
                     data.call_back_after = date.iso();
                     break;
             }
+        }
+        else if (report.get('leftMessage')) {
+            data.state = 15;
         }
         else {
             switch (report.get('failureReason')) {

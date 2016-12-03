@@ -8,7 +8,7 @@ import { setLaneInfoMode } from '../../actions/lane';
 import { selectedAssignment } from '../../store/assignments';
 import Avatar from '../misc/Avatar';
 import TagList from '../misc/TagList';
-import CallLog from '../call/CallLog';
+import CallLog from '../misc/callLog/CallLog';
 
 
 const mapStateToProps = state => ({

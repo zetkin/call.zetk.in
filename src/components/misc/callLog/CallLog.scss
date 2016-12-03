@@ -1,0 +1,10 @@
+.CallLog {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    & > span {
+        font-style: italic;
+        color: $c-ui-dark;
+    }
+}

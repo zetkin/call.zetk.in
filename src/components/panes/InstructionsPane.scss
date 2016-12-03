@@ -2,8 +2,6 @@
     z-index: 1;
     background-color: white;
 
-    @include PaneWithTabs('InstructionsPane');
-
     &.InstructionsPane-assignmentStep {
         width: 35%;
         left: 65%;

@@ -17,7 +17,6 @@ export default class InstructionsPane extends PaneBase {
         let assignment = this.props.assignment;
 
         return [
-            <Msg tagName="h1" key="h1" id="panes.instructions.h1"/>,
             <div key="instructions" className="InstructionsPane-instructions"
                 dangerouslySetInnerHTML={{
                     __html: assignment.get('instructions') }}/>,
@@ -36,7 +35,9 @@ export default class InstructionsPane extends PaneBase {
             );
         }
         else {
-            return null;
+            return (
+                <Msg tagName="p" id="panes.instructions.h1"/>
+            );
         }
     }
 

@@ -16,7 +16,7 @@ export default class CallLog extends React.Component {
         let callItems = this.props.calls.map((call, i) => {
             let style = {
                 // Increase delay with 0.1s for each item
-                animationDelay: i*0.1 + 's',
+                animationDelay: 0.3 + i*0.1 + 's',
             };
 
             return (

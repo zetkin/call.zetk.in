@@ -3,7 +3,7 @@ startButton: "Börja ringa"
 endButton: "Sluta ringa"
 callButton: "Ring {target}"
 skipButton: "Hoppa över"
-finishCallButton: "Avsluta samtal och rapportera"
+finishCallButton: "Slutför & rapportera"
 submitReportButton: "Skicka rapport"
 nextCallButton: "Fortsätt ringa"
 

@@ -52,12 +52,19 @@ export default class ReportPane extends PaneBase {
             'panes.report.h.reported' :
             'panes.report.h.report';
 
-        return (
-            <div key="nav" className="ReportPane-nav">
+        let backLink = null;
+        if (this.props.step === 'report') {
+            backLink = (
                 <FormattedLink className="ReportPane-backLink"
                     msgId="panes.report.backLink"
                     onClick={ this.onBackLinkClick.bind(this) }
                     />
+            );
+        }
+
+        return (
+            <div key="nav" className="ReportPane-nav">
+                { backLink }
                 <Msg key="h" tagName="p" id={ hMsg }/>
             </div>
         );

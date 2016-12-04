@@ -9,6 +9,15 @@
     }
 
     .ReportPane-nav {
+        p {
+            text-align: center;
+        }
+    }
+
+    &.ReportPane-reportStep {
+        width: 35%;
+        left: 65%;
+
         .ReportPane-backLink {
             @include col(4,12);
             display: inline-block;
@@ -24,14 +33,12 @@
             }
         }
 
-        p {
-            @include col(8,12);
+        .ReportPane-nav {
+            p {
+                text-align: left;
+                @include col(8,12);
+            }
         }
-    }
-
-    &.ReportPane-reportStep {
-        width: 35%;
-        left: 65%;
     }
 
     &.ReportPane-doneStep {

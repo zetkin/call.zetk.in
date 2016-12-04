@@ -2,12 +2,14 @@
     position: relative;
     padding: 1em 0;
     border-bottom: 1px solid #eee;
+    animation-delay: inherit;
 
     .CallLogItem-status {
         width: 10em;
         position: relative;
         padding: 0.6em 0 0.6em 1.5em;
         font-size: 0.7em;
+        animation-delay: inherit;
 
         span {
             position: relative;
@@ -17,13 +19,15 @@
             margin: 0 2% 0 0;
             background-color: lighten($c-ui-dark, 20%);
 
-            animation: CallLogItem-status-fadeInAnimation 0.5s 0.6s;
+            animation: CallLogItem-statusBarFirst-fadeInAnimation 1.0s;
             animation-fill-mode: backwards;
+            animation-delay: inherit;
         }
 
         span+span {
-            animation: CallLogItem-status-fadeInAnimation 0.5s 0.9s;
+            animation: CallLogItem-statusBarSecond-fadeInAnimation 1.0s;
             animation-fill-mode: backwards;
+            animation-delay: inherit;
         }
 
         &:before {
@@ -34,8 +38,9 @@
             top: 0;
             font-size: 0.5em;
 
-            animation: CallLogItem-status-fadeInAnimation 0.5s 0.3s;
+            animation: CallLogItem-statusIcon-fadeInAnimation 1.0s;
             animation-fill-mode: backwards;
+            animation-delay: inherit;
         }
     }
 
@@ -180,8 +185,22 @@
     }
 }
 
-@keyframes CallLogItem-status-fadeInAnimation {
-    from {
-        opacity: 0;
-    }
+@keyframes CallLogItem-statusIcon-fadeInAnimation {
+    0%      { opacity: 0; }
+    40%     { opacity: 0; }
+    60%     { opacity: 1; }
+    100%    { opacity: 1; }
+}
+
+@keyframes CallLogItem-statusBarFirst-fadeInAnimation {
+    0%      { opacity: 0; }
+    60%     { opacity: 0; }
+    80%     { opacity: 1; }
+    100%    { opacity: 1; }
+}
+
+@keyframes CallLogItem-statusBarSecond-fadeInAnimation {
+    0%      { opacity: 0; }
+    80%     { opacity: 0; }
+    100%    { opacity: 1; }
 }

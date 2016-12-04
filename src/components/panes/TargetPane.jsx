@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import { connect } from 'react-redux';
 import { FormattedMessage as Msg, FormattedRelative } from 'react-intl';
 import querystring from 'querystring';
@@ -66,6 +67,10 @@ export default class TargetPane extends PaneBase {
             );
         }
 
+        let activityClasses = cx('TargetPane-activity', {
+            empty: !lastAction,
+        });
+
         return [
             <div key="basics" className="TargetPane-basics">
                 <Avatar personId={ target.get('id') }
@@ -81,7 +86,7 @@ export default class TargetPane extends PaneBase {
                 <Msg tagName="h4" id="panes.target.tagHeader"/>
                 <TagList tags={ target.get('tags') }/>
             </div>,
-            <div key="activity" className="TargetPane-activity">
+            <div key="activity" className={ activityClasses }>
                 <Msg tagName="h4" id="panes.target.activityHeader"/>
                 <Msg tagName="p" id="panes.target.activityLabel"
                     values={ activityValues }/>

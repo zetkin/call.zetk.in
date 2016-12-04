@@ -71,6 +71,11 @@
                 @include icon($fa-var-flag);
             }
         }
+
+        &.empty p {
+            font-style: italic;
+            color: $c-ui-dark;
+        }
     }
 
     .TargetPane-callLog {

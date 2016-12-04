@@ -6,8 +6,12 @@ body {
     font-family: franklin-gothic-urw, sans-serif;
     color: $c-text;
     background-color: #FFF;
-    font-size: 18px;
+    font-size: 15px;
     margin: 0;
+
+    @include large-screen {
+        font-size: 18px;
+    }
 }
 
 h1, h2, h3, h4 {

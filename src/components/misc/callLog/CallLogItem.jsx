@@ -39,11 +39,22 @@ export default class CallLogItem extends React.Component {
             expanded: this.state.viewMode === 'expanded',
         });
 
+        let notes = null;
+        if (call.get('notes').length > 0) {
+            notes = (
+                <div ref="notes"
+                    className="CallLogItem-notes">
+                    {   call.get('notes') }
+                </div>
+            );
+        }
+
         let expandButton = null;
-        if (this.state.viewMode) {
+        if (this.state.viewMode && call.get('notes').length > 30) {
             expandButton = (
-                <button onClick={ this.onExpandButtonClick.bind(this) }>
-                    Expand</button>
+                <button className="CallLogItem-button"
+                    onClick={ this.onExpandButtonClick.bind(this) }>
+                </button>
             );
         }
 
@@ -68,10 +79,7 @@ export default class CallLogItem extends React.Component {
                         values={ summaryValues }
                         />
                 </div>
-                <div ref="notes"
-                    className="CallLogItem-notes">
-                    { call.get('notes') }
-                </div>
+                { notes }
                 { expandButton }
                 <div className="CallLogItem-caller">
                     { call.getIn(['caller', 'name']) }</div>

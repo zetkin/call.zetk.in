@@ -1,6 +1,5 @@
 .TargetPane {
     z-index: 2;
-    padding-top: 1em;
 
     .TargetPane-basics {
         &:after {
@@ -56,17 +55,34 @@
         margin-bottom: 0.5em;
     }
 
-    .TargetPane-tagHeader {
+    .TargetPane-tags {
         margin-top: 1em;
 
-        &:before {
-            @include icon($fa-var-tag);
+        h4 {
+            &:before {
+                @include icon($fa-var-tag);
+            }
         }
     }
 
-    .TargetPane-callLogHeader {
-        &:before {
-            @include icon($fa-var-clock-o);
+    .TargetPane-activity {
+        h4 {
+            &:before {
+                @include icon($fa-var-flag);
+            }
+        }
+
+        &.empty p {
+            font-style: italic;
+            color: $c-ui-dark;
+        }
+    }
+
+    .TargetPane-callLog {
+        h4 {
+            &:before {
+                @include icon($fa-var-clock-o);
+            }
         }
     }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import { connect } from 'react-redux';
 import { FormattedMessage as Msg, FormattedRelative } from 'react-intl';
 import querystring from 'querystring';
@@ -66,6 +67,10 @@ export default class TargetPane extends PaneBase {
             );
         }
 
+        let activityClasses = cx('TargetPane-activity', {
+            empty: !lastAction,
+        });
+
         return [
             <div key="basics" className="TargetPane-basics">
                 <Avatar personId={ target.get('id') }
@@ -77,21 +82,20 @@ export default class TargetPane extends PaneBase {
                     { info }</ul>
             </div>,
             map,
-            <h4 key="tagHeader" className="TargetPane-tagHeader">
-                <Msg id="panes.target.tagHeader"/></h4>,
-            <TagList key="tagList"
-                tags={ target.get('tags') }/>,
-            <h4 key="activityHeader" className="TargetPane-activityHeader">
-                <Msg id="panes.target.activityHeader"/>
-            </h4>,
-            <Msg key="activityLabel" id="panes.target.activityLabel"
-                values={ activityValues }/>,
-            <h4 key="callLogHeader" className="TargetPane-callLogHeader">
-                <Msg id="panes.target.callLogHeader"
+            <div key="tags" className="TargetPane-tags">
+                <Msg tagName="h4" id="panes.target.tagHeader"/>
+                <TagList tags={ target.get('tags') }/>
+            </div>,
+            <div key="activity" className={ activityClasses }>
+                <Msg tagName="h4" id="panes.target.activityHeader"/>
+                <Msg tagName="p" id="panes.target.activityLabel"
+                    values={ activityValues }/>
+            </div>,
+            <div key="callLog" className="TargetPane-callLog">
+                <Msg tagName="h4" id="panes.target.callLogHeader"
                     values={{ target: target.get('first_name') }}/>
-            </h4>,
-            <CallLog key="callLog"
-                calls={ target.get('call_log') }/>
+                <CallLog calls={ target.get('call_log') }/>
+            </div>
         ];
     }
 

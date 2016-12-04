@@ -64,6 +64,12 @@
         }
     }
 
+    .TargetPane-activityHeader {
+        &:before {
+            @include icon($fa-var-flag);
+        }
+    }
+
     .TargetPane-callLogHeader {
         &:before {
             @include icon($fa-var-clock-o);

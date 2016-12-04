@@ -85,7 +85,7 @@ export default class TargetPane extends PaneBase {
                 <Msg id="panes.target.activityHeader"/>
             </h4>,
             <Msg key="activityLabel" id="panes.target.activityLabel"
-                values={ activityValues }/>,
+                tagName="p" values={ activityValues }/>,
             <h4 key="callLogHeader" className="TargetPane-callLogHeader">
                 <Msg id="panes.target.callLogHeader"
                     values={{ target: target.get('first_name') }}/>

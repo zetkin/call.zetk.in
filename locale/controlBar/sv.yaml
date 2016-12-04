@@ -1,7 +1,7 @@
 assignmentsButton: "Visa alla uppdrag"
 startButton: "Börja ringa"
 endButton: "Sluta ringa"
-callButton: "Ring {target}"
+callButton: "Starta samtal"
 skipButton: "Hoppa över"
 finishCallButton: "Slutför & rapportera"
 submitReportButton: "Skicka rapport"

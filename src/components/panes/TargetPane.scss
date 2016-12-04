@@ -55,23 +55,29 @@
         margin-bottom: 0.5em;
     }
 
-    .TargetPane-tagHeader {
+    .TargetPane-tags {
         margin-top: 1em;
 
-        &:before {
-            @include icon($fa-var-tag);
+        h4 {
+            &:before {
+                @include icon($fa-var-tag);
+            }
         }
     }
 
-    .TargetPane-activityHeader {
-        &:before {
-            @include icon($fa-var-flag);
+    .TargetPane-activity {
+        h4 {
+            &:before {
+                @include icon($fa-var-flag);
+            }
         }
     }
 
-    .TargetPane-callLogHeader {
-        &:before {
-            @include icon($fa-var-clock-o);
+    .TargetPane-callLog {
+        h4 {
+            &:before {
+                @include icon($fa-var-clock-o);
+            }
         }
     }
 

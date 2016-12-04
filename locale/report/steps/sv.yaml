@@ -21,9 +21,9 @@ callBack:
     question: "När ska vi ringa tillbaka?"
     options:
         asap: "Så snart som möjligt"
-        fewDays: "Efter ett par dagar"
-        oneWeek: "Efter en vecka"
-        twoWeeks: "Efter ett par veckor"
+        fewDays: "Om ett par dagar"
+        oneWeek: "Om en vecka"
+        twoWeeks: "Om ett par veckor"
     summary:
         asap: "Vi ringer tillbaka så snart som möjligt"
         fewDays: "Vi ringer tillbaka tidigast om ett par dagar"

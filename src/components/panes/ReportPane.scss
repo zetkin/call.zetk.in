@@ -1,11 +1,10 @@
 .ReportPane {
     transition: left 0.5s;
 
-    @include PaneWithTabs('ReportPane');
-
     .PaneBase-header {
         p {
             color: darken(white, 30);
+            text-align: left;
         }
     }
 

@@ -1,9 +1,6 @@
 .TargetPane {
     z-index: 2;
-    background-color: white;
     padding-top: 1em;
-
-    @include PaneWithTabs('TargetPane');
 
     .TargetPane-basics {
         &:after {

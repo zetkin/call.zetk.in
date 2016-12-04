@@ -107,7 +107,9 @@ export default class TargetPane extends PaneBase {
             );
         }
         else {
-            return null;
+            return (
+                <Msg tagName="p" id="panes.target.h1"/>
+            );
         }
     }
 

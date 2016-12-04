@@ -1,8 +1,6 @@
 .InputPane {
     z-index: 2;
 
-    @include PaneWithTabs('InputPane');
-
     .PaneBase-header {
         p {
             text-align: center;

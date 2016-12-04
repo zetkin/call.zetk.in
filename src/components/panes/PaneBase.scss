@@ -1,13 +1,14 @@
 .PaneBase {
     position: absolute;
+    overflow: visible;
     top: 0;
     bottom: 0;
+    padding: 0 0 1em 1em;
+    background: none;
     box-sizing: border-box;
     box-shadow: 0 2px 2px darken(#FFF, 10);
 
     transition: width 0.5s, left 0.5s;
-    padding: 0 1em;
-    overflow: scroll;
 
     h1 {
         font-size: 1.7em;
@@ -21,6 +22,60 @@
     h3 {
         font-size: 1.2em;
         margin-bottom: 0;
+    }
+
+    .PaneBase-header {
+        position: absolute;
+        width: 100%;
+        height: 4em;
+        top: 0;
+        left: 0;
+
+        p {
+            text-align: center;
+            color: darken(white, 30);
+        }
+
+        button {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            border: none;
+            background: white;
+            font-family: inherit;
+            font-size: 1em;
+
+            &:focus {
+                outline: none;
+            }
+
+            &.InstructionsPane-targetButton {
+                &:before {
+                    @include icon($fa-var-user);
+                }
+            }
+
+            &.TargetPane-instructionsButton {
+                &:before {
+                    @include icon($fa-var-file-text);
+                }
+            }
+        }
+    }
+
+    .PaneBase-content {
+        background: white;
+        height: calc(100% - 4em);
+        margin-top: 4em;
+        overflow: scroll;
+        padding-right: 3%;
+        padding-top: 1em;
+
+        h1 {
+            &:first-child {
+                margin-top: 0;
+            }
+        }
     }
 }
 

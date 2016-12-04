@@ -3,6 +3,7 @@ instructions:
     targetButton: "Visa personinfo"
 
 target:
+    h1: "Personinfo"
     tagHeader: "Etiketter"
     callLogHeader: "Tidigare påringningar till {target}"
     instructionsButton: "Visa instruktioner"

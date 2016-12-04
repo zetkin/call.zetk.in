@@ -7,4 +7,15 @@
         font-style: italic;
         color: $c-ui-dark;
     }
+
+    li.CallLog-enter, li.CallLog-appear {
+        animation: CallLogItem-appearAnimation 0.2s;
+        animation-fill-mode: backwards;
+    }
+}
+
+@keyframes CallLogItem-appearAnimation {
+    from {
+        opacity: 0;
+    }
 }

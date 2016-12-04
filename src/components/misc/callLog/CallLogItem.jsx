@@ -15,7 +15,7 @@ export default class CallLogItem extends React.Component {
 
     componentDidMount() {
         let node = ReactDOM.findDOMNode(this.refs.notes);
-        if (node.clientHeight > 25) {
+        if (node && node.clientHeight > 25) {
             this.setState({
                 viewMode: 'contracted',
             });

@@ -4,8 +4,6 @@ import { FormattedMessage as Msg } from 'react-intl';
 import Button from '../../../common/misc/Button';
 import ReportStepBase from './ReportStepBase';
 import {
-    finishCallReport,
-    setCallReportField,
     setCallReportStep,
     setOrganizerLogMessage,
 } from '../../../actions/call';
@@ -31,9 +29,6 @@ export default class OrganizerLogStep extends ReportStepBase {
         return [
             <Msg key="organizerQuestion" tagName="p"
                 id="report.steps.organizerLog.question"/>,
-            <Button key="noActionButton"
-                labelMsg="report.steps.organizerLog.options.noActionNeeded"
-                onClick={ this.onClickRemove.bind(this) }/>,
             <textarea key="message" value={ report.get('organizerLog') }
                 onChange={ this.onChangeMessage.bind(this) }/>,
             <Button key="saveButton"
@@ -68,10 +63,5 @@ export default class OrganizerLogStep extends ReportStepBase {
 
     onClickAdd() {
         this.props.dispatch(setCallReportStep(this.props.call, 'caller_log'));
-    }
-
-    onClickRemove() {
-        this.props.dispatch(setCallReportField(
-            this.props.call, 'organizerActionNeeded', false));
     }
 }

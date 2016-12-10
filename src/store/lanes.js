@@ -28,8 +28,9 @@ const REPORT_STEP_PROGRESS = {
     'failure_reason': 0.2,
     'failure_message': 0.4,
     'call_back': 0.4,
-    'caller_log': 0.6,
-    'organizer_log': 0.8,
+    'organizer_action': 0.5,
+    'organizer_log': 0.6,
+    'caller_log': 0.8,
     'summary': 1.0,
 };
 
@@ -213,13 +214,13 @@ export default createReducer(initialState, {
             nextStep = 'success_could_talk';
         }
         else if (field === 'targetCouldTalk' && value) {
-            nextStep = 'caller_log';
+            nextStep = 'organizer_action';
         }
         else if (field === 'targetCouldTalk' && !value) {
             nextStep = 'call_back';
         }
         else if (field === 'callBackAfter') {
-            nextStep = 'caller_log';
+            nextStep = 'organizer_action';
         }
         else if (field === 'success') {
             nextStep = 'failure_reason';
@@ -231,16 +232,16 @@ export default createReducer(initialState, {
             nextStep = 'call_back';
         }
         else if (field === 'failureReason') {
-            nextStep = 'caller_log';
+            nextStep = 'organizer_action';
         }
         else if (field === 'leftMessage') {
-            nextStep = 'caller_log';
+            nextStep = 'organizer_action';
         }
         else if (field === 'organizerActionNeeded' && value) {
             nextStep = 'organizer_log';
         }
         else if (field === 'organizerActionNeeded') {
-            nextStep = 'summary';
+            nextStep = 'caller_log';
         }
 
         let reportProgress = REPORT_STEP_PROGRESS[nextStep];

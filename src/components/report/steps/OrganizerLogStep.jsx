@@ -6,14 +6,20 @@ import ReportStepBase from './ReportStepBase';
 import {
     finishCallReport,
     setCallReportField,
+    setCallReportStep,
     setOrganizerLogMessage,
 } from '../../../actions/call';
 
 
 export default class OrganizerLogStep extends ReportStepBase {
     getRenderMode(report) {
-        return (report.get('step') === 'organizer_log')?
-            'form' : 'summary';
+        if (report.get('organizerActionNeeded')) {
+            return (report.get('step') === 'organizer_log')?
+                'form' : 'summary';
+        }
+        else {
+            return 'none';
+        }
     }
 
     renderForm(report) {
@@ -53,12 +59,6 @@ export default class OrganizerLogStep extends ReportStepBase {
                     id="report.steps.organizerLog.summary.emptyLog"/>
             );
         }
-        else {
-            return (
-                <Msg tagName="p"
-                    id="report.steps.organizerLog.summary.noActionNeeded"/>
-            );
-        }
     }
 
     onChangeMessage(ev) {
@@ -67,7 +67,7 @@ export default class OrganizerLogStep extends ReportStepBase {
     }
 
     onClickAdd() {
-        this.props.dispatch(finishCallReport(this.props.call));
+        this.props.dispatch(setCallReportStep(this.props.call, 'caller_log'));
     }
 
     onClickRemove() {

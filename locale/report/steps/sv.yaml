@@ -52,23 +52,29 @@ failureMessage:
         leftMessage: "Du lämnade ett meddelande."
         noMessage: "Du lämnade inget meddelande."
 
-callerLog:
-    callerQuestion: "Lämna en anteckning till framtida ringare"
-    organizerQuestion: "Behöver en organisatör agera?"
+organizerAction:
+    question: "Framkom något under samtalet som kräver att en ansvarig agerar?"
     options:
-        organizerActionNeeded: "Ja"
+        actionNeeded: "Ja"
         noActionNeeded: "Nej, det behövs inte"
     summary:
-        leftLog: "Du lämnade en anteckning till framtida ringare:"
-        emptyLog: "Du lämnade ingen anteckning till ringare."
+        actionNeeded: "Du vill att någon ansvarig kollar på samtalet."
+        noActionNeeded: "Ingen ansvarig behöver agera."
 
 organizerLog:
-    question: "Förklara för organisatören vad problemet är."
+    question: "Förklara för den som är ansvarig vad problemet är."
     options:
         saveWithoutLog: "Spara utan meddelande"
         saveWithLog: "Inkludera meddelandet"
-        noActionNeeded: "Organisatör behövs inte"
     summary:
-        leftLog: "Du lämnade en anteckning för organistörer att uppmärksamma:"
-        emptyLog: "Du har bett en organisatör titta på samtalet."
-        noActionNeeded: "Ingen organisatör behöver titta på meddelandet"
+        leftLog: "Du skrev en anteckning till den ansvariga."
+        emptyLog: "Du skrev ingen anteckning till den ansvariga."
+
+callerLog:
+    question: "Vill du lämna en anteckning till framtida ringare?"
+    options:
+        saveWithLog: "Spara anteckning"
+        saveWithoutLog: "Spara utan anteckning"
+    summary:
+        leftLog: "Du skrev en anteckning till framtida ringare."
+        emptyLog: "Du skrev ingen anteckning till framtida ringare."

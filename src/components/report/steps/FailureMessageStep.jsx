@@ -46,6 +46,18 @@ export default class FailureMessageStep extends ReportStepBase {
         );
     }
 
+    renderEffect(report) {
+        if (report.get('leftMessage')) {
+            return (
+                <Msg tagName="p"
+                    id="report.steps.failureMessage.effect.leftMessage"/>
+            );
+        }
+        else {
+            return null;
+        }
+    }
+
     onClickOption(leftMessage) {
         this.props.dispatch(setCallReportField(
             this.props.call, 'leftMessage', leftMessage));

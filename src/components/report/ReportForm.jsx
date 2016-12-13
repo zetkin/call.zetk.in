@@ -49,6 +49,7 @@ const componentFromStep = step => {
         failure_reason: steps.FailureReasonStep,
         failure_message: steps.FailureMessageStep,
         call_back: steps.CallBackStep,
+        organizer_action: steps.OrganizerActionStep,
         caller_log: steps.CallerLogStep,
         organizer_log: steps.OrganizerLogStep,
         summary: steps.SummaryStep,

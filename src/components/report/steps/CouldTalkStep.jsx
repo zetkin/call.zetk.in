@@ -44,6 +44,16 @@ export default class CouldTalkStep extends ReportStepBase {
         );
     }
 
+    renderEffect(report) {
+        let msgId = report.get('targetCouldTalk')?
+            'report.steps.successCouldTalk.effect.couldTalk' :
+            'report.steps.successCouldTalk.effect.callBack';
+
+        return (
+            <Msg tagName="p" id={ msgId }/>
+        );
+    }
+
     onClickOption(success) {
         this.props.dispatch(setCallReportField(
             this.props.call, 'targetCouldTalk', success));

@@ -23,8 +23,8 @@
         }
     }
 
-    .ReportStepBase-content {
-        .button {
+    .ReportStepBase-form {
+        .Button {
             @include button(#f9f9f9);
 
             margin: 0 0.5em 0.5em 0;

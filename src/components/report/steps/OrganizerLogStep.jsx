@@ -4,16 +4,20 @@ import { FormattedMessage as Msg } from 'react-intl';
 import Button from '../../../common/misc/Button';
 import ReportStepBase from './ReportStepBase';
 import {
-    finishCallReport,
-    setCallReportField,
+    setCallReportStep,
     setOrganizerLogMessage,
 } from '../../../actions/call';
 
 
 export default class OrganizerLogStep extends ReportStepBase {
     getRenderMode(report) {
-        return (report.get('step') === 'organizer_log')?
-            'form' : 'summary';
+        if (report.get('organizerActionNeeded')) {
+            return (report.get('step') === 'organizer_log')?
+                'form' : 'summary';
+        }
+        else {
+            return 'none';
+        }
     }
 
     renderForm(report) {
@@ -25,9 +29,6 @@ export default class OrganizerLogStep extends ReportStepBase {
         return [
             <Msg key="organizerQuestion" tagName="p"
                 id="report.steps.organizerLog.question"/>,
-            <Button key="noActionButton"
-                labelMsg="report.steps.organizerLog.options.noActionNeeded"
-                onClick={ this.onClickRemove.bind(this) }/>,
             <textarea key="message" value={ report.get('organizerLog') }
                 onChange={ this.onChangeMessage.bind(this) }/>,
             <Button key="saveButton"
@@ -41,11 +42,10 @@ export default class OrganizerLogStep extends ReportStepBase {
         let log = report.get('organizerLog') || '';
 
         if (oan && log.length) {
-            return [
-                <Msg key="summary" tagName="p"
-                    id="report.steps.organizerLog.summary.leftLog"/>,
-                <p key="log" className="logMessage">{ log }</p>
-            ];
+            return (
+                <Msg tagName="p"
+                    id="report.steps.organizerLog.summary.leftLog"/>
+            );
         }
         else if (oan) {
             return (
@@ -53,11 +53,20 @@ export default class OrganizerLogStep extends ReportStepBase {
                     id="report.steps.organizerLog.summary.emptyLog"/>
             );
         }
+    }
+
+    renderEffect(report) {
+        let log = report.get('organizerLog') || '';
+
+        if (log.length) {
+            return [
+                <Msg key="effect" tagName="p"
+                    id="report.steps.organizerLog.effect.leftLog"/>,
+                <p key="log" className="logMessage">{ log }</p>
+            ];
+        }
         else {
-            return (
-                <Msg tagName="p"
-                    id="report.steps.organizerLog.summary.noActionNeeded"/>
-            );
+            return null;
         }
     }
 
@@ -67,11 +76,6 @@ export default class OrganizerLogStep extends ReportStepBase {
     }
 
     onClickAdd() {
-        this.props.dispatch(finishCallReport(this.props.call));
-    }
-
-    onClickRemove() {
-        this.props.dispatch(setCallReportField(
-            this.props.call, 'organizerActionNeeded', false));
+        this.props.dispatch(setCallReportStep(this.props.call, 'caller_log'));
     }
 }

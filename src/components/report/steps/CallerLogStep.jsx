@@ -4,7 +4,7 @@ import { FormattedMessage as Msg } from 'react-intl';
 import Button from '../../../common/misc/Button';
 import ReportStepBase from './ReportStepBase';
 import {
-    setCallReportField,
+    finishCallReport,
     setCallerLogMessage,
 } from '../../../actions/call';
 
@@ -16,30 +16,29 @@ export default class CallerLogStep extends ReportStepBase {
     }
 
     renderForm(report) {
+        let log = report.get('callerLog');
+        let saveLabelMsg = log.length?
+            'report.steps.callerLog.options.saveWithLog' :
+            'report.steps.callerLog.options.saveWithoutLog';
+
         return [
-            <Msg key="callerQuestion" tagName="p"
-                id="report.steps.callerLog.callerQuestion"/>,
+            <Msg key="question" tagName="p"
+                id="report.steps.callerLog.question"/>,
             <textarea key="message" value={ report.get('callerLog') }
                 onChange={ this.onChangeMessage.bind(this) }/>,
-            <Msg key="organizerQuestion" tagName="p"
-                id="report.steps.callerLog.organizerQuestion"/>,
-            <Button key="messageButton"
-                labelMsg="report.steps.callerLog.options.organizerActionNeeded"
-                onClick={ this.onClickOption.bind(this, true) }/>,
-            <Button key="noMessageButton"
-                labelMsg="report.steps.callerLog.options.noActionNeeded"
-                onClick={ this.onClickOption.bind(this, false) }/>,
+            <Button key="saveButton"
+                labelMsg={ saveLabelMsg }
+                onClick={ this.onClickSave.bind(this) }/>,
         ];
     }
 
     renderSummary(report) {
         let log = report.get('callerLog') || '';
         if (log.length) {
-            return [
-                <Msg key="summary" tagName="p"
-                    id="report.steps.callerLog.summary.leftLog"/>,
-                <p key="log" className="logMessage">{ log }</p>
-            ];
+            return (
+                <Msg tagName="p"
+                    id="report.steps.callerLog.summary.leftLog"/>
+            );
         }
         else {
             return (
@@ -49,13 +48,26 @@ export default class CallerLogStep extends ReportStepBase {
         }
     }
 
+    renderEffect(report) {
+        let log = report.get('callerLog') || '';
+        if (log.length) {
+            return [
+                <Msg key="effect" tagName="p"
+                    id="report.steps.callerLog.effect.leftLog"/>,
+                <p key="log" className="logMessage">{ log }</p>
+            ];
+        }
+        else {
+            return null;
+        }
+    }
+
     onChangeMessage(ev) {
         this.props.dispatch(setCallerLogMessage(
             this.props.call, ev.target.value));
     }
 
-    onClickOption(organizerActionNeeded) {
-        this.props.dispatch(setCallReportField(
-            this.props.call, 'organizerActionNeeded', organizerActionNeeded));
+    onClickSave() {
+        this.props.dispatch(finishCallReport(this.props.call));
     }
 }

@@ -29,10 +29,27 @@ export default class ReportStepBase extends React.Component {
             let editLink = null;
 
             if (renderMode === 'form') {
-                content = this.renderForm(report);
+                content = (
+                    <div className="ReportStepBase-form">
+                        { this.renderForm(report) }
+                    </div>
+                );
             }
             else if (renderMode === 'summary') {
-                content = this.renderSummary(report);
+                content = [
+                    <div key="summary" className="ReportStepBase-summary">
+                        { this.renderSummary(report) }
+                    </div>
+                ];
+
+                let effect = this.renderEffect(report);
+                if (effect) {
+                    content.push(
+                        <div key="effect" className="ReportStepBase-effect">
+                            { effect }
+                        </div>
+                    );
+                }
 
                 if (!this.props.disableEdit) {
                     editLink = (
@@ -52,9 +69,7 @@ export default class ReportStepBase extends React.Component {
             return (
                 <div className={ cx(classNames) }>
                     { editLink }
-                    <div className="ReportStepBase-content">
-                        { content }
-                    </div>
+                    { content }
                 </div>
             );
         }
@@ -66,6 +81,10 @@ export default class ReportStepBase extends React.Component {
         // * summary - to render brief summary
         // * none - to not render at all
         return 'none';
+    }
+
+    renderEffect(report) {
+        return null;
     }
 
     onClickEdit() {

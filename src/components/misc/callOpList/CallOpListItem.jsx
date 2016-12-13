@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedRelative } from 'react-intl';
 
 import Avatar from '../Avatar';
 import PropTypes from '../../../utils/PropTypes';
@@ -12,6 +13,7 @@ export default class CallOpListItem extends React.Component {
     render() {
         let call = this.props.call;
         let target = call.get('target');
+        let date = new Date(call.get('allocation_time'));
 
         return (
             <div className="CallOpListItem">
@@ -24,7 +26,7 @@ export default class CallOpListItem extends React.Component {
                     { target.get('name') }
                 </span>
                 <span className="CallOpListItem-time">
-                    { call.get('allocation_time') }
+                    <FormattedRelative value={ date }/>
                 </span>
 
                 <div className="CallOpListItem-ops">

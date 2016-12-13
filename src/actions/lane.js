@@ -1,4 +1,5 @@
 import * as types from '.';
+import { laneByCallId } from '../store/lanes';
 
 
 export function setLaneStep(lane, step) {
@@ -15,11 +16,20 @@ export function setLaneInfoMode(mode) {
     };
 }
 
-export function switchLaneToCall(call) {
-    let callId = call.get('id');
+export function switchLaneToCall(call, step) {
+    return ({ dispatch, getState }) => {
+        let callId = call.get('id');
 
-    return {
-        type: types.SWITCH_LANE_TO_CALL,
-        payload: { callId },
+        dispatch({
+            type: types.SWITCH_LANE_TO_CALL,
+            payload: { callId },
+        });
+
+        if (step) {
+            console.log(JSON.stringify(callId));
+            let lane = laneByCallId(getState().get('lanes'), callId.toString());
+
+            dispatch(setLaneStep(lane, step));
+        }
     };
 }

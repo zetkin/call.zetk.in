@@ -42,7 +42,7 @@ export default class ResumeOverlay extends React.Component {
 
     onCallOperation(call, op) {
         if (op == 'resume') {
-            this.props.dispatch(switchLaneToCall(call));
+            this.props.dispatch(switchLaneToCall(call, 'call'));
         }
         else if (op == 'discard') {
             this.props.dispatch(deallocateCall(call));

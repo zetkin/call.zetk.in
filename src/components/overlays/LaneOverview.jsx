@@ -63,9 +63,11 @@ export default class LaneOverview extends React.Component {
             };
 
             // Exclude calls that are merely allocated. They will be in the
-            // adjacent lanes list anyway.
+            // adjacent lanes list anyway. Finally order calls by date.
             let calls = callList.get('items').toList()
-                .filter(c => c.get('state') !== 0);
+                .filter(c => c.get('state') !== 0)
+                .sortBy(c => c.get('allocation_time'))
+                .reverse();
 
             let filterString = this.state.filterString.toLowerCase();
             if (filterString.length > 2) {

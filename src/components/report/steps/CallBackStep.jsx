@@ -53,6 +53,17 @@ export default class CallBackStep extends ReportStepBase {
         );
     }
 
+    renderEffect(report) {
+        let target = this.props.target.get('first_name');
+        let cba = report.get('callBackAfter');
+        let msgId = 'report.steps.callBack.effect.' + ((cba === 'asap')?
+            'asap' : 'other');
+
+        return (
+            <Msg tagName="p" id={ msgId } values={{ target }}/>
+        );
+    }
+
     onClickOption(option) {
         this.props.dispatch(setCallReportField(
             this.props.call, 'callBackAfter', option));

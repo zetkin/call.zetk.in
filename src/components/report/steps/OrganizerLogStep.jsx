@@ -42,17 +42,31 @@ export default class OrganizerLogStep extends ReportStepBase {
         let log = report.get('organizerLog') || '';
 
         if (oan && log.length) {
-            return [
-                <Msg key="summary" tagName="p"
-                    id="report.steps.organizerLog.summary.leftLog"/>,
-                <p key="log" className="logMessage">{ log }</p>
-            ];
+            return (
+                <Msg tagName="p"
+                    id="report.steps.organizerLog.summary.leftLog"/>
+            );
         }
         else if (oan) {
             return (
                 <Msg tagName="p"
                     id="report.steps.organizerLog.summary.emptyLog"/>
             );
+        }
+    }
+
+    renderEffect(report) {
+        let log = report.get('organizerLog') || '';
+
+        if (log.length) {
+            return [
+                <Msg key="effect" tagName="p"
+                    id="report.steps.organizerLog.effect.leftLog"/>,
+                <p key="log" className="logMessage">{ log }</p>
+            ];
+        }
+        else {
+            return null;
         }
     }
 

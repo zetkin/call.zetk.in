@@ -35,17 +35,30 @@ export default class CallerLogStep extends ReportStepBase {
     renderSummary(report) {
         let log = report.get('callerLog') || '';
         if (log.length) {
-            return [
-                <Msg key="summary" tagName="p"
-                    id="report.steps.callerLog.summary.leftLog"/>,
-                <p key="log" className="logMessage">{ log }</p>
-            ];
+            return (
+                <Msg tagName="p"
+                    id="report.steps.callerLog.summary.leftLog"/>
+            );
         }
         else {
             return (
                 <Msg tagName="p"
                     id="report.steps.callerLog.summary.emptyLog"/>
             );
+        }
+    }
+
+    renderEffect(report) {
+        let log = report.get('callerLog') || '';
+        if (log.length) {
+            return [
+                <Msg key="effect" tagName="p"
+                    id="report.steps.callerLog.effect.leftLog"/>,
+                <p key="log" className="logMessage">{ log }</p>
+            ];
+        }
+        else {
+            return null;
         }
     }
 

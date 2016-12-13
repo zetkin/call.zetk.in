@@ -27,16 +27,28 @@ export default class OrganizerActionStep extends ReportStepBase {
 
     renderSummary(report) {
         if (report.get('organizerActionNeeded')) {
-            return [
-                <Msg key="summary" tagName="p"
-                    id="report.steps.organizerAction.summary.actionNeeded"/>,
-            ];
+            return (
+                <Msg tagName="p"
+                    id="report.steps.organizerAction.summary.actionNeeded"/>
+            );
         }
         else {
             return (
                 <Msg tagName="p"
                     id="report.steps.organizerAction.summary.noActionNeeded"/>
             );
+        }
+    }
+
+    renderEffect(report) {
+        if (report.get('organizerActionNeeded')) {
+            return (
+                <Msg tagName="p"
+                    id="report.steps.organizerAction.effect.actionNeeded"/>
+            );
+        }
+        else {
+            return null;
         }
     }
 

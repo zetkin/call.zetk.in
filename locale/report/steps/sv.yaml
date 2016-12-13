@@ -3,10 +3,12 @@ successOrFailure:
     options:
         success: "Ja"
         failure: "Nej..."
-
     summary:
         success: "Du nådde {target}."
         failure: "Du nådde inte {target}."
+    effect:
+        success: "Framtida ringare kommer se att du pratat med {target}."
+        failure: "Framtida ringare kommer se att du inte pratat med {target}."
 
 successCouldTalk:
     question: "Kunde {target} prata just nu?"
@@ -16,6 +18,9 @@ successCouldTalk:
     summary:
         couldTalk: "{target} kunde prata med oss."
         callBack: "{target} hade inte tid att prata just nu."
+    effect:
+        couldTalk: "Framtida ringare kommer se att ni kunde prata färdigt."
+        callBack: "Framtida ringare kommer se att vi behövde ringa tillbaka."
 
 callBack:
     question: "När ska vi ringa tillbaka?"
@@ -29,6 +34,9 @@ callBack:
         fewDays: "Vi ringer tillbaka tidigast om ett par dagar"
         oneWeek: "Vi ringer tillbaka tidigast om en vecka"
         twoWeeks: "Vi ringer tillbaka tidigast om två veckor"
+    effect:
+        asap: "{target} placeras sist i ringkön."
+        other: "{target} plockas automatiskt bort ur ringkön så länge."
 
 failureReason:
     question: "Varför inte?"
@@ -51,6 +59,8 @@ failureMessage:
     summary:
         leftMessage: "Du lämnade ett meddelande."
         noMessage: "Du lämnade inget meddelande."
+    effect:
+        leftMessage: "Framtida ringare kommer att se att du lämnat ett meddelande."
 
 organizerAction:
     question: "Framkom något under samtalet som kräver att en ansvarig agerar?"
@@ -60,6 +70,8 @@ organizerAction:
     summary:
         actionNeeded: "Du vill att någon ansvarig kollar på samtalet."
         noActionNeeded: "Ingen ansvarig behöver agera."
+    effect:
+        actionNeeded: "En organisatör kommer bli meddelad."
 
 organizerLog:
     question: "Förklara för den som är ansvarig vad problemet är."
@@ -67,8 +79,10 @@ organizerLog:
         saveWithoutLog: "Spara utan meddelande"
         saveWithLog: "Inkludera meddelandet"
     summary:
-        leftLog: "Du skrev en anteckning till den ansvariga."
-        emptyLog: "Du skrev ingen anteckning till den ansvariga."
+        leftLog: "Du skrev en anteckning till organisatören."
+        emptyLog: "Du skrev ingen anteckning till organisatören."
+    effect:
+        leftLog: "Organisatören kommer få följande meddelande:"
 
 callerLog:
     question: "Vill du lämna en anteckning till framtida ringare?"
@@ -78,3 +92,5 @@ callerLog:
     summary:
         leftLog: "Du skrev en anteckning till framtida ringare."
         emptyLog: "Du skrev ingen anteckning till framtida ringare."
+    effect:
+        leftLog: "Framtida ringare kommer att se din anteckning:"

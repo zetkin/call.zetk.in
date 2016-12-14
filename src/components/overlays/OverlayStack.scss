@@ -20,17 +20,7 @@
         padding: 10%;
         overflow-y: scroll;
 
-        &::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: darken(white,70);
-
-            &:hover {
-                background-color: darken(white,60);
-            }
-        }
+        @include scrollbar(lighten(black, 20), $flip:true);
 
         &:after {
             content: "";

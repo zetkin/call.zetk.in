@@ -11,7 +11,9 @@ import { popTutorialNote } from '../../actions/tutorial';
 @connect(() => ({}))
 export default class TutorialNote extends React.Component {
     static propTypes = {
-        messages: PropTypes.map,
+        messages: PropTypes.map.isRequired,
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired,
     };
 
     render() {
@@ -32,8 +34,13 @@ export default class TutorialNote extends React.Component {
             );
         }
 
+        let style = {
+            left: this.props.x + 'px',
+            top: this.props.y + 'px',
+        };
+
         return (
-            <div className="TutorialNote">
+            <div className="TutorialNote" style={ style }>
                 <Msg tagName="h2" id={ messages.get('header') }/>
                 <Msg tagName="p" id={ messages.get('text') }/>
                 { manualButton }

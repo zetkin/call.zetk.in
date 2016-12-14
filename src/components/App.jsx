@@ -3,6 +3,7 @@ import React from 'react';
 
 import OverlayStack from './overlays/OverlayStack';
 import { showOverlay } from '../actions/view';
+import Tutorial from './tutorial/Tutorial';
 
 
 @connect(state => ({ fullState: state }))
@@ -35,6 +36,7 @@ export default class App extends React.Component {
                         { this.props.children }
                     </div>
                     <OverlayStack/>
+                    <Tutorial/>
                     <script type="text/json"
                         id="App-initialState"
                         dangerouslySetInnerHTML={{ __html: stateJson }}/>

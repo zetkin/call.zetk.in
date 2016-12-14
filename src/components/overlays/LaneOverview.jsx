@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { FormattedMessage as Msg, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 
@@ -31,6 +32,11 @@ export default class LaneOverview extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(retrieveUserCalls());
+
+        let filterInput = ReactDOM.findDOMNode(this.refs.filterInput);
+        if (filterInput) {
+            filterInput.focus();
+        }
     }
 
     render() {
@@ -100,7 +106,7 @@ export default class LaneOverview extends React.Component {
                     <Msg tagName="p"
                         id="overlays.laneOverview.log.p"/>
                     <i className="fa fa-search"></i>
-                    <input type="text"
+                    <input type="text" ref="filterInput"
                         placeholder={ filterPlaceholder }
                         value={ this.state.filterString }
                         onKeyUp={ this.onFilterKeyUp.bind(this) }

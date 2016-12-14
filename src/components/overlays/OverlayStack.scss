@@ -20,6 +20,8 @@
         padding: 10%;
         overflow-y: scroll;
 
+        @include scrollbar(lighten(black, 20), $flip:true);
+
         &:after {
             content: "";
             display: block;

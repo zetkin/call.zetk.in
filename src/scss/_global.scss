@@ -8,6 +8,7 @@ body {
     background-color: #FFF;
     font-size: 15px;
     margin: 0;
+    overflow: hidden;
 
     @include large-screen {
         font-size: 18px;
@@ -39,8 +40,4 @@ a {
 
 p {
     line-height: 1.7em;
-}
-
-::-webkit-scrollbar {
-    display: none;
 }

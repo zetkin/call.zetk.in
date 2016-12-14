@@ -3,7 +3,7 @@
     overflow: visible;
     top: 0;
     bottom: 0;
-    padding: 0 0 1em 1em;
+    padding: 0 0 0em 1em;
     background: none;
     box-sizing: border-box;
     box-shadow: 0 2px 2px darken(#FFF, 10);
@@ -67,9 +67,16 @@
         background: white;
         height: calc(100% - 4em);
         margin-top: 4em;
-        overflow: scroll;
         padding-right: 3%;
         padding-top: 1em;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        @include scrollbar(white);
+
+        &:hover {
+            @include scrollbar(darken(white, 5));
+        }
 
         h1 {
             &:first-child {

@@ -32,38 +32,17 @@ export default class Tutorial extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.onWindowResizeBound = this.onWindowResize.bind(this);
+        window.addEventListener('resize', this.onWindowResizeBound);
+    }
+
     componentDidUpdate() {
-        let note = ReactDOM.findDOMNode(this.refs.note);
-        if (note) {
-            let noteRect = note.getBoundingClientRect();
-            let x = window.innerWidth/2 - noteRect.width/2;
-            let y = window.innerHeight/2 - noteRect.height/2;
+        this.onWindowResize();
+    }
 
-            if (this.targetElem) {
-                let targetRect = this.targetElem.getBoundingClientRect();
-
-                // Try left-aligned, below
-                x = targetRect.left - PADDING;
-                y = targetRect.bottom + 2 * PADDING;
-
-                // Too low? Move above instead
-                if (y + noteRect.height > window.innerHeight) {
-                    y = targetRect.top - noteRect.height - 2 * PADDING;
-                }
-
-                // Too far right? Align right instead
-                if (x + noteRect.width > window.innerWidth) {
-                    x = (targetRect.right - noteRect.width) + PADDING;
-                }
-            }
-
-            if (x !== this.state.noteX || y !== this.state.noteY) {
-                this.setState({
-                    noteX: x,
-                    noteY: y,
-                });
-            }
-        }
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.onWindowResizeBound);
     }
 
     render() {
@@ -103,6 +82,40 @@ export default class Tutorial extends React.Component {
         }
         else {
             return null;
+        }
+    }
+
+    onWindowResize() {
+        let note = ReactDOM.findDOMNode(this.refs.note);
+        if (note) {
+            let noteRect = note.getBoundingClientRect();
+            let x = window.innerWidth/2 - noteRect.width/2;
+            let y = window.innerHeight/2 - noteRect.height/2;
+
+            if (this.targetElem) {
+                let targetRect = this.targetElem.getBoundingClientRect();
+
+                // Try left-aligned, below
+                x = targetRect.left - PADDING;
+                y = targetRect.bottom + 2 * PADDING;
+
+                // Too low? Move above instead
+                if (y + noteRect.height > window.innerHeight) {
+                    y = targetRect.top - noteRect.height - 2 * PADDING;
+                }
+
+                // Too far right? Align right instead
+                if (x + noteRect.width > window.innerWidth) {
+                    x = (targetRect.right - noteRect.width) + PADDING;
+                }
+            }
+
+            if (x !== this.state.noteX || y !== this.state.noteY) {
+                this.setState({
+                    noteX: x,
+                    noteY: y,
+                });
+            }
         }
     }
 }

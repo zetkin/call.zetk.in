@@ -72,6 +72,12 @@
         overflow-y: scroll;
         overflow-x: hidden;
 
+        &:hover {
+            &::-webkit-scrollbar {
+                background-color: darken(white,1.5);
+            }
+        }
+
         &::-webkit-scrollbar {
             width: 10px;
         }

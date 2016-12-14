@@ -23,9 +23,12 @@ export default class Tutorial extends React.Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
+        this.targetElem = null;
         if (nextProps.noteQueue.size) {
             let note = nextProps.noteQueue.get(0);
-            this.targetElem = document.querySelector(note.get('domElementSelector'));
+            if (note.get('domElementSelector')) {
+                this.targetElem = document.querySelector(note.get('domElementSelector'));
+            }
         }
     }
 
@@ -33,20 +36,25 @@ export default class Tutorial extends React.Component {
         let note = ReactDOM.findDOMNode(this.refs.note);
         if (note) {
             let noteRect = note.getBoundingClientRect();
-            let targetRect = this.targetElem.getBoundingClientRect();
+            let x = window.innerWidth/2 - noteRect.width/2;
+            let y = window.innerHeight/2 - noteRect.height/2;
 
-            // Try left-aligned, below
-            let x = targetRect.left - PADDING;
-            let y = targetRect.bottom + 2 * PADDING;
+            if (this.targetElem) {
+                let targetRect = this.targetElem.getBoundingClientRect();
 
-            // Too low? Move above instead
-            if (y + noteRect.height > window.innerHeight) {
-                y = targetRect.top - noteRect.height - 2 * PADDING;
-            }
+                // Try left-aligned, below
+                x = targetRect.left - PADDING;
+                y = targetRect.bottom + 2 * PADDING;
 
-            // Too far right? Align right instead
-            if (x + noteRect.width > window.innerWidth) {
-                x = (targetRect.right - noteRect.width) + PADDING;
+                // Too low? Move above instead
+                if (y + noteRect.height > window.innerHeight) {
+                    y = targetRect.top - noteRect.height - 2 * PADDING;
+                }
+
+                // Too far right? Align right instead
+                if (x + noteRect.width > window.innerWidth) {
+                    x = (targetRect.right - noteRect.width) + PADDING;
+                }
             }
 
             if (x !== this.state.noteX || y !== this.state.noteY) {

@@ -9,6 +9,7 @@ import assignments from './assignments';
 import calls from './calls';
 import campaigns from './campaigns';
 import lanes from './lanes';
+import tutorial from './tutorial';
 import user from './user';
 import view from './view';
 
@@ -20,6 +21,7 @@ const appReducer = combineReducers({
     calls,
     campaigns,
     lanes,
+    tutorial,
     user,
     view,
 });

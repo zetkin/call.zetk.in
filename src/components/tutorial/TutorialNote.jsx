@@ -29,7 +29,7 @@ export default class TutorialNote extends React.Component {
                 <FormattedLink msgId="tutorial.manualButton"
                     className="TutorialNote-manualLink"
                     target="_blank"
-                    href={ messages.get('manHref') }
+                    href={ href }
                     />
             );
         }

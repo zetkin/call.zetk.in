@@ -8,5 +8,11 @@
 
     .Tutorial-background {
         opacity: 0.7;
+        animation: Tutorial-background-appearAnimation 0.5s;
     }
+}
+
+@keyframes Tutorial-background-appearAnimation {
+    0%      { opacity: 0; }
+    100%    { opacity: 0.7; }
 }

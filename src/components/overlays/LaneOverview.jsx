@@ -99,6 +99,7 @@ export default class LaneOverview extends React.Component {
                         id="overlays.laneOverview.log.h"/>
                     <Msg tagName="p"
                         id="overlays.laneOverview.log.p"/>
+                    <i className="fa fa-search"></i>
                     <input type="text"
                         placeholder={ filterPlaceholder }
                         value={ this.state.filterString }

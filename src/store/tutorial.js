@@ -15,6 +15,7 @@ export default createReducer(initialState, {
 
     [types.PUSH_TUTORIAL_NOTE]: (state, action) => {
         let note = immutable.fromJS({
+            ns: action.payload.note.msgNamespace,
             domElementSelector: action.payload.note.domElementSelector,
             messages: {
                 header: action.payload.note.msgNamespace + '.h',

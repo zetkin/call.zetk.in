@@ -8,6 +8,7 @@ import TutorialNote from './TutorialNote';
 const PADDING = 10;
 
 const mapStateToProps = state => ({
+    isOverlayActive: !!state.getIn(['view', 'overlay']),
     noteQueue: state.getIn(['tutorial', 'noteQueue']),
 });
 
@@ -47,7 +48,7 @@ export default class Tutorial extends React.Component {
 
     render() {
         let noteQueue = this.props.noteQueue;
-        if (noteQueue.size) {
+        if (noteQueue.size && !this.props.isOverlayActive) {
             let note = noteQueue.get(0);
             let key = note.getIn(['messages', 'header']);
 

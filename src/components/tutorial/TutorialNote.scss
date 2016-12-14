@@ -1,0 +1,40 @@
+.TutorialNote {
+    background-color: $c-brand-comp-light;
+    max-width: 30%;
+    padding: 1em;
+    border-radius: 0.5em;
+
+    &:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    h2 {
+        color: white;
+        margin: 0;
+    }
+
+    p {
+        color: white;
+        margin: 0.5em 0;
+    }
+
+    .TutorialNote-closeLink, .TutorialNote-manualLink {
+        display: block;
+        float: right;
+        font-size: 0.8em;
+        font-weight: bold;
+        padding: 0.5em 1em;
+
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 5em;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: $c-brand-comp-dark;
+        }
+    }
+}

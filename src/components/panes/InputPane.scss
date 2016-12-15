@@ -75,6 +75,30 @@
     &.InputPane-callStep {
         width: 65%;
         left: 35%;
+
+        li {
+            cursor: pointer;
+
+            a {
+                color: lighten($c-text, 20);
+
+                &:after {
+                    @include icon($fa-var-chevron-right);
+                    font-size: 2em;
+                    vertical-align: middle;
+                }
+            }
+
+            &:hover {
+                a {
+                    color: $c-text;
+
+                    &:after {
+                        color: $c-brand-main;
+                    }
+                }
+            }
+        }
     }
 
     &.InputPane-reportStep {
@@ -119,8 +143,7 @@
         li {
             position: relative;
 
-            .Button {
-                @include button(darken(white, 5));
+            a {
                 position: absolute;
                 top: 1em;
                 right: 0;

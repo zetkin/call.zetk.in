@@ -225,13 +225,13 @@ const CampaignListItem = props => {
     let numBookings = props.userActions.size;
 
     return (
-        <li>
+        <li onClick={ () => props.onSelect(id) }>
             <h3>{ title }</h3>
             <Msg tagName="p" id="panes.input.summary.campaigns.status"
                 values={{ numBookings, target }}/>
-            <Button labelMsg="panes.input.summary.campaigns.respondButton"
-                labelValues={{ campaign: title }}
-                onClick={ () => props.onSelect(id) }/>
+            <FormattedLink key="CampaignListItemLink"
+                msgId="panes.input.summary.campaigns.respondButton"
+                msgValues={{ campaign: title }} />
         </li>
     );
 };

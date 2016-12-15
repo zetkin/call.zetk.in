@@ -230,6 +230,7 @@ const CampaignListItem = props => {
             <Msg tagName="p" id="panes.input.summary.campaigns.status"
                 values={{ numBookings, target }}/>
             <FormattedLink key="CampaignListItemLink"
+                className="InputPane-campaignListLink"
                 msgId="panes.input.summary.campaigns.respondButton"
                 msgValues={{ campaign: title }} />
         </li>

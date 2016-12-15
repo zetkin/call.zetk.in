@@ -79,7 +79,7 @@
         li {
             cursor: pointer;
 
-            a {
+            .InputPane-campaignListLink {
                 color: lighten($c-text, 20);
 
                 &:after {

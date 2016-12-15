@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage as Msg } from 'react-intl';
+import { FormattedDate, FormattedMessage as Msg } from 'react-intl';
 
 import Button from '../../common/misc/Button';
 import CampaignForm from '../../common/campaignForm/CampaignForm';
@@ -59,12 +59,30 @@ export default class InputPane extends PaneBase {
                     campaignContent = (
                         <ul className="InputPane-summaryList">
                         { listItems.toList().map(campaign => {
-                            let actions = target.get('future_actions').filter(a =>
-                                a.getIn(['campaign', 'id']) == campaign.get('id'));
+                            let id = campaign.get('id');
+                            let userActions = target.get('future_actions')
+                                .filter(a => a.getIn(['campaign', 'id']) == id);
+
+                            let userResponses = this.props.actions
+                                .getIn(['byTarget', target.get('id').toString()])
+                                .getIn(['responseList', 'items'])
+                                .filter(r => {
+                                    let actionId = r.get('action_id').toString();
+                                    let action = this.props.actions
+                                        .getIn(['actionList', 'items', actionId]);
+
+                                    return action.getIn(['campaign', 'id']) == id;
+                                });
+
+                            let campaignActions = this.props.actions
+                                .getIn(['actionList', 'items'])
+                                .filter(a => a.getIn(['campaign', 'id']) == id);
 
                             return (
                                 <CampaignListItem key={ campaign.get('id') }
-                                    userActions={ actions }
+                                    actions={ campaignActions }
+                                    userActions={ userActions }
+                                    userResponses={ userResponses }
                                     target={ target }
                                     campaign={ campaign }
                                     onSelect={ this.onCampaignSelect.bind(this) }/>
@@ -223,12 +241,45 @@ const CampaignListItem = props => {
     let title = props.campaign.get('title');
     let target = props.target.get('first_name');
     let numBookings = props.userActions.size;
+    let numResponses = props.userResponses.size;
+
+    let numActions = props.actions.size;
+    let startDate = props.actions
+        .sortBy(a => a.get('start_time'))
+        .first()
+        .get('start_time');
+
+    let endDate = props.actions
+        .sortBy(a => a.get('end_time'))
+        .last()
+        .get('end_time');
 
     return (
         <li onClick={ () => props.onSelect(id) }>
             <h3>{ title }</h3>
-            <Msg tagName="p" id="panes.input.summary.campaigns.status"
-                values={{ numBookings, target }}/>
+            <span className="InputPane-campaignListInfo">
+                <FormattedDate value={ startDate }
+                    day="numeric"
+                    month="numeric"
+                    />
+                {" – "}
+                <FormattedDate value={ endDate }
+                    day="numeric"
+                    month="numeric"
+                    />
+                {", "}
+                <Msg id="panes.input.summary.campaigns.actions"
+                    values={{count: numActions}} />
+
+            </span>
+            <p className="InputPane-campaignListStatus">
+                <Msg id="panes.input.summary.campaigns.status"
+                    values={{ target }}/>
+                <Msg id="panes.input.summary.campaigns.bookings"
+                    values={{ numBookings, target }}/>
+                <Msg id="panes.input.summary.campaigns.responses"
+                    values={{ numResponses, target }}/>
+            </p>
             <FormattedLink key="CampaignListItemLink"
                 className="InputPane-campaignListLink"
                 msgId="panes.input.summary.campaigns.respondButton"

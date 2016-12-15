@@ -22,13 +22,21 @@ input:
     summaryLink: "Sammanfattning"
     summary:
         campaigns:
-            h2: "Kampanjer"
+            h2: "Aktuella kampanjer"
             respondButton: "Anmäl till { campaign }"
-            status: |
+            actions: "{count} aktioner"
+            status: "{target} har"
+            bookings: |
                 {numBookings, plural,
-                    =0 {{target} har inga bokningar}
-                    =1 {{target} har en bokning}
-                    other {{target} har # bokningar}
+                    =0 {inga bokningar}
+                    =1 {en bokning}
+                    other {# bokningar}
+                }
+            responses: |
+                {numResponses, plural,
+                    =0 {inga anmälningar}
+                    =1 {en anmälan}
+                    other {# anmälningar}
                 }
 
         surveys:

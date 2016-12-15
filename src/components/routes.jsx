@@ -6,6 +6,7 @@ import AssignmentsPage from './pages/assignments/AssignmentsPage';
 import CallPage from './pages/CallPage';
 import EndPage from './pages/EndPage';
 import LandingPage from './pages/LandingPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 
 export default (
@@ -17,5 +18,7 @@ export default (
             component={ CallPage }/>
         <Route path="/end"
             component={ EndPage }/>
+        <Route id="404" path="*"
+            component={ NotFoundPage }/>
     </Route>
 );

@@ -47,3 +47,11 @@ stats:
     p: |
         Din insats är viktig för att bygga din organisation
         starkare. Här är en sammanfattning av hur det går.
+
+queueEmpty:
+    h1: "Slut på personer att ringa!"
+    p: |
+        Just nu finns det inga fler personer i kön. Om en stund kan det hända
+        att fler släpps på, men för tillfället kan du inte ringa mer på det
+        här uppdraget.
+    assignmentsLink: "Välj ett annat uppdrag"

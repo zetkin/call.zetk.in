@@ -3,7 +3,7 @@
     left: 0;
 
     &.PaneBase-leave {
-        animation: AssignmentPane-leaveAnimation 0.5s;
+        animation: AssignmentPane-leaveForPrepareAnimation $pane-transition-duration;
     }
 
     .PaneBase-content {
@@ -16,7 +16,7 @@
     }
 }
 
-@keyframes AssignmentPane-leaveAnimation {
+@keyframes AssignmentPane-leaveForPrepareAnimation {
     to {
         left: -65%;
     }

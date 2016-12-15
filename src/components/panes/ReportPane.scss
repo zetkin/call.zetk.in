@@ -1,5 +1,5 @@
 .ReportPane {
-    transition: left 0.5s;
+    transition: left $pane-transition-duration;
 
     .PaneBase-header {
         p {
@@ -52,7 +52,7 @@
     }
 
     &.PaneBase-leave {
-        animation: ReportPane-leaveAnimation 0.5s;
+        animation: ReportPane-leaveAnimation $pane-transition-duration;
     }
 }
 

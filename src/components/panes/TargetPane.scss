@@ -110,16 +110,16 @@
 
     &.PaneBase-enter {
         // Use custom animation in general, but...
-        animation: TargetPane-enterAnimation 0.5s;
+        animation: TargetPane-enterAnimation $pane-transition-duration;
     }
 
     &.TargetPane-firstCall.PaneBase-enter {
         // ...use standard animation for first call
-        animation: PaneBase-enterAnimation 0.5s;
+        animation: PaneBase-enterAnimation $pane-transition-duration;
     }
 
     &.PaneBase-leave {
-        animation: TargetPane-leaveAnimation 0.5s;
+        animation: TargetPane-leaveAnimation $pane-transition-duration;
     }
 }
 

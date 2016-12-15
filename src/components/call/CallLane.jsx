@@ -51,6 +51,9 @@ export default class CallLane extends React.Component {
             case 'done':
                 paneComponents = [ 'report', 'stats' ];
                 break;
+            case 'empty':
+                paneComponents = [ 'empty' ];
+                break;
         }
 
         let panes = paneComponents.map(paneType => {
@@ -86,6 +89,7 @@ export default class CallLane extends React.Component {
 
 const paneComponentsByType = {
     assignment: panes.AssignmentPane,
+    empty: panes.QueueEmptyPane,
     instructions: panes.InstructionsPane,
     input: panes.InputPane,
     report: panes.ReportPane,

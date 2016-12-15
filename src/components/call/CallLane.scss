@@ -55,6 +55,18 @@
     &.CallPage-leave {
         animation: CallLane-leaveAnimation 0.5s;
     }
+
+    &.CallLane-emptyStep {
+        .AssignmentPane.PaneBase-leave {
+            animation: AssignmentPane-leaveForEmptyAnimation $pane-transition-duration;
+        }
+    }
+}
+
+@keyframes AssignmentPane-leaveForEmptyAnimation {
+    to {
+        left: -100%;
+    }
 }
 
 @keyframes CallLane-enterAnimation {

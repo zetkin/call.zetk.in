@@ -6,7 +6,6 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 
-import App from '../components/App';
 import routes from '../components/routes';
 import IntlReduxProvider from '../components/IntlReduxProvider';
 import { loadLocaleHandler } from './locale';
@@ -73,18 +72,22 @@ export default function initApp(messages) {
     });
 
     app.use(function(req, res, next) {
-        renderReactPage(App, req, res);
+        renderReactPage(req, res);
     });
 
     return app;
 }
 
-function renderReactPage(Component, req, res) {
+function renderReactPage(req, res) {
     try {
         match({ routes, location: req.url }, (err, redirect, props) => {
             let html = ReactDOMServer.renderToString(
                 React.createElement(IntlReduxProvider, { store: req.store },
                     React.createElement(RouterContext, props)));
+
+            if (props.routes.find(r => r.id === '404')) {
+                res.status(404);
+            }
 
             res.send(html);
         });

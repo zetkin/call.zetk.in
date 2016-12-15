@@ -24,3 +24,6 @@ $c-ui-darker: darken($c-ui-bg, 50);
 // Responsive breakpoints
 $medium-min-width: 720px;
 $wide-min-width: 1024px;
+
+// Timing
+$pane-transition-duration: 0.5s;

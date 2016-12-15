@@ -7,7 +7,7 @@
     }
 
     &.PaneBase-leave {
-        animation: StatsPane-leaveAnimation 0.5s;
+        animation: StatsPane-leaveAnimation $pane-transition-duration;
     }
 }
 

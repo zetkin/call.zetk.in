@@ -181,11 +181,11 @@
     }
 
     &.PaneBase-enter {
-        animation: InputPane-enterAnimation 0.5s;
+        animation: InputPane-enterAnimation $pane-transition-duration;
     }
 
     &.InputPane-firstCall.PaneBase-enter {
-        animation: InputPane-firstCall-enterAnimation 0.5s;
+        animation: InputPane-firstCall-enterAnimation $pane-transition-duration;
     }
 }
 

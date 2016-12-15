@@ -8,7 +8,7 @@
     box-sizing: border-box;
     box-shadow: 0 2px 2px darken(#FFF, 10);
 
-    transition: width 0.5s, left 0.5s;
+    transition: width $pane-transition-duration, left $pane-transition-duration;
 
     h1 {
         font-size: 1.7em;
@@ -87,11 +87,11 @@
 }
 
 .PaneBase-enter {
-    animation: PaneBase-enterAnimation 0.5s;
+    animation: PaneBase-enterAnimation $pane-transition-duration;
 }
 
 .PaneBase-leave {
-    animation: PaneBase-leaveAnimation 0.5s;
+    animation: PaneBase-leaveAnimation $pane-transition-duration;
 }
 
 @keyframes PaneBase-enterAnimation {

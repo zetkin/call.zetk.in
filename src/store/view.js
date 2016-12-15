@@ -38,6 +38,11 @@ export default createReducer(initialState, {
             .set('overlay', null);
     },
 
+    [types.SKIP_CALL + '_REJECTED']: (state, action) => {
+        return state
+            .set('overlay', null);
+    },
+
     [types.SWITCH_LANE_TO_CALL]: (state, action) => {
         return state
             .set('overlay', null);

@@ -100,6 +100,20 @@ export default createReducer(initialState, {
             .setIn(['allLanes', laneId, 'step'], 'prepare');
     },
 
+    [types.START_NEW_CALL + '_REJECTED']: (state, action) => {
+        let laneId = state.get('selectedId');
+
+        return state
+            .setIn(['allLanes', laneId, 'step'], 'empty');
+    },
+
+    [types.SKIP_CALL + '_REJECTED']: (state, action) => {
+        let laneId = state.get('selectedId');
+
+        return state
+            .setIn(['allLanes', laneId, 'step'], 'empty');
+    },
+
     [types.START_CALL_WITH_TARGET + '_FULFILLED']: (state, action) => {
         let call = action.payload.data.data;
         let callId = call.id.toString();

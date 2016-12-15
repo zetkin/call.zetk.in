@@ -66,7 +66,7 @@
                 background-color: white;
             }
 
-            .Button {
+            .InputPane-campaignListLink {
                 display: none;
             }
         }
@@ -106,7 +106,7 @@
         left: 35%;
 
         .InputPane-summaryList {
-            .Button {
+            .InputPane-campaignListLink {
                 display: none;
             }
         }
@@ -145,7 +145,7 @@
 
             a {
                 position: absolute;
-                top: 1em;
+                top: 2em;
                 right: 0;
             }
 

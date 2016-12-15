@@ -2,4 +2,18 @@
     width: 100%;
     left: 0;
     z-index: 10;
+
+    .PaneBase-content {
+        text-align: center;
+        margin-top: 2em;
+
+        p {
+            max-width: 40em;
+            margin: 0 auto 1em;
+        }
+
+        .QueueEmptyPane-assignmentsLink {
+            @include button();
+        }
+    }
 }

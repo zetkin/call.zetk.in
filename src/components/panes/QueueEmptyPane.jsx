@@ -11,6 +11,7 @@ export default class QueueEmptyPane extends PaneBase {
             <Msg key="h1" tagName="h1" id="panes.queueEmpty.h1"/>,
             <Msg key="p" tagName="p" id="panes.queueEmpty.p"/>,
             <FormattedLink key="assignmentsLink"
+                className="QueueEmptyPane-assignmentsLink"
                 href="/assignments"
                 msgId="panes.queueEmpty.assignmentsLink"/>,
         ];

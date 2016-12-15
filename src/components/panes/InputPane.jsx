@@ -257,7 +257,7 @@ const CampaignListItem = props => {
     return (
         <li onClick={ () => props.onSelect(id) }>
             <h3>{ title }</h3>
-            <span className="InputPane-campaignListInfo">
+            <p className="InputPane-campaignListInfo">
                 <FormattedDate value={ startDate }
                     day="numeric"
                     month="numeric"
@@ -267,18 +267,17 @@ const CampaignListItem = props => {
                     day="numeric"
                     month="numeric"
                     />
-                {", "}
                 <Msg id="panes.input.summary.campaigns.actions"
                     values={{count: numActions}} />
 
-            </span>
+            </p>
             <p className="InputPane-campaignListStatus">
                 <Msg id="panes.input.summary.campaigns.status"
                     values={{ target }}/>
                 <Msg id="panes.input.summary.campaigns.bookings"
-                    values={{ numBookings, target }}/>
+                    values={{ numBookings }}/>
                 <Msg id="panes.input.summary.campaigns.responses"
-                    values={{ numResponses, target }}/>
+                    values={{ numResponses }}/>
             </p>
             <FormattedLink key="CampaignListItemLink"
                 className="InputPane-campaignListLink"

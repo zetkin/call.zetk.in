@@ -148,6 +148,42 @@
                 top: 1em;
                 right: 0;
             }
+
+            .InputPane-campaignListInfo {
+                font-size: 0.9em;
+                color: lighten($c-text, 30);
+                margin: 0.2em 0;
+
+                span:last-child {
+                    margin-left: 1em;
+                }
+            }
+
+            .InputPane-campaignListStatus {
+                font-style: italic;
+                font-size: 0.9em;
+
+                span {
+                    margin-right: 0.2em;
+
+                    &:nth-child(2) {
+                        &:before {
+                            @include icon($fa-var-circle);
+                            color: lighten($c-text, 30);
+                        }
+                    }
+                    &:nth-child(3) {
+                        &:before {
+                            @include icon($fa-var-dot-circle-o);
+                            color: lighten($c-text, 20);
+                        }
+                    }
+
+                    &:before {
+                        font-size: 0.9em!important;
+                    }
+                }
+            }
         }
     }
 

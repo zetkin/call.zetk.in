@@ -4,6 +4,8 @@ import immutable from 'immutable';
 import { intlReducer } from 'react-intl-redux';
 import promiseMiddleware from 'redux-promise-middleware';
 
+import loginRedirect from '../common/redux/middleware/loginRedirect';
+
 import actions from './actions';
 import assignments from './assignments';
 import calls from './calls';
@@ -38,6 +40,7 @@ export const configureStore = (initialState, z) => {
     let middleware = [
         promiseMiddleware(),
         thunkWithZ,
+        loginRedirect(process.env.ZETKIN_APP_ID, process.env.ZETKIN_DOMAIN),
     ];
 
     let devTools = f => f;

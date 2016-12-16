@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var appId = process.env.ZETKIN_APP_ID || 'a4';
+var appId = process.env.ZETKIN_APP_ID || 'a5';
 
 module.exports = {
     entry: [

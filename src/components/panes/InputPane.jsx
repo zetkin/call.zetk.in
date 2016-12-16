@@ -1,4 +1,5 @@
 import React from 'react';
+import immutable from 'immutable';
 import { connect } from 'react-redux';
 import { FormattedDate, FormattedMessage as Msg } from 'react-intl';
 
@@ -63,16 +64,22 @@ export default class InputPane extends PaneBase {
                             let userActions = target.get('future_actions')
                                 .filter(a => a.getIn(['campaign', 'id']) == id);
 
-                            let userResponses = this.props.actions
-                                .getIn(['byTarget', target.get('id').toString()])
-                                .getIn(['responseList', 'items'])
-                                .filter(r => {
-                                    let actionId = r.get('action_id').toString();
-                                    let action = this.props.actions
-                                        .getIn(['actionList', 'items', actionId]);
+                            let targetActions = this.props.actions
+                                .getIn(['byTarget', target.get('id').toString()]);
 
-                                    return action.getIn(['campaign', 'id']) == id;
-                                });
+                            let userResponses = immutable.List();
+
+                            if (targetActions) {
+                                userResponses = targetActions
+                                    .getIn(['responseList', 'items'])
+                                    .filter(r => {
+                                        let actionId = r.get('action_id').toString();
+                                        let action = this.props.actions
+                                            .getIn(['actionList', 'items', actionId]);
+
+                                        return action.getIn(['campaign', 'id']) == id;
+                                    });
+                            }
 
                             let campaignActions = this.props.actions
                                 .getIn(['actionList', 'items'])

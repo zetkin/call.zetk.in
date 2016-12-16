@@ -1,6 +1,10 @@
 .StatsPane {
     z-index: 0;
 
+    h1, p  {
+        text-align: center;
+    }
+
     &.StatsPane-doneStep {
         width: 65%;
         left: 35%;

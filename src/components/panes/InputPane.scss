@@ -28,6 +28,7 @@
 
         @include list();
 
+
         h3, p {
             margin: 0;
         }
@@ -50,15 +51,9 @@
     }
 
     &.InputPane-prepareStep {
-        width: 65%;
+        width: 30%;
         left: 70%;
         box-shadow: none;
-
-        .PaneBase-header {
-            p {
-                width: 46%;
-            }
-        }
 
         .InputPane-summaryList {
             li:hover {
@@ -66,8 +61,9 @@
                 background-color: white;
             }
 
-            .Button {
-                display: none;
+            .InputPane-campaignListLink {
+                visibility: hidden;
+                opacity: 0;
             }
         }
     }
@@ -79,8 +75,12 @@
         li {
             cursor: pointer;
 
-            a {
+            .InputPane-campaignListLink {
                 color: lighten($c-text, 20);
+
+                visibility: visible;
+                opacity: 1;
+                transition: opacity 1s;
 
                 &:after {
                     @include icon($fa-var-chevron-right);
@@ -106,8 +106,14 @@
         left: 35%;
 
         .InputPane-summaryList {
-            .Button {
-                display: none;
+            li:hover {
+                // Override hover from list() mixin
+                background-color: white;
+            }
+
+            .InputPane-campaignListLink {
+                visibility: hidden;
+                opacity: 0;
             }
         }
     }
@@ -145,8 +151,44 @@
 
             a {
                 position: absolute;
-                top: 1em;
+                top: 2em;
                 right: 0;
+            }
+
+            .InputPane-campaignListInfo {
+                font-size: 0.9em;
+                color: lighten($c-text, 30);
+                margin: 0.2em 0;
+
+                span:last-child {
+                    margin-left: 1em;
+                }
+            }
+
+            .InputPane-campaignListStatus {
+                font-style: italic;
+                font-size: 0.9em;
+
+                span {
+                    margin-right: 0.2em;
+
+                    &:nth-child(2) {
+                        &:before {
+                            @include icon($fa-var-circle);
+                            color: lighten($c-text, 30);
+                        }
+                    }
+                    &:nth-child(3) {
+                        &:before {
+                            @include icon($fa-var-dot-circle-o);
+                            color: lighten($c-text, 20);
+                        }
+                    }
+
+                    &:before {
+                        font-size: 0.9em!important;
+                    }
+                }
             }
         }
     }

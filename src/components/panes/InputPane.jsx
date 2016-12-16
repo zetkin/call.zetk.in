@@ -1,6 +1,7 @@
 import React from 'react';
+import immutable from 'immutable';
 import { connect } from 'react-redux';
-import { FormattedMessage as Msg } from 'react-intl';
+import { FormattedDate, FormattedMessage as Msg } from 'react-intl';
 
 import Button from '../../common/misc/Button';
 import CampaignForm from '../../common/campaignForm/CampaignForm';
@@ -59,14 +60,42 @@ export default class InputPane extends PaneBase {
                     campaignContent = (
                         <ul className="InputPane-summaryList">
                         { listItems.toList().map(campaign => {
-                            let actions = target.get('future_actions').filter(a =>
-                                a.getIn(['campaign', 'id']) == campaign.get('id'));
+                            let id = campaign.get('id');
+                            let userActions = target.get('future_actions')
+                                .filter(a => a.getIn(['campaign', 'id']) == id);
+
+                            let targetActions = this.props.actions
+                                .getIn(['byTarget', target.get('id').toString()]);
+
+                            let userResponses = immutable.List();
+
+                            if (targetActions) {
+                                userResponses = targetActions
+                                    .getIn(['responseList', 'items'])
+                                    .filter(r => {
+                                        let actionId = r.get('action_id').toString();
+                                        let action = this.props.actions
+                                            .getIn(['actionList', 'items', actionId]);
+
+                                        return action.getIn(['campaign', 'id']) == id;
+                                    });
+                            }
+
+                            let campaignActions = this.props.actions
+                                .getIn(['actionList', 'items'])
+                                .filter(a => a.getIn(['campaign', 'id']) == id);
+
+                            let active = (this.props.step === "call")
+                                ? true : false;
 
                             return (
                                 <CampaignListItem key={ campaign.get('id') }
-                                    userActions={ actions }
+                                    actions={ campaignActions }
+                                    userActions={ userActions }
+                                    userResponses={ userResponses }
                                     target={ target }
                                     campaign={ campaign }
+                                    isActive={ active }
                                     onSelect={ this.onCampaignSelect.bind(this) }/>
                             );
                         }) }
@@ -223,13 +252,50 @@ const CampaignListItem = props => {
     let title = props.campaign.get('title');
     let target = props.target.get('first_name');
     let numBookings = props.userActions.size;
+    let numResponses = props.userResponses.size;
+
+    let numActions = props.actions.size;
+    let startDate = props.actions
+        .sortBy(a => a.get('start_time'))
+        .first()
+        .get('start_time');
+
+    let endDate = props.actions
+        .sortBy(a => a.get('end_time'))
+        .last()
+        .get('end_time');
+
+    let clickTarget =() => (props.isActive)
+        ? props.onSelect(id)
+        : null;
 
     return (
-        <li onClick={ () => props.onSelect(id) }>
+        <li onClick={ clickTarget }>
             <h3>{ title }</h3>
-            <Msg tagName="p" id="panes.input.summary.campaigns.status"
-                values={{ numBookings, target }}/>
+            <p className="InputPane-campaignListInfo">
+                <FormattedDate value={ startDate }
+                    day="numeric"
+                    month="numeric"
+                    />
+                {" – "}
+                <FormattedDate value={ endDate }
+                    day="numeric"
+                    month="numeric"
+                    />
+                <Msg id="panes.input.summary.campaigns.actions"
+                    values={{count: numActions}} />
+
+            </p>
+            <p className="InputPane-campaignListStatus">
+                <Msg id="panes.input.summary.campaigns.status"
+                    values={{ target }}/>
+                <Msg id="panes.input.summary.campaigns.bookings"
+                    values={{ numBookings }}/>
+                <Msg id="panes.input.summary.campaigns.responses"
+                    values={{ numResponses }}/>
+            </p>
             <FormattedLink key="CampaignListItemLink"
+                className="InputPane-campaignListLink"
                 msgId="panes.input.summary.campaigns.respondButton"
                 msgValues={{ campaign: title }} />
         </li>

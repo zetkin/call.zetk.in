@@ -22,7 +22,8 @@
         .PaneBase-header {
             .InstructionsPane-targetButton {
                 background: darken(white, 10);
-                @include button-color(darken(white, 10), 5);
+                @include button-color(darken(white, 10), 5)
+                cursor: pointer;
             }
         }
 
@@ -40,6 +41,7 @@
             .TargetPane-instructionsButton {
                 background: darken(white, 10);
                 @include button-color(darken(white, 10), 5);
+                cursor: pointer;
             }
         }
 

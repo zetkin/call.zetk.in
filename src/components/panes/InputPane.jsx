@@ -78,6 +78,9 @@ export default class InputPane extends PaneBase {
                                 .getIn(['actionList', 'items'])
                                 .filter(a => a.getIn(['campaign', 'id']) == id);
 
+                            let active = (this.props.step === "call")
+                                ? true : false;
+
                             return (
                                 <CampaignListItem key={ campaign.get('id') }
                                     actions={ campaignActions }
@@ -85,6 +88,7 @@ export default class InputPane extends PaneBase {
                                     userResponses={ userResponses }
                                     target={ target }
                                     campaign={ campaign }
+                                    isActive={ active }
                                     onSelect={ this.onCampaignSelect.bind(this) }/>
                             );
                         }) }
@@ -254,8 +258,12 @@ const CampaignListItem = props => {
         .last()
         .get('end_time');
 
+    let clickTarget =() => (props.isActive)
+        ? props.onSelect(id)
+        : null;
+
     return (
-        <li onClick={ () => props.onSelect(id) }>
+        <li onClick={ clickTarget }>
             <h3>{ title }</h3>
             <p className="InputPane-campaignListInfo">
                 <FormattedDate value={ startDate }

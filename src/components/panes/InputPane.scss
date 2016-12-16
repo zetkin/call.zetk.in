@@ -28,6 +28,7 @@
 
         @include list();
 
+
         h3, p {
             margin: 0;
         }
@@ -106,6 +107,11 @@
         left: 35%;
 
         .InputPane-summaryList {
+            li:hover {
+                // Override hover from list() mixin
+                background-color: white;
+            }
+
             .InputPane-campaignListLink {
                 display: none;
             }

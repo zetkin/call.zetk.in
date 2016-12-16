@@ -5,14 +5,14 @@
     right: 0;
     height: 100px;
     padding: 1em;
-    box-shadow: 0 2px 2px darken(#FFF, 10);
+    box-shadow: 0 2px 5px darken(#FFF, 10);
     overflow: hidden;
     z-index: 99;
 
     .LaneControlBar-returnSection {
         @include col(4,12)
         text-align: left;
-
+        padding-top: 0.5em;
         .Button {
             @include button(darken(white, 10));
         }
@@ -35,6 +35,7 @@
     .LaneControlBar-proceedSection {
         @include col(4,12)
         text-align: right;
+        padding-top: 0.5em;
 
         .Button {
             @include button();

@@ -2,6 +2,11 @@
     .ReportStepBase-editLink {
         float: right;
         cursor: pointer;
+        font-size: 0.8em;
+
+        &:before {
+            @include icon($fa-var-undo);
+        }
 
         &:hover {
             color: darken($c-brand-main, 15);
@@ -9,10 +14,35 @@
     }
 
     &.ReportStepBase-summaryMode {
-        color: #888;
+        color: lighten($c-text, 30);
         border-bottom: 1px solid #eee;
         padding-bottom: 10px;
         margin-bottom: 10px;
+
+        .ReportStepBase-summary {
+            p {
+                margin-bottom: 0.5em;
+
+                &:before {
+                    @include icon($fa-var-angle-right);
+                }
+            }
+        }
+
+        .ReportStepBase-effect {
+            font-size: 0.8em;
+            font-style: italic;
+            color: lighten($c-text, 40);
+            margin-left: 1.8em;
+
+            p:first-child {
+                margin: 0.2em 0;
+
+                &:before {
+                    @include icon($fa-var-angle-left);
+                }
+            }
+        }
 
         .logMessage {
             color: lighten($c-text, 40);
@@ -24,6 +54,12 @@
     }
 
     .ReportStepBase-form {
+        p {
+            &:before {
+                @include icon($fa-var-question-circle);
+            }
+        }
+
         .Button {
             @include button(#f9f9f9);
 

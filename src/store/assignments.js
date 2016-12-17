@@ -26,10 +26,6 @@ const initialState = immutable.fromJS({
 });
 
 export default createReducer(initialState, {
-    '@@INIT': (state, action) => {
-        return immutable.fromJS(state);
-    },
-
     [types.RETRIEVE_USER_ASSIGNMENTS + '_PENDING']: (state, action) => {
         return state
             .setIn(['assignmentList', 'error'], null)

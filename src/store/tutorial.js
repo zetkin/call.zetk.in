@@ -9,10 +9,6 @@ const initialState = immutable.fromJS({
 });
 
 export default createReducer(initialState, {
-    '@@INIT': (state, action) => {
-        return immutable.fromJS(state);
-    },
-
     [types.PUSH_TUTORIAL_NOTE]: (state, action) => {
         let note = immutable.fromJS({
             ns: action.payload.note.msgNamespace,

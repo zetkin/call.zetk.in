@@ -36,7 +36,7 @@ window.onload = function() {
 
     let stateElem = document.getElementById('App-initialState');
     let stateJson = stateElem.innerText || stateElem.textContent;
-    let initialState = immutable.Map(JSON.parse(stateJson));
+    let initialState = immutable.fromJS(JSON.parse(stateJson));
 
     let store = configureStore(initialState, Z);
     let props = {

@@ -65,7 +65,7 @@
 }
 
 
-@mixin inline-button($color: lighten($c-ui-bg, 1), $amount:5, $icon:false) {
+@mixin inline-button($color: $c-ui-bg, $amount:5, $icon:false) {
     width: auto;
     content: lightness($color); // for reference;
     padding: .5em 1em .4em;

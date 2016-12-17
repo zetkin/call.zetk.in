@@ -11,12 +11,7 @@ const IntlReduxProvider = ({ store, ...props }) => {
     );
 };
 
-const mapStateToProps = state => {
-    let intl = state.get('intl');
-    return {
-        locale: intl.locale,
-        messages: intl.messages,
-    };
-};
+const mapStateToProps = state =>
+    state.get('intl').toJS();
 
 export default connect(mapStateToProps)(IntlReduxProvider);

@@ -9,10 +9,6 @@ const initialState = immutable.fromJS({
 });
 
 export default createReducer(initialState, {
-    '@@INIT': (state, action) => {
-        return immutable.fromJS(state);
-    },
-
     [types.SHOW_OVERLAY]: (state, action) => {
         let overlay = immutable.fromJS({
             type: action.payload.type,

@@ -13,10 +13,6 @@ const initialState = immutable.fromJS({
 });
 
 export default createReducer(initialState, {
-    '@@INIT': (state, action) => {
-        return immutable.fromJS(state);
-    },
-
     [types.START_NEW_CALL + '_FULFILLED']: (state, action) => {
         // Reset when new call starts
         return state

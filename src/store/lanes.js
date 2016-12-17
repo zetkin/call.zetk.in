@@ -36,10 +36,6 @@ const REPORT_STEP_PROGRESS = {
 
 
 export default createReducer(initialState, {
-    '@@INIT': (state, action) => {
-        return immutable.fromJS(state);
-    },
-
     [types.SELECT_ASSIGNMENT]: (state, action) => {
         let laneNumber = state.get('nextLaneNumber');
         let lane = {

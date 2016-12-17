@@ -52,10 +52,6 @@ export const REPORT_STEPS = [
 
 
 export default createReducer(initialState, {
-    ['@@INIT']: (state, action) => {
-        return immutable.fromJS(state);
-    },
-
     [types.RETRIEVE_USER_CALLS + '_PENDING']: (state, action) => {
         return state
             .setIn(['callList', 'error'], null)

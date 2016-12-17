@@ -1,4 +1,5 @@
 callLog:
+    note: "Ingen anteckning lämnad"
     emptyLabel: "Aldrig ringd"
     summary:
         status0: "Samtalets har inte slutförts."

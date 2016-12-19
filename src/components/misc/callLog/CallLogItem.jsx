@@ -39,7 +39,10 @@ export default class CallLogItem extends React.Component {
             expanded: this.state.viewMode === 'expanded',
         });
 
-        // TODO: Add class when no note and style these.
+        let noteClasses = cx('CallLogItem-notes', {
+            empty: call.get('notes').length === 0
+        });
+
         let notes = (call.get('notes').length > 0)
             ? call.get('notes')
             : (<Msg id="misc.callLog.note"/>);
@@ -75,7 +78,7 @@ export default class CallLogItem extends React.Component {
                         />
                 </div>
                 <div ref="notes"
-                    className="CallLogItem-notes">
+                    className={ noteClasses }>
                     { notes }
                 </div>
                 { expandButton }

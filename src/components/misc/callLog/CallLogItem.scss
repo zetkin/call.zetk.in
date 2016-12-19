@@ -184,12 +184,16 @@
     margin: 1em 0 0;
     overflow: hidden;
     transition: max-height 0.3s;
-    color: lighten($c-text, 30);
+    color: lighten($c-text, 20);
     padding-left: 1.5em;
 
     &:before {
         @include icon($fa-var-sticky-note-o);
         margin-left: -1.8em;
+    }
+
+    &.empty {
+        color: lighten($c-text, 60);
     }
 
     &:after {

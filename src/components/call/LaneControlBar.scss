@@ -4,13 +4,13 @@
     left: 0;
     right: 0;
     height: 90px;
-    padding: 1em;
+    padding: 1em 0;
     box-shadow: 0 2px 5px darken(#FFF, 10);
     overflow: hidden;
     z-index: 99;
 
     .LaneControlBar-returnSection {
-        @include col(3,12)
+        @include col(4,12)
         text-align: left;
         padding-top: 0.5em;
         .Button {
@@ -19,7 +19,7 @@
     }
 
     .LaneControlBar-content {
-        @include col(4,12);
+        @include col(4,12)
         text-align: left;
         transition: top 0.4s, left 0.4s;
 
@@ -36,7 +36,7 @@
     }
 
     .LaneControlBar-proceedSection {
-        @include col(5,12)
+        @include col(4,12)
         text-align: right;
         padding-top: 0.5em;
 
@@ -51,6 +51,12 @@
             @include button(darken(white, 5), $icon: $fa-var-step-forward);
             background: 0;
             font-size: 0.8em;
+            visibility: hidden;
+            width: 3em;
+
+            &:before {
+                visibility: visible;
+            }
         }
     }
 
@@ -74,5 +80,18 @@
 
     @include large-screen {
         height: 100px;
+
+        .LaneControlBar-returnSection {
+            @include col(3,12)
+        }
+
+        .LaneControlBar-proceedSection {
+            @include col(5,12);
+
+            .LaneControlBar-skipButton {
+                visibility: visible;
+                width: auto;
+            }
+        }
     }
 }

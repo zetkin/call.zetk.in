@@ -15,8 +15,12 @@
     }
 
     .TargetInfo-name, .TargetInfo-number {
-        font-size: 1.3em;
+        font-size: 1.1em;
         line-height: 1.5em;
+
+        @include large-screen {
+            font-size: 1.3em;
+        }
     }
 
     .TargetInfo-name {

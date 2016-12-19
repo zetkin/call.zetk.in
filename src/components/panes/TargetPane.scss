@@ -130,11 +130,13 @@
 
 
 @include large-screen {
-    .Avatar {
-        @include col(4,12);
-    }
-    .TargetPane-name, .TargetPane-info {
-        @include col(8,12);
+    .TargetPane {
+        .Avatar {
+            @include col(4,12);
+        }
+        .TargetPane-name, .TargetPane-info {
+            @include col(8,12);
+        }
     }
 }
 

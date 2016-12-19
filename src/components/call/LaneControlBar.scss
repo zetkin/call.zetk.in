@@ -10,7 +10,7 @@
     z-index: 99;
 
     .LaneControlBar-returnSection {
-        @include col(4,12)
+        @include col(3,12)
         text-align: left;
         padding-top: 0.5em;
         .Button {
@@ -20,7 +20,7 @@
 
     .LaneControlBar-content {
         @include col(4,12);
-        text-align: center;
+        text-align: left;
         transition: top 0.4s, left 0.4s;
 
         h1 {
@@ -29,11 +29,14 @@
 
         p {
             color: darken(white, 30);
+            &:before {
+                @include icon($fa-var-info-circle);
+            }
         }
     }
 
     .LaneControlBar-proceedSection {
-        @include col(4,12)
+        @include col(5,12)
         text-align: right;
         padding-top: 0.5em;
 

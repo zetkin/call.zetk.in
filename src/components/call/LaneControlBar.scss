@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 100px;
+    height: 90px;
     padding: 1em;
     box-shadow: 0 2px 5px darken(#FFF, 10);
     overflow: hidden;
@@ -70,5 +70,9 @@
         .LaneControlBar-content {
 
         }
+    }
+
+    @include large-screen {
+        height: 100px;
     }
 }

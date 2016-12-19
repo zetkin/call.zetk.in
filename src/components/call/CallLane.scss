@@ -9,7 +9,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        top: 100px;
+        top: 90px;
         right: 0;
         overflow: hidden;
     }
@@ -63,6 +63,10 @@
             animation: AssignmentPane-leaveForEmptyAnimation $pane-transition-duration;
         }
     }
+}
+
+@include large-screen {
+    top: 100px;
 }
 
 @keyframes AssignmentPane-leaveForEmptyAnimation {

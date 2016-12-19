@@ -12,6 +12,10 @@
         top: 90px;
         right: 0;
         overflow: hidden;
+
+        @include large-screen {
+            top: 100px;
+        }
     }
 
     &.CallLane-instructionsInfoMode {
@@ -63,10 +67,6 @@
             animation: AssignmentPane-leaveForEmptyAnimation $pane-transition-duration;
         }
     }
-}
-
-@include large-screen {
-    top: 100px;
 }
 
 @keyframes AssignmentPane-leaveForEmptyAnimation {

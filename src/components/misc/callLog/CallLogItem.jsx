@@ -39,15 +39,13 @@ export default class CallLogItem extends React.Component {
             expanded: this.state.viewMode === 'expanded',
         });
 
-        let notes = null;
-        if (call.get('notes').length > 0) {
-            notes = (
-                <div ref="notes"
-                    className="CallLogItem-notes">
-                    {   call.get('notes') }
-                </div>
-            );
-        }
+        let noteClasses = cx('CallLogItem-notes', {
+            empty: call.get('notes').length === 0
+        });
+
+        let notes = (call.get('notes').length > 0)
+            ? call.get('notes')
+            : (<Msg id="misc.callLog.note"/>);
 
         let expandButton = null;
         if (this.state.viewMode && call.get('notes').length > 30) {
@@ -79,7 +77,10 @@ export default class CallLogItem extends React.Component {
                         values={ summaryValues }
                         />
                 </div>
-                { notes }
+                <div ref="notes"
+                    className={ noteClasses }>
+                    { notes }
+                </div>
                 { expandButton }
                 <div className="CallLogItem-caller">
                     { call.getIn(['caller', 'name']) }</div>

@@ -27,13 +27,13 @@
     .PaneBase-header {
         position: absolute;
         width: 100%;
-        height: 4em;
+        height: 3.5em;
         top: 0;
         left: 0;
 
         p {
             text-align: center;
-            color: darken(white, 30);
+            color: darken(white, 50);
         }
 
         button {
@@ -66,9 +66,10 @@
     .PaneBase-content {
         background: white;
         height: calc(100% - 4em);
-        margin-top: 4em;
+        margin-top: 3.5em;
         padding-right: 3%;
-        padding-top: 1em;
+        padding-top: 0.3em;
+        padding-bottom: 2em;
         overflow-y: scroll;
         overflow-x: hidden;
 

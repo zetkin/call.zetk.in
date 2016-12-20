@@ -15,7 +15,11 @@ export default class Header extends React.Component {
         return (
             <header className="Header">
                 <Logo/>
-                <UserMenu user={ userData }/>
+                <div className="Header-currentApp">Zetkin Call</div>
+                <div className="Header-nav">
+                    <UserMenu user={ userData }/>
+                    <a className="Header-navLink" href="#">Min sida</a>
+                </div>
             </header>
         );
     }

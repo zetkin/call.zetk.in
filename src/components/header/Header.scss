@@ -1,0 +1,23 @@
+.Header {
+    position: relative;
+    height: 100px;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8888em;
+    z-index: 3;
+    background-color: white;
+    box-shadow: 0 2px 1px rgba(0,0,0,0.1);
+
+    @include medium-screen{
+        // height: 120px;
+        padding: 16px 16px;
+        font-size: 1em;
+    }
+
+    @include large-screen{
+        // height: 132px;
+        padding: 16px 32px;
+    }
+}

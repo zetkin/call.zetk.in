@@ -1,0 +1,16 @@
+.Logo {
+    height: 48px;
+
+    img {
+        height: 100%;
+        width: auto;
+    }
+
+    @include medium-screen{
+        height: 64px;
+    }
+
+    @include large-screen{
+        height: 72px;
+    }
+}

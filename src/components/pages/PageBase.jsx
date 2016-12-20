@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 
+import Header from '../header/Header';
 import { componentClassNames } from '../';
 
 
@@ -20,7 +21,7 @@ export default class PageBase extends React.Component {
 
     renderHeader() {
         return (
-            <header/>
+            <Header/>
         );
     }
 

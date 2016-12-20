@@ -1,0 +1,33 @@
+.PageBase {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    overflow: scroll;
+    background-color: #f5f5f5;
+
+    header {
+
+    }
+
+    .PageBase-Content {
+        width:90%;
+        margin: 5em auto;
+        padding: 1em;
+        @include card;
+        text-align: center;
+
+        h1, h1 + p {
+            text-align: center;
+        }
+
+        .Button {
+            @include button();
+            margin: 0 0.5em;
+        }
+
+        @include large-screen {
+            width: 50%;
+        }
+    }
+}

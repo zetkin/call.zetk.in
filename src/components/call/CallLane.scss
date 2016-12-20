@@ -9,9 +9,13 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        top: 100px;
+        top: 90px;
         right: 0;
         overflow: hidden;
+
+        @include large-screen {
+            top: 100px;
+        }
     }
 
     &.CallLane-instructionsInfoMode {

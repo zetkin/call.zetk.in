@@ -12,25 +12,30 @@
     .Avatar {
         float: left;
         padding-left: 0;
-        height: 8em;
-        width: 8em;
+        height: 0;
+        background-size: contain;
+        padding-top: 33%;
+        @include col(4,12);
     }
 
     .TargetPane-name {
-        @include col(8,12);
+        @include col(12,12);
         float: right;
         margin-bottom: 0.5em;
         font-size: 1.3em;
     }
 
     .TargetPane-info {
-        @include col(8,12);
+        @include col(12,12);
         list-style: none;
         float: right;
 
         li {
             margin-bottom: 0.5em;
             font-size: 0.8em;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
         }
     }
 
@@ -122,6 +127,19 @@
         animation: TargetPane-leaveAnimation $pane-transition-duration;
     }
 }
+
+
+@include large-screen {
+    .TargetPane {
+        .Avatar {
+            @include col(4,12);
+        }
+        .TargetPane-name, .TargetPane-info {
+            @include col(8,12);
+        }
+    }
+}
+
 
 @keyframes TargetPane-enterAnimation {
     from {

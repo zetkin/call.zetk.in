@@ -15,8 +15,12 @@
     }
 
     .TargetInfo-name, .TargetInfo-number {
-        font-size: 1.3em;
+        font-size: 1.1em;
         line-height: 1.5em;
+
+        @include large-screen {
+            font-size: 1.3em;
+        }
     }
 
     .TargetInfo-name {
@@ -35,7 +39,11 @@
     }
 
     .TargetInfo-lastCall {
-        font-size: 0.8em;
+        font-size: 0.7em;
+
+        @include large-screen {
+            font-size: 0.8em;
+        }
 
         &:before {
             content: "- ";

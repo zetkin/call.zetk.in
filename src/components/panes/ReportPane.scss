@@ -20,11 +20,17 @@
         .ReportPane-backLink {
             @include col(4,12);
             display: inline-block;
-            line-height: 4em;
+            line-height: 4.5em;
             cursor: pointer;
+            font-size: 0.8em;
 
             &:before {
                 @include icon($fa-var-arrow-left);
+            }
+
+            @include large-screen {
+                @include col(4,12);
+                visibility: visible;
             }
 
             &:hover {

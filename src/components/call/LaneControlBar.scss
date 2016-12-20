@@ -65,10 +65,19 @@
             display: none;
         }
         .LaneControlBar-content {
-            @include col(7,12);
+            @include col(7.5,12);
         }
         .LaneControlBar-proceedSection {
-            @include col(5,12)
+            @include col(4.5,12)
+        }
+
+        @include large-screen {
+            .LaneControlBar-content {
+                @include col(7,12);
+            }
+            .LaneControlBar-proceedSection {
+                @include col(5,12)
+            }
         }
     }
 

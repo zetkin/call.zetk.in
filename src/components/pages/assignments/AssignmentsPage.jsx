@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage as Msg } from 'react-intl';
 import { withRouter } from 'react-router';
 
+import PageBase from '../PageBase';
 import AssignmentList from './AssignmentList';
 import {
     retrieveUserAssignments,
@@ -16,12 +17,12 @@ const mapStateToProps = (state) => ({
 
 @withRouter
 @connect(mapStateToProps)
-export default class AssignmentsPage extends React.Component {
+export default class AssignmentsPage extends PageBase {
     componentDidMount() {
         this.props.dispatch(retrieveUserAssignments());
     }
 
-    render() {
+    renderContent() {
         let intro;
         let assignmentList = this.props.assignmentList;
         let items = assignmentList.get('items');
@@ -31,25 +32,25 @@ export default class AssignmentsPage extends React.Component {
         }
         else if (items && items.size) {
             intro = (
-                <Msg tagName="p" id="pages.assignments.intro"
+                <Msg key="p" tagName="p"
+                    id="pages.assignments.intro"
                     values={{ numAssignments: items.size }}/>
             );
         }
         else {
             intro = (
-                <Msg tagName="p" id="pages.assignments.noAssignmentsIntro"/>
+                <Msg key="p" tagName="p"
+                    id="pages.assignments.noAssignmentsIntro"/>
             );
         }
 
-        return (
-            <div className="AssignmentPage">
-                <Msg tagName="h1" id="pages.assignments.h1"/>
-                { intro }
-                <AssignmentList
-                    assignmentList={ this.props.assignmentList }
-                    onSelect={ this.onSelect.bind(this) }/>
-            </div>
-        );
+        return [
+            <Msg key="h1" tagName="h1" id="pages.assignments.h1"/>,
+            intro,
+            <AssignmentList key="assignmentList"
+                assignmentList={ this.props.assignmentList }
+                onSelect={ this.onSelect.bind(this) }/>,
+        ];
     }
 
     onSelect(assignment) {

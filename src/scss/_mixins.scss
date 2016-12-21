@@ -135,6 +135,48 @@
     content: $fa-character;
 }
 
+@mixin icon-button($icon, $collapse: true) {
+    color: $c-text;
+    text-decoration: none;
+    border-radius: 3em;
+    vertical-align: middle;
+    padding-right: 1em;
+
+    @if $collapse {
+        max-width: 2.2em;
+        margin-right: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+
+        //TODO: Improve transitions
+        transition: max-width 0.5s ease-in-out;
+
+        &:hover {
+            max-width: 100%;
+            transition: max-width 0.2s ease-in-out;
+        }
+
+        @include medium-screen {
+            max-width: 100%;
+            transition: max-width 0.2s ease-in-out;
+        }
+    }
+
+    &:hover {
+        background-color: $c-ui-bg;
+    }
+
+    &:before {
+        @include icon($icon);
+        background-color: $c-brand-main;
+        color: white;
+        border-radius: 50%;
+        padding: 0.3em;
+        margin-right: 0.5em;
+        vertical-align: middle;
+    }
+}
+
 @mixin list() {
     li {
         position: relative;

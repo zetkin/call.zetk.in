@@ -1,0 +1,48 @@
+.Header {
+    position: relative;
+    height: 100px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+    z-index: 3;
+    background-color: white;
+    box-shadow: 0 2px 1px rgba(0,0,0,0.1);
+
+    @include large-screen{
+        padding: 16px 32px;
+    }
+
+    .Logo {
+        flex: 1;
+    }
+
+    .Header-currentApp {
+        @include icon-button($fa-var-phone, $collapse:false);
+        font-size: 1.3em;
+        padding-right: 0;
+        flex:2;
+        @include medium-screen {
+            flex:none;
+        }
+
+        &:hover {
+            background: none;
+        }
+    }
+
+    .Header-nav {
+        flex: 3;
+
+        @include medium-screen {
+            flex:1;
+        }
+
+        .Header-navLink {
+            float: right;
+            margin: 0.5em;
+            @include icon-button($fa-var-home);
+        }
+    }
+}

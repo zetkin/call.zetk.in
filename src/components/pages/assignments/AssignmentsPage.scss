@@ -1,35 +1,7 @@
-.AssignmentPage {
-    width:90%;
-    margin: 10em auto;
-    padding: 1em;
-    @include card;
-
-    h1, h1 + p {
-        text-align: center;
-    }
-
-    &:before {
-        content: " ";
-        display: block;
-        position: absolute;
-        background: url("/static/img/dialog.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 10em;
-        height: 7em;
-        margin: 0 auto;
-        top: 2em;
-        left: calc(50% - 5em);
-    }
-
-    &:after {
-        content: " ";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: #EEE;
-        z-index: -1;
-    }
+.AssignmentsPage {
+    .PageBase-Content {
+        @include large-screen {
+            width: 90%;
+       }
+   }
 }

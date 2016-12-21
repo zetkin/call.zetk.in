@@ -15,6 +15,7 @@ import preloader from './preloader';
 
 const authOpts = {
     loginUrl: process.env.ZETKIN_LOGIN_URL,
+    logoutRedirPath: '/',
     app: {
         id: process.env.ZETKIN_APP_ID,
         key: process.env.ZETKIN_APP_KEY,

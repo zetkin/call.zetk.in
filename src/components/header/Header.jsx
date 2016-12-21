@@ -11,6 +11,7 @@ export default class Header extends React.Component {
 
     render() {
         let userData = this.props.user.get('data');
+        let dashboardUrl = '//www.' + process.env.ZETKIN_DOMAIN + '/dashboard';
 
         return (
             <header className="Header">
@@ -18,7 +19,7 @@ export default class Header extends React.Component {
                 <div className="Header-currentApp">Zetkin Call</div>
                 <div className="Header-nav">
                     <UserMenu user={ userData }/>
-                    <a className="Header-navLink" href="#">Min sida</a>
+                    <a className="Header-navLink" href={ dashboardUrl }>Min sida</a>
                 </div>
             </header>
         );

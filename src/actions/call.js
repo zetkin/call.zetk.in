@@ -142,10 +142,10 @@ export function submitCallReport() {
 
         let data = {
             notes: report.get('callerLog'),
+            message_to_organizer: report.get('organizerLog'),
             organizer_action_needed: report.get('organizerActionNeeded'),
         };
 
-        // TODO: Send along organizerLog once API supports it
         if (report.get('success')) {
             if (report.get('targetCouldTalk')) {
                 // Successful call!

@@ -4,6 +4,7 @@ import express from 'express';
 import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import url from 'url';
 import { match, RouterContext } from 'react-router';
 
 import routes from '../components/routes';
@@ -28,9 +29,14 @@ export default function initApp(messages) {
     if (process.env.NODE_ENV !== 'production') {
         // When not in production, redirect requests for the main JS file to the
         // Webpack dev server running on localhost.
-        // TODO: Configure dev server using environment variables?
         app.get('/static/main.js', function(req, res) {
-            res.redirect(303, 'http://localhost:8080/static/main.js');
+            let wpMainJs = url.format({
+                hostname: req.host,
+                port: process.env.WEBPACK_PORT || 81,
+                pathname: '/static/main.js',
+            });
+
+            res.redirect(303, wpMainJs);
         });
     }
 

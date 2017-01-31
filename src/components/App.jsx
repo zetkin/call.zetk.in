@@ -29,7 +29,7 @@ export default class App extends React.Component {
                     <script src="/static/main.js"></script>
                     <link rel="stylesheet" href="/static/css/style.css"/>
                     <link rel="icon" type="image/png"
-                        href="/static/img/favicon.png"/>
+                        href="/static/images/favicon.png"/>
                 </head>
                 <body>
                     <div className="App-content">

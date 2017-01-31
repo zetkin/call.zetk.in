@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const appId = process.env.ZETKIN_APP_ID || 'a4';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
+const WEBPACK_PORT = process.env.WEBPACK_PORT || 81;
 
 const config = {
     entry: [
@@ -64,7 +65,7 @@ if (NODE_ENV === 'production') {
 
     config.entry = [
         ...config.entry,
-        'webpack-dev-server/client?http://localhost:81',
+        'webpack-dev-server/client?http://localhost:' + WEBPACK_PORT,
         'webpack/hot/only-dev-server'
     ];
 
@@ -86,11 +87,11 @@ if (NODE_ENV === 'production') {
         new webpack.NoErrorsPlugin(),
     ];
 
-    config.output.publicPath = 'http://call.dev.zetkin.org:81/static/';
+    config.output.publicPath = 'http://call.dev.zetkin.org:' + WEBPACK_PORT + '/static/';
 
     config.devServer = {
         host: '0.0.0.0',
-        port: 81,
+        port: WEBPACK_PORT,
         inline: true,
         hot: true,
         publicPath: config.output.publicPath,

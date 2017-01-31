@@ -1,22 +1,111 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
 
-var appId = process.env.ZETKIN_APP_ID || 'a5';
+const webpack = require('webpack');
 
-module.exports = {
+const appId = process.env.ZETKIN_APP_ID || 'a4';
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
+const config = {
     entry: [
-        path.join(__dirname, 'dist/app/client/main.js')
+        path.join(__dirname, './build/app/client/main')
     ],
+    module: {
+        loaders: [
+            {
+                test: /\.eot(\?v=.*)?$/,
+                loader: 'file-loader'
+            },
+            {
+                test: /\.svg(\?v=.*)?$/,
+                loader: 'file-loader'
+            },
+            {
+                test: /\.ttf(\?v=.*)?$/,
+                loader: 'file-loader'
+            },
+            {
+                test: /\.woff2?(\?v=.*)?$/,
+                loader: 'url-loader?limit=5000'
+            },
+        ]
+    },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': process.env.NODE_ENV,
-            'process.env.ZETKIN_DOMAIN': '"dev.zetkin.org"',
-            'process.env.ZETKIN_APP_ID': '"' + appId + '"',
+            'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+            'process.env.ZETKIN_DOMAIN': JSON.stringify('dev.zetkin.org'),
+            'process.env.ZETKIN_APP_ID': JSON.stringify(appId),
         }),
     ],
     output: {
-        path: path.join(__dirname, 'dist/static'),
-        publicPath: 'http://call.dev.zetkin.org',
+        path: path.join(__dirname, 'build/static'),
+        publicPath: '/static/',
         filename: '[name].js'
     }
 };
+
+if (NODE_ENV === 'production') {
+    config.devtool = '#source-map';
+
+    config.plugins = [
+        ...config.plugins,
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+            },
+            mangle: true,
+            screw_ie8: true,
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+    ];
+} else {
+    config.devtool = '#eval-source-map';
+
+    config.entry = [
+        ...config.entry,
+        'webpack-dev-server/client?http://localhost:81',
+        'webpack/hot/only-dev-server'
+    ];
+
+    config.module.loaders = [
+        ...config.module.loaders,
+        {
+            test: /\.jsx?$/,
+            exclude: /\/node_modules\//,
+            loaders: [
+                'react-hot'
+            ]
+        },
+    ];
+
+    config.plugins = [
+        ...config.plugins,
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
+        new webpack.NoErrorsPlugin(),
+    ];
+
+    config.output.publicPath = 'http://call.dev.zetkin.org:81/static/';
+
+    config.devServer = {
+        host: '0.0.0.0',
+        port: 81,
+        inline: true,
+        hot: true,
+        publicPath: config.output.publicPath,
+        quiet: false,
+        noInfo: false,
+        stats: {
+            assets: false,
+            colors: true,
+            version: false,
+            hash: false,
+            timings: true,
+            chunks: true,
+            chunkModules: false
+        }
+    };
+}
+
+module.exports = config;

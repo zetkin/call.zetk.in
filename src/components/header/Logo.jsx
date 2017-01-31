@@ -6,7 +6,7 @@ export default class Logo extends React.Component {
     render() {
         return (
             <Link className="Logo" to="/">
-                <img src="/static/img/logo-red.png"
+                <img src="/static/images/logo-red.png"
                     alt="Zetkin"/>
             </Link>
         );

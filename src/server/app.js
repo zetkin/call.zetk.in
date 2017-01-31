@@ -29,7 +29,6 @@ export default function initApp(messages) {
     if (process.env.NODE_ENV !== 'production') {
         // When not in production, redirect requests for the main JS file to the
         // Webpack dev server running on localhost.
-        // TODO: Configure dev server using environment variables?
         app.get('/static/main.js', function(req, res) {
             let wpMainJs = url.format({
                 hostname: req.host,

@@ -18,11 +18,14 @@ import IntlReduxProvider from '../components/IntlReduxProvider';
 import routes from '../components/routes';
 
 
+const USE_TLS = !!process.env.ZETKIN_USE_TLS;
+
+
 window.onload = function() {
     Z.configure({
         host: 'api.' + process.env.ZETKIN_DOMAIN,
-        port: 80,
-        ssl: false
+        port: USE_TLS? 443 : 80,
+        ssl: USE_TLS,
     });
 
     addLocaleData([

@@ -10,7 +10,7 @@ import LoadingIndicator from '../../common/misc/LoadingIndicator';
 import PaneBase from './PaneBase';
 import { campaignById } from '../../store/campaigns';
 import { retrieveActions, updateActionResponse } from '../../actions/action';
-import { retrieveCampaigns } from '../../actions/campaign';
+import { retrieveCampaign } from '../../actions/campaign';
 
 
 const mapStateToProps = state => ({
@@ -40,6 +40,17 @@ export default class InputPane extends PaneBase {
 
     componentDidMount() {
         this.props.dispatch(retrieveActions());
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        if (nextState.viewMode == 'campaign') {
+            if (this.state.viewMode != 'campaign' || this.state.selectedId != nextState.selectedId) {
+                let orgId = nextProps.campaigns.getIn(
+                    ['campaignList', 'items', nextState.selectedId, 'org_id']);
+
+                this.props.dispatch(retrieveCampaign(orgId, nextState.selectedId));
+            }
+        }
     }
 
     renderContent() {

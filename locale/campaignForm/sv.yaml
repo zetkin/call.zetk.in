@@ -24,13 +24,28 @@ filter:
     h: "Filtrera aktioner"
 
     activities:
-        h: "Aktiviteter ({ count })"
+        h: |
+            {count, plural,
+                =0 {Filtrera på aktiviteter}
+                =1 {Filtrerar på en aktivitet}
+                other {Filtrerar på # aktiviteter}
+            }
 
     campaigns:
-        h: "Kampanjer ({ count })"
+        h: |
+            {count, plural,
+                =0 {Filtrera på kampanjer}
+                =1 {Filtrerar på en kampanj}
+                other {Filtrerar på # kampanjer}
+            }
 
     locations:
-        h: "Platser ({ count })"
+        h: |
+            {count, plural,
+                =0 {Filtrera på platser}
+                =1 {Filtrerar på en plats}
+                other {Filtrerar på # platser}
+            }
 
 
 submitLabel: "Spara mina anmälningar"

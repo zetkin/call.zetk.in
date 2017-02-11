@@ -2,4 +2,17 @@
 
 cd /var/app
 
-exec npm start
+if [ "$NODE_ENV" == "production" ]
+then
+    #./node_modules/.bin/webpack
+    node build/app/server/main
+else
+    ./node_modules/.bin/concurrently \
+        --kill-others \
+        --prefix name \
+        --names "gulp,node,webpack" \
+        --prefix-colors "bgMagenta,bgCyan,bgYellow" \
+        "./node_modules/.bin/gulp watch" \
+        "./node_modules/.bin/nodemon --ext '*' --watch build ./build/app/server/main.js" \
+        "./node_modules/.bin/webpack-dev-server"
+fi

@@ -43,11 +43,52 @@ export default createReducer(initialState, {
                 immutable.fromJS(campaigns));
     },
 
+    [types.RETRIEVE_CAMPAIGN + '_PENDING']: (state, action) => {
+        let campaign = {
+            id: action.meta.campaignId.toString(),
+            org_id: action.meta.orgId.toString(),
+            isPending: true,
+        };
+
+        return state
+            .updateIn(['campaignList', 'items'], items => items?
+                items.set(campaign.id, immutable.fromJS(campaign)) :
+                immutable.fromJS({ [campaign.id]: campaign }));
+    },
+
+    [types.RETRIEVE_CAMPAIGN + '_REJECTED']: (state, action) => {
+        let campaign = {
+            id: action.meta.campaignId.toString(),
+            org_id: action.meta.orgId.toString(),
+            error: action.payload.data,
+            isPending: false,
+        };
+
+        return state
+            .updateIn(['campaignList', 'items'], items => items?
+                items.set(campaign.id, immutable.fromJS(campaign)) :
+                immutable.fromJS({ [campaign.id]: campaign }));
+    },
+
+    [types.RETRIEVE_CAMPAIGN + '_FULFILLED']: (state, action) => {
+        let campaign = action.payload.data.data;
+        campaign.id = campaign.id.toString();
+        campaign.org_id = action.meta.orgId;
+        campaign.isPending = false;
+        campaign.error = null;
+
+        return state
+            .updateIn(['campaignList', 'items'], items => items?
+                items.set(campaign.id, immutable.fromJS(campaign)) :
+                immutable.fromJS({ [campaign.id]: campaign }));
+    },
+
     [types.RETRIEVE_ACTIONS + '_FULFILLED']: (state, action) => {
         let campaigns = {};
         action.payload.data.data.forEach(obj => {
             let campaign = obj.campaign;
             campaign.id = campaign.id.toString();
+            campaign.org_id = action.meta.orgId;
             campaigns[campaign.id] = campaign;
         });
 

@@ -18,7 +18,7 @@ import IntlReduxProvider from '../components/IntlReduxProvider';
 import routes from '../components/routes';
 
 
-const USE_TLS = !!process.env.ZETKIN_USE_TLS;
+const USE_TLS = (process.env.ZETKIN_USE_TLS == '1');
 
 
 window.onload = function() {

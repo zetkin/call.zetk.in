@@ -9,7 +9,7 @@ let port = process.env.APP_PORT || 80;
 let msgPath = path.join(__dirname, '../../locale');
 
 
-const USE_TLS = !!process.env.ZETKIN_USE_TLS;
+const USE_TLS = (process.env.ZETKIN_USE_TLS == '1')
 
 
 loadMessages(msgPath, (err, messages) => {

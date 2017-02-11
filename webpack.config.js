@@ -3,7 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const APP_ID = process.env.ZETKIN_APP_ID || 'a4';
-const USE_TLS = !!process.env.ZETKIN_USE_TLS || 0;
+const USE_TLS = process.env.ZETKIN_USE_TLS || 0;
 const DOMAIN = process.env.ZETKIN_DOMAIN;
 
 const NODE_ENV = process.env.NODE_ENV || 'development';

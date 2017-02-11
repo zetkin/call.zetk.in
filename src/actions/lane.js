@@ -26,7 +26,6 @@ export function switchLaneToCall(call, step) {
         });
 
         if (step) {
-            console.log(JSON.stringify(callId));
             let lane = laneByCallId(getState().get('lanes'), callId.toString());
 
             dispatch(setLaneStep(lane, step));

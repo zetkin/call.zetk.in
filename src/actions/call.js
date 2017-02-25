@@ -9,7 +9,8 @@ export function retrieveUserCalls() {
         dispatch({
             type: types.RETRIEVE_USER_CALLS,
             payload: {
-                promise: z.resource('users', 'me', 'outgoing_calls').get(),
+                promise: z.resource('users', 'me', 'outgoing_calls')
+                    .get(0, 40),
             }
         });
     };

@@ -1,7 +1,6 @@
 import { compose, applyMiddleware, createStore } from 'redux';
 import { combineReducers } from 'redux-immutable';
 import immutable from 'immutable';
-import { intlReducer } from 'react-intl-redux';
 import promiseMiddleware from 'redux-promise-middleware';
 
 import loginRedirect from '../common/redux/middleware/loginRedirect';
@@ -10,6 +9,7 @@ import actions from './actions';
 import assignments from './assignments';
 import calls from './calls';
 import campaigns from './campaigns';
+import intl from './intl';
 import lanes from './lanes';
 import tutorial from './tutorial';
 import user from './user';
@@ -17,12 +17,12 @@ import view from './view';
 
 
 const appReducer = combineReducers({
-    intl: intlReducer,
     actions,
     assignments,
     calls,
     campaigns,
     lanes,
+    intl,
     tutorial,
     user,
     view,

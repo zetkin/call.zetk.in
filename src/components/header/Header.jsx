@@ -3,6 +3,7 @@ import { FormattedMessage as Msg } from 'react-intl';
 import React from 'react';
 
 import Logo from './Logo';
+import FormattedLink from '../../common/misc/FormattedLink';
 import UserMenu from '../../common/misc/userMenu/UserMenu';
 
 
@@ -31,7 +32,10 @@ export default class Header extends React.Component {
                 <div className="Header-currentApp">Zetkin Call</div>
                 <div className="Header-nav">
                     { userWidget }
-                    <a className="Header-navLink" href={ dashboardUrl }>Min sida</a>
+                    <FormattedLink className="Header-navLink"
+                        msgId="header.dashboardLink"
+                        href={ dashboardUrl }
+                        />
                 </div>
             </header>
         );

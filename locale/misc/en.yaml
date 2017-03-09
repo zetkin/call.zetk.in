@@ -1,0 +1,15 @@
+callLog:
+    emptyLabel: Never called
+    note: The caller did not leave a note
+    summary:
+        status0: Call not completed
+        status1: 'We reached {target}.'
+        status11: '{target} did not pick up.'
+        status12: Line busy.
+        status13: '{target} asked us to call back.'
+        status14: '{target} was not available.'
+        status15: We left a message.
+        status21: We had the wrong number.
+        status22: The call was dropped.
+tagList:
+    emptyLabel: No tags

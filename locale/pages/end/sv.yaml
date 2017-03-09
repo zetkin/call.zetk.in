@@ -1,6 +1,4 @@
-h: "Tack för att du ringde"
-p: |
-    Ditt arbete är viktigt för att bygga din organisation starkare.
-
-assignmentsButton: "Fortsätt ringa"
-dashboardButton: "Gå till Min sida"
+assignmentsButton: Fortsätt ringa
+dashboardButton: Gå till Min sida
+h: Tack för att du ringde
+p: Ditt arbete är viktigt för att bygga din organisation starkare.

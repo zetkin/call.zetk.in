@@ -1,5 +1,9 @@
 require('array.prototype.find');
 
+require('intl');
+require('intl/locale-data/jsonp/en.js');
+require('intl/locale-data/jsonp/sv.js');
+
 // Extend standard Date API using sugar-date
 require('sugar-date').Date.extend();
 

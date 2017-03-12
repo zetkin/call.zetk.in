@@ -43,6 +43,7 @@
     "gulp-streamify": "0.0.5",
     "gulp-uglify": "^2.0.0",
     "immutable": "^3.8.1",
+    "intl": "^1.2.5",
     "node-yaml": "^3.0.2",
     "object-subset": "0.0.4",
     "querystring": "^0.2.0",

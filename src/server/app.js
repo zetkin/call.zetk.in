@@ -31,7 +31,7 @@ export default function initApp(messages) {
         // Webpack dev server running on localhost.
         app.get('/static/main.js', function(req, res) {
             let wpMainJs = url.format({
-                hostname: req.host,
+                hostname: req.hostname,
                 port: process.env.WEBPACK_PORT || 81,
                 pathname: '/static/main.js',
             });

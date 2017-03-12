@@ -163,6 +163,7 @@ export default class InputPane extends PaneBase {
                         responseList={ responseList }
                         userActionList={ userActionList }
                         scrollContainer={ scrollContainer}
+                        scrollOffset={ -160 }
                         onResponse={ this.onCampaignResponse.bind(this) }/>
                 );
             }

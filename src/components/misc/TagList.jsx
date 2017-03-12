@@ -12,6 +12,7 @@ export default class TagList extends React.Component {
     render() {
         let tagItems = this.props.tags.map(tag => (
             <li key={ tag.get('id') }
+                title={ tag.get('description') }
                 className="TagList-tag">{ tag.get('title') }</li>
         ));
 

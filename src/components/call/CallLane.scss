@@ -27,6 +27,7 @@
             .InstructionsPane-targetButton {
                 background: darken(white, 10);
                 @include button-color(darken(white, 10), 5);
+                box-shadow: 0 0 10px rgba(0,0,0,0.1) inset;
                 cursor: pointer;
             }
         }
@@ -45,6 +46,7 @@
             .TargetPane-instructionsButton {
                 background: darken(white, 10);
                 @include button-color(darken(white, 10), 5);
+                box-shadow: 0 0 10px rgba(0,0,0,0.1) inset;
                 cursor: pointer;
             }
         }

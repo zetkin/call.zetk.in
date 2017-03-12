@@ -1,16 +1,14 @@
-assignmentsButton: "Visa alla uppdrag"
-startButton: "Börja ringa"
-endButton: "Sluta ringa"
-callButton: "Starta samtal"
-skipButton: "Hoppa över"
-finishCallButton: "Slutför & rapportera"
-submitReportButton: "Skicka rapport"
-nextCallButton: "Fortsätt ringa"
-
+assignmentsButton: Visa alla uppdrag
+callButton: Starta samtal
+endButton: Sluta ringa
+finishCallButton: Slutför & rapportera
 instructions:
-    prepare: "Förbered dig iför samtalet."
-
+    prepare: Förbered dig iför samtalet.
+nextCallButton: Fortsätt ringa
+skipButton: Hoppa över
+startButton: Börja ringa
+submitReportButton: Skicka rapport
 targetInfo:
-    lastSuccessful: "Senast nådd {date}"
-    lastFailure: "Senast sökt {date}"
-    lastNever: "Aldrig ringd förut"
+    lastFailure: 'Senast sökt {date}'
+    lastNever: Aldrig ringd förut
+    lastSuccessful: 'Senast nådd {date}'

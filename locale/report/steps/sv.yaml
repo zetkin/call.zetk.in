@@ -1,96 +1,89 @@
-successOrFailure:
-    question: "Nådde du {target}?"
-    options:
-        success: "Ja"
-        failure: "Nej..."
-    summary:
-        success: "Du nådde {target}."
-        failure: "Du nådde inte {target}."
-    effect:
-        success: "Framtida ringare kommer se att du pratat med {target}."
-        failure: "Framtida ringare kommer se att du inte pratat med {target}."
-
-successCouldTalk:
-    question: "Kunde {target} prata just nu?"
-    options:
-        couldTalk: "Ja"
-        callBack: "Nej, vi måste ringa tillbaka"
-    summary:
-        couldTalk: "{target} kunde prata med oss."
-        callBack: "{target} hade inte tid att prata just nu."
-    effect:
-        couldTalk: "Framtida ringare kommer se att ni kunde prata färdigt."
-        callBack: "Framtida ringare kommer se att vi behövde ringa tillbaka."
-
 callBack:
-    question: "När ska vi ringa tillbaka?"
-    options:
-        asap: "Så snart som möjligt"
-        fewDays: "Om ett par dagar"
-        oneWeek: "Om en vecka"
-        twoWeeks: "Om ett par veckor"
-    summary:
-        asap: "Vi ringer tillbaka så snart som möjligt"
-        fewDays: "Vi ringer tillbaka tidigast om ett par dagar"
-        oneWeek: "Vi ringer tillbaka tidigast om en vecka"
-        twoWeeks: "Vi ringer tillbaka tidigast om två veckor"
     effect:
-        asap: "{target} placeras sist i ringkön."
-        other: "{target} plockas automatiskt bort ur ringkön så länge."
-
-failureReason:
-    question: "Varför inte?"
+        asap: '{target} placeras sist i ringkön.'
+        other: '{target} plockas automatiskt bort ur ringkön så länge.'
     options:
-        noPickup: "Inget svar / telefonsvarare"
-        notAvailable: "Inte tillgänglig just nu"
-        wrongNumber: "Fel nummer"
-        lineBusy: "Upptaget"
+        asap: Så snart som möjligt
+        fewDays: Om ett par dagar
+        oneWeek: Om en vecka
+        twoWeeks: Om ett par veckor
+    question: När ska vi ringa tillbaka?
     summary:
-        noPickup: "{target} svarade inte."
-        notAvailable: "{target} var inte tillgänglig just nu."
-        wrongNumber: "Vi hade fel nummer till {target}."
-        lineBusy: "Det var upptaget."
-
-failureMessage:
-    question: "Lämnade du ett meddelande på telefonsvararen?"
-    options:
-        leftMessage: "Ja"
-        noMessage: "Nej"
-    summary:
-        leftMessage: "Du lämnade ett meddelande."
-        noMessage: "Du lämnade inget meddelande."
-    effect:
-        leftMessage: "Framtida ringare kommer att se att du lämnat ett meddelande."
-
-organizerAction:
-    question: "Framkom något under samtalet som kräver att en ansvarig agerar?"
-    options:
-        actionNeeded: "Ja"
-        noActionNeeded: "Nej, det behövs inte"
-    summary:
-        actionNeeded: "Du vill att någon ansvarig kollar på samtalet."
-        noActionNeeded: "Ingen ansvarig behöver agera."
-    effect:
-        actionNeeded: "En organisatör kommer bli meddelad."
-
-organizerLog:
-    question: "Förklara för den som är ansvarig vad problemet är."
-    options:
-        saveWithoutLog: "Spara utan meddelande"
-        saveWithLog: "Inkludera meddelandet"
-    summary:
-        leftLog: "Du skrev en anteckning till organisatören."
-        emptyLog: "Du skrev ingen anteckning till organisatören."
-    effect:
-        leftLog: "Organisatören kommer få följande meddelande:"
-
+        asap: Vi ringer tillbaka så snart som möjligt
+        fewDays: Vi ringer tillbaka tidigast om ett par dagar
+        oneWeek: Vi ringer tillbaka tidigast om en vecka
+        twoWeeks: Vi ringer tillbaka tidigast om två veckor
 callerLog:
-    question: "Vill du lämna en anteckning till framtida ringare?"
-    options:
-        saveWithLog: "Spara anteckning"
-        saveWithoutLog: "Spara utan anteckning"
-    summary:
-        leftLog: "Du skrev en anteckning till framtida ringare."
-        emptyLog: "Du skrev ingen anteckning till framtida ringare."
     effect:
-        leftLog: "Framtida ringare kommer att se din anteckning:"
+        leftLog: 'Framtida ringare kommer att se din anteckning:'
+    options:
+        saveWithLog: Spara anteckning
+        saveWithoutLog: Spara utan anteckning
+    question: Vill du lämna en anteckning till framtida ringare?
+    summary:
+        emptyLog: Du skrev ingen anteckning till framtida ringare.
+        leftLog: Du skrev en anteckning till framtida ringare.
+failureMessage:
+    effect:
+        leftMessage: Framtida ringare kommer att se att du lämnat ett meddelande.
+    options:
+        leftMessage: Ja
+        noMessage: Nej
+    question: Lämnade du ett meddelande på telefonsvararen?
+    summary:
+        leftMessage: Du lämnade ett meddelande.
+        noMessage: Du lämnade inget meddelande.
+failureReason:
+    options:
+        lineBusy: Upptaget
+        noPickup: Inget svar / telefonsvarare
+        notAvailable: Inte tillgänglig just nu
+        wrongNumber: Fel nummer
+    question: Varför inte?
+    summary:
+        lineBusy: Det var upptaget.
+        noPickup: '{target} svarade inte.'
+        notAvailable: '{target} var inte tillgänglig just nu.'
+        wrongNumber: 'Vi hade fel nummer till {target}.'
+organizerAction:
+    effect:
+        actionNeeded: En organisatör kommer bli meddelad.
+    options:
+        actionNeeded: Ja
+        noActionNeeded: 'Nej, det behövs inte'
+    question: Framkom något under samtalet som kräver att en ansvarig agerar?
+    summary:
+        actionNeeded: Du vill att någon ansvarig kollar på samtalet.
+        noActionNeeded: Ingen ansvarig behöver agera.
+organizerLog:
+    effect:
+        leftLog: 'Organisatören kommer få följande meddelande:'
+    options:
+        saveWithLog: Inkludera meddelandet
+        saveWithoutLog: Spara utan meddelande
+    question: Förklara för den som är ansvarig vad problemet är.
+    summary:
+        emptyLog: Du skrev ingen anteckning till organisatören.
+        leftLog: Du skrev en anteckning till organisatören.
+successCouldTalk:
+    effect:
+        callBack: Framtida ringare kommer se att vi behövde ringa tillbaka.
+        couldTalk: Framtida ringare kommer se att ni kunde prata färdigt.
+    options:
+        callBack: 'Nej, vi måste ringa tillbaka'
+        couldTalk: Ja
+    question: 'Kunde {target} prata just nu?'
+    summary:
+        callBack: '{target} hade inte tid att prata just nu.'
+        couldTalk: '{target} kunde prata med oss.'
+successOrFailure:
+    effect:
+        failure: 'Framtida ringare kommer se att du inte pratat med {target}.'
+        success: 'Framtida ringare kommer se att du pratat med {target}.'
+    options:
+        failure: Nej...
+        success: Ja
+    question: 'Nådde du {target}?'
+    summary:
+        failure: 'Du nådde inte {target}.'
+        success: 'Du nådde {target}.'

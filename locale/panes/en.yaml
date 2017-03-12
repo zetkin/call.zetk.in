@@ -1,0 +1,57 @@
+input:
+    h1: 'Act as {target}'
+    summary:
+        campaigns:
+            actions: '{count} aktioner'
+            bookings: |-
+                {numBookings, plural,
+                    =0 {no bookings}
+                    =1 {one booking}
+                    other {# bookings}
+                }
+            h2: Active campaigns
+            respondButton: 'Sign up for {campaign}'
+            responses: |-
+                {numResponses, plural,
+                    =0 {no unbooked sign-ups}
+                    =1 {one unbooked sign-up}
+                    other {# unbooked sign-ups}
+                }
+            status: '{target} has'
+        surveys:
+            h2: Surveys
+            respondButton: 'Respond to {survey}'
+    summaryLabel: Summary
+    summaryLink: Summary
+instructions:
+    h1: Instructions
+    targetButton: Show personal info
+queueEmpty:
+    assignmentsLink: Choose another assignment
+    h1: No more people to call!
+    p: >-
+        The call queue is empty at the moment. More people might be added
+        shortly, but for now you can't continue calling in this assignment.
+report:
+    backLink: Go back
+    h:
+        report: Report call
+        reported: Call reported
+stats:
+    h1: Great work!
+    p: >-
+        Your work is important to build a stronger organization. Here's a
+        summary of how the assignment is progressing.
+target:
+    activityHeader: Previous activity
+    activityLabel: |-
+        {count, plural,
+            =0 {{target} never participated in any actions.}
+            =1 {{target} participated in one action, {lastAction}.}
+            other {{target} participated in {count} actions, the most recent being {lastAction}.}
+        }
+    activityLastAction: '{activity } ({location}) {date}'
+    callLogHeader: 'Previous calls to {target}'
+    h1: Personal info
+    instructionsButton: Show instructions
+    tagHeader: Tags

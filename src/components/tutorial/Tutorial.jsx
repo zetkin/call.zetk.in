@@ -6,6 +6,7 @@ import TutorialNote from './TutorialNote';
 
 
 const PADDING = 10;
+const MARGIN = 10;
 
 const mapStateToProps = state => ({
     isOverlayActive: !!state.getIn(['view', 'overlay']),
@@ -97,8 +98,18 @@ export default class Tutorial extends React.Component {
                 let targetRect = this.targetElem.getBoundingClientRect();
 
                 // Try left-aligned, below
-                x = targetRect.left - PADDING;
-                y = targetRect.bottom + 2 * PADDING;
+                x = targetRect.left;
+                y = targetRect.bottom + PADDING;
+
+                // Too far left?
+                if (x <= MARGIN) {
+                    x = MARGIN;
+                }
+
+                // Too far up
+                if (y <= MARGIN) {
+                    y = MARGIN;
+                }
 
                 // Too low? Move above instead
                 if (y + noteRect.height > window.innerHeight) {
@@ -106,8 +117,8 @@ export default class Tutorial extends React.Component {
                 }
 
                 // Too far right? Align right instead
-                if (x + noteRect.width > window.innerWidth) {
-                    x = (targetRect.right - noteRect.width) + PADDING;
+                if ((x + noteRect.width + MARGIN) > window.innerWidth) {
+                    x = window.innerWidth - noteRect.width - MARGIN;
                 }
             }
 

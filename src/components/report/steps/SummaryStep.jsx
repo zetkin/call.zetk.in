@@ -45,8 +45,6 @@ export default class SummaryStep extends React.Component {
                 }
             }).toList();
 
-            console.log(this.props.disableEdit);
-
             let msg = 'report.steps.summary.surveys.' + (this.props.disableEdit?
                 'submitted' : 'status');
 

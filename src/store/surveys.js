@@ -5,6 +5,7 @@ import * as types from '../actions';
 
 
 const initialState = immutable.fromJS({
+    pendingResponsesByCall: {},
     surveyList: {
         isPending: false,
         error: null,
@@ -81,5 +82,15 @@ export default createReducer(initialState, {
             .updateIn(['surveyList', 'items'], items => items?
                 items.set(survey.id, immutable.fromJS(survey)) :
                 immutable.fromJS({ [survey.id]: survey }));
+    },
+
+    [types.STORE_SURVEY_RESPONSE]: (state, action) => {
+        let callId = action.meta.callId;
+        let surveyId = action.meta.surveyId;
+        let elemId = action.meta.elemId;
+        let response = action.payload;
+
+        return state
+            .setIn(['pendingResponsesByCall', callId, surveyId, elemId], response);
     },
 });

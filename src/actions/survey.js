@@ -31,3 +31,16 @@ export function retrieveSurvey(orgId, surveyId) {
         });
     };
 }
+
+export function storeSurveyResponse(surveyId, elemId, response) {
+    return ({ dispatch, getState }) => {
+        let call = currentCall(getState());
+        let callId = call.get('id');
+
+        dispatch({
+            type: types.STORE_SURVEY_RESPONSE,
+            meta: { callId, surveyId, elemId },
+            payload: response,
+        });
+    };
+}

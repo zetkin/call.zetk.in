@@ -22,20 +22,37 @@ export default class SummaryStep extends React.Component {
                 let survey = this.props.surveyList.getIn(['items', surveyId]);
                 let included = sub.get('included');
 
-                return (
-                    <li key={ surveyId } className="SummaryStep-surveyItem">
-                        <input type="checkbox" checked={ included }
-                            onChange={ this.onSurveyToggle.bind(this, surveyId) }
-                            />
-                        <label>{ survey.get('title') }</label>
-                    </li>
-                );
+                if (this.props.disableEdit) {
+                    let msg = 'report.steps.summary.surveys.' + (included?
+                        'surveySubmitted' : 'surveyDiscarded');
+
+                    return (
+                        <li key={ surveyId } className="SummaryStep-surveyItem">
+                            <Msg id={ msg }
+                                values={{ survey: survey.get('title') }}/>
+                        </li>
+                    );
+                }
+                else {
+                    return (
+                        <li key={ surveyId } className="SummaryStep-surveyItem">
+                            <input type="checkbox" checked={ included }
+                                onChange={ this.onSurveyToggle.bind(this, surveyId) }
+                                />
+                            <label>{ survey.get('title') }</label>
+                        </li>
+                    );
+                }
             }).toList();
+
+            console.log(this.props.disableEdit);
+
+            let msg = 'report.steps.summary.surveys.' + (this.props.disableEdit?
+                'submitted' : 'status');
 
             return (
                 <div className="SummaryStep">
-                    <Msg tagName="p"
-                        id="report.steps.summary.surveys.status"
+                    <Msg tagName="p" id={ msg }
                         values={{ count: surveyItems.size }}/>
                     <ul className="SummaryStep-surveyList">
                         { surveyItems }

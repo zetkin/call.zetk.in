@@ -90,6 +90,7 @@ export default createReducer(initialState, {
         let elemId = action.meta.elemId;
         let response = action.payload;
         let surveyData = immutable.fromJS({
+            surveyId: surveyId,
             included: true,
             responses: {
                 [elemId]: response,

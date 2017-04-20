@@ -210,11 +210,57 @@ export function submitCallReport() {
         let assignment = assignmentById(state, call.get('assignment_id'))
         let orgId = assignment.get('organization_id');
 
+        let promises = [
+            z.resource('orgs', orgId, 'calls', callId).patch(data)
+        ];
+
+        // Figure out whether there are surveys that need to be submitted
+        let pendingSubmissions = state
+            .getIn(['surveys', 'pendingResponsesByCall', callId]);
+
+        if (pendingSubmissions) {
+            let includedSubmissions = pendingSubmissions
+                .filter(survey => survey.get('included'))
+                .toList();
+
+            if (includedSubmissions.size) {
+                includedSubmissions.forEach(sub => {
+                    let surveyId = sub.get('surveyId');
+                    let responses = sub.get('responses').map((res, elemId) => {
+                        let response = {
+                            // TODO: Don't parseInt() when once migrated to string IDs
+                            question_id: parseInt(elemId),
+                        };
+
+                        if (res.get('options')) {
+                            response.options = res.get('options')
+                                .toJS().map(id => parseInt(id)); // TODO: Don't parseInt
+                        }
+
+                        if (res.get('response')) {
+                            response.response = res.get('response');
+                        }
+
+                        return response;
+                    });
+
+                    let data = {
+                        // TODO: Include target as signature
+                        signature: null,
+                        responses: responses.toList().toJS(),
+                    };
+
+                    promises.push(z.resource('orgs', orgId,
+                        'surveys', surveyId, 'submissions').post(data));
+                });
+            }
+        }
+
         dispatch({
             type: types.SUBMIT_CALL_REPORT,
             meta: { callId },
             payload: {
-                promise: z.resource('orgs', orgId, 'calls', callId).patch(data)
+                promise: Promise.all(promises)
             }
         });
     };

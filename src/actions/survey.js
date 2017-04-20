@@ -44,3 +44,16 @@ export function storeSurveyResponse(surveyId, elemId, response) {
         });
     };
 }
+
+export function toggleSurveyIncluded(surveyId, included) {
+    return ({ dispatch, getState }) => {
+        let call = currentCall(getState());
+        let callId = call.get('id');
+
+        dispatch({
+            type: types.TOGGLE_SURVEY_INCLUDED,
+            meta: { callId, surveyId },
+            payload: included,
+        });
+    };
+}

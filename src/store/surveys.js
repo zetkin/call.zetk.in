@@ -89,8 +89,24 @@ export default createReducer(initialState, {
         let surveyId = action.meta.surveyId;
         let elemId = action.meta.elemId;
         let response = action.payload;
+        let surveyData = immutable.fromJS({
+            included: true,
+            responses: {
+                [elemId]: response,
+            }
+        });
 
         return state
-            .setIn(['pendingResponsesByCall', callId, surveyId, elemId], response);
+            .updateIn(['pendingResponsesByCall', callId, surveyId], survey => survey?
+                survey.mergeDeep(surveyData) : surveyData);
+    },
+
+    [types.TOGGLE_SURVEY_INCLUDED]: (state, action) => {
+        let callId = action.meta.callId;
+        let surveyId = action.meta.surveyId;
+
+        return state
+            .setIn(['pendingResponsesByCall', callId, surveyId, 'included'],
+                action.payload);
     },
 });

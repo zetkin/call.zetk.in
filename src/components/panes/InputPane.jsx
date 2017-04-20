@@ -12,7 +12,11 @@ import SurveyForm from './../../common/surveyForm/SurveyForm';
 import { campaignById } from '../../store/campaigns';
 import { retrieveActions, updateActionResponse } from '../../actions/action';
 import { retrieveCampaign } from '../../actions/campaign';
-import { retrieveSurvey, retrieveSurveys } from '../../actions/survey';
+import {
+    retrieveSurvey,
+    retrieveSurveys,
+    storeSurveyResponse,
+} from '../../actions/survey';
 
 
 const mapStateToProps = state => ({
@@ -220,7 +224,8 @@ export default class InputPane extends PaneBase {
                     surveyForm = (
                         <SurveyForm key="surveyForm"
                             survey={ survey }
-                            onResponse={ this.onSurveyResponse.bind(survey, this) }/>
+                            submitEnabled={ false }
+                            onResponse={ this.onSurveyResponse.bind(this, survey) }/>
                     );
                 }
 
@@ -321,8 +326,9 @@ export default class InputPane extends PaneBase {
         this.props.dispatch(updateActionResponse(action, checked));
     }
 
-    onSurveyResponse(survey, response) {
-        console.log(survey, response);
+    onSurveyResponse(survey, elemId, response) {
+        this.props.dispatch(
+            storeSurveyResponse(survey.get('id'), elemId, response))
     }
 
     onRespondClick(type, id) {

@@ -228,6 +228,14 @@
         }
     }
 
+    .SurveyForm {
+        background-color: inherit;
+
+        form {
+            margin: 0;
+        }
+    }
+
     &.PaneBase-enter {
         animation: InputPane-enterAnimation $pane-transition-duration;
     }

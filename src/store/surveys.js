@@ -44,7 +44,6 @@ export default createReducer(initialState, {
     },
 
     [types.RETRIEVE_SURVEY + '_PENDING']: (state, action) => {
-        console.log(action);
         let survey = {
             id: action.meta.surveyId.toString(),
             org_id: action.meta.orgId.toString(),

@@ -87,3 +87,14 @@ successOrFailure:
     summary:
         failure: 'Du nådde inte {target}.'
         success: 'Du nådde {target}.'
+summary:
+    surveys:
+        status: |-
+            Under samtalet matade du in svar på {count, plural,
+            =1 {en enkät} other {# enkäter}} som kommer att skickas in. Kryssa
+            ur enkätsvar du vill slänga.
+        submitted: |-
+            Under samtalet matade du in svar på {count, plural,
+            =1 {en enkät} other {# enkäter}}.
+        surveyDiscarded: Ignorerade svar på "{survey}"
+        surveySubmitted: Skickade in svar på "{survey}"

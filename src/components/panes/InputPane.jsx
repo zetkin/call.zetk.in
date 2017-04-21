@@ -8,14 +8,21 @@ import CampaignForm from '../../common/campaignForm/CampaignForm';
 import FormattedLink from '../../common/misc/FormattedLink';
 import LoadingIndicator from '../../common/misc/LoadingIndicator';
 import PaneBase from './PaneBase';
+import SurveyForm from './../../common/surveyForm/SurveyForm';
 import { campaignById } from '../../store/campaigns';
 import { retrieveActions, updateActionResponse } from '../../actions/action';
 import { retrieveCampaign } from '../../actions/campaign';
+import {
+    retrieveSurvey,
+    retrieveSurveys,
+    storeSurveyResponse,
+} from '../../actions/survey';
 
 
 const mapStateToProps = state => ({
     actions: state.get('actions'),
     campaigns: state.get('campaigns'),
+    surveys: state.get('surveys'),
 });
 
 @connect(mapStateToProps)
@@ -40,6 +47,7 @@ export default class InputPane extends PaneBase {
 
     componentDidMount() {
         this.props.dispatch(retrieveActions());
+        this.props.dispatch(retrieveSurveys());
     }
 
     componentWillUpdate(nextProps, nextState) {
@@ -51,6 +59,14 @@ export default class InputPane extends PaneBase {
                 this.props.dispatch(retrieveCampaign(orgId, nextState.selectedId));
             }
         }
+        else if (nextState.viewMode == 'survey') {
+            if (this.state.viewMode != 'survey' || this.state.selectedId != nextState.selectedId) {
+                let orgId = nextProps.surveys.getIn(
+                    ['surveyList', 'items', nextState.selectedId, 'org_id']);
+
+                this.props.dispatch(retrieveSurvey(orgId, nextState.selectedId));
+            }
+        }
     }
 
     renderContent() {
@@ -59,7 +75,9 @@ export default class InputPane extends PaneBase {
 
         if (this.state.viewMode == 'summary') {
             let campaignStore = this.props.campaigns;
+            let surveyStore = this.props.surveys;
             let campaignContent = null;
+            let surveyContent = null;
 
             if (campaignStore.getIn(['campaignList', 'isPending'])) {
                 campaignContent = <LoadingIndicator/>;
@@ -118,11 +136,43 @@ export default class InputPane extends PaneBase {
                 }
             }
 
+            if (surveyStore.getIn(['surveyList', 'isPending'])) {
+                surveyContent = <LoadingIndicator/>;
+            }
+            else {
+                let listItems = surveyStore.getIn(['surveyList', 'items']);
+
+                if (listItems) {
+                    surveyContent = (
+                        <ul className="InputPane-summaryList">
+                        { listItems.toList().map(survey => {
+                            let id = survey.get('id');
+
+                            let active = (this.props.step === "call")
+                                ? true : false;
+
+                            return (
+                                <SurveyListItem key={ id }
+                                    isActive={ active }
+                                    survey={ survey }
+                                    onSelect={ this.onSurveySelect.bind(this) }
+                                    />
+                            );
+                        }) }
+                        </ul>
+                    );
+                }
+            }
+
             content = (
                 <div key="content" className="InputPane-summary">
                     <section className="InputPane-campaigns">
                         <Msg tagName="h2" id="panes.input.summary.campaigns.h2"/>
                         { campaignContent }
+                    </section>
+                    <section className="InputPane-surveys">
+                        <Msg tagName="h2" id="panes.input.summary.surveys.h2"/>
+                        { surveyContent }
                     </section>
                 </div>
             );
@@ -167,6 +217,36 @@ export default class InputPane extends PaneBase {
                         onResponse={ this.onCampaignResponse.bind(this) }/>
                 );
             }
+            else if (this.state.viewMode == 'survey') {
+                let survey = this.props.surveys.getIn(
+                    ['surveyList', 'items', this.state.selectedId]);
+
+                let surveyForm = null;
+                if (survey.get('elements')) {
+                    let surveyId = survey.get('id');
+                    let callId = this.props.call.get('id');
+                    let submission = this.props.surveys.getIn(
+                        ['pendingResponsesByCall', callId, surveyId ]);
+
+                    surveyForm = (
+                        <SurveyForm key="surveyForm"
+                            survey={ survey }
+                            submitEnabled={ false }
+                            submission={ submission }
+                            onResponse={ this.onSurveyResponse.bind(this, survey) }/>
+                    );
+                }
+
+                content.push(
+                    <div key="surveyInfo" className="InputPane-surveyInfo">
+                        <h2 key="h2">{ survey.get('title') }</h2>
+                        <p key="intro">
+                            { survey.get('info_text') }
+                        </p>
+                    </div>,
+                    surveyForm
+                );
+            }
         }
 
         return content;
@@ -190,6 +270,18 @@ export default class InputPane extends PaneBase {
                 );
             });
 
+            let surveyStore = this.props.surveys;
+            let surveyItems = surveyStore.getIn(['surveyList', 'items']);
+            let surveyOptions = surveyItems.toList().map(survey => {
+                let value = 'survey:' + survey.get('id');
+
+                return (
+                    <option key={ value } value={ value }>
+                        { survey.get('title') }
+                    </option>
+                );
+            });
+
             return (
                 <div key="nav" className="InputPane-nav">
                     <FormattedLink className="InputPane-summaryLink"
@@ -201,6 +293,7 @@ export default class InputPane extends PaneBase {
                     <select value={ selectValue }
                         onChange={ this.onSelectChange.bind(this) }>
                         { campaignOptions }
+                        { surveyOptions }
                     </select>
                 </div>
             );
@@ -230,8 +323,20 @@ export default class InputPane extends PaneBase {
         });
     }
 
+    onSurveySelect(id) {
+        this.setState({
+            viewMode: 'survey',
+            selectedId: id.toString(),
+        });
+    }
+
     onCampaignResponse(action, checked) {
         this.props.dispatch(updateActionResponse(action, checked));
+    }
+
+    onSurveyResponse(survey, elemId, response) {
+        this.props.dispatch(
+            storeSurveyResponse(survey.get('id'), elemId, response))
     }
 
     onRespondClick(type, id) {
@@ -307,9 +412,28 @@ const CampaignListItem = props => {
                     values={{ numResponses }}/>
             </p>
             <FormattedLink key="CampaignListItemLink"
-                className="InputPane-campaignListLink"
+                className="InputPane-listLink"
                 msgId="panes.input.summary.campaigns.respondButton"
                 msgValues={{ campaign: title }} />
+        </li>
+    );
+};
+
+const SurveyListItem = props => {
+    let id = props.survey.get('id');
+    let title = props.survey.get('title');
+
+    let clickTarget =() => (props.isActive)
+        ? props.onSelect(id)
+        : null;
+
+    return (
+        <li onClick={ clickTarget }>
+            <h3>{ title }</h3>
+            <FormattedLink key="SurveyListItemLink"
+                className="InputPane-listLink"
+                msgId="panes.input.summary.surveys.respondButton"
+                msgValues={{ survey: title }} />
         </li>
     );
 };

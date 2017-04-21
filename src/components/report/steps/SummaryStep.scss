@@ -1,0 +1,21 @@
+.SummaryStep {
+    p {
+        &:before {
+            @include icon($fa-var-exclamation-circle);
+        }
+    }
+
+    ul {
+        padding-left: 1em;
+
+        li {
+            list-style: none;
+
+            &:before {
+                @include icon($fa-var-list);
+            }
+
+            @include checkbox-wrapper;
+        }
+    }
+}

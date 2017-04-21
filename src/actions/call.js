@@ -210,12 +210,67 @@ export function submitCallReport() {
         let assignment = assignmentById(state, call.get('assignment_id'))
         let orgId = assignment.get('organization_id');
 
+        let surveyPromises = [];
+
+        // Figure out whether there are surveys that need to be submitted
+        let pendingSubmissions = state
+            .getIn(['surveys', 'pendingResponsesByCall', callId]);
+
+        if (pendingSubmissions) {
+            let includedSubmissions = pendingSubmissions
+                .filter(survey => survey.get('included'))
+                .toList();
+
+            if (includedSubmissions.size) {
+                includedSubmissions.forEach(sub => {
+                    let surveyId = sub.get('surveyId');
+                    let responses = sub.get('responses').map((res, elemId) => {
+                        let response = {
+                            // TODO: Don't parseInt() when once migrated to string IDs
+                            question_id: parseInt(elemId),
+                        };
+
+                        if (res.get('options')) {
+                            response.options = res.get('options')
+                                .toJS().map(id => parseInt(id)); // TODO: Don't parseInt
+                        }
+
+                        if (res.get('response')) {
+                            response.response = res.get('response');
+                        }
+
+                        return response;
+                    });
+
+                    let data = {
+                        signature: call.getIn(['target', 'id']),
+                        responses: responses.toList().toJS(),
+                    };
+
+                    surveyPromises.push(z.resource('orgs', orgId,
+                        'surveys', surveyId, 'submissions').post(data));
+                });
+            }
+        }
+
+        // Requests must be made in the correct order. Patching the call must be
+        // the last request, or the caller will lose their permission to submit
+        // surveys on behalf of the target.
+        let promise = new Promise((resolve, reject) => {
+            Promise.all(surveyPromises)
+                .then(() => {
+                    z.resource('orgs', orgId, 'calls', callId)
+                        .patch(data)
+                        .then(res => resolve(res))
+                        .catch(err => reject(err));
+                })
+                .catch(err => reject(err));
+        });
+
         dispatch({
             type: types.SUBMIT_CALL_REPORT,
             meta: { callId },
-            payload: {
-                promise: z.resource('orgs', orgId, 'calls', callId).patch(data)
-            }
+            payload: { promise },
         });
     };
 }

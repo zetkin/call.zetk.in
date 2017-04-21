@@ -39,7 +39,7 @@ export default class PaneBase extends React.Component {
         let header = this.renderHeader();
         if (header) {
             header = (
-                <div className="PaneBase-header">
+                <div ref="header" className="PaneBase-header">
                     { header }
                 </div>
             );
@@ -48,7 +48,7 @@ export default class PaneBase extends React.Component {
         return (
             <section className={ classes }>
                 { header }
-                <div className="PaneBase-content">
+                <div ref="content" className="PaneBase-content">
                     { this.renderContent() }
                 </div>
             </section>

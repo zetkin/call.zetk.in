@@ -87,3 +87,14 @@ successOrFailure:
     summary:
         failure: 'You did not reach {target}.'
         success: 'You reached {target}.'
+summary:
+    surveys:
+        status: |-
+            During the call you entered responses to {count, plural,
+            =1 {one survey} other {# surveys}}, which will be submitted unless
+            deselected below.
+        submitted: |-
+            During the call you entered responses to {count, plural,
+            =1 {one survey} other {# surveys}}.
+        surveyDiscarded: Discarded responses for "{survey}"
+        surveySubmitted: Submitted responses to "{survey}"

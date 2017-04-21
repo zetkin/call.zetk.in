@@ -51,10 +51,14 @@ export default class SummaryStep extends React.Component {
                 else {
                     return (
                         <li key={ surveyId } className="SummaryStep-surveyItem">
-                            <input type="checkbox" checked={ included }
+                            <input type="checkbox"
+                                id={ surveyId }
+                                checked={ included }
                                 onChange={ this.onSurveyToggle.bind(this, surveyId) }
-                                />
-                            <label>{ survey.get('title') }</label>
+                            />
+                            <label htmlFor={ surveyId }>
+                                { survey.get('title') }
+                            </label>
                         </li>
                     );
                 }

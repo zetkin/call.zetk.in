@@ -169,6 +169,8 @@ export default class InputPane extends PaneBase {
                     <section className="InputPane-campaigns">
                         <Msg tagName="h2" id="panes.input.summary.campaigns.h2"/>
                         { campaignContent }
+                    </section>
+                    <section className="InputPane-surveys">
                         <Msg tagName="h2" id="panes.input.summary.surveys.h2"/>
                         { surveyContent }
                     </section>
@@ -410,7 +412,7 @@ const CampaignListItem = props => {
                     values={{ numResponses }}/>
             </p>
             <FormattedLink key="CampaignListItemLink"
-                className="InputPane-campaignListLink"
+                className="InputPane-listLink"
                 msgId="panes.input.summary.campaigns.respondButton"
                 msgValues={{ campaign: title }} />
         </li>
@@ -428,6 +430,10 @@ const SurveyListItem = props => {
     return (
         <li onClick={ clickTarget }>
             <h3>{ title }</h3>
+            <FormattedLink key="SurveyListItemLink"
+                className="InputPane-listLink"
+                msgId="panes.input.summary.surveys.respondButton"
+                msgValues={{ survey: title }} />
         </li>
     );
 };

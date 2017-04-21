@@ -15,6 +15,21 @@ export default class SummaryStep extends React.Component {
         super(props);
     }
 
+    shouldComponentUpdate(nextProps) {
+        let surveyCount = this.props.surveyList.get('items').size;
+        let nextSurveyCount = nextProps.surveyList.get('items').size;
+
+        if (surveyCount && !nextSurveyCount) {
+            // If the surveys are being removed, that's because a new call is
+            // being started, i.e we're transitioning away from the rendered
+            // call. No use in trying to re-render (some data is missing).
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     render() {
         if (this.props.surveyResponses) {
             let surveyItems = this.props.surveyResponses.map((sub, key) => {

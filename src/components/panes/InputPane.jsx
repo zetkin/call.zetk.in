@@ -221,10 +221,16 @@ export default class InputPane extends PaneBase {
 
                 let surveyForm = null;
                 if (survey.get('elements')) {
+                    let surveyId = survey.get('id');
+                    let callId = this.props.call.get('id');
+                    let submission = this.props.surveys.getIn(
+                        ['pendingResponsesByCall', callId, surveyId ]);
+
                     surveyForm = (
                         <SurveyForm key="surveyForm"
                             survey={ survey }
                             submitEnabled={ false }
+                            submission={ submission }
                             onResponse={ this.onSurveyResponse.bind(this, survey) }/>
                     );
                 }

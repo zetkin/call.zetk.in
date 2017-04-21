@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { FormattedMessage as Msg } from 'react-intl';
 import { connect } from 'react-redux';
 
@@ -39,7 +40,7 @@ export default class ReportPane extends PaneBase {
         let isComplete = this.props.step === 'done';
 
         return (
-            <ReportForm key="form"
+            <ReportForm key="form" ref="form"
                 report={ report } call={ call }
                 disableEdit={ isComplete }/>
         );
@@ -68,6 +69,21 @@ export default class ReportPane extends PaneBase {
                 <Msg key="h" tagName="p" id={ hMsg }/>
             </div>
         );
+    }
+
+    componentDidUpdate() {
+        const animatedScrollTo = require('animated-scrollto');
+
+        let container = ReactDOM.findDOMNode(this.refs.content);
+        let content = ReactDOM.findDOMNode(this.refs.form)
+
+        let h0 = container.getBoundingClientRect().height;
+        let h1 = content.getBoundingClientRect().height;
+        let d = (h1 - h0) + 60;
+
+        if (d > 0) {
+            animatedScrollTo(container, d, 300);
+        }
     }
 
     onBackLinkClick() {

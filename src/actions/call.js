@@ -210,9 +210,7 @@ export function submitCallReport() {
         let assignment = assignmentById(state, call.get('assignment_id'))
         let orgId = assignment.get('organization_id');
 
-        let promises = [
-            z.resource('orgs', orgId, 'calls', callId).patch(data)
-        ];
+        let surveyPromises = [];
 
         // Figure out whether there are surveys that need to be submitted
         let pendingSubmissions = state
@@ -245,23 +243,34 @@ export function submitCallReport() {
                     });
 
                     let data = {
-                        // TODO: Include target as signature
-                        signature: null,
+                        signature: call.getIn(['target', 'id']),
                         responses: responses.toList().toJS(),
                     };
 
-                    promises.push(z.resource('orgs', orgId,
+                    surveyPromises.push(z.resource('orgs', orgId,
                         'surveys', surveyId, 'submissions').post(data));
                 });
             }
         }
 
+        // Requests must be made in the correct order. Patching the call must be
+        // the last request, or the caller will lose their permission to submit
+        // surveys on behalf of the target.
+        let promise = new Promise((resolve, reject) => {
+            Promise.all(surveyPromises)
+                .then(() => {
+                    z.resource('orgs', orgId, 'calls', callId)
+                        .patch(data)
+                        .then(res => resolve(res))
+                        .catch(err => reject(err));
+                })
+                .catch(err => reject(err));
+        });
+
         dispatch({
             type: types.SUBMIT_CALL_REPORT,
             meta: { callId },
-            payload: {
-                promise: Promise.all(promises)
-            }
+            payload: { promise },
         });
     };
 }

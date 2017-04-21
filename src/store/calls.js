@@ -283,7 +283,7 @@ export default createReducer(initialState, {
     },
 
     [types.SUBMIT_CALL_REPORT + '_FULFILLED']: (state, action) => {
-        let call = action.payload[0].data.data;
+        let call = action.payload.data.data;
         let callId = action.meta.callId.toString();
 
         return state

@@ -125,6 +125,7 @@ if (NODE_ENV === 'production') {
         port: WEBPACK_PORT,
         inline: true,
         hot: true,
+        public: `${WEBPACK_HOST}:${WEBPACK_PORT}`,
         publicPath: config.output.publicPath,
         quiet: false,
         noInfo: false,

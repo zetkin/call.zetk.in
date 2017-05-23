@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 
+import GoogleAnalytics from './misc/GoogleAnalytics';
 import OverlayStack from './overlays/OverlayStack';
 import { showOverlay } from '../actions/view';
 import Tutorial from './tutorial/Tutorial';
@@ -49,6 +50,7 @@ export default class App extends React.Component {
                     <script type="text/json"
                         id="App-initialState"
                         dangerouslySetInnerHTML={{ __html: stateJson }}/>
+                    <GoogleAnalytics/>
                 </body>
             </html>
         );

@@ -1,6 +1,6 @@
 {
   "name": "call.zetk.in",
-  "version": "1.0.0",
+  "version": "4.0.0",
   "description": "Caller front-end for Zetkin",
   "main": "src/server/main.js",
   "scripts": {
@@ -47,6 +47,7 @@
     "node-yaml": "^3.0.2",
     "object-subset": "0.0.4",
     "querystring": "^0.2.0",
+    "raven": "^1.2.1",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.3.2",

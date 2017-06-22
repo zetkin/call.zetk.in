@@ -1,0 +1,15 @@
+callLog:
+    emptyLabel: Aldrig ringet
+    note: Ringeren skrev ingen note
+    summary:
+        status0: Samtalen blev ikke afsluttet
+        status1: 'Vi nåede {target}.'
+        status11: '{target} svarede ikke.'
+        status12: Nummeret var optaget.
+        status13: '{target} bad os ringe tilbage.'
+        status14: '{target} var ikke tilgængelig lige nu.'
+        status15: Vi efterlod en besked på telefonsvareren.
+        status21: Vi havde et forkert nummer.
+        status22: Samtalen blev afbrudt.
+tagList:
+    emptyLabel: Ingen etiketter

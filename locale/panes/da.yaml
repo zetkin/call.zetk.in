@@ -1,0 +1,58 @@
+input:
+    h1: 'Agér som {target}'
+    summary:
+        campaigns:
+            actions: '{count} aktioner'
+            bookings: |-
+                {numBookings, plural,
+                    =0 {ingen bookinger}
+                    =1 {en booking}
+                    other {# bookinger}
+                }
+            h2: Aktuelle kampagner
+            respondButton: 'Meld dig til {kampagne}'
+            responses: |-
+                {numResponses, plural,
+                    =0 {ingen tilmeldinger}
+                    =1 {en tilmelding}
+                    other {# tilmeldinger}
+                }
+            status: '{target} har'
+        surveys:
+            h2: Spørgeskemaer
+            respondButton: 'Svar på {survey}'
+    summaryLabel: Resumé
+    summaryLink: Resumé
+instructions:
+    h1: Instruktioner
+    targetButton: Vis personinfo
+queueEmpty:
+    assignmentsLink: Vælg en anden opgave
+    h1: Der er ikke flere personer at ringe til!
+    p: >-
+        Lige nu findes der ikke flere personer i køen. Det kan være at der
+        bliver tilføjet flere snart, men lige nu kan du ikke fortsætte med at
+        ringe i denne opgave.
+report:
+    backLink: Gå tilbage
+    h:
+        report: Indrapportér samtale
+        reported: Samtale indrapporteret
+stats:
+    h1: Godt arbejde!
+    p: >-
+        Din indsats er vigtig for at bygge din organisation stærkere. Her er et
+        resumé af hvordan det skrider frem.
+target:
+    activityHeader: Tidligere aktivitet
+    activityLabel: |-
+        {count, plural,
+            =0 {{target} har aldrig deltaget i nogen aktioner.}
+            =1 {{target} har deltaget i en aktion, {lastAction}.}
+            other {{target} har deltaget i {count} aktioner. Den seneste var {lastAction}.}
+        }
+    activityLastAction: '{activity } ({location}) {date}'
+    callLogHeader: 'Tidligere opringninger til {target}'
+    h1: Personinfo
+    instructionsButton: Vis instruktioner
+    tagHeader: Etiketter

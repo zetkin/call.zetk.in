@@ -10,6 +10,7 @@ import ReactDOM from 'react-dom';
 import Z from 'zetkin';
 import { addLocaleData } from 'react-intl';
 import svLocaleData from 'react-intl/locale-data/sv';
+import daLocaleData from 'react-intl/locale-data/da';
 import { Router, browserHistory } from 'react-router';
 
 import polyfills from '../utils/polyfills';
@@ -30,6 +31,7 @@ window.onload = function() {
 
     addLocaleData([
         ...svLocaleData,
+        ...daLocaleData,
     ]);
 
     let ticket = cookie.get('apiTicket');

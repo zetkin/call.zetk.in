@@ -18,6 +18,10 @@ export default class StatsPane extends PaneBase {
     componentDidMount() {
         let assignment = this.props.assignment;
         this.props.dispatch(retrieveAssignmentStats(assignment));
+
+        // This is safe because this component is never rendered on the server,
+        // so server/client inconsistencies can never occur.
+        this.artworkIdx = Math.round(Math.random() * 2);
     }
 
     renderContent() {
@@ -40,7 +44,12 @@ export default class StatsPane extends PaneBase {
             );
         }
 
+        const artworkSrc = '/static/images/artwork/call-reported-'
+            + this.artworkIdx + '.png';
+
         return [
+            <img className="StatsPane-artwork" alt="" title=""
+                src={ artworkSrc }/>,
             <Msg key="h1" tagName="h1" id="panes.stats.h1"/>,
             <Msg key="p" tagName="p" id="panes.stats.p"/>,
             statsContent

@@ -41,6 +41,8 @@ export default class StatsPane extends PaneBase {
         }
 
         return [
+            <img className="StatsPane-artwork" alt="" title=""
+                src="/static/images/artwork/call-reported-0.png"/>,
             <Msg key="h1" tagName="h1" id="panes.stats.h1"/>,
             <Msg key="p" tagName="p" id="panes.stats.p"/>,
             statsContent

@@ -18,6 +18,7 @@ export default class InstructionsPane extends PaneBase {
 
         return [
             <div key="instructions" className="InstructionsPane-instructions"
+                ref={ div => this.domContent = div }
                 dangerouslySetInnerHTML={{
                     __html: assignment.get('instructions') }}/>,
         ];
@@ -38,6 +39,14 @@ export default class InstructionsPane extends PaneBase {
             return (
                 <Msg tagName="p" id="panes.instructions.h1"/>
             );
+        }
+    }
+
+    componentDidMount() {
+        if (this.domContent && this.domContent.querySelectorAll) {
+            this.domContent.querySelectorAll('a').forEach(a => {
+                a.setAttribute('target', '_blank');
+            });
         }
     }
 

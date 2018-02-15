@@ -39,6 +39,12 @@
         }
     }
 
+    .TargetPane-infoId {
+        &:before {
+            @include icon($fa-var-file);
+        }
+    }
+
     .TargetPane-infoJoin {
         &:before {
             @include icon($fa-var-sign-in);

@@ -22,8 +22,10 @@ export default class TargetPane extends PaneBase {
         let target = this.props.call.get('target');
 
         let info = [
+            <li key="id" className="TargetPane-infoId">
+                { target.get('ext_id') || '-' }</li>,
             <li key="email" className="TargetPane-infoEmail">
-                { target.get('email') }</li>
+                { target.get('email') }</li>,
         ];
 
         let map = null;

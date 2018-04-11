@@ -20,6 +20,7 @@ import {
 
 const mapStateToProps = state => ({
     call: currentCall(state),
+    currentIsPending: state.getIn(['calls', 'currentIsPending']),
     report: currentReport(state),
     assignment: selectedAssignment(state),
 });
@@ -34,6 +35,7 @@ export default class LaneControlBar extends React.Component {
     render() {
         let returnSection, content, proceedSection;
         let call = this.props.call;
+        let currentIsPending = this.props.currentIsPending;
         let lane = this.props.lane;
         let step = lane.get('step');
 
@@ -52,6 +54,7 @@ export default class LaneControlBar extends React.Component {
             proceedSection = (
                 <Button key="startButton"
                     labelMsg="controlBar.startButton"
+                    loading={currentIsPending}
                     onClick={ this.onClickStart.bind(this) }/>
             );
         }
@@ -116,6 +119,7 @@ export default class LaneControlBar extends React.Component {
                 proceedSection = (
                     <Button key="submitReportButton"
                         labelMsg="controlBar.submitReportButton"
+                        loading={report.get("isPending")}
                         onClick={ this.onClickSubmitReport.bind(this) }/>
                 );
             }
@@ -132,6 +136,7 @@ export default class LaneControlBar extends React.Component {
             proceedSection = (
                 <Button key="nextCallButton"
                     labelMsg="controlBar.nextCallButton"
+                    loading={currentIsPending}
                     onClick={ this.onClickNextCall.bind(this) }/>
             );
         }

@@ -25,6 +25,7 @@ the same effect manually. You also need to do this after every new pull.
 $ git submodule init
 $ git submodule update
 ```
+#### Mac and Linux
 
 Once you have cloned the repository, build the Docker image:
 
@@ -38,6 +39,26 @@ then use to run the Zetkin Activist portal on your local port 80.
 ```bash
 $ ./bin/run_dev
 ```
+
+#### Windows
+
+On Docker file system watching is broken on Windows.
+We have to rely on the Python (3+) package docker-windows-volume-watcher.
+This does not seem to work on Windows 10 Home with VirtualBox.
+
+Once you have cloned the repository and made sure you have Python installed, build the Docker image:
+
+```
+./bin/build_dev.cmd
+```
+
+Docker will download all the requirements and create an image which you can
+then use to run the Zetkin Activist portal on your local port 80.
+
+```
+./bin/run_dev.cmd
+```
+
 
 The development version contains build scripts, component hot loading and
 other features to ease development.

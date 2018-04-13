@@ -39,7 +39,8 @@
     }
 
     .TargetInfo-lastCall {
-        font-size: 0.7em;
+        font-size: 0.667em;
+        line-height: 1;
 
         @include large-screen {
             font-size: 0.8em;
@@ -64,40 +65,31 @@
     }
 
     .TagList {
-        display: block;
         clear: left;
-        padding: 0;
-        margin: 0.2em 0 0 2.6em;
-        line-height: normal;
+        margin: 0 0 0 2.6em;
+        position: relative;
+        max-height: 2em;
+        overflow-y: hidden;
 
         &:before {
             @include icon($fa-var-tag);
-            float: left;
+            position: absolute;
+            left: -2em;
+            top: 0.5em;
         }
-
-        &:after {
-            content: "";
-            display: block;
-            clear: both;
-        }
-
-        li {
-            float: left;
-            margin: 0 0.5em;
-            list-style-type: none;
-            font-size: 0.7em;
-        }
-
+        
         span {
             margin-left: 5px;
         }
-
-        .TargetInfo-tag {
-            @include inline-button();
-        }
-
+        
         .TargetInfo-moreTags {
             @include inline-button(darken(white, 10));
+        }
+
+        .TargetInfo-moreTags,
+        .TargetInfo-tag {
+            @include inline-button();
+            margin: 0 0.5em;
         }
 
         &.TargetInfo-appear {

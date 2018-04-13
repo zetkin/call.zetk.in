@@ -1,26 +1,19 @@
 .TagList {
    padding: 0;
-
-    &:after {
-        content: "";
-        display: block;
-        clear: both;
-    }
+   margin: 0 0 1em;
+   list-style: none;
 
     & > span {
         font-style: italic;
         color: $c-ui-dark;
     }
 
-    li {
-        float: left;
-        margin: 0.5em;
-        list-style-type: none;
-        font-size: 0.7em;
-    }
-
     .TagList-tag {
         @include inline-button();
-        margin-bottom: 0.5em;
+        display: inline-block;
+        margin: 0.5em;
+        padding: 0.4em 1em;
+        font-size: 0.667em;
+        line-height: 1.4;
     }
 }

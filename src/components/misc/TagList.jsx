@@ -1,9 +1,9 @@
 import React from 'react';
-import { FormattedMessage as Msg } from 'react-intl';
+import { FormattedMessage as Msg, injectIntl } from 'react-intl';
 
 import PropTypes from '../../utils/PropTypes';
 
-
+@injectIntl
 export default class TagList extends React.Component {
     constructor(){
         super();
@@ -50,10 +50,11 @@ export default class TagList extends React.Component {
                 <Msg id="misc.tagList.emptyLabel"/>
             );
         }
+        
         if (hiddenTags) {
             tagItems.push(
                 <li key="moreTags"
-                    title={`There are ${hiddenTags} more tags \nin the personal info pane`}
+                    title={this.props.intl.formatMessage( {id: 'misc.tagList.overflowLabel'},  {count: hiddenTags} )}
                     className="TagList-tag TagList-moreTag">
                     {`+${hiddenTags}`}
                 </li>

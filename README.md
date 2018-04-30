@@ -11,6 +11,7 @@ at [the Zetkin Foundation website](http://www.zetkin.org) or
 To get started with development you need [Docker](https://www.docker.com).
 Install Docker for your platform before proceeding.
 
+### Get the Git
 First clone the repository. Make sure that you include the git submodules by
 including the `--recursive` flag.
 
@@ -25,6 +26,9 @@ the same effect manually. You also need to do this after every new pull.
 $ git submodule init
 $ git submodule update
 ```
+### Scripts
+
+#### Mac and Linux
 
 Once you have cloned the repository, build the Docker image:
 
@@ -38,10 +42,32 @@ then use to run the Zetkin Activist portal on your local port 80.
 ```bash
 $ ./bin/run_dev
 ```
+The development version contains build scripts, component hot loading and
+other features to ease development.
+
+#### Windows
+
+On Docker file system watching is broken on Windows.
+We have to rely on the Python (3+) package docker-windows-volume-watcher.
+This does not seem to work on Windows 10 Home with VirtualBox.
+
+Once you have cloned the repository and made sure you have Python installed, build the Docker image:
+
+```
+./bin/build_dev.cmd
+```
+
+Docker will download all the requirements and create an image which you can
+then use to run the Zetkin Activist portal on your local port 80.
+
+```
+./bin/run_dev.cmd
+```
 
 The development version contains build scripts, component hot loading and
 other features to ease development.
 
+### Host
 Edit your hosts file (e.g. `/etc/hosts`) to contain a line that maps
 call.dev.zetkin.org to your localhost.
 

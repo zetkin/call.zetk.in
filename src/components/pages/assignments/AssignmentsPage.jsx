@@ -27,8 +27,11 @@ export default class AssignmentsPage extends PageBase {
         let assignmentList = this.props.assignmentList;
         let items = assignmentList.get('items');
 
-        if (assignmentList.isPending) {
-            intro = null;
+        if (assignmentList.get('isPending')) {
+            intro = (
+                <Msg key="p" tagName="p"
+                    id="pages.assignments.isPendingIntro"/>
+            );
         }
         else if (items && items.size) {
             intro = (

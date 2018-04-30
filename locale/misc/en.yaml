@@ -13,3 +13,8 @@ callLog:
         status22: The call was dropped.
 tagList:
     emptyLabel: No tags
+    overflowLabel: |- 
+        There {count, plural,
+            =1 {is one more tag}
+            other {are # more tags}
+        } in the personal info pane

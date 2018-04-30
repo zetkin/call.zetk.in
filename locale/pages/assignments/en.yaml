@@ -2,6 +2,7 @@ h1: Your assignments
 intro: >-
     You have {numAssignments, plural, =1 {one assignment} other {# assignments}}
     to call.
+isPendingIntro: One moment please, we are loading your assignments
 noAssignmentsIntro: >-
     You have no call assignments. Contact an official from your organization if
     you want to help call.

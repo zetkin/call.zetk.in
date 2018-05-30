@@ -7,7 +7,7 @@ export default class Avatar extends React.Component {
         const personId = this.props.personId;
         const orgId = this.props.orgId;
         const avatarDomain = '//api.' + process.env.ZETKIN_DOMAIN;
-        const avatarSrc = avatarDomain + '/v1/orgs/'
+        const avatarSrc = avatarDomain + '/orgs/'
             + orgId
             + '/people/' + personId + '/avatar';
         const avatarStyle = {backgroundImage: 'url("' + avatarSrc + '")'}

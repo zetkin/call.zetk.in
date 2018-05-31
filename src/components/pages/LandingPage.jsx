@@ -7,8 +7,8 @@ import Button from '../../common/misc/Button';
 
 export default class LandingPage extends PageBase {
     renderContent() {
-        let loginUrl = '//login.' + process.env.ZETKIN_DOMAIN
-            + '/login?redirPath=/assignments&appId=' + process.env.ZETKIN_APP_ID;
+        let loginUrl = '//call.' + process.env.ZETKIN_DOMAIN
+            + '/assignments';
 
         return [
             <Msg key="h1" tagName="h1" id="pages.landing.h1"/>,

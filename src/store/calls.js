@@ -115,6 +115,11 @@ export default createReducer(initialState, {
                 immutable.fromJS({ [callId]: call }));
     },
 
+    [types.START_NEW_CALL + '_REJECTED']: (state, action) => {
+        return state
+            .set('currentIsPending', false);
+    },
+
     [types.START_CALL_WITH_TARGET + '_PENDING']: (state, action) => {
         return state
             .set('currentIsPending', true);
@@ -142,6 +147,11 @@ export default createReducer(initialState, {
             .deleteIn(['activeCalls', activeIndex]);
     },
 
+    [types.SKIP_CALL + '_PENDING']: (state, action) => {
+        return state
+            .set('currentIsPending', true)
+    },
+
     [types.SKIP_CALL + '_FULFILLED']: (state, action) => {
         let call = Object.assign(action.payload.data.data, {
             organization_id: action.meta.orgId,
@@ -152,12 +162,18 @@ export default createReducer(initialState, {
         let activeIndex = state.get('activeCalls').indexOf(prevCallId);
 
         return state
+            .set('currentIsPending', false)
             .deleteIn(['callList', 'items', prevCallId])
             .deleteIn(['activeCalls', activeIndex])
             .update('activeCalls', list => list.push(callId))
             .updateIn(['callList', 'items'], items => items?
                 items.set(callId, immutable.fromJS(call)) :
                 immutable.fromJS({ [callId]: call }));
+    },
+
+    [types.SKIP_CALL + '_REJECTED']: (state, action) => {
+        return state
+            .set('currentIsPending', false)
     },
 
     [types.END_CALL_SESSION + '_FULFILLED']: (state, action) => {

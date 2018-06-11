@@ -108,11 +108,11 @@ export default createReducer(initialState, {
         let callId = call.id.toString();
 
         return state
-        .set('currentIsPending', false)
-        .update('activeCalls', list => list.push(callId))
-        .updateIn(['callList', 'items'], items => items?
-        items.set(callId, immutable.fromJS(call)) :
-        immutable.fromJS({ [callId]: call }));
+            .set('currentIsPending', false)
+            .update('activeCalls', list => list.push(callId))
+            .updateIn(['callList', 'items'], items => items?
+                items.set(callId, immutable.fromJS(call)) :
+                immutable.fromJS({ [callId]: call }));
     },
 
     [types.START_NEW_CALL + '_REJECTED']: (state, action) => {

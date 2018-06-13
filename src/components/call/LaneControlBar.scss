@@ -62,10 +62,12 @@
             padding-left: 1em;
         }
     }
-    &.LaneControlBar-prepareStep {
-        .LaneControlBar-returnSection {
-            // float: left;
+    &.LaneControlBar-assignmentStep {
+        .LaneControlBar-content {
+            display: none;
         }
+    }
+    &.LaneControlBar-prepareStep {
         .LaneControlBar-proceedSection {
             flex: none;
         }
@@ -98,6 +100,16 @@
             .LaneControlBar-proceedSection {
                 // @include col(5,12)
             }
+        }
+    }
+    &.LaneControlBar-reportStep {
+        .LaneControlBar-proceedSection {
+            justify-content: flex-end;
+        }
+    }
+    &.LaneControlBar-doneStep {
+        .LaneControlBar-content {
+            display: none;
         }
     }
 

@@ -55,7 +55,7 @@
 
 @mixin button($color: $c-brand-main, $amount:5, $icon:false, $border: 0) {
     display: inline-block;
-    padding: 1em 2.5em;
+    padding: 1em 1em;
     border-width: $border;
     border-radius: 3em;
     border-style: solid;
@@ -65,6 +65,10 @@
     font-size: 1em;
     line-height: 1;
     cursor: pointer;
+
+    @include medium-screen {
+        padding: 1em 2.5em;
+    }
 
     &:focus {
         outline: none;

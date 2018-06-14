@@ -97,25 +97,14 @@
         }
     }
 
-
-    &.TargetPane-prepareStep {
-        width: 35%;
-        left: 35%;
-    }
-
-    &.TargetPane-callStep {
-        width: 35%;
-        left: 0;
-    }
-
-    &.TargetPane-reportStep {
-        width: 35%;
-        left: 0;
-    }
-
     .PaneBase-header {
         .TargetPane-instructionsButton {
-            left: 0;
+            display: none;
+
+            @include small-screen {
+                display: block;
+                left: 0;
+            }
         }
     }
 
@@ -131,6 +120,23 @@
 
     &.PaneBase-leave {
         animation: TargetPane-leaveAnimation $pane-transition-duration;
+    }
+
+    @include small-screen {
+        &.TargetPane-prepareStep {
+            width: 35%;
+            left: 35%;
+        }
+
+        &.TargetPane-callStep {
+            width: 35%;
+            left: 0;
+        }
+
+        &.TargetPane-reportStep {
+            width: 35%;
+            left: 0;
+        }
     }
 }
 

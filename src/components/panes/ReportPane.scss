@@ -14,27 +14,32 @@
     }
 
     &.ReportPane-reportStep {
-        width: 35%;
-        left: 65%;
+        @include small-screen {
+            width: 35%;
+            left: 65%;
+        }
 
         .ReportPane-backLink {
-            @include col(4,12);
-            display: inline-block;
-            line-height: 4.5em;
-            cursor: pointer;
-            font-size: 0.8em;
+            @include small-screen {
+                @include col(4,12);
+                visibility: visible;
+                @include col(4,12);
+                display: inline-block;
+                line-height: 4.5em;
+                cursor: pointer;
+                font-size: 0.7778em;
 
-            &:before {
-                @include icon($fa-var-arrow-left);
+                &:before {
+                    @include icon($fa-var-arrow-left);
+                }
+
+                &:hover {
+                    color: darken($c-brand-main, 20);
+                }
             }
 
             @include large-screen {
-                @include col(4,12);
                 visibility: visible;
-            }
-
-            &:hover {
-                color: darken($c-brand-main, 20);
             }
         }
 
@@ -47,13 +52,17 @@
     }
 
     &.ReportPane-doneStep {
-        width: 35%;
-        left: 0;
+        @include small-screen {
+            width: 35%;
+            left: 0;
+        }
     }
 
     &.ReportPane-callStep {
-        width: 35%;
-        left: 100%;
+        @include small-screen {
+            width: 35%;
+            left: 100%;
+        }
     }
 
     &.PaneBase-leave {

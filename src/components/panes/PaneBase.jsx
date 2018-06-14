@@ -34,7 +34,7 @@ export default class PaneBase extends React.Component {
             }
         });
 
-        let classes = cx(classNames);
+        let classes = cx(classNames, this.props.className);
 
         let header = this.renderHeader();
         if (header) {

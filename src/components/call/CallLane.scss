@@ -10,8 +10,12 @@
     .CallLane-panes {
         position: relative;
         flex: 1;
-        order: 2;
-        overflow: hidden;
+        order: 3;
+        overflow: auto;
+
+        @include small-screen {
+            overflow: hidden;
+        }
     }
 
     &.CallLane-instructionsInfoMode {
@@ -64,6 +68,11 @@
         .AssignmentPane.PaneBase-leave {
             animation: AssignmentPane-leaveForEmptyAnimation $pane-transition-duration;
         }
+    }
+    .CallLane-activePane {
+        display: flex;
+        width: auto;
+        min-height: 100%;
     }
 }
 

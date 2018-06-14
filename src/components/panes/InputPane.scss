@@ -46,9 +46,12 @@
     }
 
     &.InputPane-prepareStep {
-        width: 30%;
-        left: 70%;
         box-shadow: none;
+
+        @include small-screen {
+            width: 30%;
+            left: 70%;
+        }
 
         .InputPane-summaryList {
             li:hover {
@@ -64,8 +67,10 @@
     }
 
     &.InputPane-callStep {
-        width: 65%;
-        left: 35%;
+        @include small-screen {
+            width: 65%;
+            left: 35%;
+        }
 
         li {
             cursor: pointer;
@@ -97,8 +102,10 @@
     }
 
     &.InputPane-reportStep {
-        width: 30%;
-        left: 35%;
+        @include small-screen {
+            width: 30%;
+            left: 35%;
+        }
 
         .InputPane-summaryList {
             li:hover {

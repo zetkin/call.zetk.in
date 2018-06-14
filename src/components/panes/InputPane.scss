@@ -76,11 +76,17 @@
             cursor: pointer;
 
             .InputPane-listLink {
-                color: lighten($c-text, 20);
-
+                color: $c-brand-main;
                 visibility: visible;
                 opacity: 1;
                 transition: opacity 1s;
+
+                @include small-screen {
+                    color: lighten($c-text, 20);
+                    position: absolute;
+                    top: calc(50% - 23px);
+                    right: 0;
+                }
 
                 &:after {
                     @include icon($fa-var-chevron-right);
@@ -90,11 +96,13 @@
             }
 
             &:hover {
-                a {
-                    color: $c-text;
-
-                    &:after {
-                        color: $c-brand-main;
+                @include small-screen {
+                    a {
+                        color: $c-text;
+    
+                        &:after {
+                            color: $c-brand-main;
+                        }
                     }
                 }
             }
@@ -150,12 +158,6 @@
     .InputPane-summaryList {
         li {
             position: relative;
-
-            a {
-                position: absolute;
-                top: calc(50% - 23px);
-                right: 0;
-            }
 
             .InputPane-campaignListInfo {
                 font-size: 0.9em;

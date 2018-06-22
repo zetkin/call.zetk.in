@@ -33,6 +33,7 @@ if (SENTRY_DSN) {
 
 
 const authOpts = {
+    secret: process.env.TOKEN_SECRET,
     ssl: (process.env.ZETKIN_USE_TLS == '1')
         && (process.env.NODE_ENV == 'production'),
     zetkinDomain: process.env.ZETKIN_DOMAIN,

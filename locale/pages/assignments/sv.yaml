@@ -2,6 +2,7 @@ h1: Dina uppdrag
 intro: |-
     Du har {numAssignments, plural, =1 {ett uppdrag} other {# uppdrag}} som du
     kan ringa på.
+isPendingIntro: Ett ögonblick, vi hämtar dina uppdrag
 noAssignmentsIntro: |-
     Du har inga ringuppdrag. Kontakta en organisatör i din organisation om du
     vill ringa.

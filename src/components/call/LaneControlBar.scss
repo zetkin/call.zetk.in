@@ -49,14 +49,9 @@
 
         .LaneControlBar-skipButton {
             @include button(darken(white, 5), $icon: $fa-var-step-forward);
-            background: 0;
+            background-color: transparent;
             font-size: 0.8em;
-            visibility: hidden;
-            width: 3em;
-
-            &:before {
-                visibility: visible;
-            }
+            padding: 0 2em 0 1em;
         }
     }
 
@@ -81,12 +76,6 @@
         }
     }
 
-    &.LaneControlBar-reportStep {
-        .LaneControlBar-content {
-
-        }
-    }
-
     @include large-screen {
         height: 100px;
 
@@ -96,11 +85,6 @@
 
         .LaneControlBar-proceedSection {
             @include col(5,12);
-
-            .LaneControlBar-skipButton {
-                visibility: visible;
-                width: auto;
-            }
         }
     }
 }

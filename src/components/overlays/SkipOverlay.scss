@@ -1,0 +1,16 @@
+.SkipOverlay {
+  max-width: 700px;
+  margin: 0 auto;
+
+  .Button {
+      @include overlay-button();
+  }
+
+  .SkipOverlay-skipButton.loading {
+    background-color: rgba($color: #FFFFFF, $alpha: 0.5);
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}

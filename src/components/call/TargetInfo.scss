@@ -53,6 +53,10 @@
 
     .TargetInfo-number {
         &:before {
+            content: "/";
+            margin-right: 0.5em;
+        }
+        &:first-of-type:before {
             @include icon($fa-var-phone);
         }
 

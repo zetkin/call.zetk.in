@@ -12,6 +12,7 @@ export default class CallLane extends React.Component {
     static propTypes = {
         lane: PropTypes.map.isRequired,
         call: PropTypes.map,
+        size: PropTypes.string
     };
 
     constructor(props) {
@@ -19,41 +20,12 @@ export default class CallLane extends React.Component {
 
         this.state = {
             firstCall: true,
-            activePane: 1,
-            showTabs: false
+            activePane: 1
         };
-    }
-
-    checkTabs() {
-        const {showTabs} = this.state;
-        const step = this.props.lane.get('step');
-        const tabSteps = [ 'prepare', 'call', 'report', 'done'];
-        let nextTabs = false;
-
-        if (typeof window != 'undefined') {
-            if (window.innerWidth < 600) {
-                if (tabSteps.indexOf(step) >= 0 ) {
-                    nextTabs = true;
-                }
-            }
-        }
-        if (showTabs != nextTabs) {
-            this.setState({showTabs: nextTabs});
-        }
-    }
-
-    componentDidMount() {
-        this.checkTabs();
-        window.addEventListener("resize", this.checkTabs.bind(this));
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.checkTabs.bind(this));
     }
 
     componentWillReceiveProps(nextProps) {
         const nextStep = nextProps.lane.get('step');
-        this.checkTabs();
         if (nextStep != this.props.lane.get('step')) {
             let {activePane} = this.state;
             if (nextStep === 'prepare') {
@@ -82,11 +54,13 @@ export default class CallLane extends React.Component {
     }
 
     render() {
-        const {activePane, showTabs} = this.state;
+        const {size} = this.props;
+        const {activePane,} = this.state;
         let lane = this.props.lane;
         let step = lane.get('step');
         let infoMode = lane.get('infoMode');
         let paneComponents = [];
+        let tabbed = false;
         let tabs;
 
         switch (step) {
@@ -95,22 +69,26 @@ export default class CallLane extends React.Component {
                 break;
             case 'prepare':
                 paneComponents = [ 'instructions', 'target', 'input' ];
+                tabbed = size === "small";
                 break;
             case 'call':
                 paneComponents = [ 'instructions', 'target', 'input', 'report' ];
+                tabbed = size === "small";
                 break;
             case 'report':
                 paneComponents = [ 'instructions', 'target', 'input', 'report' ];
+                tabbed = size === "small";
                 break;
             case 'done':
                 paneComponents = [ 'report', 'stats' ];
+                tabbed = size === "small";
                 break;
             case 'empty':
                 paneComponents = [ 'empty' ];
                 break;
         }
 
-        if (showTabs) {
+        if (tabbed) {
             tabs = (
                 <CallLaneTabs
                     activePane={activePane}
@@ -121,7 +99,7 @@ export default class CallLane extends React.Component {
 
         let panes = paneComponents.map((paneType, i) => {
             let PaneComponent = paneComponentsByType[paneType];
-            const className = cx({'CallLane-activePane': showTabs && i === activePane});
+            const className = cx({'CallLane-activePane': tabbed && i === activePane});
             return (
                 <PaneComponent step={ step } key={ paneType }
                     lane={ lane }

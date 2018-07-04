@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import LaneSwitch from '../misc/laneSwitch/LaneSwitch';
+import CallInstructions from '../misc/CallInstructions';
 import CallLane from '../call/CallLane';
 import { selectedLane } from '../../store/lanes';
 import { pushTutorialNote } from '../../actions/tutorial';
+import ViewSize from "../misc/ViewSize";
 
 
 const mapStateToProps = state => ({
@@ -53,10 +55,16 @@ export default class CallPage extends React.Component {
         return (
             <div className="CallPage">
                 <LaneSwitch/>
-                <div className="CallPage-lanes">
-                    <CallLane key={ lane.get('id') }
-                        lane={ lane } call={ call }/>
-                </div>
+                <ViewSize render={({size}) => (
+                    <CallInstructions size={size} call={call}/>
+                )}/>
+                <ViewSize render={({size}) => (
+                    <div className="CallPage-lanes">
+                        <CallLane key={ lane.get('id') }
+                            lane={ lane } call={ call }
+                            size={size}/>
+                    </div>
+                )}/>
             </div>
         );
     }

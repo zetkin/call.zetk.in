@@ -18,3 +18,9 @@ tagList:
             =1 {is one more tag}
             other {are # more tags}
         } in the personal info pane
+callInstructions:
+    instructions: |-
+        To call the target, click the button above
+        or type the number on your phone.
+        You should return to the app when you start
+        the call to take notes.

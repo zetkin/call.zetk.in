@@ -1,10 +1,10 @@
 .CallInstructions {
     bottom: 0;
     color: $c-text-contrast;
-    height: 3.3em;
+    max-height: 3.3em;
     position: absolute;
     right: 0;
-    transition: height 0s, width 0s;
+    transition: max-height 0s, width 0s;
     transition-delay: 0.25s;
     width: calc(2.5em + 20px);
     z-index: 10;
@@ -61,7 +61,7 @@
     }
 }
 .CallInstructions-instructions {
-    padding: 0 0.5em;
+    padding: 0 0.5em 1em;
     margin: 0;
 }
 .CallInstructions-button {
@@ -85,7 +85,7 @@
 }
 
 .CallInstructions-open {
-    height: 50vh;
+    max-height: 24em;
     transition-delay: 0s;
     width: 100%;
     z-index: 100;
@@ -95,7 +95,7 @@
     }
     
     .CallInstructions-background {
-        transform: scale(40);
+        transform: scale(25);
     }
     .CallInstructions-content {
         transform: translateY(0);

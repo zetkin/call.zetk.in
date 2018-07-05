@@ -40,8 +40,10 @@
 
         .ReportPane-nav {
             p {
-                text-align: left;
-                @include col(8,12);
+                @include small-screen {
+                    text-align: left;
+                    @include col(8,12);
+                }
             }
         }
     }

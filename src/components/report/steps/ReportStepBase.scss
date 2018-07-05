@@ -55,6 +55,12 @@
 
     .ReportStepBase-form {
         p {
+            font-size: 1.2em;
+
+            @include small-screen {
+                font-size: 1em;
+            }
+
             &:before {
                 @include icon($fa-var-question-circle);
             }
@@ -62,9 +68,18 @@
 
         .Button {
             @include button(#f9f9f9);
+            display: block;
+            margin: 1em 0;
+            text-align: center;
+            width: 100%;
 
-            margin: 0 0.5em 0.5em 0;
-            font-size: 0.8em;
+            @include small-screen {
+                display: inline-block;
+                font-size: 0.8em;
+                margin: 0 0.5em 0.5em 0;
+                width: auto;
+            }
+
         }
 
         textarea {

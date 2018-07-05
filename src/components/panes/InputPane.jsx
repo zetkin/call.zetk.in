@@ -291,6 +291,7 @@ export default class InputPane extends PaneBase {
                         id="panes.input.h1"
                         values={{ target: target.get('name') }}/>
                     <select value={ selectValue }
+                        className="InputPane-campaignSelect"
                         onChange={ this.onSelectChange.bind(this) }>
                         { campaignOptions }
                         { surveyOptions }

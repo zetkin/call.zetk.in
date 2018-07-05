@@ -79,6 +79,9 @@
         @include icon($fa-var-phone);
         line-height: 2;
     }
+    &:focus{
+        outline: none;
+    }
 }
 
 .CallInstructions-open {

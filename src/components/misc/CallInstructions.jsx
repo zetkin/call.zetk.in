@@ -4,7 +4,6 @@ import cx from 'classnames';
 
 import * as targetUtils from "../../utils/target";
 
-
 export default class CallPage extends React.Component {
     constructor() {
         super();
@@ -17,9 +16,16 @@ export default class CallPage extends React.Component {
         this.setState({instructionsOpen: !this.state.instructionsOpen})
     }
 
+    componentDidMount() {
+        setTimeout(() => {
+            
+            this.setState({instructionsOpen: true})
+        }, 100);
+    }
+
     render() {
-        const {call, size} = this.props;
-        if(call && size === "small") {
+        const {call, size, lane} = this.props;
+        if(lane.get('step') === "call" && size === "small") {
             const target = call.get("target")
             const { instructionsOpen } = this.state;
             const instructionsClasses = cx(

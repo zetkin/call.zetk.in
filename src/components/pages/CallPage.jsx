@@ -51,13 +51,17 @@ export default class CallPage extends React.Component {
     render() {
         let lane = this.props.lane;
         let call = this.props.calls.getIn(['callList', 'items', lane.get('callId')]);
+        let callInstructions;
+        if (lane.get('step') === "call") {
+            callInstructions = <ViewSize render={({size}) => (
+                <CallInstructions size={size} call={call} lane={lane}/>
+            )}/>
+        }
 
         return (
             <div className="CallPage">
                 <LaneSwitch/>
-                <ViewSize render={({size}) => (
-                    <CallInstructions size={size} call={call}/>
-                )}/>
+                {callInstructions}
                 <ViewSize render={({size}) => (
                     <div className="CallPage-lanes">
                         <CallLane key={ lane.get('id') }

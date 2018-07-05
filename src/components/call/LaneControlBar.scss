@@ -12,16 +12,13 @@
     position: relative;
 
     .LaneControlBar-returnSection {
-        // @include col(4,12)
         text-align: left;
-        // padding-top: 0.5em;
         .Button {
             @include button(darken(white, 10));
         }
     }
 
     .LaneControlBar-content {
-        // @include col(4,12)
         text-align: left;
         transition: top 0.4s, left 0.4s;
         width: 100%;
@@ -43,9 +40,7 @@
     }
 
     .LaneControlBar-proceedSection {
-        // @include col(4,12)
         text-align: right;
-        // padding-top: 0.5em;
         flex: 2;
 
         .Button {
@@ -80,25 +75,13 @@
         .LaneControlBar-returnSection {
             display: none;
         }
-        .LaneControlBar-content {
-            // @include col(7.5,12);
-        }
+
         .LaneControlBar-proceedSection {
-            // @include col(4.5,12)
             display: flex;
             justify-content: space-between;
             @include small-screen {
                 min-width: 290px;
                 display: block;
-            }
-        }
-
-        @include large-screen {
-            .LaneControlBar-content {
-                // @include col(7,12);
-            }
-            .LaneControlBar-proceedSection {
-                // @include col(5,12)
             }
         }
     }
@@ -115,13 +98,5 @@
 
     @include large-screen {
         height: 100px;
-
-        .LaneControlBar-returnSection {
-            // @include col(3,12)
-        }
-
-        .LaneControlBar-proceedSection {
-            // @include col(5,12);
-        }
     }
 }

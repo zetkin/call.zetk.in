@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import { FormattedMessage as Msg } from 'react-intl';
 
 import PropTypes from '../../utils/PropTypes';
 
@@ -54,7 +55,7 @@ export default class CallLaneTabs extends React.Component {
                             onClick={this.props.setActivePane.bind(this, i)}
                             key={i}>
                             <span className={"CallLaneTabs-icon fa fa-" + tab.icon} />
-                            <span className="CallLaneTabs-title">{tab.title}</span>
+                            <span className="CallLaneTabs-title"><Msg id={"pages.call.tabs." + tab.title}/></span>
                         </div>
                     )
                 })}

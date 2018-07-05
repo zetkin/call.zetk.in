@@ -20,11 +20,10 @@
         }
 
         .ReportPane-backLink {
+            display: none;
+
             @include small-screen {
                 @include col(4,12);
-                visibility: visible;
-                @include col(4,12);
-                display: inline-block;
                 line-height: 4.5em;
                 cursor: pointer;
                 font-size: 0.7778em;
@@ -36,10 +35,6 @@
                 &:hover {
                     color: darken($c-brand-main, 20);
                 }
-            }
-
-            @include large-screen {
-                visibility: visible;
             }
         }
 

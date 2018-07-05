@@ -91,10 +91,22 @@
                 margin-top: 0;
             }
         }
+        &:last-child::after {
+            content: "";
+            height: 4em;
+            width: 100%;
+            display: block;
+        }
     }
 }
 
-.PaneBase-prepareStep .PaneBase-header {
+.PaneBase-prepareStep .PaneBase-header,
+.TargetPane-callStep .PaneBase-header,
+.InstructionsPane-callStep .PaneBase-header,
+.TargetPane-reportStep .PaneBase-header,
+.InstructionsPane-reportStep .PaneBase-header,
+.InputPane-reportStep .PaneBase-header,
+.ReportPane-reportStep .PaneBase-header {
     display: none;
 
     @include small-screen {

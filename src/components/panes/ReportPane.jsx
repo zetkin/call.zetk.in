@@ -79,7 +79,7 @@ export default class ReportPane extends PaneBase {
 
         let h0 = container.getBoundingClientRect().height;
         let h1 = content.getBoundingClientRect().height;
-        let d = (h1 - h0) + 60;
+        let d = (h1 - h0) + 80;
 
         if (d > 0) {
             animatedScrollTo(container, d, 300);

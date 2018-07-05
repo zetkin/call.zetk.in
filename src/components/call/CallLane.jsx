@@ -93,7 +93,7 @@ export default class CallLane extends React.Component {
                 <CallLaneTabs
                     activePane={activePane}
                     setActivePane={this.setActivePane.bind(this)}
-                    step={ step }/>
+                    lane={ lane }/>
             );
         }
 

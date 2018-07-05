@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import cx from 'classnames';
 import { FormattedMessage as Msg } from 'react-intl';
+
+import { setLaneStep } from '../../actions/lane';
 
 import PropTypes from '../../utils/PropTypes';
 
@@ -32,18 +35,30 @@ const stepTabs = {
     done: [reportTab, statsTab],
 }
 
-export default class CallLaneTabs extends React.Component {
+class CallLaneTabs extends React.Component {
     static propTypes = {
         activePane: PropTypes.number,
         setActivePane: PropTypes.func,
-        step: PropTypes.string,
+        lane: PropTypes.map,
     };
 
+    handleClick(i) {
+        const {activePane, dispatch, setActivePane, lane} = this.props;
+        if (i != activePane) {
+            if (lane.get("step") === "report") {
+                dispatch(setLaneStep(lane, 'call'));
+            }
+            setActivePane(i);
+        }
+    }
+
     render() {
-        if (stepTabs[this.props.step]) {
+        const {lane} = this.props;
+        const step = lane.get("step");
+        if (stepTabs[step]) {
             return (
                 <nav className="CallLaneTabs">
-                {stepTabs[this.props.step].map((tab, i) => {
+                {stepTabs[step].map((tab, i) => {
                     const tabClassName = cx(
                         'CallLaneTabs-tab',
                         'CallLaneTabs-' + tab.title,
@@ -52,7 +67,7 @@ export default class CallLaneTabs extends React.Component {
                     return (
                         <div
                             className={tabClassName}
-                            onClick={this.props.setActivePane.bind(this, i)}
+                            onClick={this.handleClick.bind(this, i)}
                             key={i}>
                             <span className={"CallLaneTabs-icon fa fa-" + tab.icon} />
                             <span className="CallLaneTabs-title"><Msg id={"pages.call.tabs." + tab.title}/></span>
@@ -65,3 +80,5 @@ export default class CallLaneTabs extends React.Component {
         return null;
     }
 }
+
+export default connect()(CallLaneTabs);

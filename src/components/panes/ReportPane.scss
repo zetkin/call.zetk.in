@@ -20,21 +20,17 @@
         }
 
         .ReportPane-backLink {
-            display: none;
+            @include col(4,12);
+            line-height: 4.5em;
+            cursor: pointer;
+            font-size: 0.7778em;
 
-            @include small-screen {
-                @include col(4,12);
-                line-height: 4.5em;
-                cursor: pointer;
-                font-size: 0.7778em;
+            &:before {
+                @include icon($fa-var-arrow-left);
+            }
 
-                &:before {
-                    @include icon($fa-var-arrow-left);
-                }
-
-                &:hover {
-                    color: darken($c-brand-main, 20);
-                }
+            &:hover {
+                color: darken($c-brand-main, 20);
             }
         }
 

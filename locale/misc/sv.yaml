@@ -13,3 +13,9 @@ callLog:
         status22: Samtalet bröts.
 tagList:
     emptyLabel: Inga etiketter
+callInstructions:
+    instructions: |-
+        För att ringa kan du klicka på numret ovan
+        eller knappa in det i din telefon.
+        Kom tillbaka hit sen så du kan anteckna
+        under samtalet.

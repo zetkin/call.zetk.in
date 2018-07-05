@@ -4,12 +4,15 @@
 
     .AssignmentStats-item {
         list-style-type: none;
-        float: left;
-        margin: 1%;
         padding: 1em;
         text-align: center;
-        width: 31%;
-        @include card;
+
+        @include small-screen {
+            float: left;
+            margin: 1%;
+            width: 31%;
+            @include card;
+        }
     }
 
     .AssignmentStats-itemNumber {

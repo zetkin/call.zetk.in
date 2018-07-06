@@ -23,6 +23,7 @@ const mapStateToProps = state => ({
     actions: state.get('actions'),
     campaigns: state.get('campaigns'),
     surveys: state.get('surveys'),
+    orgs: state.get('orgs'),
 });
 
 @connect(mapStateToProps)
@@ -70,6 +71,7 @@ export default class InputPane extends PaneBase {
     }
 
     renderContent() {
+        const orgList = this.props.orgs.getIn(['orgList', 'items']);
         let target = this.props.call.get('target');
         let content = null;
 
@@ -210,6 +212,7 @@ export default class InputPane extends PaneBase {
                     </div>,
                     <CampaignForm key="campaignForm"
                         actionList={ actionList }
+                        orgList={ orgList }
                         responseList={ responseList }
                         userActionList={ userActionList }
                         scrollContainer={ scrollContainer}

@@ -53,7 +53,7 @@
     border-color: darken($color, $amount*2);
 }
 
-@mixin button($color: $c-brand-main, $amount:5, $icon:false, $border: 0) {
+@mixin button($color: $c-brand-main, $amount:5, $icon:false, $transparent:false, $border: 0) {
     display: inline-block;
     padding: 1em 1em;
     border-width: $border;
@@ -73,8 +73,27 @@
     &:focus {
         outline: none;
     }
-    
-    @include button-color($color, $amount);
+
+    @if $transparent {
+        background-color: transparentize($color, 1);
+        border:2px solid $color;
+        &:hover {
+            background-color: transparentize($color, 0.8);
+            border:2px solid $color;
+        }
+        &:focus {
+            background-color: transparentize($color, 0.7);
+            border:2px solid $color;
+        }
+        &.selected {
+            background-color: transparentize($color, 0.6);
+            border:2px solid $color;
+        }
+    }
+    @else {
+        @include button-color($color, $amount);
+    }
+
     @if $icon {
         padding-left: 1.5em;
         &:before {

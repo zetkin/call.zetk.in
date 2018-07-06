@@ -2,9 +2,14 @@
     z-index: 2;
 
     .PaneBase-header {
+        min-height: 0;
+        
         p {
-            text-align: center;
-            color: darken(white, 30);
+            display: none;
+
+            @include small-screen {
+                display: block;
+            }
         }
     }
 
@@ -46,9 +51,12 @@
     }
 
     &.InputPane-prepareStep {
-        width: 30%;
-        left: 70%;
         box-shadow: none;
+
+        @include small-screen {
+            width: 30%;
+            left: 70%;
+        }
 
         .InputPane-summaryList {
             li:hover {
@@ -64,18 +72,26 @@
     }
 
     &.InputPane-callStep {
-        width: 65%;
-        left: 35%;
+        @include small-screen {
+            width: 65%;
+            left: 35%;
+        }
 
         li {
             cursor: pointer;
 
             .InputPane-listLink {
-                color: lighten($c-text, 20);
-
+                color: $c-brand-main;
                 visibility: visible;
                 opacity: 1;
                 transition: opacity 1s;
+
+                @include small-screen {
+                    color: lighten($c-text, 20);
+                    position: absolute;
+                    top: calc(50% - 23px);
+                    right: 0;
+                }
 
                 &:after {
                     @include icon($fa-var-chevron-right);
@@ -85,11 +101,13 @@
             }
 
             &:hover {
-                a {
-                    color: $c-text;
-
-                    &:after {
-                        color: $c-brand-main;
+                @include small-screen {
+                    a {
+                        color: $c-text;
+    
+                        &:after {
+                            color: $c-brand-main;
+                        }
                     }
                 }
             }
@@ -97,8 +115,10 @@
     }
 
     &.InputPane-reportStep {
-        width: 30%;
-        left: 35%;
+        @include small-screen {
+            width: 30%;
+            left: 35%;
+        }
 
         .InputPane-summaryList {
             li:hover {
@@ -115,10 +135,13 @@
 
     .InputPane-nav {
         .InputPane-summaryLink {
-            @include col(4,12);
             display: inline-block;
             line-height: 4em;
             cursor: pointer;
+
+            @include small-screen {
+                @include col(4,12);
+            }
 
             &:before {
                 @include icon($fa-var-arrow-left);
@@ -130,25 +153,26 @@
         }
 
         p {
-            @include col(4,12);
+            display: none;
+            @include small-screen {
+                @include col(4,12);
+            }
         }
 
-        select {
-            @include col(2,12);
-            float: right;
-            margin: 2em;
+        .InputPane-campaignSelect {
+            display: none;
+
+            @include small-screen {
+                @include col(2,12);
+                float: right;
+                margin: 2em;
+            }
         }
     }
 
     .InputPane-summaryList {
         li {
             position: relative;
-
-            a {
-                position: absolute;
-                top: calc(50% - 23px);
-                right: 0;
-            }
 
             .InputPane-campaignListInfo {
                 font-size: 0.9em;
@@ -211,7 +235,7 @@
         .CampaignForm-form {
             @include large-screen {
                 @include col(7,12);
-                margin-left: 0;
+                margin-left: 1em;
                 float:left;
             }
         }

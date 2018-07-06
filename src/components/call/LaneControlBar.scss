@@ -1,27 +1,31 @@
 .LaneControlBar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 90px;
-    padding: 1em 0;
+    min-height: 64px;
+    padding: 8px;
     box-shadow: 0 2px 5px darken(#FFF, 10);
     overflow: hidden;
     z-index: 99;
+    order: 1;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: relative;
 
     .LaneControlBar-returnSection {
-        @include col(4,12)
         text-align: left;
-        padding-top: 0.5em;
         .Button {
             @include button(darken(white, 10));
         }
     }
 
     .LaneControlBar-content {
-        @include col(4,12)
         text-align: left;
         transition: top 0.4s, left 0.4s;
+        width: 100%;
+
+        @include small-screen {
+            flex: 3;
+        }
 
         h1 {
             margin: 0;
@@ -36,9 +40,8 @@
     }
 
     .LaneControlBar-proceedSection {
-        @include col(4,12)
         text-align: right;
-        padding-top: 0.5em;
+        flex: 2;
 
         .Button {
             @include button();
@@ -51,7 +54,20 @@
             @include button(darken(white, 5), $icon: $fa-var-step-forward);
             background-color: transparent;
             font-size: 0.8em;
-            padding: 0 2em 0 1em;
+            padding-left: 1em;
+        }
+    }
+    &.LaneControlBar-assignmentStep {
+        .LaneControlBar-content {
+            display: none;
+        }
+    }
+    &.LaneControlBar-prepareStep {
+        .LaneControlBar-proceedSection {
+            flex: none;
+        }
+        .LaneControlBar-content {
+            display: none;
         }
     }
 
@@ -59,32 +75,28 @@
         .LaneControlBar-returnSection {
             display: none;
         }
-        .LaneControlBar-content {
-            @include col(7.5,12);
-        }
-        .LaneControlBar-proceedSection {
-            @include col(4.5,12)
-        }
 
-        @include large-screen {
-            .LaneControlBar-content {
-                @include col(7,12);
+        .LaneControlBar-proceedSection {
+            display: flex;
+            justify-content: space-between;
+            @include small-screen {
+                min-width: 290px;
+                display: block;
             }
-            .LaneControlBar-proceedSection {
-                @include col(5,12)
-            }
+        }
+    }
+    &.LaneControlBar-reportStep {
+        .LaneControlBar-proceedSection {
+            justify-content: flex-end;
+        }
+    }
+    &.LaneControlBar-doneStep {
+        .LaneControlBar-content {
+            display: none;
         }
     }
 
     @include large-screen {
         height: 100px;
-
-        .LaneControlBar-returnSection {
-            @include col(3,12)
-        }
-
-        .LaneControlBar-proceedSection {
-            @include col(5,12);
-        }
     }
 }

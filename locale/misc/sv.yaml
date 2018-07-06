@@ -13,3 +13,8 @@ callLog:
         status22: Samtalet bröts.
 tagList:
     emptyLabel: Inga etiketter
+callInstructions:
+    instructions: |-
+        Tryck på numret ovan för att ringa, eller knappa in det manuellt i din
+        telefon. När du trycker på numret öppnas din telefonapp. Återvänd hit
+        till webbläsaren för att fortsätta använda Zetkin.

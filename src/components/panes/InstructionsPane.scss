@@ -3,28 +3,38 @@
     background-color: white;
 
     &.InstructionsPane-assignmentStep {
-        width: 35%;
-        left: 65%;
+        display: block;
     }
 
-    &.InstructionsPane-prepareStep {
-        width: 35%;
-        left: 0%;
-    }
+    @include small-screen {
+        &.InstructionsPane-assignmentStep {
+            width: 35%;
+            left: 65%;
+        }
 
-    &.InstructionsPane-callStep {
-        width: 35%;
-        left: 0;
-    }
+        &.InstructionsPane-prepareStep {
+            width: 35%;
+            left: 0%;
+        }
 
-    &.InstructionsPane-reportStep {
-        width: 35%;
-        left: 0;
-    }
+        &.InstructionsPane-callStep {
+            width: 35%;
+            left: 0;
+        }
 
+        &.InstructionsPane-reportStep {
+            width: 35%;
+            left: 0;
+        }
+    }
     .PaneBase-header {
         .InstructionsPane-targetButton {
-            right: 0;
+            display: none;
+
+            @include small-screen {
+                display: block;
+                right: 0;
+            }
         }
     }
 }

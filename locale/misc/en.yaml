@@ -18,3 +18,8 @@ tagList:
             =1 {is one more tag}
             other {are # more tags}
         } in the personal info pane
+callInstructions:
+    instructions: |-
+        Tap on the number to call, or enter the number manually on your phone.
+        Tapping the number will open your phone app. Return here to your web
+        browser to continue using Zetkin and report the call.

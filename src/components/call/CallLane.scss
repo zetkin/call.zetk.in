@@ -4,17 +4,17 @@
     left: 0;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 
     .CallLane-panes {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        top: 90px;
-        right: 0;
-        overflow: hidden;
+        position: relative;
+        flex: 1;
+        order: 3;
+        overflow: auto;
 
-        @include large-screen {
-            top: 100px;
+        @include small-screen {
+            overflow: hidden;
         }
     }
 
@@ -68,6 +68,14 @@
         .AssignmentPane.PaneBase-leave {
             animation: AssignmentPane-leaveForEmptyAnimation $pane-transition-duration;
         }
+    }
+    .CallLane-activePane {
+        display: flex;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
     }
 }
 

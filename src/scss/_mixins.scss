@@ -55,7 +55,7 @@
 
 @mixin button($color: $c-brand-main, $amount:5, $icon:false, $border: 0) {
     display: inline-block;
-    padding: 0 2.5em;
+    padding: 1em 1em;
     border-width: $border;
     border-radius: 3em;
     border-style: solid;
@@ -63,8 +63,12 @@
     font-family: franklin-gothic-urw, sans-serif;
     font-weight: 300;
     font-size: 1em;
-    line-height: 3em;
+    line-height: 1;
     cursor: pointer;
+
+    @include medium-screen {
+        padding: 1em 2.5em;
+    }
 
     &:focus {
         outline: none;
@@ -134,10 +138,18 @@
 
 @mixin overlay-button($color: white, $border:1px ) {
     @include button($color: $color, $border: $border);
-    margin: 0 0.5em 0 0;
-    font-size: 0.8em;
     background-color: transparent;
+    display: block;
+    font-size: 0.8em;
+    margin: 1em 0;
     transition: background-color 0.2s;
+    width: 100%;
+        
+    @include small-screen {
+        margin: 0.25em;
+        display: inline-block;
+        width: auto;
+    }
 
     &:hover {
         color: $c-text;
@@ -260,6 +272,12 @@
 
 @mixin col-offset($col, $sum) {
     margin-left: percentage($col/$sum);
+}
+
+@mixin small-screen {
+    @media (min-width: #{$small-min-width}) {
+        @content;
+    }
 }
 
 @mixin medium-screen {

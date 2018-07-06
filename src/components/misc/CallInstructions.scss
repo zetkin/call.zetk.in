@@ -1,0 +1,116 @@
+.CallInstructions {
+    bottom: 0;
+    color: $c-text-contrast;
+    max-height: 3.3em;
+    position: absolute;
+    right: 0;
+    transition: max-height 0s, width 0s;
+    transition-delay: 0.25s;
+    width: calc(2.5em + 20px);
+    z-index: 10;
+}
+.CallInstructions-backgroundContainer {
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    transition: height 0s, width 0s;
+    transition-delay: 0.25s;
+}
+.CallInstructions-background {
+    background-color: $c-brand-comp-light;
+    border-radius: 50%;
+    bottom: 0.8em;
+    content: "";
+    height: 2.5em;
+    position: absolute;
+    right: 20px;
+    transition: transform 0.25s;
+    width: 2.5em;
+}
+.CallInstructions-content {
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    padding: 0.5em;
+    position: relative;
+    transform: translateY(100%);
+}
+.CallInstructions-title {
+    font-size: 1.25em;
+    display: block;
+}
+.CallInstructions-numbers {
+    margin: 1em auto;
+    display: flex;
+    flex-direction: column;
+}
+.CallInstructions-number {
+    background-color: $c-text-contrast;
+    border-radius: 2em;
+    color: $c-brand-comp-light;
+    font-size: 1.25em;
+    font-weight: 700;
+    margin: 0 auto 0.5em;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    &:before {
+        @include icon($fa-var-phone);
+    }
+}
+.CallInstructions-instructions {
+    padding: 0 0.5em 1em;
+    margin: 0;
+}
+.CallInstructions-button {
+    background-color: transparent;
+    border: 0;
+    bottom: 0.8em;
+    color: inherit;
+    cursor: pointer;
+    height: 2.5em;
+    position: absolute;
+    right: 20px;
+    width: 2.5em;
+    font-size: 1em;
+    &:before {
+        @include icon($fa-var-phone);
+        line-height: 2;
+    }
+    &:focus{
+        outline: none;
+    }
+}
+
+.CallInstructions-open {
+    max-height: 24em;
+    transition-delay: 0s;
+    width: 100%;
+    z-index: 100;
+    
+    .CallInstructions-backgroundContainer {
+        transition-delay: 0s;
+    }
+    
+    .CallInstructions-background {
+        transform: scale(32);
+    }
+    .CallInstructions-content {
+        transform: translateY(0);
+        opacity: 1;
+        transition: transform 0.25s, opacity 0.25s;
+    }
+    .CallInstructions-button {
+        bottom: auto;
+        top: 0;
+        right: 0.8em;
+        &:before {
+            @include icon($fa-var-chevron-down);
+        }
+    }
+}
+
+.CallInstructions-icon {
+}

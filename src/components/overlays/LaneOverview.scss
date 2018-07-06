@@ -1,8 +1,12 @@
 .LaneOverview {
+    display: flex;
+    flex-direction: column;
+    @include small-screen {
+        flex-direction: row;
+    }
     .LaneOverview-log, .LaneOverview-lanes {
-        float: left;
-        width: 45%;
-        margin: 0 2.5%;
+        margin: 0 1em;
+        flex: 1;
 
         p {
             margin-bottom: 2em;

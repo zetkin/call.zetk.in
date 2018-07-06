@@ -1,13 +1,6 @@
 .InputPane {
     z-index: 2;
 
-    .PaneBase-header {
-        p {
-            text-align: center;
-            color: darken(white, 30);
-        }
-    }
-
     .PaneBase-content {
         font-size: 0.9em;
     }
@@ -130,10 +123,13 @@
 
     .InputPane-nav {
         .InputPane-summaryLink {
-            @include col(4,12);
             display: inline-block;
             line-height: 4em;
             cursor: pointer;
+
+            @include small-screen {
+                @include col(4,12);
+            }
 
             &:before {
                 @include icon($fa-var-arrow-left);
@@ -145,7 +141,10 @@
         }
 
         p {
-            @include col(4,12);
+            display: none;
+            @include small-screen {
+                @include col(4,12);
+            }
         }
 
         .InputPane-campaignSelect {
@@ -153,7 +152,6 @@
 
             @include small-screen {
                 @include col(2,12);
-                display: block;
                 float: right;
                 margin: 2em;
             }

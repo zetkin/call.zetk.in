@@ -24,14 +24,5 @@
 
     .Button {
         @include overlay-button();
-        display: block;
-        width: 100%;
-        margin: 1em 0;
-        
-        @include small-screen {
-            margin: 0 0.25em;
-            display: inline-block;
-            width: auto;
-        }
     }
 }

@@ -138,10 +138,18 @@
 
 @mixin overlay-button($color: white, $border:1px ) {
     @include button($color: $color, $border: $border);
-    margin: 0 0.5em 0 0;
-    font-size: 0.8em;
     background-color: transparent;
+    display: block;
+    font-size: 0.8em;
+    margin: 1em 0;
     transition: background-color 0.2s;
+    width: 100%;
+        
+    @include small-screen {
+        margin: 0.25em;
+        display: inline-block;
+        width: auto;
+    }
 
     &:hover {
         color: $c-text;

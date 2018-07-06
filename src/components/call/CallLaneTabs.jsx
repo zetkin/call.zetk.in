@@ -60,7 +60,7 @@ class CallLaneTabs extends React.Component {
         const targetValues = {
             target: `${target.get("first_name")} ${target.get("last_name")}`
         }
-        console.log(target);
+
         if (stepTabs[step]) {
             return (
                 <nav className="CallLaneTabs">

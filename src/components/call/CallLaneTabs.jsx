@@ -38,8 +38,9 @@ const stepTabs = {
 class CallLaneTabs extends React.Component {
     static propTypes = {
         activePane: PropTypes.number,
-        setActivePane: PropTypes.func,
+        call: PropTypes.map,
         lane: PropTypes.map,
+        setActivePane: PropTypes.func,
     };
 
     handleClick(i) {
@@ -53,8 +54,13 @@ class CallLaneTabs extends React.Component {
     }
 
     render() {
-        const {lane} = this.props;
+        const {lane, call} = this.props;
         const step = lane.get("step");
+        const target = call.get("target");
+        const targetValues = {
+            target: `${target.get("first_name")} ${target.get("last_name")}`
+        }
+        console.log(target);
         if (stepTabs[step]) {
             return (
                 <nav className="CallLaneTabs">
@@ -70,7 +76,7 @@ class CallLaneTabs extends React.Component {
                             onClick={this.handleClick.bind(this, i)}
                             key={i}>
                             <span className={"CallLaneTabs-icon fa fa-" + tab.icon} />
-                            <span className="CallLaneTabs-title"><Msg id={"pages.call.tabs." + tab.title}/></span>
+                            <span className="CallLaneTabs-title"><Msg id={"pages.call.tabs." + tab.title} values={targetValues}/></span>
                         </div>
                     )
                 })}

@@ -54,8 +54,8 @@ export default class CallLane extends React.Component {
     }
 
     render() {
-        const {size} = this.props;
-        const {activePane,} = this.state;
+        const {size, call} = this.props;
+        const {activePane} = this.state;
         let lane = this.props.lane;
         let step = lane.get('step');
         let infoMode = lane.get('infoMode');
@@ -92,6 +92,7 @@ export default class CallLane extends React.Component {
             tabs = (
                 <CallLaneTabs
                     activePane={activePane}
+                    call={call}
                     setActivePane={this.setActivePane.bind(this)}
                     lane={ lane }/>
             );

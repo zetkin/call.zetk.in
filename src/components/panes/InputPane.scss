@@ -1,6 +1,18 @@
 .InputPane {
     z-index: 2;
 
+    .PaneBase-header {
+        min-height: 0;
+        
+        p {
+            display: none;
+
+            @include small-screen {
+                display: block;
+            }
+        }
+    }
+
     .PaneBase-content {
         font-size: 0.9em;
     }

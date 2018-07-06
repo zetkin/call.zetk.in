@@ -1,6 +1,6 @@
 tabs:
     instructions: Instructions
     target: Personal info
-    input: Act
+    input: Act as {target}
     report: Report
     stats: Good work

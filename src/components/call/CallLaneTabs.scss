@@ -6,7 +6,7 @@
 
 .CallLaneTabs-tab {
   cursor: pointer;
-  width: 64px;
+  min-width: 64px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +23,10 @@
 
   .CallLaneTabs-title {
     display: inline;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 75%;
   }
 }
 

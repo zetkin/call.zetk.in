@@ -1,6 +1,6 @@
 tabs:
     instructions: Instruktioner
     target: Person info
-    input: Agera
+    input: Agera som {target}
     report: Rapport
     stats: Bra jobbat

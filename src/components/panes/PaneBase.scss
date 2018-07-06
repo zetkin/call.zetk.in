@@ -28,75 +28,76 @@
         margin-bottom: 0;
     }
 
-    .PaneBase-header {
-        width: 100%;
-        position: relative;
-        min-height: 3.5em;
+}
 
-        p {
-            text-align: center;
-            color: darken(white, 50);
-            margin: 0;
-            line-height: 1;
-            padding: 1.5em 0;
+.PaneBase-header {
+    width: 100%;
+    position: relative;
+    min-height: 3.5em;
+
+    p {
+        text-align: center;
+        color: darken(white, 50);
+        margin: 0;
+        line-height: 1;
+        padding: 1.5em 0;
+    }
+
+    button {
+        position: absolute;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        border: none;
+        background: white;
+        font-family: inherit;
+        font-size: 1em;
+
+        &:focus {
+            outline: none;
         }
 
-        button {
-            position: absolute;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            border: none;
-            background: white;
-            font-family: inherit;
-            font-size: 1em;
-
-            &:focus {
-                outline: none;
+        &.InstructionsPane-targetButton {
+            &:before {
+                @include icon($fa-var-user);
             }
+        }
 
-            &.InstructionsPane-targetButton {
-                &:before {
-                    @include icon($fa-var-user);
-                }
-            }
-
-            &.TargetPane-instructionsButton {
-                &:before {
-                    @include icon($fa-var-file-text);
-                }
+        &.TargetPane-instructionsButton {
+            &:before {
+                @include icon($fa-var-file-text);
             }
         }
     }
+}
 
-    .PaneBase-content {
-        background: white;
-        flex: 1;
-        padding: 1em 1em 4em;
-        overflow-y: auto;
-        overflow-x: hidden;
-        
-        @include small-screen {
-            padding-bottom: 2em;
-        }
+.PaneBase-content {
+    background: white;
+    flex: 1;
+    padding: 1em 1em 4em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    @include small-screen {
+        padding-bottom: 2em;
+    }
 
-        @include scrollbar(white);
+    @include scrollbar(white);
 
-        &:hover {
-            @include scrollbar(darken(white, 5));
-        }
+    &:hover {
+        @include scrollbar(darken(white, 5));
+    }
 
-        h1 {
-            &:first-child {
-                margin-top: 0;
-            }
+    h1 {
+        &:first-child {
+            margin-top: 0;
         }
-        &:last-child::after {
-            content: "";
-            height: 4em;
-            width: 100%;
-            display: block;
-        }
+    }
+    &:last-child::after {
+        content: "";
+        height: 4em;
+        width: 100%;
+        display: block;
     }
 }
 

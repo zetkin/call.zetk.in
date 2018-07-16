@@ -106,7 +106,8 @@ export default class CallLane extends React.Component {
                     lane={ lane }
                     call={ this.props.call }
                     className={className}
-                    firstCall={ this.state.firstCall }/>
+                    firstCall={ this.state.firstCall }
+                    size={size}/>
             );
         });
 

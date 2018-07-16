@@ -3,13 +3,11 @@ import immutable from 'immutable';
 import { connect } from 'react-redux';
 import { FormattedDate, FormattedMessage as Msg } from 'react-intl';
 
-import Button from '../../common/misc/Button';
 import CampaignForm from '../../common/campaignForm/CampaignForm';
 import FormattedLink from '../../common/misc/FormattedLink';
 import LoadingIndicator from '../../common/misc/LoadingIndicator';
 import PaneBase from './PaneBase';
 import SurveyForm from './../../common/surveyForm/SurveyForm';
-import { campaignById } from '../../store/campaigns';
 import { retrieveActions, updateActionResponse } from '../../actions/action';
 import { retrieveCampaign } from '../../actions/campaign';
 import {
@@ -71,6 +69,7 @@ export default class InputPane extends PaneBase {
     }
 
     renderContent() {
+        const { size } = this.props;
         const orgList = this.props.orgs.getIn(['orgList', 'items']);
         let target = this.props.call.get('target');
         let content = null;
@@ -199,9 +198,24 @@ export default class InputPane extends PaneBase {
                     .updateIn(['items'], items => items
                         .filter(item =>
                             item.getIn(['campaign', 'id']) == campaign.get('id')));
-
+                
+                let scrollOffset = 0;
                 let scrollContainer = document
+                    .querySelector('.InputPane .CampaignForm-form');
+                if( size == "medium" || size == "large" ) {
+                    scrollContainer = document
                     .querySelector('.InputPane .PaneBase-content');
+                }
+                if( size === "small" ) {
+                    scrollContainer = document
+                    .querySelector('.CallLane-panes');
+                }
+                if ( scrollContainer ) {
+                    scrollOffset = scrollContainer.getBoundingClientRect().top * -1;
+                    scrollOffset = scrollContainer.getBoundingClientRect().top * -1
+                    + scrollContainer.scrollTop;
+                    console.log(scrollOffset);
+                }
 
                 content.push(
                     <div key="campaignInfo" className="InputPane-campaignInfo">
@@ -212,11 +226,13 @@ export default class InputPane extends PaneBase {
                     </div>,
                     <CampaignForm key="campaignForm"
                         actionList={ actionList }
+                        forceNeeded={ true }
                         orgList={ orgList }
                         responseList={ responseList }
                         userActionList={ userActionList }
                         scrollContainer={ scrollContainer}
-                        scrollOffset={ -160 }
+                        calcOffset={this.calcOffset.bind(this)}
+                        scrollOffset={ scrollOffset }
                         onResponse={ this.onCampaignResponse.bind(this) }/>
                 );
             }
@@ -257,7 +273,6 @@ export default class InputPane extends PaneBase {
 
     renderHeader() {
         let target = this.props.call.get('target');
-        let step = this.props.step;
         let selectValue = this.state.viewMode + ':' + this.state.selectedId;
 
         if (this.state.viewMode != 'summary') {
@@ -366,6 +381,15 @@ export default class InputPane extends PaneBase {
             selectedId: fields[1],
         });
     }
+
+    calcOffset(target, container) {
+        const scrollTop = target.getBoundingClientRect().top 
+            + container.getBoundingClientRect().top * -1
+            + container.scrollTop 
+            + window.scrollY;
+        console.log(scrollTop);
+        return scrollTop;
+    }
 }
 
 const CampaignListItem = props => {
@@ -391,7 +415,7 @@ const CampaignListItem = props => {
         : null;
 
     return (
-        <li onClick={ clickTarget }>
+        <li className="InputPane-summaryCampaign" onClick={ clickTarget }>
             <h3>{ title }</h3>
             <p className="InputPane-campaignListInfo">
                 <FormattedDate value={ startDate }
@@ -432,7 +456,7 @@ const SurveyListItem = props => {
         : null;
 
     return (
-        <li onClick={ clickTarget }>
+        <li className="InputPane-summarySurvey" onClick={ clickTarget }>
             <h3>{ title }</h3>
             <FormattedLink key="SurveyListItemLink"
                 className="InputPane-listLink"

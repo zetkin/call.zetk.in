@@ -1,9 +1,15 @@
 .InputPane {
     z-index: 2;
 
-    .PaneBase-header {
-        min-height: 0;
+    &.CallLane-activePane {
+        height: auto;
         
+        @include small-screen {
+            height: 100%;
+        }
+    }
+
+    .PaneBase-header {
         p {
             display: none;
 
@@ -15,10 +21,23 @@
 
     .PaneBase-content {
         font-size: 0.9em;
+        padding: 1em 1em 0;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .InputPane-campaignInfo {
+        padding: 0 1em;
     }
 
     h2 {
         margin-bottom: 0.5em;
+    }
+
+    .InputPane-summary {
+        padding: 0 1em;
     }
 
     .InputPane-summaryList {
@@ -77,7 +96,8 @@
             left: 35%;
         }
 
-        li {
+        .InputPane-summaryCampaign,
+        .InputPane-summarySurvey {
             cursor: pointer;
 
             .InputPane-listLink {
@@ -102,7 +122,7 @@
 
             &:hover {
                 @include small-screen {
-                    a {
+                    .InputPane-listLink {
                         color: $c-text;
     
                         &:after {
@@ -213,42 +233,85 @@
     }
 
     .CampaignForm {
-        background-color: white;
-
-        .CampaignForm-calendar {
-            @include large-screen {
-                @include col(5,12);
-                margin-top: 0;
-                padding-left: 0;
-                float: right;
-                position: relative;
-            }
-        }
-
         .CampaignForm-filter {
             @include large-screen {
                 margin: 0 0 2em 0;
                 @include col(7,12);
             }
         }
-
-        .CampaignForm-form {
-            @include large-screen {
-                @include col(7,12);
-                margin-left: 1em;
-                float:left;
-            }
-        }
-
+        
         .CampaignForm-day {
             .CampaignForm-date {
                 margin-left: 0;
-
+                
                 span {
                     display: inline;
                     margin-right: 1em;
                 }
             }
+        }
+
+        .CampaignForm-sidebar {
+            @include medium-screen {
+                @include col(10,12);
+                @include col-offset(1, 12);
+                position: relative;
+            }
+            
+            @include large-screen {
+                @include col(5,12);
+                @include col-offset(0, 12);
+                position: absolute;
+                left: 0;
+            }
+        }
+
+        .CampaignForm-form {
+            padding: 0;
+
+            @include medium-screen {
+                @include col(12,12);
+                margin-left: 0;
+            }
+            
+            @include large-screen {
+                @include col(7,12);
+                @include col-offset(5, 12);
+            }
+        }
+        .CampaignForm-days {
+            @include large-screen {
+                margin: 0;
+            }
+        }
+        .CampaignForm-actionInfoSection {
+            bottom: 0;
+            height: auto;
+            position: fixed;
+            top: 11em;
+            
+            @include medium-screen {
+                @include col(12,12, $last:true);
+                left: auto;
+                position: absolute;
+                top: 0;
+            }
+            
+            @include large-screen {
+                @include col(7,12, $last:true);
+                left: auto;
+            }
+        }
+
+        .ActionInfoSection .ResponseWidget {
+            margin-bottom: 0;
+            position: relative;
+            top: -1.5em;
+        }
+
+        .ResponseWidget-button,
+        .SingleActionForm-infoButton {
+            padding: 1em 2.5em;
         }
     }
 

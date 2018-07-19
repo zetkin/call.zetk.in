@@ -3,13 +3,11 @@ import immutable from 'immutable';
 import { connect } from 'react-redux';
 import { FormattedDate, FormattedMessage as Msg } from 'react-intl';
 
-import Button from '../../common/misc/Button';
 import CampaignForm from '../../common/campaignForm/CampaignForm';
 import FormattedLink from '../../common/misc/FormattedLink';
 import LoadingIndicator from '../../common/misc/LoadingIndicator';
 import PaneBase from './PaneBase';
 import SurveyForm from './../../common/surveyForm/SurveyForm';
-import { campaignById } from '../../store/campaigns';
 import { retrieveActions, updateActionResponse } from '../../actions/action';
 import { retrieveCampaign } from '../../actions/campaign';
 import {
@@ -23,6 +21,7 @@ const mapStateToProps = state => ({
     actions: state.get('actions'),
     campaigns: state.get('campaigns'),
     surveys: state.get('surveys'),
+    orgs: state.get('orgs'),
 });
 
 @connect(mapStateToProps)
@@ -70,6 +69,8 @@ export default class InputPane extends PaneBase {
     }
 
     renderContent() {
+        const { size } = this.props;
+        const orgList = this.props.orgs.getIn(['orgList', 'items']);
         let target = this.props.call.get('target');
         let content = null;
 
@@ -197,9 +198,12 @@ export default class InputPane extends PaneBase {
                     .updateIn(['items'], items => items
                         .filter(item =>
                             item.getIn(['campaign', 'id']) == campaign.get('id')));
+                
+                const scrollContainer = (size == 'small')?
+                    document.querySelector('.CallLane-panes') :
+                    document.querySelector('.InputPane .PaneBase-content');
 
-                let scrollContainer = document
-                    .querySelector('.InputPane .PaneBase-content');
+                const scrollOffset = -scrollContainer.getBoundingClientRect().top;
 
                 content.push(
                     <div key="campaignInfo" className="InputPane-campaignInfo">
@@ -210,10 +214,12 @@ export default class InputPane extends PaneBase {
                     </div>,
                     <CampaignForm key="campaignForm"
                         actionList={ actionList }
+                        forceNeeded={ true }
+                        orgList={ orgList }
                         responseList={ responseList }
                         userActionList={ userActionList }
                         scrollContainer={ scrollContainer}
-                        scrollOffset={ -160 }
+                        scrollOffset={ scrollOffset }
                         onResponse={ this.onCampaignResponse.bind(this) }/>
                 );
             }
@@ -254,7 +260,6 @@ export default class InputPane extends PaneBase {
 
     renderHeader() {
         let target = this.props.call.get('target');
-        let step = this.props.step;
         let selectValue = this.state.viewMode + ':' + this.state.selectedId;
 
         if (this.state.viewMode != 'summary') {
@@ -388,7 +393,7 @@ const CampaignListItem = props => {
         : null;
 
     return (
-        <li onClick={ clickTarget }>
+        <li className="InputPane-summaryCampaign" onClick={ clickTarget }>
             <h3>{ title }</h3>
             <p className="InputPane-campaignListInfo">
                 <FormattedDate value={ startDate }
@@ -429,7 +434,7 @@ const SurveyListItem = props => {
         : null;
 
     return (
-        <li onClick={ clickTarget }>
+        <li className="InputPane-summarySurvey" onClick={ clickTarget }>
             <h3>{ title }</h3>
             <FormattedLink key="SurveyListItemLink"
                 className="InputPane-listLink"

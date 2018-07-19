@@ -11,6 +11,7 @@ import calls from './calls';
 import campaigns from './campaigns';
 import intl from './intl';
 import lanes from './lanes';
+import orgs from './orgs';
 import surveys from './surveys';
 import tutorial from './tutorial';
 import user from './user';
@@ -23,6 +24,7 @@ const appReducer = combineReducers({
     calls,
     campaigns,
     lanes,
+    orgs,
     intl,
     surveys,
     tutorial,

@@ -199,23 +199,11 @@ export default class InputPane extends PaneBase {
                         .filter(item =>
                             item.getIn(['campaign', 'id']) == campaign.get('id')));
                 
-                let scrollOffset = 0;
-                let scrollContainer = document
-                    .querySelector('.InputPane .CampaignForm-form');
-                if( size == "medium" || size == "large" ) {
-                    scrollContainer = document
-                    .querySelector('.InputPane .PaneBase-content');
-                }
-                if( size === "small" ) {
-                    scrollContainer = document
-                    .querySelector('.CallLane-panes');
-                }
-                if ( scrollContainer ) {
-                    scrollOffset = scrollContainer.getBoundingClientRect().top * -1;
-                    scrollOffset = scrollContainer.getBoundingClientRect().top * -1
-                    + scrollContainer.scrollTop;
-                    console.log(scrollOffset);
-                }
+                const scrollContainer = (size == 'small')?
+                    document.querySelector('.CallLane-panes') :
+                    document.querySelector('.InputPane .PaneBase-content');
+
+                const scrollOffset = -scrollContainer.getBoundingClientRect().top;
 
                 content.push(
                     <div key="campaignInfo" className="InputPane-campaignInfo">
@@ -231,7 +219,6 @@ export default class InputPane extends PaneBase {
                         responseList={ responseList }
                         userActionList={ userActionList }
                         scrollContainer={ scrollContainer}
-                        calcOffset={this.calcOffset.bind(this)}
                         scrollOffset={ scrollOffset }
                         onResponse={ this.onCampaignResponse.bind(this) }/>
                 );
@@ -380,15 +367,6 @@ export default class InputPane extends PaneBase {
             viewMode: fields[0],
             selectedId: fields[1],
         });
-    }
-
-    calcOffset(target, container) {
-        const scrollTop = target.getBoundingClientRect().top 
-            + container.getBoundingClientRect().top * -1
-            + container.scrollTop 
-            + window.scrollY;
-        console.log(scrollTop);
-        return scrollTop;
     }
 }
 

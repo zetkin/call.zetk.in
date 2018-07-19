@@ -24,13 +24,8 @@
         padding: 1em 0 0;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
         overflow-x: hidden;
-        
-        @include small-screen {
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
+        overflow-y: auto;
     }
 
     .InputPane-campaignInfo {
@@ -238,21 +233,12 @@
     }
 
     .CampaignForm {
-        background-color: white;
-        @include large-screen {
-            overflow: hidden;
-        }
-
-        &.CampaignForm-infoOpen {
-        }
-
         .CampaignForm-filter {
             @include large-screen {
                 margin: 0 0 2em 0;
                 @include col(7,12);
             }
         }
-
         
         .CampaignForm-day {
             .CampaignForm-date {
@@ -284,8 +270,6 @@
             padding: 0 1em;
 
             @include medium-screen {
-                height: 100%;
-                overflow: auto;
                 @include col(12,12);
                 margin-left: 0;
             }

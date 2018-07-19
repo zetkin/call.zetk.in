@@ -21,7 +21,7 @@
 
     .PaneBase-content {
         font-size: 0.9em;
-        padding: 1em 0 0;
+        padding: 1em 1em 0;
         display: flex;
         flex-direction: column;
         overflow-x: hidden;
@@ -267,7 +267,7 @@
         }
 
         .CampaignForm-form {
-            padding: 0 1em;
+            padding: 0;
 
             @include medium-screen {
                 @include col(12,12);

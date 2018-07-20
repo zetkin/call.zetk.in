@@ -66,6 +66,8 @@ organizerLog:
     summary:
         emptyLog: Du skrev ingen anteckning till organisatören.
         leftLog: Du skrev en anteckning till organisatören.
+    templates:
+        wrongNumber: Fel nummer, undersök gärna.
 successCouldTalk:
     effect:
         callBack: Framtida ringare kommer se att vi behövde ringa tillbaka.

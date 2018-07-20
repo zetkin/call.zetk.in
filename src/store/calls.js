@@ -230,14 +230,21 @@ export default createReducer(initialState, {
         else if (field === 'success') {
             nextStep = 'failure_reason';
         }
-        else if (field === 'failureReason' && value === "noPickup") {
-            nextStep = 'failure_message';
-        }
-        else if (field === 'failureReason' && value === "notAvailable") {
-            nextStep = 'call_back';
-        }
         else if (field === 'failureReason') {
-            nextStep = 'organizer_action';
+            if (value === "noPickup") {
+                nextStep = 'failure_message';
+            }
+            else if (value === "notAvailable") {
+                nextStep = 'call_back';
+            }
+            else if (value === 'wrongNumber') {
+                nextStep = 'organizer_log';
+                state = state.updateIn(['reports', callId], report => report
+                    .set('organizerActionNeeded', true));
+            }
+            else {
+                nextStep = 'organizer_action';
+            }
         }
         else if (field === 'leftMessage') {
             nextStep = 'organizer_action';

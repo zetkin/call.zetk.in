@@ -66,6 +66,8 @@ organizerLog:
     summary:
         emptyLog: You did not leave a message to the official.
         leftLog: You left a message to the official.
+    templates:
+        wrongNumber: Wrong number, please investigate.
 successCouldTalk:
     effect:
         callBack: Future callers will see that we had to call back.

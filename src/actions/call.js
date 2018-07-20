@@ -155,46 +155,12 @@ export function submitCallReport() {
             else {
                 // Failed, call_back_after set
                 data.state = 13;
-
-                let date = new Date();
-                date.setUTC(true);
-
-                // Fast forward CBA date if not "ASAP"
-                switch (report.get('callBackAfter')) {
-                    case 'fewDays':
-                        date.advance('2 days');
-                        break;
-                    case 'oneWeek':
-                        date.advance('7 days');
-                        break;
-                    case 'twoWeeks':
-                        date.advance('14 days');
-                        break;
-                }
-
-                data.call_back_after = date.iso();
+                data.call_back_after = report.get('callBackAfter').iso();
             }
         }
         else if (report.get('failureReason') == 'notAvailable') {
             data.state = 14;
-
-            let date = new Date();
-            date.setUTC(true);
-
-            switch (report.get('callBackAfter')) {
-                case 'fewDays':
-                    date.advance('2 days');
-                    data.call_back_after = date.iso();
-                    break;
-                case 'oneWeek':
-                    date.advance('7 days');
-                    data.call_back_after = date.iso();
-                    break;
-                case 'twoWeeks':
-                    date.advance('14 days');
-                    data.call_back_after = date.iso();
-                    break;
-            }
+            data.call_back_after = report.get('callBackAfter').iso();
         }
         else if (report.get('leftMessage')) {
             data.state = 15;

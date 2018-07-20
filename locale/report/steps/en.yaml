@@ -2,17 +2,17 @@ callBack:
     effect:
         asap: '{target} is placed last in the queue'
         other: 'In the meantime, {target} is automatically removed from the queue.'
-    options:
-        asap: As soon as possible
-        fewDays: A few days from now
-        oneWeek: A week from now
-        twoWeeks: A few weeks from now
+    examples:
+        nextWeek: Next week
+        today: Later today
+        tomorrow: Tomorrow
+    examplesLabel: Examples
     question: When should we call back?
-    summary:
-        asap: We will call back as soon as possible.
-        fewDays: We will call back no sooner than a few days from now.
-        oneWeek: We will call back no sooner than a week from now.
-        twoWeeks: We will call back no sooner than two weeks from now.
+    submitButton: Call back after { date }
+    summary: We will call back after { date }
+    timeOfDay:
+        any: At any time of day
+        after: After { hour }:00
 callerLog:
     disabled: Notes have been disabled for this assignment.
     effect:

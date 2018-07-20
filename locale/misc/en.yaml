@@ -6,8 +6,8 @@ callLog:
         status1: 'We reached {target}.'
         status11: '{target} did not pick up.'
         status12: Line busy.
-        status13: '{target} asked us to call back.'
-        status14: '{target} was not available.'
+        status13: '{target} asked us to call after {date}.'
+        status14: '{target} was not available. Call back after {date}'
         status15: We left a message.
         status21: We had the wrong number.
         status22: The call was dropped.

@@ -67,7 +67,7 @@ organizerLog:
         emptyLog: Du skrev ingen anteckning till organisatören.
         leftLog: Du skrev en anteckning till organisatören.
     templates:
-        wrongNumber: Fel nummer, undersök gärna.
+        wrongNumber: 'Fel nummer ({ numbers }), undersök gärna.'
 successCouldTalk:
     effect:
         callBack: Framtida ringare kommer se att vi behövde ringa tillbaka.
@@ -101,3 +101,11 @@ summary:
             =1 {en enkät} other {# enkäter}}.
         surveyDiscarded: Ignorerade svar på "{survey}"
         surveySubmitted: Skickade in svar på "{survey}"
+wrongNumber:
+    options:
+        both: 'Båda numren var fel'
+        single: 'Bara { phone } var fel'
+    question: 'Vilket nummer var fel?'
+    summary:
+        both: 'Båda numren var fel'
+        single: '{ phone } var fel nummer'

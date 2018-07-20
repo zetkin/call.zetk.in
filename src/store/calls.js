@@ -42,6 +42,7 @@ export const REPORT_STEPS = [
     'success_or_failure',
     'success_could_talk',
     'failure_reason',
+    'wrong_number',
     'failure_message',
     'call_back',
     'organizer_action',
@@ -198,6 +199,7 @@ export default createReducer(initialState, {
                     targetCouldTalk: false,
                     callBackAfter: null,
                     failureReason: null,
+                    wrongNumber: null,
                     leftMessage: false,
                     callerLog: '',
                     organizerActionNeeded: false,
@@ -238,13 +240,16 @@ export default createReducer(initialState, {
                 nextStep = 'call_back';
             }
             else if (value === 'wrongNumber') {
-                nextStep = 'organizer_log';
+                nextStep = 'wrong_number';
                 state = state.updateIn(['reports', callId], report => report
                     .set('organizerActionNeeded', true));
             }
             else {
                 nextStep = 'organizer_action';
             }
+        }
+        else if (field === 'wrongNumber') {
+            nextStep = 'organizer_log';
         }
         else if (field === 'leftMessage') {
             nextStep = 'organizer_action';

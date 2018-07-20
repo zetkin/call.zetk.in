@@ -53,5 +53,6 @@ const componentFromStep = step => {
         caller_log: steps.CallerLogStep,
         organizer_log: steps.OrganizerLogStep,
         summary: steps.SummaryStep,
+        wrong_number: steps.WrongNumberStep,
     }[step];
 };

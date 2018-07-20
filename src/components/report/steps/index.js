@@ -7,3 +7,4 @@ export CallerLogStep from './CallerLogStep';
 export OrganizerActionStep from './OrganizerActionStep';
 export OrganizerLogStep from './OrganizerLogStep';
 export SummaryStep from './SummaryStep';
+export WrongNumberStep from './WrongNumberStep';

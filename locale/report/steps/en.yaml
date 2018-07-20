@@ -67,7 +67,7 @@ organizerLog:
         emptyLog: You did not leave a message to the official.
         leftLog: You left a message to the official.
     templates:
-        wrongNumber: Wrong number, please investigate.
+        wrongNumber: 'Wrong number ({ numbers }), please investigate.'
 successCouldTalk:
     effect:
         callBack: Future callers will see that we had to call back.
@@ -101,3 +101,11 @@ summary:
             =1 {one survey} other {# surveys}}.
         surveyDiscarded: Discarded responses for "{survey}"
         surveySubmitted: Submitted responses to "{survey}"
+wrongNumber:
+    options:
+        both: 'Both numbers were wrong'
+        single: 'Just { phone } was wrong'
+    question: 'Which number was wrong?'
+    summary:
+        both: 'Both numbers were wrong'
+        single: '{ phone } was the wrong number'

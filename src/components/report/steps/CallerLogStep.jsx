@@ -12,8 +12,10 @@ import {
 export default class CallerLogStep extends ReportStepBase {
     componentDidMount() {
         // Skip this step if caller notes are disabled
-        if (this.props.report.get('disableCallerNotes')) {
-            this.props.dispatch(finishCallReport(this.props.call));
+        if (this.props.report.get('step') == 'caller_log') {
+            if (this.props.report.get('disableCallerNotes')) {
+                this.props.dispatch(finishCallReport(this.props.call));
+            }
         }
     }
 

@@ -9,12 +9,14 @@ import { setLaneStep } from '../../../actions/lane';
 
 export default class WrongNumberStep extends ReportStepBase {
     componentDidMount() {
-        // Skip this step if there is just one number
-        const target = this.props.target;
-        if (!target.get('phone') || !target.get('alt_phone')) {
-            this.props.dispatch(setCallReportField(
-                this.props.call, 'wrongNumber',
-                target.get('phone')? 'phone' : 'alt_phone'));
+        if (this.props.report.get('step') == 'wrong_number') {
+            // Skip this step if there is just one number
+            const target = this.props.target;
+            if (!target.get('phone') || !target.get('alt_phone')) {
+                this.props.dispatch(setCallReportField(
+                    this.props.call, 'wrongNumber',
+                    target.get('phone')? 'phone' : 'alt_phone'));
+            }
         }
     }
 

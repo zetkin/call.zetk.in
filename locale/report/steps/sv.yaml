@@ -14,6 +14,7 @@ callBack:
         oneWeek: Vi ringer tillbaka tidigast om en vecka
         twoWeeks: Vi ringer tillbaka tidigast om två veckor
 callerLog:
+    disabled: Anteckningar är avstängda i det här ringuppdraget.
     effect:
         leftLog: 'Framtida ringare kommer att se din anteckning:'
     options:

@@ -14,6 +14,7 @@ callBack:
         oneWeek: We will call back no sooner than a week from now.
         twoWeeks: We will call back no sooner than two weeks from now.
 callerLog:
+    disabled: Notes have been disabled for this assignment.
     effect:
         leftLog: 'Future callers will see your note:'
     options:

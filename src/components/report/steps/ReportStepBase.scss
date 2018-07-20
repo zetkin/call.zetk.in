@@ -66,6 +66,14 @@
             }
         }
 
+        small {
+            display: block;
+            font-size: 0.8em;
+            font-style: italic;
+            color: lighten($c-text, 40);
+            margin: 0 0 1.4em 1.8em;
+        }
+
         .Button {
             @include button(#f9f9f9);
             display: block;

@@ -189,6 +189,8 @@ export default createReducer(initialState, {
         // Create an empty report for current call when navigating
         // to the "call" lane step, if there is none already.
         if (step === 'call' && !report) {
+            const assignment = action.payload.assignment;
+
             return state
                 .setIn(['reports', callId], immutable.fromJS({
                     step: REPORT_STEPS[0],
@@ -200,6 +202,7 @@ export default createReducer(initialState, {
                     callerLog: '',
                     organizerActionNeeded: false,
                     organizerLog: '',
+                    disableCallerNotes: assignment.get('disable_caller_notes'),
                 }));
         }
         else {

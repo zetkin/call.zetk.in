@@ -42,6 +42,7 @@ export const REPORT_STEPS = [
     'success_or_failure',
     'success_could_talk',
     'failure_reason',
+    'wrong_number',
     'failure_message',
     'call_back',
     'organizer_action',
@@ -189,6 +190,8 @@ export default createReducer(initialState, {
         // Create an empty report for current call when navigating
         // to the "call" lane step, if there is none already.
         if (step === 'call' && !report) {
+            const assignment = action.payload.assignment;
+
             return state
                 .setIn(['reports', callId], immutable.fromJS({
                     step: REPORT_STEPS[0],
@@ -196,10 +199,12 @@ export default createReducer(initialState, {
                     targetCouldTalk: false,
                     callBackAfter: null,
                     failureReason: null,
+                    wrongNumber: null,
                     leftMessage: false,
                     callerLog: '',
                     organizerActionNeeded: false,
                     organizerLog: '',
+                    disableCallerNotes: assignment.get('disable_caller_notes'),
                 }));
         }
         else {
@@ -227,14 +232,24 @@ export default createReducer(initialState, {
         else if (field === 'success') {
             nextStep = 'failure_reason';
         }
-        else if (field === 'failureReason' && value === "noPickup") {
-            nextStep = 'failure_message';
-        }
-        else if (field === 'failureReason' && value === "notAvailable") {
-            nextStep = 'call_back';
-        }
         else if (field === 'failureReason') {
-            nextStep = 'organizer_action';
+            if (value === "noPickup") {
+                nextStep = 'failure_message';
+            }
+            else if (value === "notAvailable") {
+                nextStep = 'call_back';
+            }
+            else if (value === 'wrongNumber') {
+                nextStep = 'wrong_number';
+                state = state.updateIn(['reports', callId], report => report
+                    .set('organizerActionNeeded', true));
+            }
+            else {
+                nextStep = 'organizer_action';
+            }
+        }
+        else if (field === 'wrongNumber') {
+            nextStep = 'organizer_log';
         }
         else if (field === 'leftMessage') {
             nextStep = 'organizer_action';

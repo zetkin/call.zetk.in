@@ -4,7 +4,7 @@ action:
         signUp: Sign up
         undoSignUp: Undo Sign up
     currentNeed: More activists needed here
-    infoButton: Read more
+    infoButton: Info
     multiLocationLabel: |
         {count, plural,
             =2 {In two locations}

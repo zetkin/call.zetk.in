@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { FormattedDate, FormattedMessage as Msg } from 'react-intl';
+import { injectIntl, FormattedDate, FormattedMessage as Msg } from 'react-intl';
 import cx from 'classnames';
 
 
+@injectIntl
 export default class CallLogItem extends React.Component {
     constructor(props) {
         super(props);
@@ -33,6 +34,12 @@ export default class CallLogItem extends React.Component {
             caller: call.getIn(['caller', 'name']),
             target: call.getIn(['target', 'name']),
         };
+
+        const cba = call.get('call_back_after');
+        if (cba) {
+            const cbaDate = Date.create(cba);
+            summaryValues.date = this.props.intl.formatDate(cbaDate);
+        }
 
         let classes = cx('CallLogItem', 'status' + state, {
             contracted: this.state.viewMode === 'contracted',
@@ -71,6 +78,9 @@ export default class CallLogItem extends React.Component {
                         hour="2-digit"
                         minute="2-digit"
                         />
+                    <span className="CallLogItem-caller">
+                        { call.getIn(['caller', 'name']) }
+                    </span>
                 </div>
                 <div className="CallLogItem-summary">
                     <Msg id={ summaryMsg }
@@ -82,8 +92,6 @@ export default class CallLogItem extends React.Component {
                     { notes }
                 </div>
                 { expandButton }
-                <div className="CallLogItem-caller">
-                    { call.getIn(['caller', 'name']) }</div>
             </div>
         );
     }

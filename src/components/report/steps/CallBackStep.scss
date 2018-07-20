@@ -1,0 +1,33 @@
+.CallBackStep {
+    input[type=date], select {
+        display: block;
+        margin: 0 0 0.5em;
+        width: 100%;
+        font-size: 1em;
+        text-align: center;
+        font-family: franklin-gothic-urw, sans-serif;
+
+        @include medium-screen {
+            width: 46%;
+        }
+    }
+}
+
+.CallBackStep-examples {
+    margin: 0.2em 0 2em;
+    font-size: 0.6em;
+
+    color: $c-ui-dark;
+
+    a {
+        display: inline-block;
+        margin-left: 0.4em;
+        cursor: pointer;
+        color: inherit;
+        text-decoration: underline;
+
+        &:hover {
+            color: darken($c-ui-darker, 15);
+        }
+    }
+}

@@ -10,6 +10,15 @@ import {
 
 
 export default class CallerLogStep extends ReportStepBase {
+    componentDidMount() {
+        // Skip this step if caller notes are disabled
+        if (this.props.report.get('step') == 'caller_log') {
+            if (this.props.report.get('disableCallerNotes')) {
+                this.props.dispatch(finishCallReport(this.props.call));
+            }
+        }
+    }
+
     getRenderMode(report) {
         return (report.get('step') === 'caller_log')?
             'form' : 'summary';
@@ -21,11 +30,22 @@ export default class CallerLogStep extends ReportStepBase {
             'report.steps.callerLog.options.saveWithLog' :
             'report.steps.callerLog.options.saveWithoutLog';
 
+        let input = (
+            <textarea key="message" value={ report.get('callerLog') }
+                onChange={ this.onChangeMessage.bind(this) }/>
+        );
+
+        if (report.get('disableCallerNotes')) {
+            input = (
+                <Msg key="disabled" tagName="small"
+                    id="report.steps.callerLog.disabled"/>
+            );
+        }
+
         return [
             <Msg key="question" tagName="p"
                 id="report.steps.callerLog.question"/>,
-            <textarea key="message" value={ report.get('callerLog') }
-                onChange={ this.onChangeMessage.bind(this) }/>,
+            input,
             <Button key="saveButton"
                 labelMsg={ saveLabelMsg }
                 onClick={ this.onClickSave.bind(this) }/>,
@@ -50,7 +70,14 @@ export default class CallerLogStep extends ReportStepBase {
 
     renderEffect(report) {
         let log = report.get('callerLog') || '';
-        if (log.length) {
+
+        if (report.get('disableCallerNotes')) {
+            return [
+                <Msg key="disabled" tagName="p"
+                    id="report.steps.callerLog.disabled"/>,
+            ];
+        }
+        else if (log.length) {
             return [
                 <Msg key="effect" tagName="p"
                     id="report.steps.callerLog.effect.leftLog"/>,

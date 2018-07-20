@@ -1,10 +1,10 @@
 action:
     booked: Bokad
     button:
-        signUp: Anmäl dig
+        signUp: Anmäl
         undoSignUp: Ångra anmälan
     currentNeed: Fler aktivister behövs här
-    infoButton: Läs mer
+    infoButton: Info
     multiLocationLabel: |
         {count, plural,
             =2 {På två platser}

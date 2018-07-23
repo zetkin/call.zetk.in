@@ -9,9 +9,26 @@
     }
 
     & > * {
-        display: inline-block;
         vertical-align: middle;
         margin-left: 0.5em;
+    }
+
+    .Avatar,
+    .TagList {
+        display: none;
+
+        @include small-screen {
+            display: block;
+        }
+    }
+
+    .TargetInfo-number,
+    .TargetInfo-lastCall {
+        display: none;
+
+        @include small-screen {
+            display: inline-block;
+        }
     }
 
     .TargetInfo-name, .TargetInfo-number {
@@ -26,10 +43,20 @@
     .TargetInfo-name {
         margin: 0;
         transition: font-size 0.3s;
+        text-align: center;
+
+        @include small-screen {
+            text-align: left;
+            display: inline-block;
+        }
     }
 
     .TargetInfo-number {
         &:before {
+            content: "/";
+            margin-right: 0.5em;
+        }
+        &:first-of-type:before {
             @include icon($fa-var-phone);
         }
 

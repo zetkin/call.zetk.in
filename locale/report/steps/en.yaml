@@ -2,18 +2,19 @@ callBack:
     effect:
         asap: '{target} is placed last in the queue'
         other: 'In the meantime, {target} is automatically removed from the queue.'
-    options:
-        asap: As soon as possible
-        fewDays: A few days from now
-        oneWeek: A week from now
-        twoWeeks: A few weeks from now
+    examples:
+        nextWeek: Next week
+        today: Later today
+        tomorrow: Tomorrow
+    examplesLabel: Examples
     question: When should we call back?
-    summary:
-        asap: We will call back as soon as possible.
-        fewDays: We will call back no sooner than a few days from now.
-        oneWeek: We will call back no sooner than a week from now.
-        twoWeeks: We will call back no sooner than two weeks from now.
+    submitButton: Call back after { date }
+    summary: We will call back after { date }
+    timeOfDay:
+        any: At any time of day
+        after: After { hour }:00
 callerLog:
+    disabled: Notes have been disabled for this assignment.
     effect:
         leftLog: 'Future callers will see your note:'
     options:
@@ -65,6 +66,8 @@ organizerLog:
     summary:
         emptyLog: You did not leave a message to the official.
         leftLog: You left a message to the official.
+    templates:
+        wrongNumber: 'Wrong number ({ numbers }), please investigate.'
 successCouldTalk:
     effect:
         callBack: Future callers will see that we had to call back.
@@ -98,3 +101,11 @@ summary:
             =1 {one survey} other {# surveys}}.
         surveyDiscarded: Discarded responses for "{survey}"
         surveySubmitted: Submitted responses to "{survey}"
+wrongNumber:
+    options:
+        both: 'Both numbers were wrong'
+        single: 'Just { phone } was wrong'
+    question: 'Which number was wrong?'
+    summary:
+        both: 'Both numbers were wrong'
+        single: '{ phone } was the wrong number'

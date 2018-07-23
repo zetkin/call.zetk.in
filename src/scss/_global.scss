@@ -23,15 +23,24 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 1.8em;
+    @include small-screen {
+        font-size: 2em;
+    }
 }
 
 h2 {
-    font-size: 1.8em;
+    font-size: 1.5em;
+    @include small-screen {
+        font-size: 1.8em;
+    }
 }
 
 h3 {
-    font-size: 1.5em;
+    font-size: 1.2em;
+    @include small-screen {
+        font-size: 1.5em;
+    }
 }
 
 a {

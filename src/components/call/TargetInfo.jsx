@@ -5,6 +5,7 @@ import cx from 'classnames';
 import { FormattedMessage as Msg, FormattedRelative } from 'react-intl';
 
 import PropTypes from '../../utils/PropTypes';
+import * as targetUtils from "../../utils/target";
 import { selectedAssignment } from '../../store/assignments';
 import Avatar from '../misc/Avatar';
 import TagList from '../misc/TagList';
@@ -55,14 +56,15 @@ export default class TargetInfo extends React.Component {
                 );
             }
 
-            callInfo = [
-                <span key="number" className="TargetInfo-number">
-                    { target.get('phone') }
-                </span>,
+            callInfo = targetUtils.getNumbers(target).map(num => (
+                <span key={num} className="TargetInfo-number">
+                    { num }
+                </span>
+            )).concat([
                 <div key="lastCall" className="TargetInfo-lastCall">
                     { lastCallLabel }
                 </div>
-            ];
+            ]);
 
             tagList = (
                 <TagList tags={ target.get('tags') }/>

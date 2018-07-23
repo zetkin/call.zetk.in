@@ -6,8 +6,10 @@
     }
 
     &.StatsPane-doneStep {
-        width: 65%;
-        left: 35%;
+        @include small-screen {
+            width: 65%;
+            left: 35%;
+        }
     }
 
     &.PaneBase-leave {

@@ -6,10 +6,15 @@ callLog:
         status1: 'Vi nådde {target}.'
         status11: '{target} svarade inte.'
         status12: Linjen var upptagen.
-        status13: '{target} bad oss ringa tillbaka.'
-        status14: '{target} var inte tillgänglig just nu.'
+        status13: '{target} bad oss ringa efter {date}.'
+        status14: '{target} var inte tillgänglig. Ring efter {date}.'
         status15: Vi lämnade meddelande på telefonsvarare.
         status21: Vi hade fel nummer.
         status22: Samtalet bröts.
 tagList:
     emptyLabel: Inga etiketter
+callInstructions:
+    instructions: |-
+        Tryck på numret ovan för att ringa, eller knappa in det manuellt i din
+        telefon. När du trycker på numret öppnas din telefonapp. Återvänd hit
+        till webbläsaren för att fortsätta använda Zetkin.

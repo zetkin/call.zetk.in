@@ -2,18 +2,19 @@ callBack:
     effect:
         asap: '{target} placeras sist i ringkön.'
         other: '{target} plockas automatiskt bort ur ringkön så länge.'
-    options:
-        asap: Så snart som möjligt
-        fewDays: Om ett par dagar
-        oneWeek: Om en vecka
-        twoWeeks: Om ett par veckor
+    examples:
+        nextWeek: Nästa vecka
+        today: Senare idag
+        tomorrow: I morgon
+    examplesLabel: Exempel
     question: När ska vi ringa tillbaka?
-    summary:
-        asap: Vi ringer tillbaka så snart som möjligt
-        fewDays: Vi ringer tillbaka tidigast om ett par dagar
-        oneWeek: Vi ringer tillbaka tidigast om en vecka
-        twoWeeks: Vi ringer tillbaka tidigast om två veckor
+    submitButton: Ring tidigast { date }
+    summary: Vi ringer tillbaka tidigast { date }
+    timeOfDay:
+        any: När som helst på dagen
+        after: Tidigast { hour }:00
 callerLog:
+    disabled: Anteckningar är avstängda i det här ringuppdraget.
     effect:
         leftLog: 'Framtida ringare kommer att se din anteckning:'
     options:
@@ -65,6 +66,8 @@ organizerLog:
     summary:
         emptyLog: Du skrev ingen anteckning till organisatören.
         leftLog: Du skrev en anteckning till organisatören.
+    templates:
+        wrongNumber: 'Fel nummer ({ numbers }), undersök gärna.'
 successCouldTalk:
     effect:
         callBack: Framtida ringare kommer se att vi behövde ringa tillbaka.
@@ -98,3 +101,11 @@ summary:
             =1 {en enkät} other {# enkäter}}.
         surveyDiscarded: Ignorerade svar på "{survey}"
         surveySubmitted: Skickade in svar på "{survey}"
+wrongNumber:
+    options:
+        both: 'Båda numren var fel'
+        single: 'Bara { phone } var fel'
+    question: 'Vilket nummer var fel?'
+    summary:
+        both: 'Båda numren var fel'
+        single: '{ phone } var fel nummer'

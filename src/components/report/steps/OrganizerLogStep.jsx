@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage as Msg } from 'react-intl';
+import { injectIntl, FormattedMessage as Msg } from 'react-intl';
 
 import Button from '../../../common/misc/Button';
 import ReportStepBase from './ReportStepBase';
@@ -9,7 +9,35 @@ import {
 } from '../../../actions/call';
 
 
+@injectIntl
 export default class OrganizerLogStep extends ReportStepBase {
+    componentDidMount() {
+        const report = this.props.report;
+        const target = this.props.target;
+
+        // If wrong number was reported, and there isn't already
+        // an organizer log message, note it here
+        if (!report.get('organizerLog') && !report.get('success')
+            && report.get('failureReason') == 'wrongNumber') {
+
+            const wrongNumber = report.get('wrongNumber');
+            let numbers = [];
+            if (wrongNumber == 'both' || wrongNumber == 'phone') {
+                numbers.push(target.get('phone'));
+            }
+            if (wrongNumber == 'both' || wrongNumber == 'altPhone') {
+                numbers.push(target.get('alt_phone'));
+            }
+
+            const msg = this.props.intl.formatMessage(
+                { id: 'report.steps.organizerLog.templates.wrongNumber' },
+                { numbers: numbers.join(', ') });
+
+            this.props.dispatch(setOrganizerLogMessage(
+                this.props.call, msg));
+        }
+    }
+
     getRenderMode(report) {
         if (report.get('organizerActionNeeded')) {
             return (report.get('step') === 'organizer_log')?

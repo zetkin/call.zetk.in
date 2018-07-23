@@ -25,8 +25,14 @@ export default class TargetPane extends PaneBase {
             <li key="id" className="TargetPane-infoId">
                 { target.get('ext_id') || '-' }</li>,
             <li key="email" className="TargetPane-infoEmail">
-                { target.get('email') }</li>,
+                { target.get('email') }</li>
         ];
+        if (target.get('city')) {
+            info.push(
+                <li key="city" className="TargetPane-infoCity">
+                    { target.get('city') }</li>
+            )
+        }
 
         let map = null;
         if (target.get('zip_code') && target.get('city')) {

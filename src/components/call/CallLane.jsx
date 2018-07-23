@@ -2,6 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
+import CallLaneTabs from './CallLaneTabs';
 import LaneControlBar from './LaneControlBar';
 import PropTypes from '../../utils/PropTypes';
 import * as panes from '../panes';
@@ -11,6 +12,7 @@ export default class CallLane extends React.Component {
     static propTypes = {
         lane: PropTypes.map.isRequired,
         call: PropTypes.map,
+        size: PropTypes.string
     };
 
     constructor(props) {
@@ -18,22 +20,48 @@ export default class CallLane extends React.Component {
 
         this.state = {
             firstCall: true,
+            activePane: 1
         };
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.lane.get('step') === 'done') {
+        const nextStep = nextProps.lane.get('step');
+        if (nextStep != this.props.lane.get('step')) {
+            let {activePane} = this.state;
+            if (nextStep === 'prepare') {
+                activePane = 1;
+            }
+            else if (nextStep === 'call') {
+                activePane = 2;
+            }
+            else if (nextStep === 'report') {
+                activePane = 3;
+            }
+            else if (nextStep === 'done') {
+                activePane = 1;
+            }
+            this.setState({activePane});
+        }
+        if (nextStep === 'done') {
             this.setState({
                 firstCall: false,
             });
         }
     }
 
+    setActivePane(index) {
+        this.setState({activePane: index});
+    }
+
     render() {
+        const {size, call} = this.props;
+        const {activePane} = this.state;
         let lane = this.props.lane;
         let step = lane.get('step');
         let infoMode = lane.get('infoMode');
         let paneComponents = [];
+        let tabbed = false;
+        let tabs;
 
         switch (step) {
             case 'assignment':
@@ -41,28 +69,45 @@ export default class CallLane extends React.Component {
                 break;
             case 'prepare':
                 paneComponents = [ 'instructions', 'target', 'input' ];
+                tabbed = size === "small";
                 break;
             case 'call':
                 paneComponents = [ 'instructions', 'target', 'input', 'report' ];
+                tabbed = size === "small";
                 break;
             case 'report':
                 paneComponents = [ 'instructions', 'target', 'input', 'report' ];
+                tabbed = size === "small";
                 break;
             case 'done':
                 paneComponents = [ 'report', 'stats' ];
+                tabbed = size === "small";
                 break;
             case 'empty':
                 paneComponents = [ 'empty' ];
                 break;
         }
 
-        let panes = paneComponents.map(paneType => {
+        if (tabbed) {
+            tabs = (
+                <CallLaneTabs
+                    activePane={activePane}
+                    call={call}
+                    setActivePane={this.setActivePane.bind(this)}
+                    lane={ lane }/>
+            );
+        }
+
+        let panes = paneComponents.map((paneType, i) => {
             let PaneComponent = paneComponentsByType[paneType];
+            const className = cx({'CallLane-activePane': tabbed && i === activePane});
             return (
                 <PaneComponent step={ step } key={ paneType }
                     lane={ lane }
                     call={ this.props.call }
-                    firstCall={ this.state.firstCall }/>
+                    className={className}
+                    firstCall={ this.state.firstCall }
+                    size={size}/>
             );
         });
 
@@ -74,6 +119,7 @@ export default class CallLane extends React.Component {
 
         return (
             <div className={ classes }>
+                {tabs}
                 <CSSTransitionGroup
                     transitionEnterTimeout={ 500 }
                     transitionLeaveTimeout={ 500 }

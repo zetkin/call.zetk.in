@@ -6,8 +6,8 @@ callLog:
         status1: 'We reached {target}.'
         status11: '{target} did not pick up.'
         status12: Line busy.
-        status13: '{target} asked us to call back.'
-        status14: '{target} was not available.'
+        status13: '{target} asked us to call after {date}.'
+        status14: '{target} was not available. Call back after {date}'
         status15: We left a message.
         status21: We had the wrong number.
         status22: The call was dropped.
@@ -18,3 +18,8 @@ tagList:
             =1 {is one more tag}
             other {are # more tags}
         } in the personal info pane
+callInstructions:
+    instructions: |-
+        Tap on the number to call, or enter the number manually on your phone.
+        Tapping the number will open your phone app. Return here to your web
+        browser to continue using Zetkin and report the call.

@@ -1,6 +1,8 @@
 .AssignmentPane {
-    width: 65%;
-    left: 0;
+    @include small-screen {
+        width: 65%;
+        left: 0;
+    }
 
     &.PaneBase-leave {
         animation: AssignmentPane-leaveForPrepareAnimation $pane-transition-duration;
@@ -13,6 +15,10 @@
         h1 {
             font-size: 2.2em;
         }
+    }
+
+    &.AssignmentPane-assignmentStep {
+        display: block;
     }
 }
 

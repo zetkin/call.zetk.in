@@ -85,6 +85,14 @@ export default function initApp(messages) {
 
     // Require users to be authenticated for most pages
     app.get('/assignments*', auth.validate(authOpts));
+    app.get('/end', auth.validate(authOpts, true), (req, res, next) => {
+        if (!req.isZetkinAuthenticated) {
+            res.redirect(307, '/');
+        }
+        else {
+            next();
+        }
+    });
 
     app.get('/l10n', loadLocaleHandler());
 

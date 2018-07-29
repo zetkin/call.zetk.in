@@ -7,6 +7,7 @@ import { activeCalls } from '../../store/calls';
 import CallOpList from '../misc/callOpList/CallOpList';
 import LoadingIndicator from '../../common/misc/LoadingIndicator';
 import { switchLaneToCall } from '../../actions/lane';
+import getViewSize from '../../utils/getViewSize';
 import {
     deallocateCall,
     retrieveUserCalls,
@@ -33,9 +34,11 @@ export default class LaneOverview extends React.Component {
     componentDidMount() {
         this.props.dispatch(retrieveUserCalls());
 
-        let filterInput = ReactDOM.findDOMNode(this.refs.filterInput);
-        if (filterInput) {
-            filterInput.focus();
+        if (getViewSize() != 'small') {
+            let filterInput = ReactDOM.findDOMNode(this.refs.filterInput);
+            if (filterInput) {
+                filterInput.focus();
+            }
         }
     }
 

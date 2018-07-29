@@ -52,6 +52,10 @@ target:
         }
     activityLastAction: '{activity } ({location}) {date}'
     callLogHeader: 'Previous calls to {target}'
+    editHeader: 'Edit this information?'
+    editInfo: |-
+        If something in this tab needs changing, write a message to the
+        organizer in the report after finishing the call.
     h1: Personal info
     instructionsButton: Show instructions
     tagHeader: Tags

@@ -53,6 +53,10 @@ target:
         }
     activityLastAction: '{activity} ({location}) {date}'
     callLogHeader: 'Tidigare påringningar till {target}'
+    editHeader: 'Redigera informationen?'
+    editInfo: |-
+        Om något här behöver ändras, skriv ett meddelande till en funktionär
+        i rapporten efter samtalet.
     h1: Personinfo
     instructionsButton: Visa instruktioner
     tagHeader: Etiketter

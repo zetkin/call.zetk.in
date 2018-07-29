@@ -23,16 +23,16 @@
 
     p {
         color: white;
-        margin: 0.5em 0;
-        font-size: 0.8em;
+        margin: 0.5em 0 1em;
+        font-size: 0.9em;
     }
 
     .TutorialNote-closeLink, .TutorialNote-manualLink {
         display: block;
-        float: right;
-        font-size: 0.8em;
-        font-weight: bold;
         padding: 0.5em 1em;
+        margin: 0.5em 0 0;
+        border: 1px solid white;
+        text-align: center;
 
         color: white;
         text-decoration: none;
@@ -42,6 +42,18 @@
 
         &:hover {
             background-color: $c-brand-comp-dark;
+        }
+    }
+
+    @include medium-screen {
+        .TutorialNote-closeLink, .TutorialNote-manualLink {
+            float: right;
+            border-width: 0;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        p {
+            font-size: 0.8em;
         }
     }
 }

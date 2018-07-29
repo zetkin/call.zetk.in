@@ -18,14 +18,19 @@ export default class OverlayStack extends React.Component {
         if (overlayData) {
             let OverlayComponent = resolveOverlay(overlayData.get('type'));
             content = [
-                <button key="closeButton"
-                    className="OverlayStack-closeButton"
-                    onClick={ this.onCloseButtonClick.bind(this) }>
-                    </button>,
                 <div key="overlay" className="OverlayStack-overlay">
                     <OverlayComponent config={ overlayData.get('config') }/>
                 </div>,
             ];
+
+            if (overlayData.getIn(['config', 'closeButton'])) {
+                content.push(
+                    <button key="closeButton"
+                        className="OverlayStack-closeButton"
+                        onClick={ this.onCloseButtonClick.bind(this) }>
+                        </button>
+                );
+            }
         }
 
         return (

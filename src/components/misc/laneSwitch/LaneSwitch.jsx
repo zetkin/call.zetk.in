@@ -60,6 +60,10 @@ export default class LaneSwitch extends React.Component {
     }
 
     onClickOpen() {
-        this.props.dispatch(showOverlay('laneOverview'));
+        const config = {
+            closeButton: true,
+        };
+
+        this.props.dispatch(showOverlay('laneOverview', config));
     }
 }

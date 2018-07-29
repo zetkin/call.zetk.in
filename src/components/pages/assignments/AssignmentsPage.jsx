@@ -18,8 +18,19 @@ const mapStateToProps = (state) => ({
 @withRouter
 @connect(mapStateToProps)
 export default class AssignmentsPage extends PageBase {
+    constructor(props) {
+        super(props);
+
+        this.state = Object.assign({}, this.state, {
+            jsRunning: false,
+        });
+    }
+
     componentDidMount() {
         this.props.dispatch(retrieveUserAssignments());
+        this.setState({
+            jsRunning: true,
+        });
     }
 
     renderContent() {
@@ -40,10 +51,16 @@ export default class AssignmentsPage extends PageBase {
                     values={{ numAssignments: items.size }}/>
             );
         }
-        else {
+        else if (this.state.jsRunning) {
             intro = (
                 <Msg key="p" tagName="p"
                     id="pages.assignments.noAssignmentsIntro"/>
+            );
+        }
+        else {
+            intro = (
+                <Msg key="p" tagName="p"
+                    id="pages.assignments.notLoading"/>
             );
         }
 

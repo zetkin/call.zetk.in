@@ -23,7 +23,7 @@ export default class OverlayStack extends React.Component {
                 </div>,
             ];
 
-            if (overlayData.getIn(['config', 'closeButton'])) {
+            if (overlayData.getIn(['config', 'closeButton'], true)) {
                 content.push(
                     <button key="closeButton"
                         className="OverlayStack-closeButton"

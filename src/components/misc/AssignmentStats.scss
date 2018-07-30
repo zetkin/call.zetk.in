@@ -1,18 +1,23 @@
 .AssignmentStats {
-    padding: 0;
+    padding: 0 0 0.5em;
     margin-top: 2em;
 
+    overflow-x: scroll;
+
+    ul {
+        width: 250%;
+        padding: 0;
+    }
+
     .AssignmentStats-item {
+        @include card;
         list-style-type: none;
         padding: 1em;
         text-align: center;
 
-        @include small-screen {
-            float: left;
-            margin: 1%;
-            width: 31%;
-            @include card;
-        }
+        float: left;
+        margin: 1%;
+        width: 31%;
     }
 
     .AssignmentStats-itemNumber {
@@ -25,5 +30,13 @@
         display: block;
         font-weight: bold;
         margin: 0;
+    }
+
+    @include small-screen {
+        overflow-x: hidden;
+
+        ul {
+            width: 100%;
+        }
     }
 }

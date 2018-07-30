@@ -58,7 +58,7 @@ export default class TargetInfo extends React.Component {
 
             callInfo = targetUtils.getNumbers(target).map(num => (
                 <span key={num} className="TargetInfo-number">
-                    { num }
+                    <a href={ 'tel:' + num }>{ num }</a>
                 </span>
             )).concat([
                 <div key="lastCall" className="TargetInfo-lastCall">

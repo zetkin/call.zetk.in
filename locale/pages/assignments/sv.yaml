@@ -6,4 +6,7 @@ isPendingIntro: Ett ögonblick, vi hämtar dina uppdrag
 noAssignmentsIntro: |-
     Du har inga ringuppdrag. Kontakta en organisatör i din organisation om du
     vill ringa.
+notLoading: |-
+    Dina uppdrag bör laddas inom några sekunder. Om inget händer kan det bero
+    på att du har en inkompatibel webbläsare. Använd helst Chrome eller Firefox.
 startCalling: Välj uppdrag och börja ringa

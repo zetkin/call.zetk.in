@@ -2,7 +2,6 @@
     display: none;
     background: none;
     box-sizing: border-box;
-    box-shadow: 0 2px 2px darken(#FFF, 10);
     transition: width $pane-transition-duration, left $pane-transition-duration;
     flex-direction: column;
 
@@ -12,6 +11,7 @@
         overflow: visible;
         top: 0;
         bottom: 0;
+        box-shadow: 0 2px 2px darken(#FFF, 10);
     }
 
     h1 {
@@ -93,11 +93,16 @@
             margin-top: 0;
         }
     }
+
     &:last-child::after {
         content: "";
-        height: 4em;
+        height: 1em;
         width: 100%;
         display: block;
+
+        @include small-screen {
+            height: 4em;
+        }
     }
 }
 

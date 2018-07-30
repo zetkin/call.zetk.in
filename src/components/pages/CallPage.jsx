@@ -7,6 +7,7 @@ import CallLane from '../call/CallLane';
 import { selectedLane } from '../../store/lanes';
 import { pushTutorialNote } from '../../actions/tutorial';
 import ViewSize from "../misc/ViewSize";
+import getViewSize from '../../utils/getViewSize';
 
 
 const mapStateToProps = state => ({
@@ -32,17 +33,21 @@ export default class CallPage extends React.Component {
                 if (step == 'prepare') {
                     this.props.dispatch(pushTutorialNote(
                         'tutorial.notes.prepare', null));
-                }
-                else if (step == 'call') {
-                    this.props.dispatch(pushTutorialNote(
-                        'tutorial.notes.targetInfo',
-                        '.TargetInfo'));
-                    this.props.dispatch(pushTutorialNote(
-                        'tutorial.notes.postCall',
-                        '.LaneControlBar-proceedSection .Button:last-child'));
                     this.props.dispatch(pushTutorialNote(
                         'tutorial.notes.laneSwitch',
                         '.LaneSwitch'));
+                }
+                else if (step == 'call') {
+                    if (getViewSize() != 'small') {
+                        // This tutorial step is redundant on mobile
+                        this.props.dispatch(pushTutorialNote(
+                            'tutorial.notes.targetInfo',
+                            '.TargetInfo'));
+                    }
+
+                    this.props.dispatch(pushTutorialNote(
+                        'tutorial.notes.postCall',
+                        '.LaneControlBar-proceedSection .Button:last-child'));
                 }
             }, 800);
         }

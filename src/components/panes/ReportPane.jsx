@@ -71,18 +71,24 @@ export default class ReportPane extends PaneBase {
         );
     }
 
-    componentDidUpdate() {
-        const animatedScrollTo = require('animated-scrollto');
+    componentDidUpdate(prevProps) {
+        const report = this.props.report;
+        const prevReport = prevProps.report;
 
-        let container = ReactDOM.findDOMNode(this.refs.content);
-        let content = ReactDOM.findDOMNode(this.refs.form)
+        // Auto-scroll to bottom when changing report step
+        if (prevReport.get('step') != report.get('step')) {
+            const animatedScrollTo = require('animated-scrollto');
 
-        let h0 = container.getBoundingClientRect().height;
-        let h1 = content.getBoundingClientRect().height;
-        let d = (h1 - h0) + 80;
+            let container = ReactDOM.findDOMNode(this.refs.content);
+            let content = ReactDOM.findDOMNode(this.refs.form)
 
-        if (d > 0) {
-            animatedScrollTo(container, d, 300);
+            let h0 = container.getBoundingClientRect().height;
+            let h1 = content.getBoundingClientRect().height;
+            let d = (h1 - h0) + 80;
+
+            if (d > 0) {
+                animatedScrollTo(container, d, 300);
+            }
         }
     }
 

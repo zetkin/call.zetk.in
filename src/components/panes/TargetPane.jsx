@@ -90,6 +90,10 @@ export default class TargetPane extends PaneBase {
                     { info }</ul>
             </div>,
             map,
+            <div key="edit" className="TargetPane-edit">
+                <Msg tagName="h4" id="panes.target.editHeader"/>
+                <Msg tagName="p" id="panes.target.editInfo"/>
+            </div>,
             <div key="tags" className="TargetPane-tags">
                 <Msg tagName="h4" id="panes.target.tagHeader"/>
                 <TagList tags={ target.get('tags') }/>

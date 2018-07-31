@@ -72,6 +72,21 @@
         margin-bottom: 0.5em;
     }
 
+    .TargetPane-edit {
+        margin-top: 1em;
+
+        h4 {
+            &:before {
+                @include icon($fa-var-pencil);
+            }
+        }
+
+        p {
+            font-style: italic;
+            color: $c-ui-dark;
+        }
+    }
+
     .TargetPane-tags {
         margin-top: 1em;
 

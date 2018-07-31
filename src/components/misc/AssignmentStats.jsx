@@ -16,9 +16,11 @@ export default class AssignmentStats extends React.Component {
         ));
 
         return (
-            <ul className="AssignmentStats">
-                { items }
-            </ul>
+            <div className="AssignmentStats">
+                <ul>
+                    { items }
+                </ul>
+            </div>
         );
     }
 }

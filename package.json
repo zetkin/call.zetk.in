@@ -1,6 +1,6 @@
 {
   "name": "call.zetk.in",
-  "version": "14.1.0",
+  "version": "14.1.1",
   "description": "Caller front-end for Zetkin",
   "main": "src/server/main.js",
   "scripts": {

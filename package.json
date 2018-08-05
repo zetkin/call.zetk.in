@@ -1,6 +1,6 @@
 {
   "name": "call.zetk.in",
-  "version": "14.1.1",
+  "version": "14.2.0",
   "description": "Caller front-end for Zetkin",
   "main": "src/server/main.js",
   "scripts": {
@@ -44,6 +44,7 @@
     "gulp-uglify": "^2.0.0",
     "immutable": "^3.8.1",
     "intl": "^1.2.5",
+    "linkifyjs": "^2.1.6",
     "node-yaml": "^3.0.2",
     "object-subset": "0.0.4",
     "querystring": "^0.2.0",

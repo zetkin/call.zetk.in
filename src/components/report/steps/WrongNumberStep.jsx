@@ -15,7 +15,7 @@ export default class WrongNumberStep extends ReportStepBase {
             if (!target.get('phone') || !target.get('alt_phone')) {
                 this.props.dispatch(setCallReportField(
                     this.props.call, 'wrongNumber',
-                    target.get('phone')? 'phone' : 'alt_phone'));
+                    target.get('phone')? 'phone' : 'altPhone'));
             }
         }
     }

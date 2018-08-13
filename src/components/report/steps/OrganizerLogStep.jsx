@@ -16,9 +16,8 @@ export default class OrganizerLogStep extends ReportStepBase {
         const target = this.props.target;
 
         // If wrong number was reported, and there isn't already
-        // an organizer log message, note it here
-        if (!report.get('organizerLog') && !report.get('success')
-            && report.get('failureReason') == 'wrongNumber') {
+        // a user-submitted organizer log message, note it here
+        if (!report.get('success') && report.get('failureReason') == 'wrongNumber') {
 
             const wrongNumber = report.get('wrongNumber');
             let numbers = [];
@@ -33,8 +32,15 @@ export default class OrganizerLogStep extends ReportStepBase {
                 { id: 'report.steps.organizerLog.templates.wrongNumber' },
                 { numbers: numbers.join(', ') });
 
-            this.props.dispatch(setOrganizerLogMessage(
-                this.props.call, msg));
+            // If the current log message is not a "wrong number" message
+            // similar to the one we're about to change to, bail out to avoid
+            // overriding a user-submitted message. Control this by comparing
+            // the two messages without including the phone numbers.
+            const curLog = report.get('organizerLog');
+            if (!curLog || curLog.replace(/\(.*\)/, '()') == msg.replace(/\(.*\)/, '()')) {
+                this.props.dispatch(setOrganizerLogMessage(
+                    this.props.call, msg));
+            }
         }
     }
 

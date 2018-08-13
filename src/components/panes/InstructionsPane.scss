@@ -4,6 +4,7 @@
 
     &.InstructionsPane-assignmentStep {
         display: block;
+        overflow-y: scroll;
     }
 
     @include small-screen {

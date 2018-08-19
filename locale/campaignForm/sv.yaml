@@ -23,27 +23,22 @@ calendar:
         tuesday: T
         wednesday: O
 filter:
-    activities:
-        h: |
+    activity:
+        active:
+            p: Filtrerar aktioner på aktivitet
+            button: Visa alla aktioner
+        inactive:
+            p: Visar alla aktioner oavsett aktivitet
+            button: Filtrera på aktivitet
+        modal:
+            clearButton: Visa alla aktiviteter
+    modal:
+        title: Filtrera på aktivitet
+        closeButton: Filtrera
+        toggleActionCount: |
             {count, plural,
-                =0 {Filtrera på aktiviteter}
-                =1 {Filtrerar på en aktivitet}
-                other {Filtrerar på # aktiviteter}
-            }
-    campaigns:
-        h: |
-            {count, plural,
-                =0 {Filtrera på kampanjer}
-                =1 {Filtrerar på en kampanj}
-                other {Filtrerar på # kampanjer}
-            }
-    h: Filtrera aktioner
-    locations:
-        h: |
-            {count, plural,
-                =0 {Filtrera på platser}
-                =1 {Filtrerar på en plats}
-                other {Filtrerar på # platser}
+                =1 {En aktion}
+                other {# aktioner}
             }
     showNeed:
         button:

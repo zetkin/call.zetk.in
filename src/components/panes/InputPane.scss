@@ -233,13 +233,6 @@
     }
 
     .CampaignForm {
-        .CampaignForm-filter {
-            @include large-screen {
-                margin: 0 0 2em 0;
-                @include col(7,12);
-            }
-        }
-        
         .CampaignForm-day {
             .CampaignForm-date {
                 margin-left: 0;
@@ -300,6 +293,27 @@
             @include large-screen {
                 @include col(7,12, $last:true);
                 left: auto;
+            }
+        }
+
+        .ActionFilterModal {
+            top: 11em;
+            padding-top: 0;
+
+            @include medium-screen {
+                left: 35%;
+                top: 10em;
+                padding-left: 2em;
+                padding-right: 2em;
+            }
+        }
+
+        .ActionFilterModal-footer {
+            padding: 0;
+            bottom: 4em;
+
+            @include medium-screen {
+                left: 35%;
             }
         }
 

@@ -23,27 +23,22 @@ calendar:
         tuesday: T
         wednesday: W
 filter:
-    activities:
-        h: |
+    activity:
+        active:
+            p: Filtering actions by activity
+            button: Show all actions
+        inactive:
+            p: Showing all actions regardless of activity.
+            button: Filter by activity
+        modal:
+            clearButton: Show all activities
+    modal:
+        title: Filter by activity
+        closeButton: Filter
+        toggleActionCount: |
             {count, plural,
-                =0 {Filter by activity}
-                =1 {Filtering by one activity}
-                other {Filtering by # activities}
-            }
-    campaigns:
-        h: |
-            {count, plural,
-                =0 {Filter by campaign}
-                =1 {Filtering by one campaign}
-                other {Filtering by # campaigns}
-            }
-    h: Filter actions
-    locations:
-        h: |
-            {count, plural,
-                =0 {Filter by location}
-                =1 {Filtering by one location}
-                other {Filtering by # locations}
+                =1 {One action}
+                other {# actions}
             }
     showNeed:
         button:

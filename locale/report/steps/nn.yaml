@@ -1,0 +1,116 @@
+callBack:
+    effect:
+        asap: '{target} er plassert sist i køen'
+        other: 'I mellomtida blir {target} automatisk teken bort frå køen.'
+    examples:
+        nextWeek: Neste veke
+        today: Seinare i dag
+        tomorrow: I morgon
+    examplesLabel: Døme
+    question: Når burde vi ringe tilbake?
+    submitButton: 'Ring tilbake etter { date }'
+    summary: 'Vi ringer tilbake etter { date }'
+    timeOfDay:
+        any: Når som helst på dagen
+        after: 'Etter { hour }:00'
+callerLog:
+    disabled: Meldingsfunksjonen er av for dette ærendet.
+    effect:
+        leftLog: 'Framtidige telefonaktivistar kjem til å sjå meldinga di:'
+    options:
+        saveWithLog: Lagre melding
+        saveWithoutLog: Lagre utan melding
+    question: Vil du legge igjen beskjed til framtidige ringeaktivistar?
+    summary:
+        emptyLog: Du har ikkje lagt att melding til framtidige ringeaktivistar.
+        leftLog: Du skreiv ei melding til framtidige ringeaktivistar
+failureMessage:
+    effect:
+        leftMessage: Framtidige ringeaktivistar kjem til å sjå at du la igjen beskjed.
+    options:
+        leftMessage: Ja
+        noMessage: Nei
+    question: La du igjen beskjed på telefonsvararen?
+    summary:
+        leftMessage: Du la att beskjed.
+        noMessage: Du la ikkje igjen beskjed.
+failureReason:
+    options:
+        lineBusy: Oppteken
+        noPickup: Telefonsvarar/ tok ikkje telefonen
+        notAvailable: Ikkje tilgjengeleg no
+        wrongNumber: Feil nummer
+    question: Kvifor ikkje?
+    summary:
+        lineBusy: Linja var oppteken
+        noPickup: '{target} tok ikkje telefonen'
+        notAvailable: '{target} var ikkje tilgjengeleg'
+        wrongNumber: 'Vi hadde feil nummer for {target}'
+organizerAction:
+    effect:
+        actionNeeded: Ein tillitsvald vil få beskjed
+    options:
+        actionNeeded: 'Ja, gi beskjed til tillitsvald'
+        noActionNeeded: 'Nei, ikkje nødvendig'
+    question: >-
+        Skjedde det noko i løpet av samtalen som krev oppfølging frå
+        tillitsvald?
+    summary:
+        actionNeeded: Du vil at ein tillitsvald ser på denne samtalen.
+        noActionNeeded: Inga handling trengst.
+organizerLog:
+    effect:
+        leftLog: 'Den tillitsvalde kjem til å sjå meldinga di:'
+    options:
+        saveWithLog: Inkludér melding
+        saveWithoutLog: Lagre utan melding
+    question: Forklar problemet til den tillitsvalde
+    summary:
+        emptyLog: Du har ikkje lagt att beskjed til den tillitsvalde.
+        leftLog: Du har lagt igjen beskjed.
+    templates:
+        wrongNumber: 'Feil nummer ({ numbers }), ver venleg og undersøk.'
+successCouldTalk:
+    effect:
+        callBack: Framtidige ringeaktivistar kjem til å sjå at vi måtte ringe tilbake
+        couldTalk: Framtidige ringeaktivistar kjem til å sjå at du avslutta samtalen.
+    options:
+        callBack: 'Nei, vi må ringe tilbake.'
+        couldTalk: Ja
+    question: 'Kunne {target} snakke?'
+    summary:
+        callBack: '{target} kunne ikkje snakke med oss no.'
+        couldTalk: '{target} kunne ikkje snakke med oss.'
+successOrFailure:
+    effect:
+        failure: >-
+            Framtidige telefonaktivistar kjem til å sjå at du ikkje snakka med
+            {target}
+        success: 'Framtidige ringeaktivistar kjem til å sjå at du snakka med {target}'
+    options:
+        failure: Nei...
+        success: Ja
+    question: 'Har du nådd { target }?'
+    summary:
+        failure: 'Du nådde ikkje {target}'
+        success: 'Du nådde {target}.'
+summary:
+    surveys:
+        status: >-
+            I løpet av samtalen avga du svar på {count, plural,
+
+            =1 {ei undersøking} other {# undersøkingar}}, som vil bli innsende
+            dersom du ikkje kryssar av under.
+        submitted: >-
+            I løpet av samtalen avga du svar på {count, plural, =1 {ei
+            undersøking} other {# undersøkingar}}.
+        surveyDiscarded: 'Forkasta svar på "{survey}"'
+        surveySubmitted: 'Inkomne svar på "{survey}"'
+wrongNumber:
+    options:
+        both: Begge nummera var feil
+        single: 'Berre { phone } var feil'
+    question: Kva for eit nummer var feil?
+    summary:
+        both: Begge nummera var feil
+        single: '{ phone } var feil nummer'

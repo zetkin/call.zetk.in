@@ -1,0 +1,11 @@
+h1: Dine ærende
+intro: 'Du har {numAssignments, plural, =1 {eitt ærende} other {# ærende}} å ringe.'
+isPendingIntro: 'Eitt sekund, vi lastar inn dine ærende'
+noAssignmentsIntro: >-
+    Du har ingen ringeærende. Kontakt ein tillitsvald frå organisasjonen dersom
+    du vil hjelpe til.
+notLoading: >-
+    Dine ærende burde dukke opp om nokre sekund. Dersom ingenting skjer kan det
+    vere fordi du bruker ein inkompatibel nettlesar. Prøv med Chrome eller
+    Firefox.
+startCalling: Vel ærende og begynn å ringe

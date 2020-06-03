@@ -1,0 +1,59 @@
+input:
+    h1: 'Agér som {target}'
+    summary:
+        campaigns:
+            actions: '{count} aksjonar'
+            bookings: |-
+                {numBookings, plural,
+                    =0 {ingen bestillingar}
+                    =1 {ein bestilling}
+                    other {# bestillingar}
+                }
+            h2: Aktive kampanjar
+            respondButton: 'Skriv deg opp på {campaign}'
+            responses: |-
+                {numResponses, plural,
+                    =0 {ingen utildelte oppmeldingar}
+                    =1 {ei utildelt oppmelding}
+                    other {# utildelte oppmeldingar}
+                }
+            status: '{target} har'
+        surveys:
+            h2: Undersøkingar
+            respondButton: 'Svar på {survey}'
+    summaryLabel: Oppsummering
+    summaryLink: Oppsummering
+instructions:
+    h1: Rettleiing
+    targetButton: Vi personleg info
+queueEmpty:
+    assignmentsLink: Vel eit anna ærende
+    h1: Ingen fleire å ringe!
+    p: >-
+        Ringekøen er tom akkurat no. Fleire personar kan bli tillagde snart men
+        for tida finst det ikkje fleire samtaler i ærendet.
+report:
+    backLink: Gå tilbake
+    h:
+        report: Rapportér samtale
+        reported: Samtalerapport avgitt
+stats:
+    h1: Godt jobba!
+    p: >-
+        Arbeidet ditt er viktig for å bygge ein sterkare organisasjon. Here er
+        ei oppsummering av framgangen i ærendet.
+target:
+    activityHeader: Tidlegare aktivitet
+    activityLabel: |-
+        {count, plural,
+            =0 {{target} har aldri delteke på aksjon.}
+            =1 {{target} har delteke på ein aksjon, {lastAction}.}
+            other {{target} har delteke på {count} aksjonar, den mest nylege var {lastAction}.}
+        }
+    activityLastAction: '{activity } ({location}) {date}'
+    callLogHeader: 'Tidlegare samtaler til {target}'
+    editHeader: Endre denne informasjonen?
+    editInfo: "Dersom noko i denne fliken burde\_endrast, skriv melding til den tillitsvalde i rapporten etter avslutta samtale."
+    h1: Personleg info
+    instructionsButton: Vis rettleiing
+    tagHeader: Etikettar

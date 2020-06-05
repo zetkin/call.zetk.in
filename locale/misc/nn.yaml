@@ -1,0 +1,22 @@
+callLog:
+    emptyLabel: Aldri oppringt
+    note: Ringeaktivisten la ikkje igjen melding
+    summary:
+        status0: Samtale ikkje fullført
+        status1: 'Vi nådde { target }'
+        status11: '{target} tok ikkje telefonen'
+        status12: Oppteken
+        status13: '{target} ba oss ringe etter {date}'
+        status14: '{target} var ikkje tilgjengeleg. Ring tilbake etter {date}'
+        status15: Vi la att beskjed.
+        status21: Vi hadde feil nummer.
+        status22: Samtalen datt ut
+tagList:
+    emptyLabel: Ingen etikettar
+    overflowLabel: |-
+        Det {count, plural,
+            =1 {er ein til etikett}
+            other {er # til etikettar}
+        } i feltet for personleg info
+callInstructions:
+    instructions: "Klikk på nummeret for å ringe eller tast nummeret manuellt på telefonen. Klikkar du på\_nummeret åpnar telefonappen. Gå så tilbake til nettlesaren for å halde fram i Zetkin og logge samtalen."

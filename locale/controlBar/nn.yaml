@@ -1,0 +1,14 @@
+assignmentsButton: Vis alle ærende
+callButton: Begynn samtale
+endButton: Avslutt oppringing
+finishCallButton: Avslutt og gi rapport
+instructions:
+    prepare: Forbered deg til samtalen
+nextCallButton: Hald fram med oppringing
+skipButton: Hopp over
+startButton: Begynn å ringe
+submitReportButton: Send rapport
+targetInfo:
+    lastFailure: 'Sist prøvd {date}'
+    lastNever: Aldri prøvd før
+    lastSuccessful: 'Sist nådd {date}'

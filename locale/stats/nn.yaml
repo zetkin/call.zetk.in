@@ -1,0 +1,3 @@
+calls_made: Fullførte samtaler
+calls_reached: Vellykka samtaler
+target_size: '{number, plural, =1 { person i } other { personar i }} målgruppe'

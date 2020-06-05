@@ -1,0 +1,66 @@
+action:
+    booked: Bestilt
+    button:
+        signUp: Skriv deg opp
+        undoSignUp: Avbryt påmelding
+    currentNeed: Fleire aktivistar trengst her
+    infoButton: Info
+    multiLocationLabel: |-
+        {count, plural,
+            =2 {På to plassar}
+            =3 {På tre plassar}
+            =4 {På fire plassar}
+            =5 {På fem plassar}
+            other {På # plassar}
+        }
+calendar:
+    weekDays:
+        friday: F
+        monday: M
+        saturday: S
+        sunday: S
+        thursday: T
+        tuesday: T
+        wednesday: W
+filter:
+    activity:
+        active:
+            p: Sil ut aksjonar etter aktivitet
+            button: Vis alle aksjonar
+        inactive:
+            p: Viser alle aksjonar uavhengig av aktivitet
+            button: Sil ut etter aktivitet
+        modal:
+            clearButton: Vis alle aktivitetar
+    modal:
+        title: Sil ut etter aktivitet
+        closeButton: Filter
+        toggleActionCount: |-
+            {count, plural,
+                =1 {Ein aksjon}
+                other {# aksjonar}
+            }
+    showNeed:
+        button:
+            show: Vis meg der eg trengst
+            hide: Vis alle aksjonar
+        p: |-
+            Det {count, plural,
+                =1 {er for tida ein aksjon}
+                other  {er for tida # aksjonar}
+            } som treng fleire deltakarar
+message:
+    showNeed:
+        p: |-
+            Fleire aktivistar trengst på {count, plural,
+                =1 {denne aksjonen}
+                other {desse aksjonane}
+            }. Dersom du ikkje finn noko som funkar for deg kan du
+            sjølvsagt gå tilbake og skrive deg opp på noko anna.
+        title: Du trengst her!
+    yourActions:
+        p: >-
+            Her kan du halde oversikt over kvar du skal vere. Dersom du nettopp
+            skreiv deg opp og ombestemmer deg, kan du gjere om handlinga. Dersom
+            du er oppmeld og må avbestille, må du kontakte organisasjonen.
+        title: Dine framtidige aksjonar

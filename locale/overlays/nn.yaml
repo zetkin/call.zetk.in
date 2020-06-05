@@ -1,0 +1,29 @@
+laneOverview:
+    lanes:
+        h: Uferdige samtaler
+        ops:
+            discard: Forkast samtale
+            switch: Bytt til denne samtalen
+        p: >-
+            Her er samtaler du starta men ikkje fullførte. Fullfør samtalene
+            eller forkast dei slik at nokon andre kan ringe nummeret.
+    log:
+        filterPlaceholder: Skriv namn for å sile ut
+        h: Dine tidlegare samtaler
+        ops:
+            repeat: 'Logg ny samtale med {target}'
+            switch: 'Bytt til uferdig samtale med {target}'
+        p: Du kan starte nye samtaler med folk du ikkje har snakka med før.
+resume:
+    h: Du har uferdige samtaler
+    ops:
+        discard: 'Forkast samtale til {target}'
+        resume: 'Hald fram med samtale til {target}'
+    p: >-
+        I ei tidlegare økt vart du tildelt eit ringeærende som du ikkje har lagt
+        att melding om.
+skip:
+    h: Hopp over samtale
+    p: 'Vil du hoppe over {target} og ringe nokon andre?'
+    resumeButton: 'Nei, gå tilbake til samtale'
+    skipButton: 'Ja, hopp over {target}'

@@ -1,0 +1,33 @@
+closeButton: Eg forstår
+manualButton: Les meir i manualen
+notes:
+    intro:
+        h: Kom i gang med ærendet
+        href: 'http://manual.zetkin.org/no'
+        p: >-
+            Du skal straks starte eit ringeærende. Les rettleiinga og forbered
+            deg. Klikk deretter på "Begynn å ringe" for å starte. 
+    laneSwitch:
+        h: Avgi rapport for gamle samtaler igjen
+        href: 'http://manual.zetkin.org/no'
+        p: >-
+            Her kan du avgi rapport om ny samtale med nokon du har ringt
+            tidlegare. Det er til stor hjelp dersom nokon ringer tilbake.
+    postCall:
+        h: Etter samtalen
+        href: 'http://manual.zetkin.org/no'
+        p: >-
+            Etter at du er ferdig med samtalen kan du klikke her for å avgi
+            rapport.
+    prepare:
+        h: Bli kjend med personen
+        href: 'http://manual.zetkin.org/no'
+        p: >-
+            Dette er den fyrste personen du ringer. Forbered deg fyrst og så
+            hald fram med samtalen.
+    targetInfo:
+        h: Bruk telefonen din
+        href: 'http://manual.zetkin.org/no'
+        p: >-
+            Her er ei kort oppsummering av personen, inkludert telefonnummer.
+            Bruk vanleg telefon for å ringe personen.

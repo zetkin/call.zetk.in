@@ -7,9 +7,10 @@ docker run \
     -v $PWD/src:/var/app/src \
     --name call_zetk_in \
     --env TOKEN_SECRET=012345678901234567890123 \
+    --env ZETKIN_USE_TLS=0 \
     --env ZETKIN_LOGIN_URL=http://login.dev.zetkin.org \
-    --env ZETKIN_APP_ID=514d9750b6f242c2a7abc31f6fc17a73 \
-    --env ZETKIN_APP_KEY=NjcwOWU0ZDktOGVmYi00N2ViLTk1MTEtY2UyYjY0ODU5YWU4 \
+    --env ZETKIN_APP_ID=59dda3d6e4f2437db756395b54c733aa \
+    --env ZETKIN_APP_KEY=ZWUwNzMxNGYtYTMwZC00YjE1LWI5ZmEtNjlkY2UwYzYxOGY4 \
     --env ZETKIN_DOMAIN=dev.zetkin.org \
     -p 80:80 \
     -p 81:81 \

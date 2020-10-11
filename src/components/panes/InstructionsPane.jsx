@@ -4,23 +4,65 @@ import { connect } from 'react-redux';
 
 import PaneBase from './PaneBase';
 import { selectedAssignment } from '../../store/assignments';
+import { currentCall } from '../../store/calls';
 import { setLaneInfoMode } from '../../actions/lane';
 
 
 const mapStateToProps = state => ({
     assignment: selectedAssignment(state),
+    call: currentCall(state),
+    caller: state ? state.get('user') : null,
 });
+
+// Replace identifiers in the text, e.g. "{target.email}" --> "anna@example.com"
+// and "{caller.first_name}" --> "Joe"
+function replaceIdentifiers(text, target, caller) {
+    let replaced_text = text;
+
+    let target_identifiers = [
+        'first_name',
+        'last_name',
+        'name',
+        'phone',
+        'alt_phone',
+        'ext_id',
+        'id',
+        'email',
+        'zip_code',
+        'city',
+    ];
+
+    for (let identifier of target_identifiers) {
+        replaced_text = replaced_text.replaceAll("{target."+identifier+"}", target.get(identifier));
+    }
+
+    let caller_identifier = [
+        'first_name',
+        'last_name',
+    ];
+
+    for (let identifier of caller_identifier) {
+        replaced_text = replaced_text.replaceAll("{caller."+identifier+"}", caller.getIn(['data', identifier]));
+    }
+
+    return replaced_text;
+}
 
 @connect(mapStateToProps)
 export default class InstructionsPane extends PaneBase {
     renderContent() {
         let assignment = this.props.assignment;
+        let instructions = assignment.get('instructions');
+
+        if (this.props.call && this.props.caller) {
+            instructions = replaceIdentifiers(instructions, this.props.call.get('target'), this.props.caller);
+        }
 
         return [
             <div key="instructions" className="InstructionsPane-instructions"
                 ref={ div => this.domContent = div }
                 dangerouslySetInnerHTML={{
-                    __html: assignment.get('instructions') }}/>,
+                    __html: instructions }}/>,
         ];
     }
 

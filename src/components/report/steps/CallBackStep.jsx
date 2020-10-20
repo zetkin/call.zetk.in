@@ -59,6 +59,7 @@ export default class CallBackStep extends ReportStepBase {
             hour: date.getHours()? 'numeric' : undefined,
             minute: date.getHours()? 'numeric' : undefined,
         });
+        const minDate = (new Date()).toISOString().replace(/T.+$/, '');
 
         return [
             <Msg key="question" tagName="p"
@@ -66,7 +67,8 @@ export default class CallBackStep extends ReportStepBase {
             <div key="dateTime" className="CallBackStep-dateTime">
                 <input type="date"
                     onChange={ this.onDateChange.bind(this) }
-                    value={ this.state.selectedDate.format('{yyyy}-{MM}-{dd}') }/>
+                    value={ this.state.selectedDate.format('{yyyy}-{MM}-{dd}') }
+                    min={ minDate }/>
 
                 <select
                     onChange={ this.onHourChange.bind(this) }

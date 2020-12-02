@@ -33,7 +33,8 @@ function replaceIdentifiers(text, target, caller) {
     ];
 
     for (let identifier of target_identifiers) {
-        replaced_text = replaced_text.replaceAll("{target."+identifier+"}", target.get(identifier));
+        const targetIdRegex = RegExp(`{\s*target.${identifier}\s*}`, 'g');
+        replaced_text = replaced_text.replace(targetIdRegex, target.get(identifier));
     }
 
     let caller_identifier = [
@@ -42,7 +43,8 @@ function replaceIdentifiers(text, target, caller) {
     ];
 
     for (let identifier of caller_identifier) {
-        replaced_text = replaced_text.replaceAll("{caller."+identifier+"}", caller.getIn(['data', identifier]));
+        const callerIdRegex = RegExp(`{\s*caller.${identifier}\s*}`, 'g');
+        replaced_text = replaced_text.replace(callerIdRegex, caller.getIn(['data', identifier]));
     }
 
     return replaced_text;

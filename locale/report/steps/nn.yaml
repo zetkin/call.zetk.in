@@ -80,7 +80,7 @@ successCouldTalk:
     question: 'Kunne {target} snakke?'
     summary:
         callBack: '{target} kunne ikkje snakke med oss no.'
-        couldTalk: '{target} kunne ikkje snakke med oss.'
+        couldTalk: '{target} kunne snakke med oss.'
 successOrFailure:
     effect:
         failure: >-

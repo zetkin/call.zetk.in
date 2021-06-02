@@ -54,8 +54,8 @@ export default class TargetPane extends PaneBase {
         let map = null;
         if (target.get('zip_code') && target.get('city')) {
             let location = target.get('zip_code') + '+' + target.get('city')
-            if(target.has('street_address')) {
-                location = target.get('street_address') + '+' + location
+            if(target.get('street_address')) {
+                location = target.get('street_address') + '+' + location;
             }
             let qs = querystring.stringify({
                 center: location,

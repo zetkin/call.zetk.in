@@ -53,8 +53,12 @@ export default class TargetPane extends PaneBase {
 
         let map = null;
         if (target.get('zip_code') && target.get('city')) {
+            let location = target.get('zip_code') + '+' + target.get('city')
+            if(target.has('street_address')) {
+                location = target.get('street_address') + '+' + location
+            }
             let qs = querystring.stringify({
-                center: target.get('street_address') + '+' + target.get('zip_code') + '+' + target.get('city'),
+                center: location,
                 maptype: 'roadmap',
                 size: '650x200',
                 zoom: 15,

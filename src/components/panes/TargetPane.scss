@@ -79,7 +79,7 @@
 
     .TargetPane-personField {
         &:before {
-            @include icon($fa-var-list);
+            @include icon($fa-var-info-circle);
         }
 
         span {

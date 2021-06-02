@@ -51,6 +51,20 @@
         }
     }
 
+    .TargetPane-infoAddress {
+        &:before {
+            @include icon($fa-var-home);
+        }
+        span {
+            display: block;
+            margin-left: 2em;
+            margin-bottom: 0.2em;
+            &:first-child {
+                margin-top: -1.4em;
+            }
+        }
+    }
+
     .TargetPane-infoEmail {
         &:before {
             @include icon($fa-var-envelope);
@@ -61,6 +75,28 @@
         &:before {
             @include icon($fa-var-map-marker);
         }
+    }
+
+    .TargetPane-personField {
+        &:before {
+            @include icon($fa-var-list);
+        }
+
+        span {
+            display: block;
+            margin-left: 2em;
+            margin-bottom: 0.5em;
+            &:first-child {
+                margin-top: -1.6em;
+                font-size: 0.8em;
+                margin-left: 2.5em;
+                font-style: italic;
+            }
+        }
+    }
+
+    .TargetPane-personFieldValue {
+        margin-top: -0.5em;
     }
 
     .TargetPane-map {

@@ -11,6 +11,7 @@ import Avatar from '../misc/Avatar';
 import TagList from '../misc/TagList';
 import CallLog from '../misc/callLog/CallLog';
 
+const ADDR_FIELDS = [ 'co_address', 'street_address', 'zip_code', 'city' ];
 
 const mapStateToProps = state => ({
     assignment: selectedAssignment(state),
@@ -21,23 +22,43 @@ export default class TargetPane extends PaneBase {
     renderContent() {
         let target = this.props.call.get('target');
 
-        let info = [
+        const addrFields = ADDR_FIELDS.filter(field => target.get(field)).map(field => 
+            <span key={ field }>
+                { target.get(field) }
+            </span>
+        );
+
+         let info = [
             <li key="id" className="TargetPane-infoId">
                 { target.get('ext_id') || '-' }</li>,
             <li key="email" className="TargetPane-infoEmail">
-                { target.get('email') }</li>
+                { target.get('email') }</li>,
+            <li key="address" className="TargetPane-infoAddress">
+                { addrFields }
+            </li>,
         ];
-        if (target.get('city')) {
-            info.push(
-                <li key="city" className="TargetPane-infoCity">
-                    { target.get('city') }</li>
-            )
+
+
+        if(target.has('person_fields')) {
+            const customFields = target.get('person_fields')
+                .map(field => 
+                    <li className="TargetPane-personField" key={field}>
+                        <span className="TargetPane-personFieldLabel">{ field.get('title')}</span>
+                        <span className="TargetPane-personFieldValue">{ field.get('value') }</span>
+                    </li>
+                ).toArray();
+
+            info = info.concat(customFields);
         }
 
         let map = null;
         if (target.get('zip_code') && target.get('city')) {
+            let location = target.get('zip_code') + '+' + target.get('city')
+            if(target.get('street_address')) {
+                location = target.get('street_address') + '+' + location;
+            }
             let qs = querystring.stringify({
-                center: target.get('zip_code') + '+' + target.get('city'),
+                center: location,
                 maptype: 'roadmap',
                 size: '650x200',
                 zoom: 15,

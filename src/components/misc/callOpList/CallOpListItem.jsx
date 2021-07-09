@@ -25,6 +25,9 @@ export default class CallOpListItem extends React.Component {
                 <span className="CallOpListItem-name">
                     { target.get('name') }
                 </span>
+                <span className="CallOpListItem-phone">
+                    { target.get('phone') }
+                </span>
                 <span className="CallOpListItem-time">
                     <FormattedRelative value={ date }/>
                 </span>

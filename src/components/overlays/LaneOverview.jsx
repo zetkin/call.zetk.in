@@ -81,10 +81,13 @@ export default class LaneOverview extends React.Component {
             let filterString = this.state.filterString.toLowerCase();
             if (filterString.length > 2) {
                 calls = calls.filter(c =>
-                    c.getIn(['target', 'name'])
+                    (c.getIn(['target', 'name']) || '')
                         .toLowerCase()
                         .indexOf(filterString) >= 0
-                    || c.getIn(['target', 'phone'])
+                    || (c.getIn(['target', 'phone']) || '')
+                        .replace(/\s/g, '')
+                        .indexOf(filterString) >= 0
+                    || (c.getIn(['target', 'alt_phone']) || '')
                         .replace(/\s/g, '')
                         .indexOf(filterString) >= 0
                 );

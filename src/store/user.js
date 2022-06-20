@@ -2,7 +2,20 @@ import { createReducer } from 'redux-create-reducer';
 import immutable from 'immutable';
 
 import * as types from '../actions';
+import { selectedAssignment } from './assignments';
 
+
+export const selectedAssignmentCallerProfile = state => {
+    const assignment = selectedAssignment(state);
+    if (assignment) {
+        const orgId = assignment.getIn(['organization', 'id']);
+        const profile = state.getIn(['user', 'membershipList', 'items', orgId.toString(), 'profile']);
+        return profile;
+    }
+    else {
+        return null;
+    }
+};
 
 const initialState = immutable.fromJS({
     isPending: false,

@@ -9,14 +9,17 @@ import * as targetUtils from "../../utils/target";
 import { selectedAssignment } from '../../store/assignments';
 import Avatar from '../misc/Avatar';
 import TagList from '../misc/TagList';
+import { selectedAssignmentCallerProfile } from '../../store/user';
 
 const mapStateToProps = state => ({
     assignment: selectedAssignment(state),
+    caller: selectedAssignmentCallerProfile(state),
 });
 
 @connect(mapStateToProps)
 export default class TargetInfo extends React.Component {
     static propTypes = {
+        caller: PropTypes.map.isRequired,
         target: PropTypes.map.isRequired,
         showFullInfo: PropTypes.bool,
     };

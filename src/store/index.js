@@ -48,8 +48,8 @@ export const configureStore = (initialState, z) => {
     ];
 
     let devTools = f => f;
-    if (typeof window === 'object' && window.devToolsExtension) {
-        devTools = window.devToolsExtension({
+    if (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION__) {
+        devTools = window.__REDUX_DEVTOOLS_EXTENSION__({
             deserializeState: state => immutable.fromJS(state)
         });
     }

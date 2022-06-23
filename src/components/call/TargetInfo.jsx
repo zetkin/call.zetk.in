@@ -25,7 +25,7 @@ export default class TargetInfo extends React.Component {
     };
 
     render() {
-        let target = this.props.target;
+        const { caller, target } = this.props;
         let callInfo, tagList;
 
         if (this.props.showFullInfo) {
@@ -59,11 +59,31 @@ export default class TargetInfo extends React.Component {
                 );
             }
 
-            callInfo = targetUtils.getNumbers(target).map(num => (
-                <span key={num} className="TargetInfo-number">
-                    <a href={ 'tel:' + num }>{ num }</a>
-                </span>
-            )).concat([
+            callInfo = targetUtils.getNumbers(target).map(num => {
+                let onClick = null;
+                if (caller.get('has_voip_credentials')) {
+                    onClick = ev => {
+                        ev.preventDefault();
+                        fetch('/api/dial', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                number: num,
+                                caller: caller.get('id'),
+                            }),
+                        });
+                        return false;
+                    };
+                }
+
+                return (
+                    <span key={num} className="TargetInfo-number">
+                        <a href={ 'tel:' + num } onClick={onClick}>{ num }</a>
+                    </span>
+                );
+            }).concat([
                 <div key="lastCall" className="TargetInfo-lastCall">
                     { lastCallLabel }
                 </div>

@@ -1,6 +1,7 @@
 import auth from 'express-zetkin-auth';
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import axios from 'axios';
 import path from 'path';
 import Raven from 'raven';
 import React from 'react';
@@ -45,6 +46,8 @@ const authOpts = {
 
 export default function initApp(messages) {
     const app = express();
+
+    app.use(express.json());
 
     if (SENTRY_DSN) {
         app.use(Raven.requestHandler());
@@ -108,6 +111,52 @@ export default function initApp(messages) {
         else {
             res.redirect('/assignments');
         }
+    });
+
+    app.post('/api/dial', async (req, res) => {
+        const { caller, number } = req.body;
+        if (!caller || !number) {
+            return res.status(400).end();
+        }
+
+        try {
+            const memRes = await req.z.resource('users', 'me', 'memberships').get();
+            const membership = memRes.data.data.find(membership => (
+                membership.profile.id.toString() == caller
+            ));
+
+            if (!membership) {
+                return res.status(404).end();
+            }
+
+            const profileRes = await req.z.resource(
+                'orgs',
+                membership.organization.id,
+                'people',
+                membership.profile.id
+            ).get();
+
+            const {
+                telavox_username: username,
+                telavox_password: password
+            } = profileRes.data.data;
+
+            if (!username || !password) {
+                return res.status(400).end();
+            }
+
+            await axios(`https://api.telavox.se/dial/${number}?autoanswer=true`, {
+                headers: {
+                    authorization: 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64'),
+                },
+            });
+
+            res.status(200).end();
+        }
+        catch (error) {
+            console.log(error);
+            res.status(500).json({ error });
+        };
     });
 
     if (SENTRY_DSN) {

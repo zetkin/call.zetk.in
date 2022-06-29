@@ -208,8 +208,15 @@ export function submitCallReport() {
                         return response;
                     });
 
+                    let signatureType = state.getIn(['surveys', 'surveyList', 'items', surveyId, 'signature']);
+
+                    let signature = null;
+                    if (signatureType != 'force_anonymous') {
+                        signature = call.getIn(['target', 'id']);
+                    }
+
                     let data = {
-                        signature: call.getIn(['target', 'id']),
+                        signature: signature,
                         responses: responses.toList().toJS(),
                     };
 

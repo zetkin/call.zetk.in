@@ -8,10 +8,12 @@ import { selectedLane } from '../../store/lanes';
 import { pushTutorialNote } from '../../actions/tutorial';
 import ViewSize from "../misc/ViewSize";
 import getViewSize from '../../utils/getViewSize';
+import { selectedAssignmentCallerProfile } from '../../store/user';
 
 
 const mapStateToProps = state => ({
     calls: state.get('calls'),
+    caller: selectedAssignmentCallerProfile(state),
     lane: selectedLane(state),
 });
 
@@ -40,8 +42,12 @@ export default class CallPage extends React.Component {
                 else if (step == 'call') {
                     if (getViewSize() != 'small') {
                         // This tutorial step is redundant on mobile
+                        let tutorialMessage = 'tutorial.notes.targetInfoPhone';
+                        if (nextProps.caller.get('has_voip_credentials')) {
+                            tutorialMessage = 'tutorial.notes.targetInfoVoip';
+                        }
                         this.props.dispatch(pushTutorialNote(
-                            'tutorial.notes.targetInfo',
+                            tutorialMessage,
                             '.TargetInfo'));
                     }
 

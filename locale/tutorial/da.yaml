@@ -27,7 +27,7 @@ notes:
         p: >-
             Dette er den første person du skal ringe til. Forbered dig på
             samtalen, og fortsæt så for at lave opkaldet. God vind!
-    targetInfo:
+    targetInfoPhone:
         h: Brug din telefon
         href: 'http://manual.zetkin.org/dk'
         p: >-

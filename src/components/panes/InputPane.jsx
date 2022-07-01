@@ -234,8 +234,16 @@ export default class InputPane extends PaneBase {
                     let submission = this.props.surveys.getIn(
                         ['pendingResponsesByCall', callId, surveyId ]);
 
+                    const targetData = this.props.call.get('target').toJS();
+                    if (targetData.person_fields) {
+                        targetData.person_fields.forEach(field => {
+                            targetData[field.slug] = field.value;
+                        });
+                    }
+
                     surveyForm = (
                         <SurveyForm key="surveyForm"
+                            personData={targetData}
                             survey={ survey }
                             submitEnabled={ false }
                             submission={ submission }

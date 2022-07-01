@@ -20,10 +20,11 @@ export function retrieveSurveys() {
 }
 
 export function retrieveSurvey(orgId, surveyId) {
-    return ({ dispatch, z }) => {
+    return ({ dispatch, getState, z }) => {
+        const call = currentCall(getState()).toJS();
         dispatch({
             type: types.RETRIEVE_SURVEY,
-            meta: { orgId, surveyId },
+            meta: { call, orgId, surveyId },
             payload: {
                 promise: z.resource('orgs', orgId,
                     'surveys', surveyId).get()

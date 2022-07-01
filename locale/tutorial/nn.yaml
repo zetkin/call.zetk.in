@@ -25,7 +25,7 @@ notes:
         p: >-
             Dette er den fyrste personen du ringer. Forbered deg fyrst og så
             hald fram med samtalen.
-    targetInfo:
+    targetInfoPhone:
         h: Bruk telefonen din
         href: 'http://manual.zetkin.org/no'
         p: >-

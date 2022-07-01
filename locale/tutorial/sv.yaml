@@ -29,10 +29,17 @@ notes:
         p: |-
             Här är den första personen du ska ringa. Förbered dig inför
             samtalet och gå sedan vidare för att ringa.
-    targetInfo:
+    targetInfoPhone:
         h: Använd din telefon
         href: >-
             http://manual.zetkin.org/sv/for-aktivister/ringa-med-zetkin/samtalet/ring/
         p: |-
             Här ser du en sammanfattning om personen, inklusive numret du ska
             ringa. För att ringa använder du en vanlig telefon.
+    targetInfoVoip:
+        h: Klicka på telefonnumret för att ringa med IP-telefoni
+        href: >-
+            http://manual.zetkin.org/sv/for-aktivister/ringa-med-zetkin/samtalet/ring/
+        p: |-
+            Här ser du en sammanfattning om personen, inklusive numret du ska
+            ringa. För att ringa klickar du på numret eller använder en vanlig telefon.

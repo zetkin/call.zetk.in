@@ -78,10 +78,40 @@ export default createReducer(initialState, {
         survey.isPending = false;
         survey.error = null;
 
-        return state
+        let updatedState = state
             .updateIn(['surveyList', 'items'], items => items?
                 items.set(survey.id, immutable.fromJS(survey)) :
                 immutable.fromJS({ [survey.id]: survey }));
+
+        // Prepopulate survey fields (unless already filled out)
+        const call = action.meta.call;
+        if (!state.getIn(['pendingResponsesByCall', call.id])) {
+            const targetData = call.target;
+            if (targetData.person_fields) {
+                targetData.person_fields.forEach(field => {
+                    targetData[field.slug] = field.value;
+                });
+            }
+
+            const surveyData = {
+                surveyId: survey.id,
+                included: false,
+                responses: {},
+            };
+
+            survey.elements
+                .filter(elem => elem.type == 'question')
+                .filter(elem => elem.question.response_type == 'person_field')
+                .forEach(elem => {
+                    const fieldName = elem.question.response_config.person_field;
+                    surveyData.responses[elem.id] = { response: targetData[fieldName] };
+                });
+
+            updatedState = updatedState.setIn(
+                ['pendingResponsesByCall', call.id, survey.id], immutable.fromJS(surveyData));
+        }
+
+        return updatedState;
     },
 
     [types.STORE_SURVEY_RESPONSE]: (state, action) => {

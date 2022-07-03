@@ -25,9 +25,16 @@ notes:
         p: >-
             This is the first person you will be calling. Prepare for the call
             and then continue to make the call.
-    targetInfo:
+    targetInfoPhone:
         h: Use your phone
         href: 'http://manual.zetkin.org/en'
         p: >-
             Here is a short summary of the person, including their phone number.
             Use a regular phone to dial and call the person.
+
+    targetInfoVoip:
+        h: Click phone number to use IP dialing
+        href: 'http://manual.zetkin.org/en'
+        p: >-
+            Here is a short summary of the person, including their phone number.
+            Click the number to dial or use a regular phone to dial the number.

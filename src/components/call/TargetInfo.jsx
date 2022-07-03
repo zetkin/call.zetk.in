@@ -9,20 +9,23 @@ import * as targetUtils from "../../utils/target";
 import { selectedAssignment } from '../../store/assignments';
 import Avatar from '../misc/Avatar';
 import TagList from '../misc/TagList';
+import { selectedAssignmentCallerProfile } from '../../store/user';
 
 const mapStateToProps = state => ({
     assignment: selectedAssignment(state),
+    caller: selectedAssignmentCallerProfile(state),
 });
 
 @connect(mapStateToProps)
 export default class TargetInfo extends React.Component {
     static propTypes = {
+        caller: PropTypes.map.isRequired,
         target: PropTypes.map.isRequired,
         showFullInfo: PropTypes.bool,
     };
 
     render() {
-        let target = this.props.target;
+        const { caller, target } = this.props;
         let callInfo, tagList;
 
         if (this.props.showFullInfo) {
@@ -56,11 +59,31 @@ export default class TargetInfo extends React.Component {
                 );
             }
 
-            callInfo = targetUtils.getNumbers(target).map(num => (
-                <span key={num} className="TargetInfo-number">
-                    <a href={ 'tel:' + num }>{ num }</a>
-                </span>
-            )).concat([
+            callInfo = targetUtils.getNumbers(target).map(num => {
+                let onClick = null;
+                if (caller.get('has_voip_credentials')) {
+                    onClick = ev => {
+                        ev.preventDefault();
+                        fetch('/api/dial', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                number: num,
+                                caller: caller.get('id'),
+                            }),
+                        });
+                        return false;
+                    };
+                }
+
+                return (
+                    <span key={num} className="TargetInfo-number">
+                        <a href={ 'tel:' + num } onClick={onClick}>{ num }</a>
+                    </span>
+                );
+            }).concat([
                 <div key="lastCall" className="TargetInfo-lastCall">
                     { lastCallLabel }
                 </div>

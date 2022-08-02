@@ -10,7 +10,7 @@ input:
                     other {# bokningar}
                 }
             h2: Aktuella kampanjer
-            respondButton: 'Anmäl till { campaign }'
+            respondButton: 'Anmäl'
             responses: |-
                 {numResponses, plural,
                     =0 {inga anmälningar}
@@ -20,7 +20,7 @@ input:
             status: '{target} har'
         surveys:
             h2: Enkäter
-            respondButton: 'Svara på { survey }'
+            respondButton: 'Svara'
     summaryLabel: Sammanfattning
     summaryLink: Sammanfattning
 instructions:

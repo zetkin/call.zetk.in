@@ -10,7 +10,7 @@ input:
                     other {# bookinger}
                 }
             h2: Aktuelle kampagner
-            respondButton: 'Meld dig til {kampagne}'
+            respondButton: 'Meld til'
             responses: |-
                 {numResponses, plural,
                     =0 {ingen tilmeldinger}
@@ -20,7 +20,7 @@ input:
             status: '{target} har'
         surveys:
             h2: Spørgeskemaer
-            respondButton: 'Svar på {survey}'
+            respondButton: 'Svar'
     summaryLabel: Resumé
     summaryLink: Resumé
 instructions:

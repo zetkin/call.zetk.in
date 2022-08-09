@@ -146,7 +146,9 @@ export default class InputPane extends PaneBase {
                 if (listItems) {
                     surveyContent = (
                         <ul className="InputPane-summaryList">
-                        { listItems.toList().map(survey => {
+                        { listItems.toList().sort(
+                            (s0, s1) => s0.get('title').localeCompare(s1.get('title'))
+                        ).map(survey => {
                             let id = survey.get('id');
 
                             let active = (this.props.step === "call")

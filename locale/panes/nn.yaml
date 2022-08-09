@@ -10,7 +10,7 @@ input:
                     other {# bestillingar}
                 }
             h2: Aktive kampanjar
-            respondButton: 'Skriv deg opp på {campaign}'
+            respondButton: 'Skriv opp'
             responses: |-
                 {numResponses, plural,
                     =0 {ingen utildelte oppmeldingar}
@@ -20,7 +20,7 @@ input:
             status: '{target} har'
         surveys:
             h2: Undersøkingar
-            respondButton: 'Svar på {survey}'
+            respondButton: 'Svar'
     summaryLabel: Oppsummering
     summaryLink: Oppsummering
 instructions:

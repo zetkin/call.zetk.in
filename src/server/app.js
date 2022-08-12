@@ -77,6 +77,8 @@ export default function initApp(messages) {
     app.use(auth.initialize(authOpts));
     app.get('/logout', auth.logout(authOpts));
 
+    app.get('/api/heartbeat', auth.heartbeat(authOpts));
+
     // Redirect to assignments page if logged in
     app.get('/', auth.validate(authOpts, true), (req, res, next) => {
         if (req.isZetkinAuthenticated) {

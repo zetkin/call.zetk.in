@@ -22,6 +22,23 @@ import routes from '../components/routes';
 
 const USE_TLS = (process.env.ZETKIN_USE_TLS == '1');
 
+let pendingHeartbeat = null;
+const heartbeat = () => {
+    if (!pendingHeartbeat) {
+        pendingHeartbeat = fetch('/api/heartbeat');
+        pendingHeartbeat
+            .then(() => {
+                pendingHeartbeat = null;
+                const token = cookie.get('apiAccessToken');
+                if (token) {
+                    Z.setAccessToken(token);
+                }
+            })
+            .catch(() => {
+                pendingHeartbeat = null;
+            });
+    }
+}
 
 window.onload = function() {
     Z.configure({
@@ -41,6 +58,8 @@ window.onload = function() {
     if (token) {
         Z.setAccessToken(token);
     }
+
+    setInterval(heartbeat, 60000);
 
     let stateElem = document.getElementById('App-initialState');
     let stateJson = stateElem.innerText || stateElem.textContent;

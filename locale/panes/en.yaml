@@ -10,7 +10,7 @@ input:
                     other {# bookings}
                 }
             h2: Active campaigns
-            respondButton: 'Sign up for {campaign}'
+            respondButton: 'Sign up'
             responses: |-
                 {numResponses, plural,
                     =0 {no unbooked sign-ups}
@@ -20,7 +20,7 @@ input:
             status: '{target} has'
         surveys:
             h2: Surveys
-            respondButton: 'Respond to {survey}'
+            respondButton: 'Respond'
     summaryLabel: Summary
     summaryLink: Summary
 instructions:

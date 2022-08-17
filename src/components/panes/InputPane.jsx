@@ -107,7 +107,7 @@ export default class InputPane extends PaneBase {
                                         let action = this.props.actions
                                             .getIn(['actionList', 'items', actionId]);
 
-                                        return action.getIn(['campaign', 'id']) == id;
+                                        return action && action.getIn(['campaign', 'id']) == id;
                                     });
                             }
 

@@ -71,6 +71,10 @@ export default class ReportPane extends PaneBase {
         );
     }
 
+    componentDidMount() {
+        this.setInert(this.props.step !== 'report')
+    }
+
     componentDidUpdate(prevProps) {
         const report = this.props.report;
         const prevReport = prevProps.report;
@@ -90,6 +94,8 @@ export default class ReportPane extends PaneBase {
                 animatedScrollTo(container, d, 300);
             }
         }
+
+        this.setInert(this.props.step !== 'report')
     }
 
     onBackLinkClick() {

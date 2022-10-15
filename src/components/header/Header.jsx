@@ -31,11 +31,11 @@ export default class Header extends React.Component {
                 <Logo/>
                 <div className="Header-currentApp">Zetkin Call</div>
                 <div className="Header-nav">
-                    { userWidget }
                     <FormattedLink className="Header-navLink"
                         msgId="header.dashboardLink"
                         href={ dashboardUrl }
                         />
+                    { userWidget }
                 </div>
             </header>
         );

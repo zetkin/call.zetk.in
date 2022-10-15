@@ -44,10 +44,12 @@ export default class TutorialNote extends React.Component {
                 <Msg tagName="h2" id={ messages.get('header') }/>
                 <Msg tagName="p" id={ messages.get('text') }/>
                 { manualButton }
-                <FormattedLink msgId="tutorial.closeButton"
-                    className="TutorialNote-closeLink"
-                    onClick={ this.onCloseClick.bind(this) }
-                    />
+                <button className="TutorialNote-closeButton"
+                    onClick={ this.onCloseClick.bind(this) }>
+                    {this.props.intl.formatMessage({
+                        id: 'tutorial.closeButton'
+                    })}
+                </button>
             </div>
         );
     }

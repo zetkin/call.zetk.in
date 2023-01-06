@@ -6,6 +6,7 @@ import PaneBase from './PaneBase';
 import { selectedAssignment } from '../../store/assignments';
 import { currentCall } from '../../store/calls';
 import { setLaneInfoMode } from '../../actions/lane';
+import CleanHtml from '../../common/misc/CleanHtml';
 
 
 const mapStateToProps = state => ({
@@ -61,10 +62,12 @@ export default class InstructionsPane extends PaneBase {
         }
 
         return [
-            <div key="instructions" className="InstructionsPane-instructions"
-                ref={ div => this.domContent = div }
-                dangerouslySetInnerHTML={{
-                    __html: instructions }}/>,
+            <CleanHtml
+                component="div"
+                key="instructions"
+                className="InstructionsPane-instructions"
+                containerRef={ div => this.domContent = div }
+                dirtyHtml={instructions}/>,
         ];
     }
 

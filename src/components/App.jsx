@@ -4,6 +4,7 @@ import React from 'react';
 import OverlayStack from './overlays/OverlayStack';
 import { showOverlay } from '../actions/view';
 import Tutorial from './tutorial/Tutorial';
+import CleanStateJson from '../common/misc/CleanStateJson';
 
 
 @connect(state => ({ fullState: state }))
@@ -25,8 +26,6 @@ export default class App extends React.Component {
     }
 
     render() {
-        let stateJson = JSON.stringify(this.props.fullState);
-
         return (
             <html>
                 <head>
@@ -48,9 +47,7 @@ export default class App extends React.Component {
                     </div>
                     <OverlayStack/>
                     <Tutorial/>
-                    <script type="text/json"
-                        id="App-initialState"
-                        dangerouslySetInnerHTML={{ __html: stateJson }}/>
+                    <CleanStateJson state={this.props.fullState.toJS()}/>
                 </body>
             </html>
         );

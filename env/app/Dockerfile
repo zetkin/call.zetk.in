@@ -8,7 +8,7 @@ ARG ZETKIN_USE_TLS=1
 # Install node
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN \
 	apt-get update && \
 	apt-get install -q -y --allow-downgrades --allow-remove-essential \

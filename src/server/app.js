@@ -116,7 +116,7 @@ export default function initApp(messages) {
     });
 
     app.post('/api/dial', async (req, res) => {
-        const { caller, number } = req.body;
+        const { caller, org, number } = req.body;
         if (!caller || !number) {
             return res.status(400).end();
         }
@@ -124,7 +124,7 @@ export default function initApp(messages) {
         try {
             const memRes = await req.z.resource('users', 'me', 'memberships').get();
             const membership = memRes.data.data.find(membership => (
-                membership.profile.id.toString() == caller
+                membership.profile.id.toString() == caller && membership.organization.id.toString() == org.toString()
             ));
 
             if (!membership) {

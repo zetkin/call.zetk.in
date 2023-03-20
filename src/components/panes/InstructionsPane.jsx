@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage as Msg } from 'react-intl';
 import { connect } from 'react-redux';
+import { marked } from 'marked';
 
 import PaneBase from './PaneBase';
 import { selectedAssignment } from '../../store/assignments';
@@ -59,6 +60,8 @@ export default class InstructionsPane extends PaneBase {
         if (this.props.call && this.props.caller) {
             instructions = replaceIdentifiers(instructions, this.props.call.get('target'), this.props.caller);
         }
+
+        instructions = marked.parse(instructions);
 
         return [
             <div key="instructions" className="InstructionsPane-instructions"

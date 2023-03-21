@@ -47,6 +47,7 @@
     "intl": "^1.2.5",
     "isomorphic-dompurify": "^0.15.0",
     "linkifyjs": "^2.1.6",
+    "marked": "^4.2.12",
     "node-yaml": "^3.0.2",
     "object-subset": "0.0.4",
     "querystring": "^0.2.0",

@@ -1,6 +1,6 @@
 {
   "name": "call.zetk.in",
-  "version": "36.0.0",
+  "version": "38.0.0",
   "description": "Caller front-end for Zetkin",
   "main": "src/server/main.js",
   "scripts": {
@@ -47,6 +47,7 @@
     "intl": "^1.2.5",
     "isomorphic-dompurify": "^0.15.0",
     "linkifyjs": "^2.1.6",
+    "marked": "^4.2.12",
     "node-yaml": "^3.0.2",
     "object-subset": "0.0.4",
     "querystring": "^0.2.0",

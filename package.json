@@ -45,6 +45,7 @@
     "gulp-uglify": "^2.0.0",
     "immutable": "^3.8.1",
     "intl": "^1.2.5",
+    "isomorphic-dompurify": "^0.15.0",
     "linkifyjs": "^2.1.6",
     "node-yaml": "^3.0.2",
     "object-subset": "0.0.4",

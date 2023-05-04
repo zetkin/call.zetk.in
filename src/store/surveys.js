@@ -85,7 +85,7 @@ export default createReducer(initialState, {
 
         // Prepopulate survey fields (unless already filled out)
         const call = action.meta.call;
-        if (!state.getIn(['pendingResponsesByCall', call.id])) {
+        if (!state.getIn(['pendingResponsesByCall', call.id, survey.id])) {
             const targetData = call.target;
             if (targetData.person_fields) {
                 targetData.person_fields.forEach(field => {

@@ -15,20 +15,50 @@ const mapStateToProps = state => ({
 
 @connect(mapStateToProps)
 export default class StatsPane extends PaneBase {
-    componentDidMount() {
-        let assignment = this.props.assignment;
-        this.props.dispatch(retrieveAssignmentStats(assignment));
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            waiting: true,
+        };
 
         // This is safe because this component is never rendered on the server,
         // so server/client inconsistencies can never occur.
         this.artworkIdx = Math.round(Math.random() * 2);
     }
 
+    componentDidMount() {
+        let assignment = this.props.assignment;
+
+        // Delay loading stats. If user is an experienced caller, they might
+        // just click through this in no time, and making this request is
+        // unnecessary
+        this.timeout = setTimeout(() => {
+            this.props.dispatch(retrieveAssignmentStats(assignment));
+            this.timeout = null;
+            this.setState({
+                waiting: false,
+            })
+        }, 3000);
+    }
+
+    componentDidUpdate() {
+        if (this.props.step != 'done' && this.timeout) {
+            clearTimeout(this.timeout);
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.timeout) {
+            clearTimeout(this.timeout)
+        }
+    }
+
     renderContent() {
         let assignment = this.props.assignment;
 
         let statsContent = null;
-        if (assignment.get('statsIsPending')) {
+        if (this.state.waiting || assignment.get('statsIsPending')) {
             statsContent = <LoadingIndicator key="loadingIndicator" />;
         }
         else if (assignment.get('stats')) {

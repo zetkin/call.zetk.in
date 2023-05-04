@@ -77,6 +77,8 @@ export default function initApp(messages) {
     app.use(auth.initialize(authOpts));
     app.get('/logout', auth.logout(authOpts));
 
+    app.get('/api/heartbeat', auth.heartbeat(authOpts));
+
     // Redirect to assignments page if logged in
     app.get('/', auth.validate(authOpts, true), (req, res, next) => {
         if (req.isZetkinAuthenticated) {
@@ -114,7 +116,7 @@ export default function initApp(messages) {
     });
 
     app.post('/api/dial', async (req, res) => {
-        const { caller, number } = req.body;
+        const { caller, org, number } = req.body;
         if (!caller || !number) {
             return res.status(400).end();
         }
@@ -122,7 +124,7 @@ export default function initApp(messages) {
         try {
             const memRes = await req.z.resource('users', 'me', 'memberships').get();
             const membership = memRes.data.data.find(membership => (
-                membership.profile.id.toString() == caller
+                membership.profile.id.toString() == caller && membership.organization.id.toString() == org.toString()
             ));
 
             if (!membership) {

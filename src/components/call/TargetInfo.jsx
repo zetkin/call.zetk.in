@@ -72,6 +72,7 @@ export default class TargetInfo extends React.Component {
                             body: JSON.stringify({
                                 number: num,
                                 caller: caller.get('id'),
+                                org: this.props.assignment.get('organization_id'),
                             }),
                         });
                         return false;

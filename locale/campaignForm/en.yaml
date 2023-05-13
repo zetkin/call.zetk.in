@@ -1,4 +1,6 @@
 action:
+    noTitle: Untitled event
+    noLocation: No physical location
     booked: Booked
     button:
         signUp: Sign up

@@ -1,4 +1,5 @@
 action:
+    noLocation: Ingen fysisk sted
     booked: Booket
     multiLocationLabel: |-
         {count, plural,

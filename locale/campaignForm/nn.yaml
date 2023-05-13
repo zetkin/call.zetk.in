@@ -1,4 +1,5 @@
 action:
+    noLocation: Ingen fysisk sted
     booked: Bestilt
     button:
         signUp: Skriv deg opp

@@ -1,4 +1,5 @@
 action:
+    noLocation: Ingen fysisk plats
     booked: Bokad
     button:
         signUp: Anmäl

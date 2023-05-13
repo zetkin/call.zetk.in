@@ -3,10 +3,8 @@ import * as types from '.';
 
 export function retrieveUserAssignments() {
     return ({ dispatch, z }) => {
-        let today = (new Date()).format('{yyyy}{MM}{dd}')
         let filters = [
-            ['start_date', '<=', today],
-            ['end_date', '>=', today],
+            ['active', '==', 1],
         ];
 
         dispatch({

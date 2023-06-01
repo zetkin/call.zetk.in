@@ -127,9 +127,16 @@ export default createReducer(initialState, {
             }
         });
 
-        return state
-            .updateIn(['pendingResponsesByCall', callId, surveyId], survey => survey?
-                survey.mergeDeep(surveyData) : surveyData);
+        const surveyPath = ['pendingResponsesByCall', callId, surveyId];
+        const responsePath = surveyPath.concat(['responses', elemId.toString()])
+        if (state.getIn(responsePath) != null) {
+          return state
+              .updateIn(responsePath, resp => immutable.fromJS(response));
+        } else {
+          return state
+              .updateIn(surveyPath, survey => survey?
+                  survey.mergeDeep(surveyData) : surveyData);
+        }
     },
 
     [types.TOGGLE_SURVEY_INCLUDED]: (state, action) => {

@@ -30,6 +30,7 @@ export default class StaticMap extends React.Component {
             })
             .catch((err) => {
                 console.log('Error: Address not found!');
+                throw err;
             })
     }
 

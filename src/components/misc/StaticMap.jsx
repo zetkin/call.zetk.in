@@ -12,7 +12,6 @@ export default class StaticMap extends React.Component {
             return coordinatesPromise;
         })
         .then((coordinates) => {
-            console.log(coordinates)
             this.initMap(coordinates)
         })
     }

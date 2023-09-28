@@ -35,7 +35,7 @@ export default class StaticMap extends React.Component {
     }
 
     initMap(coordinates) {
-        const map = L.map('map', {
+        const map = L.map('staticmap', {
             zoomControl: false,
             dragging: false,
             touchZoom: false,
@@ -68,6 +68,6 @@ export default class StaticMap extends React.Component {
     }
 
     render() {
-        return <div id="map" style={{height: 300, width: "100%"}}></div>
+        return <div id="staticmap" style={{height: 300, width: "100%"}}></div>
     }
 }

@@ -4,7 +4,7 @@ cd /var/app
 
 if [ "$NODE_ENV" == "production" ]
 then
-    #./node_modules/.bin/webpack
+    npm install --unsafe-perm
     node build/app/server/main
 else
     ./node_modules/.bin/concurrently \

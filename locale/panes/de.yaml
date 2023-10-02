@@ -1,0 +1,57 @@
+input:
+    h1: Als {target} handeln
+    summary:
+        campaigns:
+            bookings: |-
+                {numBookings, plural,
+                =0 {keine Buchungen}
+                =1 {eine Buchung}
+                other {# Buchungen}
+                }
+            h2: Laufende Kampagnen
+            respondButton: Anmelden
+            responses: |-
+                {numResponses, plural,
+                =0 {keine ungebuchten Anmeldungen}
+                =1 {eine ungebuchte Anmeldung}
+                other {# ungebuchte Anmeldungen}
+                }
+            status: '{target} hat'
+        surveys:
+            h2: Umfragen
+            respondButton: Antworten
+    summaryLabel: Überblick
+    summaryLink: Überblick
+instructions:
+    h1: Leitfaden
+    targetButton: Persönliche Angaben anzeigen
+queueEmpty:
+    assignmentsLink: Andere Telefonaktion auswählen
+    h1: Keine Zielpersonen übrig!
+    p: Die Anrufliste ist momentan leer. Eventuell werden in Kürze mehr Zielpersonen
+        hinzugefügt, aber momentan kannst du in dieser Telefonaktion nicht weitermachen.
+report:
+    backLink: Gehe zurück
+    h:
+        report: Anruf auswerten
+        reported: Anruf ausgewertet
+stats:
+    h1: Slay!
+    p: Deine Arbeit ist wichtig, um eine starke LINKE aufzubauen. Hier ist ein Überblick,
+        wie du vorankommst.
+target:
+    activityHeader: Vorherige Aktivitäten
+    activityLabel: |-
+        {count, plural,
+        =0 {{target} hat nie an irgendeiner Aktion teilgenommen.}
+        =1 {{target} hat an einer Aktion teilgenommen, {lastAction}.}
+        other {{target} hat an {count} Aktionen teilgenommen, die letzte war {lastAction}.}
+        }
+    activityLastAction: '{Aktivität } ({Ort}) {Datum}'
+    callLogHeader: Vorherige Anrufe an {target}
+    editHeader: Diese Information bearbeiten?
+    editInfo: Wenn etwas in diesem Fenster geändert werden sollte, kontaktiere deine*n
+        Organizer*in im Bericht nach dem Telefonat.
+    h1: Persönliche Angaben
+    instructionsButton: Leitfaden anzeigen
+    tagHeader: Stichworte

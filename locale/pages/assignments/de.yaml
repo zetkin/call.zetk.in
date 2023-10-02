@@ -1,0 +1,10 @@
+h1: Deine Telefonaktionen
+intro: Du hast {numAssignments, plural, =1 {eine Telefonaktion} other {# Telefonaktionen}}
+    zu erledigen.
+isPendingIntro: Einen Moment bitte, deine Telefonaktionen werden geladen
+noAssignmentsIntro: Du hast keine ausstehenden Telefonaktionen. Kontaktiere deine
+    Organisation, falls du unterstützen kannst.
+notLoading: Deine Telefonaktionen sollten gleich aktualisiert sein. Falls nichts passiert,
+    könnte es an einem nicht kompatiblen Browser liegen. Versuche es mit Firefox oder
+    Chrome.
+startCalling: Telefonaktion auswählen und starten

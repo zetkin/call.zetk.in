@@ -1,0 +1,67 @@
+action:
+    booked: Gebucht
+    button:
+        signUp: Anmelden
+        undoSignUp: Abmelden
+    currentNeed: Hier werden mehr Aktive gebraucht
+    infoButton: Info
+    multiLocationLabel: |-
+        {count, plural,
+        =2 {an zwei Orten}
+        =3 {an drei Orten}
+        =4 {an vier Orten}
+        =5 {an fünf Orten}
+        other {an # Orten}
+        }
+    noLocation: kein Ort
+    noTitle: unbenannte Aktion
+calendar:
+    weekDays:
+        friday: Fr
+        monday: Mo
+        saturday: Sa
+        sunday: So
+        thursday: Do
+        tuesday: Di
+        wednesday: Mi
+filter:
+    activity:
+        active:
+            button: Alle Aktionen anzeigen
+            p: Nach Aktivitätstyp filtern
+        inactive:
+            button: Nach Aktivitätstyp filtern
+            p: Alles anzeigen unabhängig vom Aktivitätstyp
+        modal:
+            clearButton: Alle Aktivitäten anzeigen
+    modal:
+        closeButton: Filtern
+        title: Nach Aktivitätstyp filtern
+        toggleActionCount: |-
+            {count, plural,
+            =1 {eine Aktion}
+            other {# Aktionen}
+            }
+    showNeed:
+        button:
+            hide: Alle Aktionen anzeigen
+            show: Anzeigen, wo ich gebraucht werde
+        p: |-
+            Es gibt momentan {count, plural,
+            =1 {eine Aktion}
+            other { # Aktionen}
+            }, die mehr Aktive benötigen.
+message:
+    showNeed:
+        p: |-
+            Bei {count, plural,
+            =1 {dieser Aktion}
+            other {diesen Aktionen}
+            } werden mehr Aktive gebraucht. Wenn du hier nichts Passendes für dich findest, kannst du natürlich zurückgehen und dich für etwas anderes anmelden.
+        title: Du wirst hier gebraucht!
+    yourActions:
+        p: Hier ist dein Überblick, wo du dabei sein wirst. Wenn du dich gerade angemeldet
+            hast und deine Meinung änderst, kannst du dich direkt wieder abmelden.
+            Sobald du aber bestätigt wurdest, musst du dich bei der Kontaktperson
+            melden, um abzusagen.
+        title: Deine anstehenden Aktivitäten

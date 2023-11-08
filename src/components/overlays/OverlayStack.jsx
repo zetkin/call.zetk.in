@@ -1,5 +1,6 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
+import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 
 import { resolveOverlay } from '.';
@@ -11,6 +12,7 @@ const mapStateToProps = state => ({
 });
 
 @connect(mapStateToProps)
+@injectIntl
 export default class OverlayStack extends React.Component {
     render() {
         let content = null;
@@ -27,6 +29,7 @@ export default class OverlayStack extends React.Component {
                 content.push(
                     <button key="closeButton"
                         className="OverlayStack-closeButton"
+                        aria-label={this.props.intl.formatMessage({ id: 'misc.close' })}
                         onClick={ this.onCloseButtonClick.bind(this) }>
                         </button>
                 );

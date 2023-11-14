@@ -46,13 +46,28 @@ export default class PaneBase extends React.Component {
         }
 
         return (
-            <section className={ classes }>
+            <section className={ classes } ref="pane">
                 { header }
                 <div ref="content" className="PaneBase-content">
                     { this.renderContent() }
                 </div>
             </section>
         );
+    }
+
+    // Updates the pane's inert status
+    //
+    // Ideally this would be handled in render() but this old version of React
+    // doesn't recognize it as a valid HTML attribute and thus prevents us from
+    // updating it declaratively. This setter provides an imperative workaround
+    // so that we can make use of the attribute anyway.
+    setInert(inert) {
+        let pane = ReactDOM.findDOMNode(this.refs.pane);
+        if (inert) {
+            pane.setAttribute('inert', '');
+        } else {
+            pane.removeAttribute('inert');
+        }
     }
 
     renderHeader() {

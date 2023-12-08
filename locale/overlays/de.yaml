@@ -5,8 +5,8 @@ laneOverview:
             discard: Anruf aus der persönlichen Wiedervorlage entfernen
             switch: Zu diesem Anruf wechseln
         p: Hier siehst du die Anrufe, die du begonnen, aber nie beendet hast. Du solltest
-            sie beenden oder aber aus der persönlichen Wiedervorlage entlassen, damit
-            andere Telefonierer*innen diese Zielpersonen anrufen können.
+            sie beenden oder aber aus der persönlichen Wiedervorlage entfernen, damit
+            andere Telefonierer*innen diese Personen anrufen können.
     log:
         filterPlaceholder: Tippe den Namen zum Filtern
         h: Deine vorherigen Anrufe

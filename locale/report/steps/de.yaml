@@ -7,9 +7,9 @@ callBack:
         today: Heute noch
         tomorrow: Morgen
     examplesLabel: Beispiele
-    question: Wann sollten wir zurückrufen?
-    submitButton: Nach dem { date } zurückrufen
-    summary: Wir werden nach dem { date } zurückrufen
+    question: Wann sollen wir zurückrufen?
+    submitButton: Am { date } zurückrufen
+    summary: Wir werden am { date } zurückrufen
     timeOfDay:
         after: Nach { hour }:00
         any: Zu irgendeinem Zeitpunkt
@@ -54,7 +54,7 @@ organizerAction:
         noActionNeeded: Nein, nicht nötig
     question: Ist während des Anrufs etwas passiert, was eine Bearbeitung durch
     summary:
-        actionNeeded: Du möchtest, dass ein*e Organizer*in diesen Anruf bearbeitet.
+        actionNeeded: Du möchtest, dass eine Organizer*in diesen Anruf bearbeitet.
         noActionNeeded: Keine Aktion erforderlich.
 organizerLog:
     effect:
@@ -64,8 +64,8 @@ organizerLog:
         saveWithoutLog: Speichern ohne Nachricht
     question: Erkläre dem*r Organizer*in das Problem.
     summary:
-        emptyLog: Du hast keine Nachricht für die*den Organizer*in hinterlassen.
-        leftLog: Du hast eine Nachricht für die*den Organizer*in hinterlassen.
+        emptyLog: Du hast keine Nachricht hinterlassen.
+        leftLog: Du hast eine Nachricht hinterlassen.
     templates:
         wrongNumber: Falsche Telefonnummern ({ numbers }), bitte überprüfen.
 successCouldTalk:

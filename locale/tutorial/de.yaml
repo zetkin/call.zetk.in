@@ -7,7 +7,7 @@ notes:
             bereite dich vor. Dann klicke auf "Anrufen starten" um loszulegen.
     laneSwitch:
         h: Von vorherigen Anrufen berichten
-        p: Hier kannst du einen Anrufbericht zu einer Zielperson machen, die du bereits
+        p: Hier kannst du einen Anrufbericht zu einer Person machen, die du bereits
             angerufen hattest. Das ist besonders sinnvoll, wenn Personen dich zurückrufen.
     postCall:
         h: Nach dem Anruf

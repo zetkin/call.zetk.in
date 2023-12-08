@@ -47,11 +47,11 @@ target:
         =1 {{target} hat an einer Aktion teilgenommen, {lastAction}.}
         other {{target} hat an {count} Aktionen teilgenommen, die letzte war {lastAction}.}
         }
-    activityLastAction: '{Aktivität } ({Ort}) {Datum}'
+    activityLastAction: '{activity } ({location}) {date}'
     callLogHeader: Vorherige Anrufe an {target}
     editHeader: Diese Information bearbeiten?
-    editInfo: Wenn etwas in diesem Fenster geändert werden sollte, kontaktiere deine*n
-        Organizer*in im Bericht nach dem Telefonat.
+    editInfo: Wenn etwas in diesem Fenster geändert werden sollte, teile es nach dem
+        Telefonat über den Bericht mit.
     h1: Persönliche Angaben
     instructionsButton: Leitfaden anzeigen
     tagHeader: Stichworte

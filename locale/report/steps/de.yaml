@@ -1,0 +1,114 @@
+callBack:
+    effect:
+        asap: '{target} steht nun hinten in der Warteschlange'
+        other: In der Zwischenzeit wird {target} von der Warteschlange entfernt.
+    examples:
+        nextWeek: Nächste Woche
+        today: Heute noch
+        tomorrow: Morgen
+    examplesLabel: Beispiele
+    question: Wann sollen wir zurückrufen?
+    submitButton: Am { date } zurückrufen
+    summary: Wir werden am { date } zurückrufen
+    timeOfDay:
+        after: Nach { hour }:00
+        any: Zu irgendeinem Zeitpunkt
+callerLog:
+    disabled: Die Notizen wurden für diese Telefonaktion deaktiviert.
+    effect:
+        leftLog: 'Zukünftige Telefonierer*innen werden deine Notiz sehen:'
+    options:
+        saveWithLog: Notiz speichern
+        saveWithoutLog: Ohne Notiz speichern
+    question: Möchtest du eine Notiz für zukünftige Telefonierer*innen hinterlassen?
+    summary:
+        emptyLog: Du hast keine Notiz für zukünftige Telefonierer*innen hinterlassen.
+        leftLog: Du hast eine Notiz für zukünftige Telefonierer*innen hinterlassen.
+failureMessage:
+    effect:
+        leftMessage: Zukünftige Telefonierer*innen werden deine Notiz sehen.
+    options:
+        leftMessage: Ja
+        noMessage: Nein
+    question: Hast du eine Nachricht auf dem Anrufbeantworter hinterlassen?
+    summary:
+        leftMessage: Du hast eine Nachricht hinterlassen.
+        noMessage: Du hast keine Nachricht hinterlassen.
+failureReason:
+    options:
+        lineBusy: Besetzt
+        noPickup: Anrufbeantworter / nicht abgenommen
+        notAvailable: Momentan nicht erreichbar
+        wrongNumber: Falsche Telefonnummer
+    question: Wieso nicht?
+    summary:
+        lineBusy: Es war besetzt.
+        noPickup: '{target} hat nicht abgenommen.'
+        notAvailable: '{target} war gerade nicht verfügbar.'
+        wrongNumber: Wir hatten für {target} eine falsche Telefonnummer.
+organizerAction:
+    effect:
+        actionNeeded: Ein*e Organizer*in wird benachrichtigt.
+    options:
+        actionNeeded: Ja, Organizer*in benachrichtigen
+        noActionNeeded: Nein, nicht nötig
+    question: Ist während des Anrufs etwas passiert, was eine Bearbeitung durch
+    summary:
+        actionNeeded: Du möchtest, dass eine Organizer*in diesen Anruf bearbeitet.
+        noActionNeeded: Keine Aktion erforderlich.
+organizerLog:
+    effect:
+        leftLog: 'Organizer*in wird deine Nachricht sehen:'
+    options:
+        saveWithLog: Nachricht hinzufügen
+        saveWithoutLog: Speichern ohne Nachricht
+    question: Erkläre dem*r Organizer*in das Problem.
+    summary:
+        emptyLog: Du hast keine Nachricht hinterlassen.
+        leftLog: Du hast eine Nachricht hinterlassen.
+    templates:
+        wrongNumber: Falsche Telefonnummern ({ numbers }), bitte überprüfen.
+successCouldTalk:
+    effect:
+        callBack: Zukünftige Telefonierer*innen werden sehen, dass wir zurückrufen
+            mussten.
+        couldTalk: Zukünftige Telefonierer*innen werden sehen, dass du diesen Anruf
+            abschließen konntest.
+    options:
+        callBack: Nein, wir müssen zurückrufen
+        couldTalk: Ja
+    question: Konnte {target} sprechen?
+    summary:
+        callBack: '{target} konnte gerade nicht sprechen.'
+        couldTalk: '{target} konnte mit uns sprechen.'
+successOrFailure:
+    effect:
+        failure: Zukünftige Telefonierer*innen werden sehen, dass du nicht mit {target}
+            gesprochen hast
+        success: Zukünftige Telefonierer*innen werden sehen, dass du mit {target}
+            gesprochen hast
+    options:
+        failure: Nein...
+        success: Ja
+    question: Hast du {target} erreicht?
+    summary:
+        failure: Du hast {target} nicht erreicht.
+        success: Du hast {target} erreicht.
+summary:
+    surveys:
+        status: |-
+            Während des Anrufs hast du Antworten in {count, plural,
+            =1 {einer Umfrage} other {# Umfragen}} eingetragen, welche nun eingereicht werden außer du entfernst sie unten.
+        submitted: |-
+            Während des Anrufs hast du Antworten in {count, plural,
+            =1 {einer Umfrage} other {# Umfragen}} eingetragen.
+        surveyDiscarded: Verworfene Antworten für "{survey}"
+        surveySubmitted: Eingereichte Antworten für "{survey}"
+wrongNumber:
+    options:
+        both: Beide Telefonnummern sind falsch
+        single: Nur { phone } ist falsch
+    question: Welche Telefonnummer ist falsch?
+    summary:
+        both: Beide Telefonnummern sind falsch
+        single: '{ phone } ist eine falsche Telefonnummer.'

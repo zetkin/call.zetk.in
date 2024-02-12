@@ -1,0 +1,29 @@
+laneOverview:
+    lanes:
+        h: Nicht beendete Anrufe
+        ops:
+            discard: Anruf aus der persönlichen Wiedervorlage entfernen
+            switch: Zu diesem Anruf wechseln
+        p: Hier siehst du die Anrufe, die du begonnen, aber nie beendet hast. Du solltest
+            sie beenden oder aber aus der persönlichen Wiedervorlage entfernen, damit
+            andere Telefonierer*innen diese Personen anrufen können.
+    log:
+        filterPlaceholder: Tippe den Namen zum Filtern
+        h: Deine vorherigen Anrufe
+        ops:
+            repeat: Neuen Anruf mit {target} protokollieren
+            switch: Zum abgebrochenen Anruf mit {target} wechseln
+        p: Du kannst neue Anrufe mit Zielpersonen starten, die du bereits versucht
+            hast zu erreichen.
+resume:
+    h: Du hast nicht beendete Anrufe
+    ops:
+        discard: Anruf mit {target} beenden
+        resume: Anruf mit {target} wieder aufnehmen
+    p: In einer vorherigen Sitzung wurde dir ein Anruf zugewiesen, von dem du noch
+        berichten solltest.
+skip:
+    h: Anruf überspringen
+    p: Möchtest du {target} überspringen und lieber eine andere Person anrufen?
+    resumeButton: Nein, Anruf wieder aufnehmen
+    skipButton: Ja, {target} überspringen

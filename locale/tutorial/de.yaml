@@ -1,0 +1,26 @@
+closeButton: Verstanden
+manualButton: Mehr lesen im Handbuch
+notes:
+    intro:
+        h: Telefonaktion beginnen
+        p: Du bist dabei eine Telefonaktion zu starten. Lies bitte den Leitfaden und
+            bereite dich vor. Dann klicke auf "Anrufen starten" um loszulegen.
+    laneSwitch:
+        h: Von vorherigen Anrufen berichten
+        p: Hier kannst du einen Anrufbericht zu einer Person machen, die du bereits
+            angerufen hattest. Das ist besonders sinnvoll, wenn Personen dich zurückrufen.
+    postCall:
+        h: Nach dem Anruf
+        p: Sobald ihr aufgelegt habt, klicke hier um den Anrufbericht zu starten.
+    prepare:
+        h: Zielperson kennenlernen
+        p: Hier ist die erste Person, die du anrufen wirst. Bereite dich auf den Anruf
+            vor und starte dann den Anruf.
+    targetInfoPhone:
+        h: Benutze dein Telefon
+        p: Hier siehst du einen Überblick zur Person mit Telefonnummer. Wähle die
+            Nummer auf deinem Telefon zum Anrufen.
+    targetInfoVoip:
+        h: Klicke auf die Telefonnummer, um über die Software zu telefonieren
+        p: Hier siehst du einen Überblick zur Person mit Telefonnummer. Klicke hier
+            auf die Nummer zum Anrufen oder wähle die Nummer auf deinem Telefon.

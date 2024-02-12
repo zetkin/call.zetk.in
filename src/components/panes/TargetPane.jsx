@@ -10,6 +10,7 @@ import { selectedAssignment } from '../../store/assignments';
 import Avatar from '../misc/Avatar';
 import TagList from '../misc/TagList';
 import CallLog from '../misc/callLog/CallLog';
+import StaticMap from '../misc/StaticMap';
 
 const ADDR_FIELDS = [ 'co_address', 'street_address', 'zip_code', 'city' ];
 
@@ -53,22 +54,13 @@ export default class TargetPane extends PaneBase {
 
         let map = null;
         if (target.get('zip_code') && target.get('city')) {
-            let location = target.get('zip_code') + '+' + target.get('city')
+            let address = target.get('zip_code') + '+' + target.get('city')
             if(target.get('street_address')) {
-                location = target.get('street_address') + '+' + location;
+                address = target.get('street_address') + '+' + location;
             }
-            let qs = querystring.stringify({
-                center: location,
-                maptype: 'roadmap',
-                size: '650x200',
-                zoom: 15,
-                key: 'AIzaSyAHVagqI3RTd0psf57oA6gzKqVyjp8FS8w',
-            });
-
-            let src = 'https://maps.googleapis.com/maps/api/staticmap?' + qs;
 
             map = (
-                <img key="map" className="TargetPane-map" src={ src }/>
+                <StaticMap address={address} zoom={15} />
             );
         }
 

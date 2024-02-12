@@ -1,0 +1,22 @@
+callInstructions:
+    instructions: Klicke auf die anzurufende Nummer oder wähle die Nummer
+callLog:
+    emptyLabel: Niemals angerufen
+    note: Telefonierer*in hat keine Notiz hinterlassen
+    summary:
+        status0: Anruf nicht beendet
+        status1: Wir haben {target} erreicht.
+        status11: '{target} hat nicht abgenommen.'
+        status12: Besetzt
+        status13: '{target} möchte nach dem {date} angerufen werden.'
+        status14: '{target} war nicht erreichbar. Rufe nach dem {date} nochmal an.'
+        status15: Wir haben eine Nachricht hinterlassen.
+        status21: Wir hatten eine falsche Nummer.
+        status22: Der Anruf wurde abgebrochen.
+tagList:
+    emptyLabel: Keine Stichworte
+    overflowLabel: |-
+        Es gibt {count, plural,
+        =1 {ein zusätzliches Stichwort}
+        other {# zusätzliche Stichworte}
+        } in Persönliche Angaben.

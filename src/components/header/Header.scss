@@ -44,13 +44,14 @@
 
     .Header-nav {
         flex: 4;
+        display: flex;
+        justify-content: flex-end;
 
         @include small-screen {
             flex: 2;
         }
 
         .Header-navLink {
-            float: right;
             margin: 0.5em;
             @include icon-button($fa-var-home);
         }

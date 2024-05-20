@@ -11,6 +11,14 @@ import {
 
 @injectIntl
 export default class OrganizerLogStep extends ReportStepBase {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            message: props.report.get('organizerLog'),
+        };
+    }
+
     componentDidMount() {
         const report = this.props.report;
         const target = this.props.target;
@@ -63,7 +71,7 @@ export default class OrganizerLogStep extends ReportStepBase {
         return [
             <Msg key="organizerQuestion" tagName="p"
                 id="report.steps.organizerLog.question"/>,
-            <textarea key="message" value={ report.get('organizerLog') }
+            <textarea key="message" value={ this.state.message }
                 onChange={ this.onChangeMessage.bind(this) }/>,
             <Button key="saveButton"
                 labelMsg={ saveLabelMsg }
@@ -105,11 +113,14 @@ export default class OrganizerLogStep extends ReportStepBase {
     }
 
     onChangeMessage(ev) {
-        this.props.dispatch(setOrganizerLogMessage(
-            this.props.call, ev.target.value));
+        this.setState({
+            message: ev.target.value,
+        });
     }
 
     onClickAdd() {
+        this.props.dispatch(setOrganizerLogMessage(
+            this.props.call, this.state.message));
         this.props.dispatch(setCallReportStep(this.props.call, 'caller_log'));
     }
 }

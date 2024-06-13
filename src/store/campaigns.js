@@ -87,9 +87,11 @@ export default createReducer(initialState, {
         let campaigns = {};
         action.payload.data.data.forEach(obj => {
             let campaign = obj.campaign;
-            campaign.id = campaign.id.toString();
-            campaign.org_id = action.meta.orgId;
-            campaigns[campaign.id] = campaign;
+	    if(campaign) {
+                campaign.id = campaign.id.toString();
+                campaign.org_id = action.meta.orgId;
+                campaigns[campaign.id] = campaign;
+            }
         });
 
         return state

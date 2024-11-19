@@ -61,6 +61,7 @@ export default class TargetInfo extends React.Component {
 
             callInfo = targetUtils.getNumbers(target).map(num => {
                 let onClick = null;
+                let callWidget = '';
                 if (caller.get('has_voip_credentials')) {
                     onClick = ev => {
                         ev.preventDefault();
@@ -77,11 +78,34 @@ export default class TargetInfo extends React.Component {
                         });
                         return false;
                     };
+                } else if (caller.get('voip_embed_url')) {
+                    const voipURL = caller.get('voip_embed_url') + '#' + new URLSearchParams({
+                        assignment: this.props.assignment.get('id'),
+                        caller: caller.get('id'),
+                        org: this.props.assignment.get('organization_id'),
+                        tel: num
+                    }).toString();
+                    onClick = ev => {
+                        ev.preventDefault();
+                        let voip = document.querySelector('iframe#voip')
+                        if(voip) {
+                            voip.src = voipURL + '&call=1';
+                        }
+                        return false;
+                    }
+                    callWidget = (
+                        <iframe id="voip" style={{
+                                border: "0",
+                                width: "240px",
+                                height: "27px"
+                            }} src={voipURL} allow="microphone"></iframe>
+                    );
                 }
 
                 return (
                     <span key={num} className="TargetInfo-number">
                         <a href={ 'tel:' + num } onClick={onClick}>{ num }</a>
+                        {callWidget}
                     </span>
                 );
             }).concat([

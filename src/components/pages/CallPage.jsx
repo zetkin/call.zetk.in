@@ -45,6 +45,8 @@ export default class CallPage extends React.Component {
                         let tutorialMessage = 'tutorial.notes.targetInfoPhone';
                         if (nextProps.caller.get('has_voip_credentials')) {
                             tutorialMessage = 'tutorial.notes.targetInfoVoip';
+                        } else if (nextProps.caller.get('has_voip_embed')) {
+                            tutorialMessage = 'tutorial.notes.targetInfoVoip';
                         }
                         this.props.dispatch(pushTutorialNote(
                             tutorialMessage,

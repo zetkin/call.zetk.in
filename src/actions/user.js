@@ -20,9 +20,6 @@ export function retrieveUserMemberships() {
                                         membership.profile.has_voip_credentials = (
                                             !!profileData.telavox_username && !!profileData.telavox_password
                                         );
-                                        if (process.env.VOIP_EMBED_URL) {
-                                            membership.profile.voip_embed_url = process.env.VOIP_EMBED_URL;
-                                        }
                                     });
                             })
                         ))

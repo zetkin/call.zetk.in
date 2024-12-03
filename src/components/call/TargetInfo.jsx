@@ -78,8 +78,8 @@ export default class TargetInfo extends React.Component {
                         });
                         return false;
                     };
-                } else if (caller.get('voip_embed_url')) {
-                    const voipURL = caller.get('voip_embed_url') + '#' + new URLSearchParams({
+                } else if (process.env.VOIP_EMBED_URL) {
+                    const voipURL = process.env.VOIP_EMBED_URL + '#' + new URLSearchParams({
                         assignment: this.props.assignment.get('id'),
                         caller: caller.get('id'),
                         org: this.props.assignment.get('organization_id'),

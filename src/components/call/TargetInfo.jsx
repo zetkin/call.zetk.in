@@ -62,7 +62,7 @@ export default class TargetInfo extends React.Component {
             callInfo = targetUtils.getNumbers(target).map(num => {
                 let onClick = null;
                 let callWidget = '';
-                if (caller.get('has_voip_credentials')) {
+                if (caller && caller.get('has_voip_credentials')) {
                     onClick = ev => {
                         ev.preventDefault();
                         fetch('/api/dial', {

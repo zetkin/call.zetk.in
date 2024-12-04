@@ -48,8 +48,12 @@ export function startCallWithTarget(assignmentId, targetId) {
     return ({ dispatch, getState, z }) => {
         let state = getState();
         let assignment = assignmentById(state, assignmentId);
-        let orgId = assignment.get('organization_id');
+        let orgId = assignment?.get('organization_id');
         let data = { target_id: targetId };
+
+        if (!assignment) {
+            return
+        }
 
         dispatch({
             type: types.START_CALL_WITH_TARGET,

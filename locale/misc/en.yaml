@@ -23,3 +23,4 @@ callInstructions:
         Tap on the number to call, or enter the number manually on your phone.
         Tapping the number will open your phone app. Return here to your web
         browser to continue using Zetkin and report the call.
+close: Close

@@ -20,3 +20,4 @@ tagList:
         } i feltet for personleg info
 callInstructions:
     instructions: "Klikk på nummeret for å ringe eller tast nummeret manuellt på telefonen. Klikkar du på\_nummeret åpnar telefonappen. Gå så tilbake til nettlesaren for å halde fram i Zetkin og logge samtalen."
+close: Lukk

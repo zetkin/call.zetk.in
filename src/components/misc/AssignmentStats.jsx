@@ -32,10 +32,10 @@ const StatsItem = props => {
             <span className="AssignmentStats-itemNumber">
                 { props.number }
             </span>
-            <p className="AssignmentStats-itemLabel">
+            <span className="AssignmentStats-itemLabel">
                 <Msg id={ props.labelMsg }
                     values={{ number: props.number }}/>
-            </p>
+            </span>
         </li>
     );
 };

@@ -93,12 +93,9 @@ export default class TargetInfo extends React.Component {
                         }
                         return false;
                     }
+                    const iframeHtml = `<iframe id="voip" style="border: 0;width: 240px;height:27px" allow="microphone" src="${voipURL}"></iframe>`;
                     callWidget = (
-                        <iframe id="voip" style={{
-                                border: "0",
-                                width: "240px",
-                                height: "27px"
-                            }} src={voipURL} allow="microphone"></iframe>
+                        <span dangerouslySetInnerHTML={{ __html: iframeHtml }}></span>
                     );
                 }
 

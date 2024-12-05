@@ -14,15 +14,6 @@ export default class App extends React.Component {
         if (activeCalls.size > 0) {
             this.props.dispatch(showOverlay('resume'));
         }
-
-        // TODO: This is not a great solution to the issue where panes open
-        // just because of tabbing (#104) but it works. Might be a pain once
-        // surveys are in Call and user wants to tab between inputs.
-        window.addEventListener('keydown', ev => {
-            if (ev.keyCode == 9) {
-                ev.preventDefault();
-            }
-        });
     }
 
     render() {

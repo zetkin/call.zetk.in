@@ -27,8 +27,9 @@
         font-size: 0.9em;
     }
 
-    .TutorialNote-closeLink, .TutorialNote-manualLink {
+    .TutorialNote-closeButton, .TutorialNote-manualLink {
         display: block;
+        background: transparent;
         padding: 0.5em 1em;
         margin: 0.5em 0 0;
         border: 1px solid white;
@@ -46,7 +47,7 @@
     }
 
     @include medium-screen {
-        .TutorialNote-closeLink, .TutorialNote-manualLink {
+        .TutorialNote-closeButton, .TutorialNote-manualLink {
             float: right;
             border-width: 0;
             font-size: 0.8em;

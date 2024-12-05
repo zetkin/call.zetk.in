@@ -17,11 +17,7 @@ export default class OverlayStack extends React.Component {
         let overlayData = this.props.overlay;
         if (overlayData) {
             let OverlayComponent = resolveOverlay(overlayData.get('type'));
-            content = [
-                <div key="overlay" className="OverlayStack-overlay">
-                    <OverlayComponent config={ overlayData.get('config') }/>
-                </div>,
-            ];
+            content = [];
 
             if (overlayData.getIn(['config', 'closeButton'], true)) {
                 content.push(
@@ -31,6 +27,12 @@ export default class OverlayStack extends React.Component {
                         </button>
                 );
             }
+
+            content.push(
+                <div key="overlay" className="OverlayStack-overlay">
+                    <OverlayComponent config={ overlayData.get('config') }/>
+                </div>,
+            );
         }
 
         return (
